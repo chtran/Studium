@@ -1,3 +1,19 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.home-hero {
+  padding: 30px;
+  margin-bottom: 25px;
+  background-color: #DDD;
+  border-radius: 6px;
+}
+#home-slide {
+  height: 406px;
+}
+#home-signin {
+  padding-left: 40px;
+  height: 406px;
+}
+#new_to_studium {
+  color: #333;
+}
