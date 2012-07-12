@@ -12,8 +12,5 @@
               %span.icon-book= link_to "Paragraphs",admin_materials_paragraphs_path 
           %li
             %a{href: "#"}
-              %span.icon-book= link_to "Categories",category_types_path 
-          %li
-            %a{href: "#"}
-              %span.icon-book= link_to "Question Types",question_types_path 
+              %span.icon-book= link_to "Categories",admin_materials_categories_path 
     %div.span9

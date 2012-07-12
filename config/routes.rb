@@ -20,6 +20,8 @@ Studium::Application.routes.draw do
   get "/admin/materials/questions/remove_paragraph",to: "admin/materials/questions#remove_paragraph"
   get "/admin/materials/questions/remove_choice",to: "admin/materials/questions#remove_choice"
 
+  resources :category_types
+  resources :question_types
   namespace "admin" do
     namespace "materials" do
       root to: "base#index",as: "admin_materials_index"

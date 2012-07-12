@@ -18,6 +18,5 @@ Given /^I am signed in as "(.+)" with password "(.+)"$/ do |email,password|
   step %Q[I fill in "Email" with "#{email}"]
   step %Q[I fill in "Password" with "#{password}"]
   step %Q[I press "Sign in"]
-  step %Q[I should be on the dashboard page]
   step %Q[I should see "#{email}"]
 end

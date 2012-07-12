@@ -118,7 +118,7 @@ class RoomsController < ApplicationController
     user.status = 0
     user.save
     publish("presence-room_#{old_room_id}", "users_change", {})
-    render :text => "Kicked", :status => '202'
+    render :text => "Kicked", :status => '200'
   end
   # Input: question_id
   # Return: HTML of that question

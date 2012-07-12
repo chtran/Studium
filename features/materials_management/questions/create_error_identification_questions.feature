@@ -4,7 +4,7 @@ Feature: Create Error Identification Questions
 	I want to be able to create new error identification questions in my material ms page
 
 	Background:
-		Given the following users exist:
+    Given the following users exist:
 			| email							 | password | admin |
 			| admin@ticketee.com | password | true  |
 		And I am signed in as "admin@ticketee.com" with password "password"
