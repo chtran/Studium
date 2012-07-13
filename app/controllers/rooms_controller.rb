@@ -124,6 +124,13 @@ class RoomsController < ApplicationController
   # Return: HTML of that question
   def show_question
     @question = Question.find(params[:question_id])
+    if @question.paragraph
+      @div_paragraph = 'span6'
+      @div_prompt = 'span6'
+    else
+      @div_paragraph = ''
+      @div_prompt = 'span12'
+    end
     render :partial => "show_question"
   end
 

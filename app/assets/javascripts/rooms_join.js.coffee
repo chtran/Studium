@@ -67,7 +67,7 @@ $(->
         success: (data) ->
           $("#question_container").html(data);
           setup_timer(
-            10,
+            60,
             -> confirm_answer()
           );
       });
@@ -84,7 +84,7 @@ $(->
         },
         success: (data) ->
           $(".choices").html(data);
-          setup_timer(10, ready);
+          setup_timer(60, ready);
       });
       # Show the ready button
       $("#ready").show();
