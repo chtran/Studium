@@ -42,6 +42,9 @@ class StatsController < ApplicationController
   end
 
   def index
+    @math_total_answers, @math_correct_answers, @math_percent = total_answers(1)
+    @cr_total_answers, @cr_correct_answers, @cr_percent = total_answers(2)
+    @writing_total_answers, @writing_correct_answers, @writing_percent = total_answers(3)
   end
 
   def pull
@@ -56,6 +59,19 @@ class StatsController < ApplicationController
     render :json => data, :status => "200"
   end
 
+  def total_answers(category_type_id)
+    histories = current_user.histories
+    total_answers = 0
+    correct_answers = 0
+    histories.each do |h|
+      if h.question.question_type.category_type_id == category_type_id
+        total_answers += 1
+        correct_answers += 1 if h.choice.correct
+      end
+    end
+    
+    return total_answers, correct_answers, (correct_answers.to_f/total_answers.to_f)*100
 
+  end
 
 end
