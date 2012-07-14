@@ -1,18 +1,63 @@
-%div.well
-  %h2#stats-title Your Personal Statistics
-%div.btn-group#subject-button
-  %div.btn.btn-large.btn-primar.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
-    All Subjects
-    %span.caret
-  %ul.dropdown-menu
-    %li
-      %a#math Math
-    %li
-      %a#CR Critical Reading
-    %li
-      %a#writing Writing
+%div#container
 
+  %div.well
+    %h1#stats-title Your Personal Statistics
+  %div.perform-stats
+    %div 
+      %h2 
+        Performance 
+        %small today
+      %hr
+      
+      %table.table
+        %thead
+          %tr
+            %th Subject
+            %th Accuracy (%)
+            %th Question Answered
+            %th Correct
+        %tbody
+          %tr
+            %td Math
+            %td
+              40%
+              %div.progress.progress-striped.active#progress-bar
+                %div.bar{:style => 'width: 60%'}
+            %td 60
+            %td 30
+          %tr
+            %td Critical Reading
+            %td
+              %div.progress.progress-success.progress-striped.active#progress-bar
+                %div.bar{:style => 'width: 80%'}
+            %td 60
+            %td 30
+          %tr
+            %td Writing
+            %td
+              %div.progress.progress-warning.progress-striped.active#progress-bar
+                %div.bar{:style => 'width: 40%'}
+            %td 60
+            %td 30
+  
+  %div.perform-stats
+    %div.btn-group.subject-button
+      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+        All Subjects
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a#math Math
+        %li
+          %a#CR Critical Reading
+        %li
+          %a#writing Writing
+    %div 
+      %h2 
+        Performance 
+        %small overall
+      %hr
 
-%div#graph
+  %div#graph
 
 

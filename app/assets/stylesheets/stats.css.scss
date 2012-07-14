@@ -2,7 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#subject-button{
+.subject-button{
   float: right;
+}
 
+#progress-bar{
+  width: 400px;
+}
+
+.perform-stats{
+  padding-top: 50px;
+}
+
+#container{
+  padding-left: 40px;
+  padding-right: 40px;
 }
