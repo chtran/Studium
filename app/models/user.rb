@@ -21,30 +21,28 @@ class User < ActiveRecord::Base
     self.profile.first_name + " " + self.profile.last_name
   end
 
-  def expected(that)
+  def expected(question)
     toReturn = {}
-    if that.exp
-      toReturn[:this] = 1/(1+10**((that.exp-self.exp)/400.0))
-      toReturn[:that] = 1/(1+10**((self.exp-that.exp)/400.0))
+    if question.exp
+      toReturn[:user] = 1/(1+10**((question.exp-self.exp)/400.0))
+      toReturn[:question] = 1/(1+10**((self.exp-question.exp)/400.0))
     end
     return toReturn
   end
   def lose_to(question)
     expectation = expected(question)
-    self_change = 32*expectation[:this]
-    question_change = 32*(1-expectation[:that])
-    self.decrement!(:exp, self_change)
-    question.increment!(:exp, question_change)
-    return self_change.to_i
+    change = (32*expectation[:user]).to_i
+    self.decrement!(:exp, change)
+    question.increment!(:exp, change)
+    return change
   end
 
   def win_to(question)
     expectation = expected(question)
-    self_change = 32*(1-expectation[:this])
-    question_change = 32*expectation[:that]
-    self.increment!(:exp, self_change)
-    question.decrement!(:exp, question_change)
-    return self_change.to_i
+    change = (32*expectation[:question]).to_i
+    self.increment!(:exp, change)
+    question.decrement!(:exp, change)
+    return change
   end
 
 end

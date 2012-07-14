@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :choice do
     choice_letter "A"
     content "Test Choice"
-    correct false
   end
+
 end
