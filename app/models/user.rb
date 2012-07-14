@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     question_change = 32*(1-expectation[:that])
     self.decrement!(:exp, self_change)
     question.increment!(:exp, question_change)
-    return self_change
+    return self_change.to_i
   end
 
   def win_to(question)
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     question_change = 32*expectation[:that]
     self.increment!(:exp, self_change)
     question.decrement!(:exp, question_change)
-    return self_change
+    return self_change.to_i
   end
 
 end
