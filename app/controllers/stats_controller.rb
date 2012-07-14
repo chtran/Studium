@@ -15,7 +15,7 @@ class StatsController < ApplicationController
 
     histories.each do |h|
       if (h.question.question_type.category_type_id == category_type_id.to_i) or (category_type_id == '0')
-        correct_sum += 1 if h.choice.correct 
+        correct_sum += 1 if h.choice.correct
         size += 1 if category_type_id != '0'
       end
     end
