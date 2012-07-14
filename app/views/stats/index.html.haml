@@ -20,7 +20,7 @@
           %tr
             %td Math
             %td
-              40%
+              ="#{@math_percent.to_i} %"
               %div.progress.progress-striped.active#progress-bar
                 %div.bar{:style => "width: #{@math_percent}%"}
             %td
@@ -30,6 +30,7 @@
           %tr
             %td Critical Reading
             %td
+              ="#{@cr_percent.to_i} %"
               %div.progress.progress-success.progress-striped.active#progress-bar
                 %div.bar{:style => "width: #{@cr_percent}%"}
             %td 
@@ -39,6 +40,7 @@
           %tr
             %td Writing
             %td
+              ="#{@writing_percent.to_i}%"
               %div.progress.progress-warning.progress-striped.active#progress-bar
                 %div.bar{:style => "width: #{@writing_percent}%"}
             %td 
