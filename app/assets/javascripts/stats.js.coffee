@@ -2,12 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
-  init = ->
+  init = (id)->
     $.ajax({
       type: "GET",
-      url: "/stats/pull",
+      url: "/stats/pull/"+id.toString(),
       success: (data)->
-        
 ##
         chart = new Highcharts.Chart({
             chart: {
@@ -15,10 +14,7 @@ $(->
                 type: 'spline'
             },
             title: {
-                text: 'Monthly Average Temperature'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Your performance statistics'
             },
             xAxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -26,7 +22,7 @@ $(->
             },
             yAxis: {
                 title: {
-                    text: 'Temperature'
+                    text: 'percent answer correct'
                 },
 #labels: {
 #                   formatter: ->
@@ -51,29 +47,22 @@ $(->
                 marker: {
                     symbol: 'square'
                 },
-                data: [{
-                    y: 0   
-                }, 0.0, 0.9, 0.5, 0.5, 0.2, 0.5, 0.2, 0.3, 0.3, 0.9, 0.6]
-    
-            }, {
-                name: 'London',
-                marker: {
-                    symbol: 'diamond'
-                },
-                data: [{
-                    y: 0,
-                   
-                }, 0.2, 0.7, 0.5, 0.9, 0.2, 0.0, 0.6, 0.2, 0.3, 0.6, 0.8]
+                data: data['correct_interval']
             }]
         });
 ##
+
     });
-  x = 1
-  getx = -> 
-    return x
+  $("#math").click ->
+    init(1);
+
+  $("#CR").click ->
+    init(2);
+    
+  $("#writing").click ->
+    init(3);
+
   if $("#graph").length
-    init(); 
+    init(0);
  );
- x = 1 
- alert(x)
 
