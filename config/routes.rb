@@ -48,5 +48,7 @@ Studium::Application.routes.draw do
   post "/pusher/auth", to: "pusher#auth"
   devise_for :users,controllers: {registrations: "registrations"}
 
+  get "/stats", to: "stats#index"
+  get "/stats/pull/:category_type_id", to: "stats#pull"
   root to: "homepage#index",as: :index
 end

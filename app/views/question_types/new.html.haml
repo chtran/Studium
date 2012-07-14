@@ -1,11 +1,11 @@
 =form_for(@question_types) do |f|
   =f.label :type_name
-  =f.text_field :type name
+  =f.text_field :type_name
 
   =f.label :need_paragraph
   =f.check_box :need_paragraph
 
- =f.label :category_type_id
- =f.select("category_type_id", CategoryTypes.all.collect{|c| [c.category_name, c.id]}, {:include_blank =>false})
+  =f.label :category_type_id
+  =f.select("category_type_id", CategoryType.all.collect{|c| [c.category_name, c.id]}, {:include_blank =>false})
 
- 
+  =f.submit 
