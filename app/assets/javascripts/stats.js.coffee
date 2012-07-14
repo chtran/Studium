@@ -14,7 +14,7 @@ $(->
                 type: 'spline'
             },
             title: {
-                text: 'Your performance statistics'
+                text: 'Your percentage of correct answers progress'
             },
             xAxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -22,7 +22,7 @@ $(->
             },
             yAxis: {
                 title: {
-                    text: 'percent answer correct'
+                    text: 'percent'
                 },
 #labels: {
 #                   formatter: ->
