@@ -51,5 +51,7 @@ Studium::Application.routes.draw do
   get "/stats", to: "stats#index"
   get "/stats/pull/:category_type_id", to: "stats#pull"
   get "/stats/pull_stacked/:category_type_id", to: "stats#pull_stacked"
+
+  get "admin/reports/users", to: "admin/reports#users"
   root to: "homepage#index",as: :index
 end

@@ -1,0 +1,24 @@
+%div
+  %table.table
+    %thead
+      %tr
+        %th Category
+        %th Number
+        %th Percentage (%)
+    %tbody
+      %tr
+        %td Answered at least one question
+        %td= @answered[:number]
+        %td= @answered[:percentage]
+      %tr
+        %td Come back after registering
+        %td= @come_back[:number]
+        %td= @come_back[:percentage]
+      %tr
+        %td Registered
+        %td= @registered[:number]
+        %td= @registered[:percentage]
+%div.lead
+  %p Total questions answered: #{@questions_answered[:total]}
+  %p Maximum questions answered (by an user): #{@questions_answered[:max]}
+  %p Average questions answered: #{@questions_answered[:avg]}
