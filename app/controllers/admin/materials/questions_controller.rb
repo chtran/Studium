@@ -236,11 +236,8 @@ private
   # Query for questions of specific question type or all if the specified
   # question_type_id is nil
   def query_with_question_type_id(question_type_id)
-    # Determine the filter for the query
-    query_filter=question_type_id ? "question_type_id=#{question_type_id}" : nil
-
     # Query for questions and return the results
-    query_filter ? Question.where(query_filter).order(:title) : Question.order(:title)
+    question_type_id ? Question.where(question_type_id: question_type_id).order(:title) : Question.order(:title)
   end
 
   # Accepts an array of choice hashes. Set @error to true
