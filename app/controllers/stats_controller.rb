@@ -76,8 +76,11 @@ class StatsController < ApplicationController
         correct_answers += 1 if h.choice.correct
       end
     end
+
+    # Reset percent to 0 if user has not answered any question
+    percent=total_answers==0 ? 0 : (correct_answers.to_f/total_answers.to_f)*100
     
-    return total_answers, correct_answers, (correct_answers.to_f/total_answers.to_f)*100
+    return total_answers, correct_answers, total_answers
 
   end
 
