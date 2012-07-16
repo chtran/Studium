@@ -3,10 +3,21 @@
   %div.well
     %h1#stats-title Your Personal Statistics
   %div.perform-stats
+    %div.btn-group.subject-button
+      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+        Today
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a Last week
+        %li
+          %a Last 2 weeks
+        %li
+          %a Last month
     %div 
       %h2 
         Performance 
-        %small today
+        %small recently
       %hr
       
       %table.table
@@ -19,19 +30,19 @@
         %tbody
           %tr
             %td Math
-            %td
+            %td.progress-bar-container
               ="#{@math_percent.to_i} %"
-              %div.progress.progress-striped.active#progress-bar
-                %div.bar{:style => "width: #{@math_percent}%"}
+              %div.progress.progress-striped.active#progress-bar-math
+                %div.bar#bar-math{:style => "width: #{@math_percent}%"}
             %td
               =@math_total_answers
             %td 
               =@math_correct_answers
           %tr
             %td Critical Reading
-            %td
+            %td.progress-bar-container
               ="#{@cr_percent.to_i} %"
-              %div.progress.progress-success.progress-striped.active#progress-bar
+              %div.progress.progress-success.progress-striped.active#progress-bar-CR
                 %div.bar{:style => "width: #{@cr_percent}%"}
             %td 
               =@cr_total_answers
@@ -39,9 +50,9 @@
               =@cr_correct_answers
           %tr
             %td Writing
-            %td
+            %td.progress-bar-container
               ="#{@writing_percent.to_i}%"
-              %div.progress.progress-warning.progress-striped.active#progress-bar
+              %div.progress.progress-warning.progress-striped.active#progress-bar-writing
                 %div.bar{:style => "width: #{@writing_percent}%"}
             %td 
               =@writing_total_answers
@@ -50,22 +61,36 @@
   
   %div.perform-stats
     %div.btn-group.subject-button
-      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+      %div.btn.btn-large.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
         %span.caret
       %ul.dropdown-menu
         %li
-          %a#math Math
+          %a#math_graph Math
         %li
-          %a#CR Critical Reading
+          %a#CR_graph Critical Reading
         %li
-          %a#writing Writing
+          %a#writing_graph Writing
     %div 
       %h2 
         Performance 
         %small overall
       %hr
-
+    %h3#description-progress Overall progress description goes here
   %div#graph
+  %div
+    %div
+      %h3#description-column Column stacked description goes here
+    %div.btn-group.subject-button
+      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+        All Subjects
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a#math_column Math
+        %li
+          %a#CR_column Critical Reading
+        %li
+          %a#writing_column Writing
   %div#column_stacked
 
