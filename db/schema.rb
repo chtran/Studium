@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716081723) do
+ActiveRecord::Schema.define(:version => 20120716091725) do
 
   create_table "category_types", :force => true do |t|
     t.string   "category_name"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 20120716081723) do
     t.boolean  "admin",                  :default => false
     t.integer  "room_id"
     t.integer  "status"
-    t.integer  "exp"
+    t.integer  "exp",                    :default => 1400
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
