@@ -1,6 +1,3 @@
-Pusher.app_id = '22619'
-Pusher.key = '9a81f498ef1031e46675'
-Pusher.secret = 'c90fd082578b9efe4f69'
 class RoomsController < ApplicationController
   before_filter :authenticate_user!
   protect_from_forgery

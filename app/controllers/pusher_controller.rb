@@ -21,7 +21,7 @@ class PusherController < ApplicationController
       webhook.events.each do |event|
         # If the channel is a rooms#join's channel
         puts event["channel"]
-        if event["channel"].match /^presence-room_(\d+)/
+        if event["channel"].match /^presence-room_(\d+)$/
           room_id = $1.to_i
           case event["name"]
           when 'channel_occupied'
