@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   # Return: the room list
   # Used for dynamically updating the room list
   def room_list
-    @rooms = Room.all
+    @rooms = Room.where(:active => true)
     render partial: "room_list"
   end
 

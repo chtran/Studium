@@ -14,4 +14,22 @@ class PusherController < ApplicationController
       render :text => "Forbidden", :status => '403'
     end
   end
+
+  def webhook
+    webhook = Pusher::WebHook.new(request)
+    if webhook.valid?
+      webhook.events.each.do |event|
+        room_id = event["channel"].split("presence-room_")[1].to_i
+        case event["name"]
+        when 'channel_occupied'
+          Room.find(room_id).update_attribute("active",true)
+        when 'channel_vacated'
+          Room.find(room_id).update_attribute("active",false)
+        end
+      end
+      render text: 'ok'
+    else
+      render text: 'invalid', status: 401
+    end
+  end
 end
