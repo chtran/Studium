@@ -18,7 +18,7 @@ class PusherController < ApplicationController
   def webhook
     webhook = Pusher::WebHook.new(request)
     if webhook.valid?
-      webhook.events.each.do |event|
+      webhook.events.each do |event|
         room_id = event["channel"].split("presence-room_")[1].to_i
         case event["name"]
         when 'channel_occupied'
