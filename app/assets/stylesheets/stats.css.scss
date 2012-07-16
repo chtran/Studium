@@ -6,15 +6,29 @@
   float: right;
 }
 
-#progress-bar{
-  width: 400px;
+.progress{
+  width: 500px;
+}
+
+.progress-bar-container{
+  width: 650px;
 }
 
 .perform-stats{
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 #container{
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#description-progress{
+  padding-bottom: 50px;
+  color: #333;
+
+}
+
+#description-column{
+  padding-top: 50px;
 }

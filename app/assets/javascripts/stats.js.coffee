@@ -53,24 +53,12 @@ $(->
 ##
 
     });
-  $("#math").click ->
-    init(1);
-
-  $("#CR").click ->
-    init(2);
-    
-  $("#writing").click ->
-    init(3);
-
-  if $("#graph").length
-    init(0);
-
-  c_stacked = ->
+  c_stacked = (id)->
       $.ajax({
         type: "GET",
-        url: "pull_stacked/0",
+        url: "stats/pull_stacked/"+id.toString(),
         success: (data)->
-          chart = new Highcharts.Chart({
+          chart_column = new Highcharts.Chart({
               chart: {
                   renderTo: 'column_stacked',
                   type: 'column'
@@ -130,12 +118,42 @@ $(->
                   data: data['incorrect_data']
               }]
             });
+        });
+  recent = ->
+    $.ajax({
+        type: "GET",
+        url: "stats/test_ajax"
+        success: (data)->
+          document.getElementById('bar-math').style.width = data['math'].toString()+'%';
         })
+  
+  if $("#progress-bar-math").length
+    recent();
 
-    if $("#column_stacked").length 
-      c_stacked();
+
+  $("#math_graph").click ->
+    init(1);
+
+  $("#CR_graph").click ->
+    init(2);
+    
+  $("#writing_graph").click ->
+    init(3);
+
+  $("#math_column").click ->
+    c_stacked(1);
+
+  $("#CR_column").click ->
+    c_stacked(2);
+    
+  $("#writing_column").click ->
+    c_stacked(3);
 
 
+  if $("#graph").length
+    init(0);
 
+  if $("#column_stacked").length
+    c_stacked(0);
  )
 
