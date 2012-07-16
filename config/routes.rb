@@ -46,6 +46,7 @@ Studium::Application.routes.draw do
   post "/rooms/show_histories",to: "rooms#show_histories"
 
   post "/pusher/auth", to: "pusher#auth"
+  post "/pusher/webhook", to: "pusher#webhook"
   devise_for :users,controllers: {registrations: "registrations"}
 
   get "/stats", to: "stats#index", as: "stats"

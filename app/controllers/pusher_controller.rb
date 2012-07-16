@@ -24,7 +24,9 @@ class PusherController < ApplicationController
         when 'channel_occupied'
           Room.find(room_id).update_attribute("active",true)
         when 'channel_vacated'
-          Room.find(room_id).update_attribute("active",false)
+          room = Room.find(room_id)
+          room.update_attribute("active",false)
+          room.users = []
         end
       end
       render text: 'ok'
