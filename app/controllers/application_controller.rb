@@ -1,7 +1,7 @@
 require 'pusher'
-Pusher.app_id = Studium::Application.config.pusher.app_id
-Pusher.key = Studium::Application.config.pusher.key
-Pusher.secret = Studium::Application.config.pusher.secret
+Pusher.app_id = Studium::Application.config.pusher_app_id
+Pusher.key = Studium::Application.config.pusher_key
+Pusher.secret = Studium::Application.config.pusher_secret
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
