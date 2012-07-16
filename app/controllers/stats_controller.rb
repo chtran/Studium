@@ -4,6 +4,8 @@
 #
 
 class StatsController < ApplicationController
+  before_filter :authenticate_user!
+
   def correct_percent(histories, category_type_id)
     correct_sum = 0 
 
@@ -69,7 +71,7 @@ class StatsController < ApplicationController
     total_answers = 0
     correct_answers = 0
     histories.each do |h|
-      if h.question.question_type.category_type_id == category_type_id or category_type_id == 0
+      if h.question.question_type and h.question.question_type.category_type_id == category_type_id or category_type_id == 0
         total_answers += 1
         correct_answers += 1 if h.choice.correct
       end
