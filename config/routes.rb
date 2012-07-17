@@ -60,5 +60,4 @@ Studium::Application.routes.draw do
   post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
 
   root to: "homepage#index",as: :index
-  mathjax 'mathjax'
 end

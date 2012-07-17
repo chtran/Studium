@@ -15,7 +15,7 @@
     = javascript_include_tag "javascripts/jquery.countdown.min"
     = csrf_meta_tags
 
-    = mathjax_tag
+    %script{type: "text/javascript", src: "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"}
 
     = yield(:head)
 
