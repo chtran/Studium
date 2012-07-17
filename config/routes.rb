@@ -1,5 +1,4 @@
 Studium::Application.routes.draw do
-<<<<<<< HEAD
 
   get "/pusher_key", to: "application#pusher_key"
   get "users/index"
