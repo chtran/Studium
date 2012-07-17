@@ -8,13 +8,16 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type: "text/javascript"></script>
     <![endif]-->
 
+    = mathjax_tag
     = stylesheet_link_tag "application",media: "all"
     = javascript_include_tag "application"
     -#= javascript_include_tag "http://localhost:9292/faye.js"
     = javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
     = javascript_include_tag "javascripts/jquery.countdown.min"
     = csrf_meta_tags
+
     = yield(:head)
+
 
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
@@ -57,4 +60,8 @@
         %hr
         %footer
           %p Copyright Chau and Kien, 2012.
+          %div.MathJax_Display
+            %span.MathJax
+              %nobr
+                \[\int_a^b f(x) dx=F(b)-F(a)\]
 
