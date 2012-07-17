@@ -6,7 +6,7 @@ class RoomMode < ActiveRecord::Base
     # If the room_mode's name is one the the categories' names
     if categories = CategoryType.where(category_name: self.title) and categories != []
       # Find all the question types associated with that category
-      question_types = categories[0].question_types.map {|t| t.id}
+      question_types = categories[0].question_types.select(:id)
       output = Question.where(:question_type_id => question_types)
     elsif self.title == "Replay"
       # Select all the distinct questions that user has answered
@@ -19,7 +19,7 @@ class RoomMode < ActiveRecord::Base
                .choice.correct
       end
     elsif self.title == "Smart"
-      exp_array = users.map { |u| u.exp}
+      exp_array = users.select(:exp)
       min_exp = exp_array.min
       max_exp = exp_array.max
       output = Question.where(exp: (min_exp-50)..(max_exp+50))

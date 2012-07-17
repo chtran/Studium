@@ -4,6 +4,9 @@ Studium::Application.configure do
   config.pusher_app_id = '24003'
   config.pusher_key = 'cb9eb0536f6f8194c197'
   config.pusher_secret = '89a3f76eab32dfe86fbe'
+  #config.pusher_app_id = '22619'
+  #config.pusher_key = '9a81f498ef1031e46675'
+  #config.pusher_secret = 'c90fd082578b9efe4f69'
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

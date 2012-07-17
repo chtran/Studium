@@ -3,11 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
   # Define the whole code as the function init. Only execute init when the page is #rooms_join (see the end of the file for this execution)
-  init = ->
+  init = (key)->
     # Get room_id and user_id from attributes rendered in the page
     room_id = $("#question_container").attr("room_id");
 
-    client = new Pusher('9a81f498ef1031e46675');
+    client = new Pusher(key);
     channel = client.subscribe("presence-room_"+room_id);
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
     channel.bind('pusher:member_removed', (member) ->
@@ -159,6 +159,8 @@ $(->
     
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length
-    init();
+    $.get("/pusher_key", (key)->
+      init(key)
+    )
 
 );
