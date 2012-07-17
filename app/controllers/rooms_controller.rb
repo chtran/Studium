@@ -30,10 +30,11 @@ class RoomsController < ApplicationController
 
   def join
     @room = Room.find(params[:room_id])
-    current_user.room_id = @room.id
-    current_user.update_attribute(:status, 1)
-    choose_question(@room) unless @room.question
+    current_user.update_attribute(:room_id, @room.id)
+    #current_user.update_attribute(:status, 1)
+    choose_question!(@room) if !@room.question
     publish("presence-room_#{@room.id}","users_change", {})
+    @reload = @room.users.count==1 ? "true" : "false"
   end
 
   # Request type: POST
@@ -43,7 +44,6 @@ class RoomsController < ApplicationController
   def user_list
     @room = current_user.room
     @user_list = @room.users
-    @status = ["Not in any room", "Answering", "Confirmed", "Ready"]
     render partial: "user_list"
   end
   # Request type: POST
@@ -83,7 +83,7 @@ class RoomsController < ApplicationController
     current_user.save
     publish("presence-room_#{@room.id}","users_change",{})
     if @room.show_next_question?
-      @next_question = choose_question(@room)
+      @next_question = choose_question!(@room)
       @room.users.each do |user|
         user.status = 1
         user.save
@@ -184,15 +184,15 @@ class RoomsController < ApplicationController
     render :partial => "room_item", :locals => {room: room}
   end
   # Generate new questions for the input room when it run out of buffer questions
-  def generate_questions(room)
+  def generate_questions!(room)
     # Temporarily assign all the questions to each room
     room.questions = Question.all
     room.save
   end
 
   # Choose new question from buffer questions
-  def choose_question(room)
-    generate_questions(room) if room.questions.empty?
+  def choose_question!(room)
+    generate_questions!(room) if room.questions.empty?
     # Temporarily choose a random question from buffer
     next_question = room.questions.order('RANDOM()').first
     # Delete the next_question from the buffer

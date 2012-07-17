@@ -29,6 +29,9 @@ class PusherController < ApplicationController
           when 'channel_vacated'
             room = Room.find(room_id)
             room.update_attribute("active",false)
+            room.users.each do |u|
+              u.update_attribute(:status, 0)
+            end
             room.users = []
             puts "Deactivated room #{room_id}"
           end

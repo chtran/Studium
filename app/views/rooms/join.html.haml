@@ -16,7 +16,8 @@
     });
 
 %div.row-fluid#rooms_join
-  %div.span9#question_container{user_id: current_user.id, room_id: @room.id, question_id: @room.question.id}
+  %div.span9#question_container{room_id: @room.id, question_id: @room.question.id}
+    %p{reload: @reload} Waiting for next round...
   %div.span3
     %div#timer
     %div#top_nav
