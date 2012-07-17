@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
   # Define the whole code as the function init. Only execute init when the page is #rooms_join (see the end of the file for this execution)
-  init = ->
+  init = (key)->
     # Get room_id and user_id from attributes rendered in the page
     room_id = $("#question_container").attr("room_id");
 
@@ -153,6 +153,8 @@ $(->
     
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length
-    init();
+    $.get("/pusher_key", (key)->
+      init(key)
+    )
 
 );

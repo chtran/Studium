@@ -31,8 +31,7 @@ class RoomsController < ApplicationController
   def join
     @room = Room.find(params[:room_id])
     current_user.room_id = @room.id
-    current_user.status = 1
-    current_user.save
+    current_user.update_attribute(:status, 1)
     choose_question(@room) unless @room.question
     publish("presence-room_#{@room.id}","users_change", {})
   end
@@ -56,14 +55,12 @@ class RoomsController < ApplicationController
     @current_question = @room.question
     if params[:choice_id]
       @choice_id = params[:choice_id]
-      new_history_item = History.new({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-      new_history_item.save
+      new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
       publish("presence-room_#{@room.id}", "update_histories", {
         history_id: new_history_item.id
       })
     end
-    current_user.status = 2
-    current_user.save
+    current_user.update_attribute(:status, 2)
     publish("presence-room_#{@room.id}", "users_change", {})
     publish("presence-room_#{@room.id}", "show_explanation", {
       question_id: @current_question.id
@@ -178,9 +175,7 @@ class RoomsController < ApplicationController
   def choose_question(room)
     generate_questions(room) if room.questions.empty?
     # Temporarily choose a random question from buffer
-    this_questions = room.questions
-    r = Random.new
-    next_question = this_questions[r.rand(0..this_questions.length-1)]
+    next_question = room.questions.order('RANDOM()').first
     # Delete the next_question from the buffer
     QuestionsBuffer
       .where({room_id: room.id, question_id:next_question.id})

@@ -1,6 +1,6 @@
 $(->
-  init = ->
-    client = new Pusher('9a81f498ef1031e46675');
+  init = (key) ->
+    client = new Pusher(key)
     channel = client.subscribe('rooms');
     update_room_list = ->
       $.ajax({
@@ -20,5 +20,7 @@ $(->
     );
     true;
   if $("#rooms_index").length
-    init();
+    $.get("/pusher_key", (key)->
+      init(key)
+    )
 );

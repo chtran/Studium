@@ -6,6 +6,9 @@ Pusher.secret = Studium::Application.config.pusher_secret
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  def pusher_key
+    render :text => Pusher.key
+  end
 private
   def authenticate_admin!
     redirect_to index_url,alert: "The page you were looking for could not be found." unless user_signed_in? and current_user.admin?
