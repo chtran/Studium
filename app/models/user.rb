@@ -45,4 +45,9 @@ class User < ActiveRecord::Base
     return change
   end
 
+  def status_message
+    array = ["Observing", "Answering", "Confirmed", "Ready"]
+    return array[self.status]
+  end
+
 end
