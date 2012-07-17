@@ -1,6 +1,9 @@
 Studium::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.pusher_app_id = '22619'
+  config.pusher_key = '9a81f498ef1031e46675'
+  config.pusher_secret = 'c90fd082578b9efe4f69'
   # Code is not reloaded between requests
   config.cache_classes = true
 
