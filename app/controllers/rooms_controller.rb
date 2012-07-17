@@ -164,6 +164,20 @@ class RoomsController < ApplicationController
   end
 
   # Request type: POST
+  # Returns a message to put in a chat box
+  def chat_message
+    @room=current_user.room
+    message=current_user.email+": "+ params[:message]
+    publish("presence-room_#{@room.id}","chat_message", {
+      message: message
+    })
+
+    render json: {
+      message: message
+    }
+  end
+
+  # Request type: POST
   # Input: room_id
   # Return HTML of the individual room item to be shown on rooms#index (Used for real-time room list)
   def show_new_room_item

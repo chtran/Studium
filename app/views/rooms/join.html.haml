@@ -1,3 +1,20 @@
+%script
+  :plain
+    $(document).ready(function(){
+      $(".chat_send").click(function(){
+        message=$(".chat_message").val();
+        $.ajax({
+          type: "POST",
+          url: "/rooms/chat_message",
+          data: {
+            message: message
+          }
+        });
+
+        $(".chat_message").val("");
+      });
+    });
+
 %div.row-fluid#rooms_join
   %div.span9#question_container{user_id: current_user.id, room_id: @room.id, question_id: @room.question.id}
   %div.span3
@@ -5,10 +22,16 @@
     %div#top_nav
     %div#bottom_nav
       %ul.nav.nav-tabs
-        %li.active
-          %a{"href" => "#chat", "data-toggle" => "tab"}Chat
         %li
+          %a{"href" => "#chat", "data-toggle" => "tab"}Chat
+        %li.active
           %a{"href" => "#history", "data-toggle" => "tab"}History
       %div.tab-content
-        %div.tab-pane.active#history
         %div.tab-pane#chat
+          %div.chat-content
+          
+          = label_tag :message
+          = text_area_tag :message,"",{class: "chat_message"}
+          
+          = submit_tag "Send",class: "btn btn-primary chat_send"
+        %div.tab-pane#history.active

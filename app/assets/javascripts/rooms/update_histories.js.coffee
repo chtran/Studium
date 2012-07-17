@@ -19,7 +19,7 @@ $(->
         history_id: history_id
       },
       success: (data) ->
-        $("#history").append(data);
+        $(".history").append(data);
     });
     true;
 

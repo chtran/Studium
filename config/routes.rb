@@ -55,5 +55,7 @@ Studium::Application.routes.draw do
   get "/stats/pull_stacked/:category_type_id", to: "stats#pull_stacked"
 
   get "admin/reports/users", to: "admin/reports#users"
+  post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
+
   root to: "homepage#index",as: :index
 end

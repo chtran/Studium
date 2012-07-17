@@ -29,6 +29,13 @@ $(->
       true;
     );
 
+    channel.bind("chat_message", (data) ->
+      # Add the chat message to the chat content	
+      $(".chat-content").append("<p>"+data.message+"</p>");
+      $(".chat-content p:last-child").effect("highlight",{},2000);
+      true;
+    );
+
     # Listen to the "show_explanation" event which keeps track of whether to show explanation or not
     channel.bind("show_explanation", (data) ->
       # Get the choice_id by finding the "btn-primary" class
@@ -36,7 +43,6 @@ $(->
       show_explanation(data.question_id, choice_id);
       true;
     );
-    
 
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
