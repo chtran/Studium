@@ -8,9 +8,10 @@ class Room < ActiveRecord::Base
   # Input: a number indicating some status
   # Return: true if every user in the room has the given status, false otherwise
   def status_checker(i)
+    puts self.users.select(:status).map {|s| s==i}
     self.users
         .select(:status)
-        .map {|s| s==i}
+        .map {|u| u.status==i}
         .inject {|b,a| b and a}
   end
     

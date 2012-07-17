@@ -60,7 +60,12 @@ class RoomsController < ApplicationController
         history_id: new_history_item.id
       })
     end
-    current_user.update_attribute(:status, 2)
+    #current_user.update_attribute(:status, 2)
+    current_user.status = 2
+    current_user.save
+    @room.save
+    puts @room.users.select(:status).to_a.to_s
+    puts "Show explanation: " + @room.show_explanation?.to_s
     publish("presence-room_#{@room.id}", "users_change", {})
     publish("presence-room_#{@room.id}", "show_explanation", {
       question_id: @current_question.id

@@ -7,7 +7,7 @@ $(->
     # Get room_id and user_id from attributes rendered in the page
     room_id = $("#question_container").attr("room_id");
 
-    client = new Pusher('9a81f498ef1031e46675');
+    client = new Pusher(key);
     channel = client.subscribe("presence-room_"+room_id);
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
     channel.bind('pusher:member_removed', (member) ->
