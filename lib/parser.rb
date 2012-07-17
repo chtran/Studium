@@ -35,7 +35,8 @@ class String
       count=0
       while result=~/(.*?)<bl \/>(.*)/m
         count+=1
-        result=$1+%Q[<input type="text" id="question_#{question_id}_blank_#{count}" class="span1 focused" />]+$2
+        result=$1+%Q[<input type="text" id="question_#{question_id}_blank_#{count}" class="span2 focused" style="display:inline" />]+$2
+        result.gsub!(/\n/,"")
       end
     end
     
@@ -84,4 +85,5 @@ class String
 
     result
   end
+
 end

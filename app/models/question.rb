@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   validates :title,:prompt, :question_type_id, presence: true
+  validates :prompt,uniqueness: true
   validate :contains_correct_choice
 
   belongs_to :paragraph
