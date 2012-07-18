@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716190320) do
+ActiveRecord::Schema.define(:version => 20120718131814) do
 
   create_table "category_types", :force => true do |t|
     t.string   "category_name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120716190320) do
     t.integer  "question_id"
     t.string   "title"
     t.boolean  "active",        :default => true
+    t.integer  "room_mode_id"
   end
 
   create_table "users", :force => true do |t|

@@ -2,27 +2,24 @@ class RoomMode < ActiveRecord::Base
   attr_accessible :title
   has_many :rooms
 
-  def generate_questions(users)
+  def generate_questions(room)
+    mastered_questions_id = room.mastered_questions.collect{ |q| q.id}
+    unmastered_questions = Question.where("id NOT IN (?)", mastered_questions_id)
     # If the room_mode's name is one the the categories' names
     if categories = CategoryType.where(category_name: self.title) and categories != []
       # Find all the question types associated with that category
       question_types = categories[0].question_types.select(:id)
-      output = Question.where(:question_type_id => question_types)
+      output = unmastered_questions.where(:question_type_id => question_types)
     elsif self.title == "Replay"
-      # Select all the distinct questions that user has answered
-      questions = users[0].histories.select(:question_id).uniq
-      # Select only those which he failed in the last attemp
-      output = questions.select do |q|
-        !History.where(user_id: users[0].id, question_id: q.question_id)
-               .order(:created_at)
-               .last
-               .choice.correct
-      end
+      output = room.users[0].failed_questions
     elsif self.title == "Smart"
-      exp_array = users.select(:exp)
-      min_exp = exp_array.min
-      max_exp = exp_array.max
-      output = Question.where(exp: (min_exp-50)..(max_exp+50))
+      mastered_questions_id = room.mastered_questions.collect{ |q| q.id}
+      exp_array = room.users.select(:exp).order(:exp)
+      min_exp = exp_array.first
+      max_exp = exp_array.last
+      output = unmastered_questions.where(exp: (min_exp-50)..(max_exp+50))
+    elsif self.title == "Shuffled"
+      output = unmastered_questions
     end
     return output
   end

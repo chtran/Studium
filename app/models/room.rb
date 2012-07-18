@@ -1,9 +1,11 @@
 class Room < ActiveRecord::Base
   belongs_to :question
+  belongs_to :room_mode
   has_many :questions_buffers
   has_many :questions, :through => :questions_buffers
   has_many :users
   has_many :histories
+  validates :room_mode_id, :presence => true
 
   # Input: a number indicating some status
   # Return: true if every user in the room has the given status, false otherwise
@@ -23,4 +25,10 @@ class Room < ActiveRecord::Base
   def show_next_question?
     status_checker(3) #Show next question when everyone is "ready" or status==3
   end
+
+  def mastered_questions
+    return users.collect { |u| u.mastered_questions } 
+                .inject { |this,that| this & that }
+  end
+
 end

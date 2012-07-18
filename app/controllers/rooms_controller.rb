@@ -31,7 +31,6 @@ class RoomsController < ApplicationController
   def join
     @room = Room.find(params[:room_id])
     current_user.update_attribute(:room_id, @room.id)
-    #current_user.update_attribute(:status, 1)
     choose_question!(@room) if !@room.question
     publish("presence-room_#{@room.id}","users_change", {})
     @reload = @room.users.count==1 ? "true" : "false"
@@ -60,12 +59,8 @@ class RoomsController < ApplicationController
         history_id: new_history_item.id
       })
     end
-    #current_user.update_attribute(:status, 2)
-    current_user.status = 2
-    current_user.save
+    current_user.update_attribute(:status, 2)
     @room.save
-    puts @room.users.select(:status).to_a.to_s
-    puts "Show explanation: " + @room.show_explanation?.to_s
     publish("presence-room_#{@room.id}", "users_change", {})
     publish("presence-room_#{@room.id}", "show_explanation", {
       question_id: @current_question.id
@@ -79,30 +74,29 @@ class RoomsController < ApplicationController
   #   If everyone is ready then choose next question and publish to /rooms/next_question
   def ready
     @room = current_user.room
-    current_user.status = 3
-    current_user.save
+    current_user.update_attribute(:status, 3)
     publish("presence-room_#{@room.id}","users_change",{})
     if @room.show_next_question?
-      @next_question = choose_question!(@room)
-      @room.users.each do |user|
-        user.status = 1
-        user.save
+      if @next_question = choose_question!(@room)
+        @room.users.each do |user|
+          current_user.update_attribute(:status, 1)
+        end
+        question_id = @next_question.id
+      else
+        question_id = 0
       end
       publish("presence-room_#{@room.id}","next_question", {
-        question_id: @next_question.id
+        question_id: question_id
       })
     end
-    render :json => {
-      room_id: @room.id
-    }
+    render :text => "OK", :status => "200"
   end
 
   # Request type: GET
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def quit
-    current_user.room_id = 0
-    current_user.status = 0
+    current_user.update_attributes({room_id: 0, status: 0})
     redirect_to rooms_path
   end
 
@@ -113,24 +107,26 @@ class RoomsController < ApplicationController
   def kick
     user = User.find(params[:user_id])
     old_room_id = user.room_id
-    user.room_id = 0
-    user.status = 0
-    user.save
+    user.update_attributes({room_id: 0, status: 0})
     publish("presence-room_#{old_room_id}", "users_change", {})
     render :text => "Kicked", :status => '200'
   end
   # Input: question_id
   # Return: HTML of that question
   def show_question
-    @question = Question.find(params[:question_id])
-    if @question.paragraph
-      @div_paragraph = 'span6'
-      @div_prompt = 'span6'
+    if params[:question_id]=="0"
+      render :text => "Sorry, we ran out of questions for you."
     else
-      @div_paragraph = ''
-      @div_prompt = 'span12'
+      @question = Question.find(params[:question_id])
+      if @question.paragraph
+        @div_paragraph = 'span6'
+        @div_prompt = 'span6'
+      else
+        @div_paragraph = ''
+        @div_prompt = 'span12'
+      end
+      render :partial => "show_question"
     end
-    render :partial => "show_question"
   end
 
   # Request type: POST
@@ -150,12 +146,12 @@ class RoomsController < ApplicationController
     }
     # If there's a choice_id (user chose a choice) and that choice is correct
     if params[:choice_id] and Choice.find(params[:choice_id]).correct?
-      @change = current_user.win_to(@question)
+      @change = current_user.win_to!(@question)
       @message = messages[:correct] + " You won "+@change.to_s+" exp!"
       @style = styles[:correct]
     # If there's no choice_id (user hasn't chosen a choice) or the chosen choice is incorrect
     else
-      @change = current_user.lose_to(@question)
+      @change = current_user.lose_to!(@question)
       @message = messages[:incorrect] + " You lost "+@change.to_s+" exp."
       @style = styles[:incorrect]
     end
@@ -185,16 +181,20 @@ class RoomsController < ApplicationController
   end
   # Generate new questions for the input room when it run out of buffer questions
   def generate_questions!(room)
-    # Temporarily assign all the questions to each room
-    room.questions = Question.all
-    room.save
+    room_questions = room.room_mode.generate_questions(room)
+    room.questions = room_questions
+    return room_questions.empty? ? false : room_questions
   end
 
   # Choose new question from buffer questions
   def choose_question!(room)
-    generate_questions!(room) if room.questions.empty?
+    questions = room.questions.empty? ? generate_questions!(room) : room.questions
     # Temporarily choose a random question from buffer
-    next_question = room.questions.order('RANDOM()').first
+    if !questions
+      room.update_attribute(:question_id, 0)
+      return false
+    end
+    next_question = questions.order('RANDOM()').first
     # Delete the next_question from the buffer
     QuestionsBuffer
       .where({room_id: room.id, question_id:next_question.id})

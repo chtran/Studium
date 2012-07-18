@@ -21,6 +21,11 @@ class User < ActiveRecord::Base
     self.profile.first_name + " " + self.profile.last_name
   end
 
+  def status_message
+    array = ["Observing", "Answering", "Confirmed", "Ready"]
+    return array[self.status]
+  end
+
   def expected(question)
     toReturn = {}
     if question.exp
@@ -29,7 +34,8 @@ class User < ActiveRecord::Base
     end
     return toReturn
   end
-  def lose_to(question)
+
+  def lose_to!(question)
     expectation = expected(question)
     change = (32*expectation[:user]).to_i
     self.decrement!(:exp, change)
@@ -37,7 +43,7 @@ class User < ActiveRecord::Base
     return change
   end
 
-  def win_to(question)
+  def win_to!(question)
     expectation = expected(question)
     change = (32*expectation[:question]).to_i
     self.increment!(:exp, change)
@@ -45,9 +51,33 @@ class User < ActiveRecord::Base
     return change
   end
 
-  def status_message
-    array = ["Observing", "Answering", "Confirmed", "Ready"]
-    return array[self.status]
+  def mastered_questions
+    self.histories
+        .joins(:choice)
+        .where(choices: {correct: true})
+        .select("histories.question_id")
+        .uniq
+        .includes(:question)
+        .collect { |i| i.question }
   end
+
+  def failed_questions
+    failed = self.histories
+                 .where("question_id IN (?)", self.answered_questions.collect {|q| q.id})
+                 .where("question_id NOT IN (?)", self.mastered_questions.collect {|q| q.id}) 
+                 .select("histories.question_id")
+                 .uniq
+                 .includes(:question)
+                 .collect {|i| i.question}
+  end
+                    
+  def answered_questions
+    self.histories
+        .select(:question_id)
+        .uniq
+        .includes(:question)
+        .collect {|h| h.question}
+  end
+        
 
 end

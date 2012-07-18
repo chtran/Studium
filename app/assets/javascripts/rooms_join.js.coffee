@@ -46,9 +46,10 @@ $(->
 
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
-      change_question(data.question_id);
+      change_question(data.question_id)
       true;
     );
+
     # Input: none
     # Effect: update the user list to div#top_nav
     update_users = ->
