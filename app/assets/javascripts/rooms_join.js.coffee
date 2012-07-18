@@ -73,11 +73,16 @@ $(->
         },
         success: (data) ->
           if data.message
-            $("#prompt").text(data.message)
+            alert(data.message)
+            window.location.replace("/rooms")
           else
             $("#prompt").html(data.question_prompt);
             $("#choices").html(data.question_choices);
-            $("#paragraph").html(data.paragraph);
+            if data.paragraph != ""
+              $("#paragraph").html(data.paragraph).show()
+            else
+              alert("no para")
+              $("#paragraph").hide()
             $("#ready").hide();
             $("#current_question").addClass("question_active");
             setup_timer(
