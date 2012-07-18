@@ -73,7 +73,7 @@ $(->
         },
         success: (data) ->
           if data.message
-            $("prompt").text(data.message)
+            $("#prompt").text(data.message)
           else
             $("#prompt").html(data.question_prompt);
             $("#choices").html(data.question_choices);
@@ -141,8 +141,9 @@ $(->
       });
       true;
     # Set question the first time
-    current_question_id = $("#question_container").attr("question_id");
-    change_question(current_question_id);
+    if $("#question_container p").attr("reload") == "true"
+      current_question_id = $("#question_container").attr("question_id");
+      change_question(current_question_id);
 
     # Update the user list the first time
     update_users();

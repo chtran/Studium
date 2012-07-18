@@ -26,7 +26,7 @@
   %div.span3
 %div.row-fluid#rooms_join
   %div.span4#paragraph.prettyprint.pre-scrollable.linenums
-  %div.span4#question_container{room_id: @room.id, question_id: @room.question.id}
+  %div.span4#question_container{room_id: @room.id, question_id: @room.question_id}
     %p{reload: @reload} Waiting for next round...
     %div.prompt_container#current_question.question_active
       %h4 Question
