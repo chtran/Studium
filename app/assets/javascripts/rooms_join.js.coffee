@@ -81,7 +81,6 @@ $(->
             if data.paragraph != ""
               $("#paragraph").html(data.paragraph).show()
             else
-              alert("no para")
               $("#paragraph").hide()
             $("#ready").hide();
             $("#current_question").addClass("question_active");
@@ -147,6 +146,7 @@ $(->
       true;
     # Set question the first time
     if $("#question_container p").attr("reload") == "true"
+      $("#observing").hide()
       current_question_id = $("#question_container").attr("question_id");
       change_question(current_question_id);
 

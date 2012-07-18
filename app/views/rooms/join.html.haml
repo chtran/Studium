@@ -25,25 +25,26 @@
   %div.span9
   %div.span3
 %div.row-fluid#rooms_join
-  %div.span4#paragraph.prettyprint.pre-scrollable.linenums
-  %div.span4#question_container{room_id: @room.id, question_id: @room.question_id}
-    %p{reload: @reload} Waiting for next round...
-    %div.prompt_container#current_question.question_active
-      %h4 Question
-      %div.row-fluid
-        %div.span2
-        %div.span10
-          %p.lead#prompt
-      %div.row-fluid.choices_container
-        %h4 Choices
-        %div.row-fluid
-          %div.span2
-          %div.span8
-            %div#choices
-      %div.pull-right
-        %a.btn.btn-primary#confirm{style: "display:none"} Confirm
-        %a.btn.btn-primary#ready{style: "display:none"} Ready
-  %div.span1
+  %div.span9
+    %div.row-fluid
+      %div.span5#paragraph.prettyprint.pre-scrollable.linenums
+      %div.span5#question_container{room_id: @room.id, question_id: @room.question_id}
+        %p#observing{reload: @reload} Waiting for next round...
+        %div.prompt_container#current_question.question_active
+          %h4 Question
+          %div.row-fluid
+            %div.span2
+            %div.span10
+              %p.lead#prompt
+          %div.row-fluid.choices_container
+            %h4 Choices
+            %div.row-fluid
+              %div.span2
+              %div.span8
+                %div#choices
+          %div.pull-right
+            %a.btn.btn-primary#confirm{style: "display:none"} Confirm
+            %a.btn.btn-primary#ready{style: "display:none"} Ready
   %div.span3
     %div#top_nav
     %div#bottom_nav
