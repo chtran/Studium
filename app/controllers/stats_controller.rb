@@ -51,9 +51,19 @@ class StatsController < ApplicationController
 
   def index
     histories = current_user.histories
-    @math_total_answers, @math_correct_answers, @math_percent = total_answers(histories, 1)
-    @cr_total_answers, @cr_correct_answers, @cr_percent = total_answers(histories, 2)
-    @writing_total_answers, @writing_correct_answers, @writing_percent = total_answers(histories, 3)
+    category_type = CategoryType.all
+    @subject_data = []
+    category_type.each do |c|
+      @subject_data <<  {
+        id: c.id, 
+        name: c.category_name,
+        data: {
+          total_answers: total_answers(histories, c.id)[0],
+          correct_answers: total_answers(histories, c.id)[1],
+          percent: total_answers(histories, c.id)[2]
+        }
+      }
+    end
   end
 
   def pull
@@ -80,7 +90,7 @@ class StatsController < ApplicationController
     # Reset percent to 0 if user has not answered any question
     percent=total_answers==0 ? 0 : (correct_answers.to_f/total_answers.to_f)*100
     
-    return total_answers, correct_answers, total_answers
+    return total_answers, correct_answers, percent.to_i
 
   end
 

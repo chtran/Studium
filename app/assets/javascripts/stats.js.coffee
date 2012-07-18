@@ -56,7 +56,7 @@ $(->
   c_stacked = (id)->
       $.ajax({
         type: "GET",
-        url: "stats/pull_stacked/"+id.toString(),
+        url: "pull_stacked/"+id.toString(),
         success: (data)->
           chart_column = new Highcharts.Chart({
               chart: {
@@ -130,25 +130,20 @@ $(->
   if $("#progress-bar-math").length
     recent();
 
+  number_of_categories = document.getElementById('dropdown-subjects').getElementsByTagName('li').length;
+  range = [1..number_of_categories];
+  for id in range
+    $("#"+id.toString()+"_graph").click -> 
+      graph(this);
+    $("#"+id.toString()+"_column").click -> 
+      graph(this);
 
-  $("#math_graph").click ->
-    init(1);
-
-  $("#CR_graph").click ->
-    init(2);
+  graph = (subject)->
+    offset = subject.id.split("_")[1];
+    id = parseInt(subject.id.split("_")[0]);
+    if offset == "graph" then init(id);
+    if offset == "column" then c_stacked(id);
     
-  $("#writing_graph").click ->
-    init(3);
-
-  $("#math_column").click ->
-    c_stacked(1);
-
-  $("#CR_column").click ->
-    c_stacked(2);
-    
-  $("#writing_column").click ->
-    c_stacked(3);
-
 
   if $("#graph").length
     init(0);

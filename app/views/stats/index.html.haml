@@ -28,49 +28,31 @@
             %th Question Answered
             %th Correct
         %tbody
-          %tr
-            %td Math
-            %td.progress-bar-container
-              ="#{@math_percent.to_i} %"
-              %div.progress.progress-striped.active#progress-bar-math
-                %div.bar#bar-math{:style => "width: #{@math_percent}%"}
-            %td
-              =@math_total_answers
-            %td 
-              =@math_correct_answers
-          %tr
-            %td Critical Reading
-            %td.progress-bar-container
-              ="#{@cr_percent.to_i} %"
-              %div.progress.progress-success.progress-striped.active#progress-bar-CR
-                %div.bar{:style => "width: #{@cr_percent}%"}
-            %td 
-              =@cr_total_answers
-            %td 
-              =@cr_correct_answers
-          %tr
-            %td Writing
-            %td.progress-bar-container
-              ="#{@writing_percent.to_i}%"
-              %div.progress.progress-warning.progress-striped.active#progress-bar-writing
-                %div.bar{:style => "width: #{@writing_percent}%"}
-            %td 
-              =@writing_total_answers
-            %td 
-              =@writing_correct_answers
-  
+          -@subject_data.each do |s|
+            %tr
+              %td #{s[:name]}
+              %td.progress-bar-container
+                ="#{s[:data][:percent]}%"
+                -@color = "primary" if s[:id]%3 == 1
+                -@color = "success" if s[:id]%3 == 2
+                -@color = "warning" if s[:id]%3 == 0
+                %div.progress.progress-striped.active{:class => "progress-#{@color}"}
+                  %div.bar{:style => "width: #{s[:data][:percent]}%"}
+              %td
+                =s[:data][:total_answers]
+              %td
+                =s[:data][:correct_answers]
+
+
   %div.perform-stats
     %div.btn-group.subject-button
       %div.btn.btn-large.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
         %span.caret
-      %ul.dropdown-menu
-        %li
-          %a#math_graph Math
-        %li
-          %a#CR_graph Critical Reading
-        %li
-          %a#writing_graph Writing
+      %ul.dropdown-menu#dropdown-subjects
+        -@subject_data.each do |s|
+          %li
+            %a{:id => "#{s[:id]}_graph"} #{s[:name]}
     %div 
       %h2 
         Performance 
@@ -85,12 +67,9 @@
       %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
         %span.caret
-      %ul.dropdown-menu
-        %li
-          %a#math_column Math
-        %li
-          %a#CR_column Critical Reading
-        %li
-          %a#writing_column Writing
+      %ul.dropdown-menu.dropdown-subjects
+        -@subject_data.each do |s|
+          %li
+            %a{:id => "#{s[:id]}_column"} #{s[:name]}
   %div#column_stacked
 
