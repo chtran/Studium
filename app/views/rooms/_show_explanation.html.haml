@@ -1,19 +1,13 @@
-%div.choices
-  %h4 Explanation
-  %div.row-fluid
-    %div.span12
-      %div{class: @style}
-        %p= @message
-  %div.row-fluid
-    %div.span2
-    %div.span4
-      %div.row-fluid
-      - @question.choices.each do |choice|
-        - result = choice.correct ? "btn-success" : ""
-        %div.span12.btn.each_choice.disabled{id: choice.id.to_s, class: result}
-          %div.row-fluid
-            %div.span3= choice.choice_letter
-            %div.span8= choice.content
-            - if (choice.correct)
-              %div.span1
-                %i.icon-white.icon-ok
+%h4 Explanation
+
+%div.row-fluid{class: @style}
+  %p= @message
+
+- @question.choices.each do |choice|
+  - result = choice.correct ? "btn-success" : ""
+  %div.row-fluid.btn.each_choice.disabled{id: choice.id.to_s, class: result}
+    %div.span1
+      - if (choice.correct)
+        %i.icon-white.icon-ok
+    %div.span2= choice.choice_letter
+    %div.span6= choice.content

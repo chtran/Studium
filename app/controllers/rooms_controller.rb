@@ -122,15 +122,15 @@ class RoomsController < ApplicationController
   # Input: question_id
   # Return: HTML of that question
   def show_question
+    require "parser"
     @question = Question.find(params[:question_id])
-    if @question.paragraph
-      @div_paragraph = 'span6'
-      @div_prompt = 'span6'
-    else
-      @div_paragraph = ''
-      @div_prompt = 'span12'
-    end
-    render :partial => "show_question"
+    question_choices=render_to_string(@question.choices).html_safe
+
+    render json: {
+      question_prompt: @question.prompt.parse(question_id: @question.id,is_passage: false).html_safe,
+      question_choices: question_choices,
+      paragraph: @question.paragraph ? @question.paragraph.content.parse(question_id: @question.id,is_passage: true).html_safe : ""
+    }
   end
 
   # Request type: POST
