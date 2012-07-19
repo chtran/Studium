@@ -4,6 +4,7 @@ Studium::Application.configure do
   config.pusher_app_id = '24003'
   config.pusher_key = 'cb9eb0536f6f8194c197'
   config.pusher_secret = '89a3f76eab32dfe86fbe'
+  config.facebook_app_id = '153785024745338'
   # The test environment is used exclusively to run your application's
   # test suite.  You never need to work with it otherwise.  Remember that
   # your test database is "scratch space" for the test suite and is wiped

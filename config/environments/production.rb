@@ -4,6 +4,7 @@ Studium::Application.configure do
   config.pusher_app_id = '22619'
   config.pusher_key = '9a81f498ef1031e46675'
   config.pusher_secret = 'c90fd082578b9efe4f69'
+  config.facebook_app_id = '139450059526185'
   # Code is not reloaded between requests
   config.cache_classes = true
 

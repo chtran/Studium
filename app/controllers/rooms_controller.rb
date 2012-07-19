@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
+    @friends = current_user.friends
   end
 
   # Request type: POST

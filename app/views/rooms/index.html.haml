@@ -4,3 +4,7 @@
     %div.accordion.text-center#room_list
     %br
     = link_to "New room", new_room_path, {class: "btn btn-primary"}
+  %div.span3
+    %div#friend_list
+      Friends
+      = render "friend_list", friends: @friends
