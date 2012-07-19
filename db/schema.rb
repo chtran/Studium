@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716190320) do
+ActiveRecord::Schema.define(:version => 20120719071303) do
 
   create_table "category_types", :force => true do |t|
     t.string   "category_name"
@@ -60,8 +60,15 @@ ActiveRecord::Schema.define(:version => 20120716190320) do
     t.datetime "date_of_birth"
     t.string   "school"
     t.integer  "user_id"
+<<<<<<< HEAD
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image"
+    t.string   "link"
+>>>>>>> 1ac5d79851723b274847b5bb2ab4e29703799def
   end
 
   create_table "question_types", :force => true do |t|
@@ -102,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120716190320) do
     t.integer  "question_id"
     t.string   "title"
     t.boolean  "active",        :default => true
+    t.integer  "room_mode_id"
   end
 
   create_table "users", :force => true do |t|
@@ -119,8 +127,11 @@ ActiveRecord::Schema.define(:version => 20120716190320) do
     t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false
     t.integer  "room_id"
-    t.integer  "status"
+    t.integer  "status",                 :default => 0
     t.integer  "exp",                    :default => 1400
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

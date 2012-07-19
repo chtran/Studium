@@ -20,7 +20,11 @@ $(->
           history_id: history_id
         },
         success: (data) ->
-          $(".history").append(data);
+          $("#history").append(data);
+          $("#history p:last").effect("highlight",2000);
+          #$("#history").animate({
+          #  scrollTop: $("#history p:last").position().top
+          #},1000);
       });
       true;
 

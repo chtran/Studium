@@ -49,7 +49,7 @@ Studium::Application.routes.draw do
 
   post "/pusher/auth", to: "pusher#auth"
   post "/pusher/webhook", to: "pusher#webhook"
-  devise_for :users,controllers: {registrations: "registrations"}
+  devise_for :users,controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
 
   get "/stats", to: "stats#index", as: "stats"
   get "/stats/pull_pro_bar/:interval", to:"stats#pull_pro_bar"

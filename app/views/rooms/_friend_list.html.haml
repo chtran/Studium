@@ -1,0 +1,4 @@
+%div.pre-scrollable
+  - friends.each do |f|
+    %div{id: "user_#{f.id}"}
+      = f.name

@@ -7,5 +7,8 @@
   %div.control-group.text-center
     = f.label :title, "Room title"
     = f.text_field :title
+  %div.control-group.text-center
+    = f.label :room_mode_id, "Room mode"
+    = f.select(:room_mode_id, RoomMode.all.collect { |m| [m.title, m.id]})
   %div.text-center
     = f.submit class:"btn btn-primary"

@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :room_id, :status
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :room_id, :status, :provider, :uid, :oauth_token
   # Status:
   # 0 - not in any room
   # 1 - answering a question
@@ -17,8 +18,47 @@ class User < ActiveRecord::Base
   has_many :histories,dependent: :destroy
   has_one :profile,dependent: :destroy
   accepts_nested_attributes_for :profile
+
+  def self.find_for_facebook_auth(auth, signed_in_resource=nil)
+    user = User.where(provider: auth.provider, uid: auth.uid).first
+    if !user
+      user = User.create(provider:auth.provider,
+                         uid:auth.uid,
+                         email: auth.info.email,
+                         password: Devise.friendly_token[0,20],
+                         oauth_token: auth.credentials.token)
+      profile = Profile.new(first_name: auth.info.first_name,
+                            last_name: auth.info.last_name,
+                            image: auth.info.image,
+                            link: auth.info.urls.Facebook)
+      profile.user = user
+      profile.save
+    else
+      user.update_attribute(:oauth_token, auth.credentials.token)
+      user.profile.update_attributes({
+        image: auth.info.image,
+        link: auth.info.urls.Facebook
+      })
+    end
+    user
+  end
+
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
+  def friends
+    uids = facebook.get_connections("me","friends").collect {|f| f["id"]}
+    User.where("uid IN (?)", uids)
+  end
+
   def name
     self.profile.first_name + " " + self.profile.last_name
+  end
+
+  def status_message
+    array = ["Observing", "Answering", "Confirmed", "Ready"]
+    return array[self.status]
   end
 
   def expected(question)
@@ -29,7 +69,8 @@ class User < ActiveRecord::Base
     end
     return toReturn
   end
-  def lose_to(question)
+
+  def lose_to!(question)
     expectation = expected(question)
     change = (32*expectation[:user]).to_i
     self.decrement!(:exp, change)
@@ -37,7 +78,7 @@ class User < ActiveRecord::Base
     return change
   end
 
-  def win_to(question)
+  def win_to!(question)
     expectation = expected(question)
     change = (32*expectation[:question]).to_i
     self.increment!(:exp, change)
@@ -45,9 +86,33 @@ class User < ActiveRecord::Base
     return change
   end
 
-  def status_message
-    array = ["Observing", "Answering", "Confirmed", "Ready"]
-    return array[self.status]
+  def mastered_questions
+    self.histories
+        .joins(:choice)
+        .where(choices: {correct: true})
+        .select("histories.question_id")
+        .uniq
+        .includes(:question)
+        .collect { |i| i.question }
   end
+
+  def failed_questions
+    failed = self.histories
+                 .where("question_id IN (?)", self.answered_questions.collect {|q| q.id})
+                 .where("question_id NOT IN (?)", self.mastered_questions.collect {|q| q.id}) 
+                 .select("histories.question_id")
+                 .uniq
+                 .includes(:question)
+                 .collect {|i| i.question}
+  end
+                    
+  def answered_questions
+    self.histories
+        .select(:question_id)
+        .uniq
+        .includes(:question)
+        .collect {|h| h.question}
+  end
+        
 
 end

@@ -4,6 +4,7 @@ Studium::Application.configure do
   config.pusher_app_id = '24003'
   config.pusher_key = 'cb9eb0536f6f8194c197'
   config.pusher_secret = '89a3f76eab32dfe86fbe'
+  config.facebook_app_id = '153785024745338'
   #config.pusher_app_id = '22619'
   #config.pusher_key = '9a81f498ef1031e46675'
   #config.pusher_secret = 'c90fd082578b9efe4f69'
