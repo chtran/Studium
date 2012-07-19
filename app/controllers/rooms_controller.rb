@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def index
     @friends = current_user.friends
+    current_user.update_attribute(:status,0)
   end
 
   # Request type: POST
@@ -34,7 +35,7 @@ class RoomsController < ApplicationController
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
     publish("presence-room_#{@room.id}","users_change", {})
-    @reload = @room.users.count==1 ? "true" : "false"
+    @reload = (@room.users.count==1).to_s
   end
 
   # Request type: POST
@@ -185,7 +186,7 @@ class RoomsController < ApplicationController
   # Generate new questions for the input room when it run out of buffer questions
   def generate_questions!(room)
     room_questions = room.room_mode.generate_questions(room)
-    room.questions = room_questions
+    room.questions = room_questions.all
     return room_questions.empty? ? false : room_questions
   end
 

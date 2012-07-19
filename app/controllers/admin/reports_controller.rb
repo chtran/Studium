@@ -7,7 +7,7 @@ class Admin::ReportsController < ApplicationController
     end
 
     users_who_come_back = users.find_all do |u|
-      u.created_at.to_date == u.last_sign_in_at.to_date
+      u.created_at.to_date != u.last_sign_in_at.to_date
     end
 
     questions_answered = users.map do |u| 
