@@ -4,7 +4,7 @@ class RoomMode < ActiveRecord::Base
 
   def generate_questions(room)
     mastered_questions_id = room.mastered_questions.collect{ |q| q.id}
-    unmastered_questions = Question.where("id NOT IN (?)", mastered_questions_id)
+    unmastered_questions = mastered_questions_id.empty? ? Question : Question.where("id NOT IN (?)", mastered_questions_id)
     # If the room_mode's name is one the the categories' names
     if categories = CategoryType.where(category_name: self.title) and categories != []
       # Find all the question types associated with that category
