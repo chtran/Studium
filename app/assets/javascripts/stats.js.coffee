@@ -17,17 +17,17 @@ $(->
                 text: 'Your percentage of correct answers progress'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: data['key_interval']
             },
             yAxis: {
                 title: {
                     text: 'percent'
                 },
-#labels: {
-#                   formatter: ->
-#                       return this.value +'°'
-#               }
+                labels: {
+#                  formatter: ->
+#                    console.log(this)
+#                    return this['value'] +'%'
+                }
             },
             tooltip: {
                 crosshairs: true,
@@ -43,7 +43,7 @@ $(->
                 }
             },
             series: [{
-                name: 'Tokyo',
+                name: 'Percent Of Correct Answers'
                 marker: {
                     symbol: 'square'
                 },
@@ -51,12 +51,12 @@ $(->
             }]
         });
 ##
-
+      
     });
   c_stacked = (id)->
       $.ajax({
         type: "GET",
-        url: "pull_stacked/"+id.toString(),
+        url: "/stats/pull_stacked/"+id.toString(),
         success: (data)->
           chart_column = new Highcharts.Chart({
               chart: {
@@ -67,7 +67,7 @@ $(->
                   text: 'Stacked column chart'
               },
               xAxis: {
-                  categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                  categories: data['key_interval']
               },
               yAxis: {
                   min: 0,
@@ -119,16 +119,34 @@ $(->
               }]
             });
         });
-  recent = ->
+  recent = (interval)->
     $.ajax({
         type: "GET",
-        url: "stats/test_ajax"
-        success: (data)->
-          document.getElementById('bar-math').style.width = data['math'].toString()+'%';
+        url: "stats/pull_pro_bar/"+interval.toString(),
+        success: (subject_data)->
+            for s in subject_data
+              bar_id = "bar-"+s['name'];
+              percent_id = "percent_" + s['name'];
+              total_answers_id = "total_answers_" + s['name'];
+              correct_answers_id = "correct_answers_" + s['name']
+              percent = s["data"]["percent"]
+              document.getElementById(bar_id).style.width = percent.toString()+'%';
+              document.getElementById(percent_id).innerHTML = s['data']['percent']+'%';
+              document.getElementById(total_answers_id).innerHTML = s['data']['total_answers'];
+              document.getElementById(correct_answers_id).innerHTML = s['data']['correct_answers'];
         })
   
-  if $("#progress-bar-math").length
-    recent();
+  if $("#interval_btn").length then recent(1);
+
+  $("#today").click ->
+    recent(1);
+
+  $("#last_week").click ->
+    recent(7);
+
+  $("#last_month").click ->
+    recent(30);
+
 
   number_of_categories = document.getElementById('dropdown-subjects').getElementsByTagName('li').length;
   range = [1..number_of_categories];

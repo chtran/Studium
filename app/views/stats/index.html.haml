@@ -4,16 +4,16 @@
     %h1#stats-title Your Personal Statistics
   %div.perform-stats
     %div.btn-group.subject-button
-      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
-        Today
+      %div.btn.btn-large.btn-primary.dropdown-toggle#interval_btn{"data-toggle" => "dropdown"}
+        Select time
         %span.caret
       %ul.dropdown-menu
         %li
-          %a Last week
+          %a#today Today
         %li
-          %a Last 2 weeks
+          %a#last_week Last week
         %li
-          %a Last month
+          %a#last_month Last month
     %div 
       %h2 
         Performance 
@@ -32,15 +32,16 @@
             %tr
               %td #{s[:name]}
               %td.progress-bar-container
-                ="#{s[:data][:percent]}%"
+                %p{:id => "percent_#{s[:name]}"}
+                  ="#{s[:data][:percent]}%"
                 -@color = "primary" if s[:id]%3 == 1
                 -@color = "success" if s[:id]%3 == 2
                 -@color = "warning" if s[:id]%3 == 0
                 %div.progress.progress-striped.active{:class => "progress-#{@color}"}
-                  %div.bar{:style => "width: #{s[:data][:percent]}%"}
-              %td
+                  %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
+              %td{:id => "total_answers_#{s[:name]}"} 
                 =s[:data][:total_answers]
-              %td
+              %td{:id => "correct_answers_#{s[:name]}"}
                 =s[:data][:correct_answers]
 
 
@@ -58,11 +59,11 @@
         Performance 
         %small overall
       %hr
-    %h3#description-progress Overall progress description goes here
+    %h3#description-progress The graph shows your progress over time, measured by percent of correct answers
   %div#graph
   %div
     %div
-      %h3#description-column Column stacked description goes here
+      %h3#description-column Columns stacked graph shows the number of correct and incorrect answers  
     %div.btn-group.subject-button
       %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
