@@ -21,4 +21,7 @@ private
   def publish(channel, event, data)
     Pusher[channel].trigger(event,data)
   end
+  def publish_async(channel, event, data)
+    Pusher[channel].trigger_async(event,data)
+  end
 end

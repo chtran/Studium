@@ -24,8 +24,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(params[:room])
     if @room.save
-      # See application_controller for publish method.
-      publish("rooms", "create", {room_id: @room.id})
+      # See application_controller for publish_async method.
+      publish_async_async("rooms", "create", {room_id: @room.id})
       redirect_to room_join_path(@room.id)
     else
       redirect_to rooms_path, alert: "Error creating room"
@@ -36,7 +36,7 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:room_id])
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
-    publish("presence-room_#{@room.id}","users_change", {})
+    publish_async("presence-room_#{@room.id}","users_change", {})
     @reload = (@room.users.count==1).to_s
   end
 
@@ -59,13 +59,13 @@ class RoomsController < ApplicationController
     if params[:choice_id]
       @choice_id = params[:choice_id]
       new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-      publish("presence-room_#{@room.id}", "update_histories", {
+      publish_async("presence-room_#{@room.id}", "update_histories", {
         history_id: new_history_item.id
       })
     end
     current_user.update_attribute(:status, 2)
     @room.save
-    publish("presence-room_#{@room.id}", "users_change", {})
+    publish_async("presence-room_#{@room.id}", "users_change", {})
     publish("presence-room_#{@room.id}", "show_explanation", {
       question_id: @current_question.id
     }) if @room.show_explanation?
@@ -75,11 +75,11 @@ class RoomsController < ApplicationController
   # Request type: POST
   # Input: room_id
   # Effect: change user's status to 3 (Ready). 
-  #   If everyone is ready then choose next question and publish to /rooms/next_question
+  #   If everyone is ready then choose next question and publish_async to /rooms/next_question
   def ready
     @room = current_user.room
     current_user.update_attribute(:status, 3)
-    publish("presence-room_#{@room.id}","users_change",{})
+    publish_async("presence-room_#{@room.id}","users_change",{})
     if @room.show_next_question?
       if @next_question = choose_question!(@room)
         @room.users.each do |user|
@@ -112,7 +112,7 @@ class RoomsController < ApplicationController
     user = User.find(params[:user_id])
     old_room_id = user.room_id
     user.update_attributes({room_id: 0, status: 0})
-    publish("presence-room_#{old_room_id}", "users_change", {})
+    publish_async("presence-room_#{old_room_id}", "users_change", {})
     render :text => "Kicked", :status => '200'
   end
   # Input: question_id
@@ -120,7 +120,7 @@ class RoomsController < ApplicationController
   def show_question
     require "parser"
     current_user.update_attribute(:status, 1)
-    publish("presence-room_#{current_user.room_id}", "users_change", {})
+    publish_async("presence-room_#{current_user.room_id}", "users_change", {})
     if params[:question_id]=="0"
       render json: {
         message: "Sorry, we ran out of questions for you"
@@ -171,7 +171,7 @@ class RoomsController < ApplicationController
   def chat_message
     @room=current_user.room
     message=current_user.email+": "+ params[:message]
-    publish("presence-room_#{@room.id}","chat_message", {
+    publish_async("presence-room_#{@room.id}","chat_message", {
       message: message
     })
 
