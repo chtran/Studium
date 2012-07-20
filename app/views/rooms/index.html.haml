@@ -3,8 +3,14 @@
   %div.span6
     %div.accordion.text-center#room_list
     %br
-    = link_to "New room", new_room_path, {class: "btn btn-primary"}
+    %a.btn.btn-primary{"data-toggle"=>"modal", "href"=>"#new_room"}New room
+    %div.modal.hide#new_room
+      %div.modal-header
+        %button.close{"type" => "button", "data-dismiss" => "modal"}x
+        %h3 Create new room
+      %div.modal-body
+        =render "new"
   %div.span3
     %div#friend_list
-      Friends
+      %h3 Friends
       = render "friend_list", friends: @friends

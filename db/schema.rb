@@ -60,15 +60,10 @@ ActiveRecord::Schema.define(:version => 20120719071303) do
     t.datetime "date_of_birth"
     t.string   "school"
     t.integer  "user_id"
-<<<<<<< HEAD
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-=======
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "image"
     t.string   "link"
->>>>>>> 1ac5d79851723b274847b5bb2ab4e29703799def
   end
 
   create_table "question_types", :force => true do |t|

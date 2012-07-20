@@ -20,7 +20,7 @@
   %div.span1
     %div#timer.pull-right{display: "inline"}
   %div.span2
-    %div#room_mode.btn.btn-info Shuffled
+    %div#room_mode.btn.btn-info= @room.room_mode.title
 %div.row-fluid#divider
   %div.span9
   %div.span3
@@ -29,7 +29,11 @@
     %div.row-fluid
       %div.span5#paragraph.prettyprint.pre-scrollable.linenums
       %div.span5#question_container{room_id: @room.id, question_id: @room.question_id}
-        %p#observing{reload: @reload} Waiting for next round...
+        %div.modal#observing{reload: @reload, style: "display:none"}
+          %div.modal-header
+            %h3 Waiting...
+          %div.modal-body
+            %p Please wait for the next round to begin
         %div.prompt_container#current_question.question_active
           %h4 Question
           %div.row-fluid

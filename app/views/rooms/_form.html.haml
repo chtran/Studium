@@ -1,7 +1,7 @@
-= form_for (@room) do |f|
-  - if @room.errors.any?
+= form_for (@new_room) do |f|
+  - if @new_room.errors.any?
     %ul
-      - @room.errors.full_messages.each do |msg|
+      - @new_room.errors.full_messages.each do |msg|
         %li=msg
 
   %div.control-group.text-center

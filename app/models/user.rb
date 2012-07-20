@@ -87,32 +87,32 @@ class User < ActiveRecord::Base
   end
 
   def mastered_questions
-    self.histories
-        .joins(:choice)
-        .where(choices: {correct: true})
-        .select("histories.question_id")
-        .uniq
-        .includes(:question)
-        .collect { |i| i.question }
+    questions_id = self.histories
+                       .joins(:choice)
+                       .where(choices: {correct: true})
+                       .select("histories.question_id")
+                       .uniq
+                       .collect(&:question_id)
+    return Question.where("id IN (?)", questions_id)
   end
 
   def failed_questions
-    failed = self.histories
-                 .where("question_id IN (?)", self.answered_questions.collect {|q| q.id})
-                 .where("question_id NOT IN (?)", self.mastered_questions.collect {|q| q.id}) 
-                 .select("histories.question_id")
-                 .uniq
-                 .includes(:question)
-                 .collect {|i| i.question}
+    questions_id = self.histories
+                       .where("question_id IN (?)", self.answered_questions.collect(&:id))
+                       .where("question_id NOT IN (?)", self.mastered_questions.empty? ? "" : self.mastered_questions.collect(&:id)) 
+                       .select("histories.question_id")
+                       .uniq
+                       .collect(&:question_id)
+    return Question.where("id IN (?)", questions_id)
   end
-                    
+
   def answered_questions
-    self.histories
-        .select(:question_id)
-        .uniq
-        .includes(:question)
-        .collect {|h| h.question}
+    questions_id = self.histories
+                       .select(:question_id)
+                       .uniq
+                       .collect(&:question_id)
+    return Question.where("id IN (?)", questions_id)
   end
-        
+
 
 end

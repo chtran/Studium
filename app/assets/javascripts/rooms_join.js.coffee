@@ -46,9 +46,11 @@ $(->
 
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
+      $("#observing").modal("hide")
       change_question(data.question_id)
       true;
     );
+
 
     # Input: none
     # Effect: update the user list to div#top_nav
@@ -84,10 +86,7 @@ $(->
               $("#paragraph").hide()
             $("#ready").hide();
             $("#current_question").addClass("question_active");
-            setup_timer(
-              60,
-              -> confirm_answer()
-            );
+            setup_timer(60,confirm_answer);
       });
       true;
 
@@ -145,10 +144,17 @@ $(->
       });
       true;
     # Set question the first time
-    if $("#question_container p").attr("reload") == "true"
-      $("#observing").hide()
+    
+    if $("#observing").attr("reload") == "true"
       current_question_id = $("#question_container").attr("question_id");
       change_question(current_question_id);
+    else
+      $("#observing").modal({
+        keyboard: false,
+        backdrop: 'static',
+        show: true
+      })
+
 
     # Update the user list the first time
     update_users();

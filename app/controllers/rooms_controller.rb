@@ -4,7 +4,9 @@ class RoomsController < ApplicationController
 
   def index
     @friends = current_user.friends
-    current_user.update_attribute(:status,0)
+    @new_room = Room.new
+    current_user.update_attribute(:status,0) unless current_user.status==0
+    current_user.update_attribute(:room_id,0) unless current_user.room_id==0
   end
 
   # Request type: POST
@@ -117,6 +119,8 @@ class RoomsController < ApplicationController
   # Return: HTML of that question
   def show_question
     require "parser"
+    current_user.update_attribute(:status, 1)
+    publish("presence-room_#{current_user.room_id}", "users_change", {})
     if params[:question_id]=="0"
       render json: {
         message: "Sorry, we ran out of questions for you"

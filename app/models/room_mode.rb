@@ -16,8 +16,8 @@ class RoomMode < ActiveRecord::Base
       output = room.users[0].failed_questions
     elsif self.title == "Smart"
       exp_array = room.users.select(:exp).order(:exp)
-      min_exp = exp_array.first
-      max_exp = exp_array.last
+      min_exp = exp_array.first.exp
+      max_exp = exp_array.last.exp
       output = unmastered_questions.where(exp: (min_exp-50)..(max_exp+50))
     elsif self.title == "Shuffled"
       output = unmastered_questions
