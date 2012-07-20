@@ -2,7 +2,7 @@ class String
   def parse(options={})
     # Parse all the markups
     self.highlight_render(options[:question_id])
-        .blank(options[:question_id])
+        .blank
         .linebreak(options[:is_passage])
         .underline(options[:question_id])
   end
@@ -26,18 +26,15 @@ class String
     result
   end
 
-  def blank(question_id)
+  def blank
     result=self
 
-    # If question_id is not nil
-    if question_id
-      # Parse all the blank markups that match question_id
-      count=0
-      while result=~/(.*?)<bl \/>(.*)/m
-        count+=1
-        result=$1+%Q[<input type="text" id="question_#{question_id}_blank_#{count}" class="span2 focused" style="display:inline" />]+$2
-        result.gsub!(/\n/,"")
-      end
+    # Parse all the blank markups that match question_id
+    count=0
+    while result=~/(.*?)<bl \/>(.*)/m
+      count+=1
+      result=$1+%Q[<input type="text" id="blank_#{count}" class="span2 focused" style="display:inline" />]+$2
+      result.gsub!(/\n/,"")
     end
     
     result

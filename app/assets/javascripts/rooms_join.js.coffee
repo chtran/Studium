@@ -164,6 +164,11 @@ $(->
     $(".question_active#current_question #choices .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary");
       $(this).addClass("btn-primary");
+      contents = $(this).find(".choice_content").text().split("..")
+      count = 1
+      for content in contents
+        $("#blank_"+count).val(content)
+        count++
       $("#confirm").show();
       true;
     );
