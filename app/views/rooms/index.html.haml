@@ -10,6 +10,15 @@
         %h3 Create new room
       %div.modal-body
         =render "new"
+    %div.modal.hide#invitation
+      %div.modal-header
+        %button.close{"type" => "button", "data-dismiss" => "modal"}x
+        %h3 You're invited!
+      %div.modal-body
+        %p
+      %div.modal-footer
+        %a.btn{"data-dismiss"=>"modal"}Reject
+        %a.btn.btn-primary#accept Accept
   %div.span3
     %div#friend_list
       %h3 Friends

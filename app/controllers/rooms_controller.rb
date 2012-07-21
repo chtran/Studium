@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def index
     @friends = current_user.friends
+    gon.user_id = current_user.id
     @new_room = Room.new
     current_user.update_attribute(:status,0) unless current_user.status==0
     current_user.update_attribute(:room_id,0) unless current_user.room_id==0
@@ -25,7 +26,7 @@ class RoomsController < ApplicationController
     @room = Room.new(params[:room])
     if @room.save
       # See application_controller for publish_async method.
-      publish_async_async("rooms", "create", {room_id: @room.id})
+      publish_async_async("presence-rooms", "create", {room_id: @room.id})
       redirect_to room_join_path(@room.id)
     else
       redirect_to rooms_path, alert: "Error creating room"
@@ -34,6 +35,7 @@ class RoomsController < ApplicationController
 
   def join
     @room = Room.find(params[:room_id])
+    gon.room_id = @room.id
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
@@ -96,6 +98,14 @@ class RoomsController < ApplicationController
     render :text => "OK", :status => "200"
   end
 
+  def invite
+    publish_async("user_#{params[:user_id]}", "invite", {
+      user_id: current_user.id,
+      user_name: current_user.name,
+      room_id: current_user.room_id
+    })
+    render text: "OK", status: "200"
+  end
   # Request type: GET
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself

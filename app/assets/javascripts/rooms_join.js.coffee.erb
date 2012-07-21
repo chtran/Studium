@@ -3,12 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
   # Define the whole code as the function init. Only execute init when the page is #rooms_join (see the end of the file for this execution)
-  init = (key)->
-    # Get room_id and user_id from attributes rendered in the page
-    room_id = $("#question_container").attr("room_id");
+  init = ->
+    # Get room_id from gon
+    room_id = gon.room_id
 
-    client = new Pusher(key);
+    #client = new Pusher("<%=Studium::Application.config.pusher_key%>")
     channel = client.subscribe("presence-room_"+room_id);
+    rooms_channel = client.subscribe("presence-rooms")
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
     channel.bind('pusher:member_removed', (member) ->
       # Send a POST request to rooms#kick, which kick the user from the room
@@ -22,6 +23,11 @@ $(->
         success: (data) ->
           update_users();
       });
+    );
+    # Update the histories
+    channel.bind("update_histories", (data) ->
+      update_histories(data.history_id);
+      true;
     );
     # Listen to the "users_change" event which keeps track of users joining/leaving the room
     channel.bind("users_change", (data) ->
@@ -132,6 +138,38 @@ $(->
         url: "/rooms/ready",
       });
       true;
+
+
+    update_histories=(history_id)->
+      $.ajax({
+        type: "POST",
+        url: "/histories/show_history",
+        data: {
+          history_id: history_id
+        },
+        success: (data) ->
+          $("#history").append(data);
+          $("#history p:last").effect("highlight",2000);
+          #$("#history").animate({
+          #  scrollTop: $("#history p:last").position().top
+          #},1000);
+      });
+      true;
+
+    # Show all the previous histories
+    update_previous_histories= ->
+      $.ajax({
+        type: "POST",
+        url: "/rooms/show_histories",
+        data: {
+          room_id: room_id
+        },
+        success: (data) ->
+          $("#history").html(data);
+      });
+      true;
+
+
     # Input: time(seconds), callback(function)
     # Effect: Setup the timer with the specified time and callback
     setup_timer = (time, callback) ->
@@ -142,8 +180,7 @@ $(->
         description: '',
         onExpiry: callback
       });
-      true;
-    # Set question the first time
+      # Set question the first time
     
     if $("#observing").attr("reload") == "true"
       current_question_id = $("#question_container").attr("question_id");
@@ -183,10 +220,28 @@ $(->
     # User clicking "ready"
     $("#ready").live("click", ready);
     
+    $("#invite_button").live("click", -> 
+      rooms_channel.members.each((member) ->
+        console.log(member)
+        data = "<div><a href='#' class='invite_link' user_id="+member.id+">"+member.info.name+"</a></div>"
+        $("#invite .modal-body p").append(data)
+      )
+      $("#invite.modal").modal("show")
+    )
+    
+    $(".invite_link").live("click", ->
+      $.ajax({
+        type: "POST",
+        url: "/rooms/invite",
+        data: {
+          user_id: $(this).attr("user_id")
+        }
+        success: ->
+          alert("Invited "+$(this).text())
+      })
+    )
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length
-    $.get("/pusher_key", (key)->
-      init(key)
-    )
+    init()
 
 );

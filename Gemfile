@@ -60,5 +60,6 @@ gem "thin"
 gem "omniauth-facebook"
 gem "koala"
 gem "em-http-request"
+gem "gon"
 # Work around; default to rake 0.8.7 because 0.9 breaks rails
 gem "rake","0.9.2.2"

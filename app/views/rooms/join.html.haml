@@ -19,7 +19,15 @@
   %div.span9
   %div.span1
     %div#timer.pull-right{display: "inline"}
-  %div.span2
+  %div.span1
+    %div
+      %a.btn.btn-primary#invite_button Invite
+    %div.modal.hide#invite
+      %div.modal-header
+        %h3 Invite people to the room
+      %div.modal-body
+        %p
+  %div.span1
     %div#room_mode.btn.btn-info= @room.room_mode.title
 %div.row-fluid#divider
   %div.span9
@@ -29,7 +37,7 @@
     %div.row-fluid
       %div.span5#paragraph.prettyprint.pre-scrollable.linenums
       %div.span5#question_container{room_id: @room.id, question_id: @room.question_id}
-        %div.modal#observing{reload: @reload, style: "display:none"}
+        %div.modal.hide#observing{reload: @reload}
           %div.modal-header
             %h3 Waiting...
           %div.modal-body

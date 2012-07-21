@@ -46,6 +46,7 @@ Studium::Application.routes.draw do
   post "/rooms/kick", to: "rooms#kick"
   post "/histories/show_history",to: "histories#show_history"
   post "/rooms/show_histories",to: "rooms#show_histories"
+  post "/rooms/invite", to: "rooms#invite"
 
   post "/pusher/auth", to: "pusher#auth"
   post "/pusher/webhook", to: "pusher#webhook"
