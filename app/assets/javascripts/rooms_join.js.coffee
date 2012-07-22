@@ -7,7 +7,6 @@ $(->
     # Get room_id from gon
     room_id = gon.room_id
 
-    #client = new Pusher("<%=Studium::Application.config.pusher_key%>")
     channel = client.subscribe("presence-room_"+room_id);
     rooms_channel = client.subscribe("presence-rooms")
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
@@ -241,6 +240,17 @@ $(->
         success: ->
           alert("Invited "+$(this).text())
       })
+    )
+    $("#chat .chat_send").live("click", ->
+      message = $("#chat .chat_message").val()
+      $.ajax({
+        type: "POST",
+        url: "/rooms/chat_message",
+        data: {
+          message: message
+        }
+      })
+      $("#chat .chat_message").val("")
     )
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length

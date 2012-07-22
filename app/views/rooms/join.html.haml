@@ -1,20 +1,3 @@
-%script
-  :plain
-    $(document).ready(function(){
-      $(".chat_send").click(function(){
-        message=$(".chat_message").val();
-        $.ajax({
-          type: "POST",
-          url: "/rooms/chat_message",
-          data: {
-            message: message
-          }
-        });
-
-        $(".chat_message").val("");
-      });
-    });
-
 %div.row-fluid#room_settings
   %div.span9
   %div.span1

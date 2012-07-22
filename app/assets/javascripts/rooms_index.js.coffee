@@ -1,6 +1,5 @@
 $(->
   init = ->
-    #client = new Pusher("<%=Studium::Application.config.pusher_key%>")
     channel = client.subscribe("presence-rooms")
     user_channel = client.subscribe("user_"+gon.user_id)
     update_room_list = ->
