@@ -12,10 +12,7 @@
     = stylesheet_link_tag "application",media: "all"
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:300"
     = javascript_include_tag "application"
-    -#= javascript_include_tag "http://localhost:9292/faye.js"
-    = javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
     :javascript
-      var client = new Pusher("#{Studium::Application.config.pusher_key}")
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-33600563-1']);
       _gaq.push(['_trackPageview']);
@@ -26,10 +23,8 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
 
-    = javascript_include_tag "javascripts/jquery.countdown.min"
     = csrf_meta_tags
 
-    %script{type: "text/javascript", src: "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"}
 
     = yield(:head)
 

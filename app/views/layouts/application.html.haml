@@ -55,9 +55,11 @@
                   %li= link_to "Admin Page",admin_index_path
 
                 %li= link_to "Sign out",destroy_user_session_path, method: :delete
-    %div.row-fluid.notice-alert
-      -# Notifications
-      %div.container-fluid
+              - else
+                %li= link_to "Sign in",new_user_session_path
+    %div.container-fluid
+      %div.row-fluid.notice-alert
+        -# Notifications
         - if notice
           %div.alert.alert-success
             %button.close{:"data-dismiss"=>"alert"} x
@@ -68,10 +70,10 @@
             %p= alert
 
 
-    %div.row-fluid.mycontainer.container-fluid
-      %div
-        = yield
-        %hr
-        %footer
-          %p Copyright Chau and Kien, 2012.
+      %div.row-fluid
+        %div.mycontainer
+          = yield
+          %hr
+          %footer
+            %p Copyright Chau and Kien, 2012.
 

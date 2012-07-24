@@ -1,6 +1,9 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.homepage {
+  padding-top:45px;
+}
 .myhero{
   background: url("/assets/images/homepage/bg3.jpg") repeat-x  #F3F1F8;
   background-color: #EEE;
@@ -18,8 +21,6 @@
   color: inherit;
 }
 .navbar-big{
-  min-height: 50px;
-  padding-top: 10px;
   font-size: 15px;
 }
 #home-slide {
