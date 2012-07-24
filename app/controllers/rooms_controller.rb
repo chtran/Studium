@@ -10,8 +10,8 @@ class RoomsController < ApplicationController
     @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
-    current_user.update_attribute(:status,0) unless current_user.status==0
-    current_user.update_attribute(:room_id,0) unless current_user.room_id==0
+    #current_user.update_attribute(:status,0) unless current_user.status==0
+    #current_user.update_attribute(:room_id,0) unless current_user.room_id==0
   end
 
   # Request type: POST
