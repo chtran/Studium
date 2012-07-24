@@ -18,13 +18,13 @@
 %div.row-fluid#rooms_join
   %div.span9
     %div.row-fluid
+      %div.modal.hide#observing{reload: @reload}
+        %div.modal-header
+          %h3 Waiting...
+        %div.modal-body
+          %p Please wait for the next round to begin
       %div.span5#paragraph.prettyprint.pre-scrollable.linenums
       %div.span5#question_container{room_id: @room.id, question_id: @room.question_id}
-        %div.modal.hide#observing{reload: @reload}
-          %div.modal-header
-            %h3 Waiting...
-          %div.modal-body
-            %p Please wait for the next round to begin
         %div.prompt_container#current_question.question_active
           %h4 Question
           %div.row-fluid
