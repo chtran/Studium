@@ -1,38 +1,36 @@
 %div.intro
   %div.myhero
     %div.row-fluid
-      %div.span7
+      %div.span3
+      %div.span6
+        %div#home-welcome
+          %h1 Welcome to Studium!
         %div.carousel.slide#home-slide
           %div.carousel-inner
             %div.item.active
               = image_tag("images/homepage/midu1.jpg")
               %div.carousel-caption
                 %h4 Personalized statistics
-                %p Ben canh do thi Midu rat xinh
+                %p Study smarter not harder by focusing on your weaknesses
             %div.item
               = image_tag("images/homepage/midu2.jpg")
               %div.carousel-caption
                 %h4 Study with your friends
-                %p Ben canh nua thi dep
+                %p Studying has never been this fun before!
           %a.carousel-control.left{"href" => "#home-slide", "data-slide" => "prev"} &lsaquo;
           %a.carousel-control.right{"href" => "#home-slide", "data-slide" => "next"} &rsaquo;
         :javascript
           $('carousel').carousel();
-      %div.span5
         %div#home-description
-          %h1 track the market trends with ease.
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies mi nec turpis viverra eget cursus erat posuere. 
-
-          %p
-            Donec nec lectus eu lorem dictum pulvinar eget non lorem. Nam aliquam magna eu libero convallis vitae vulputate felis malesuada. Pellentesque porta sem non diam.
           =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), {class: "btn btn-primary btn-large"}
+
+      %div.span2
 %div.row-fluid#home-quote
   %div.span6
     %blockquote
-      %p Best site ever! I have never seen something quite like this before. Dude this is crazy!
-      %small Craig Soffer
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies mi nec turpis viverra eget cursus erat posuere.
+      %small Bill Gates
   %div.span6
     %blockquote
-      %p Hello I'm Mark Zuckerberg. I'm a billionaire. I don't know Chau and Kien and I don't have a fucking clue what is Studium
+      %p Donec nec lectus eu lorem dictum pulvinar eget non lorem. Nam aliquam magna eu libero convallis vitae vulputate felis malesuada. Pellentesque porta sem non diam.
       %small Mark Zuckerberg
