@@ -7,8 +7,34 @@
   background-color: #DDD;
   border-radius: 6px;
 }
+
+#hero{
+  background: url("/assets/images/homepage/bg_trans_1.png") repeat  #F3F1F8;
+  -khtml-opacity: 0.9;
+  opacity: 0.9;
+  background-color: #EEE;
+  border-bottom: grey;
+}
+
+.navbar-big{
+  min-height: 49px;
+  padding-top: 10px;
+  font-size: 18px;
+}
 #home-slide {
-  height: 406px;
+  padding: 20px;
+  box-shadow: 0 0 20px #999;
+  background: white;
+}
+
+#home-description {
+  margin-left: 30px;
+}
+#home-description .btn {
+  margin-top: 30px;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  padding: 11px 35px 13px;
 }
 #home-signin {
   padding-left: 40px;
@@ -16,4 +42,42 @@
 }
 #new_to_studium {
   color: #333;
+}
+
+.intro{
+  background: url("/assets/images/homepage/bg3.jpg") repeat-x  #F3F1F8;
+}
+
+.intro p {
+  margin-top: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.intro h1 {
+  letter-spacing: -1px;
+  font-size: 28px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+#home-quote{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+}
+#home-quote blockquote {
+  margin-left: 30px;
+}
+.navbar .mybrand {
+  float: left;
+  display: block;
+  padding: 8px 20px 12px;
+  margin-left: -20px;
+  font-size: 25px;
+  font-weight: 200;
+  line-height: 1;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.navbar a.mybrand:hover {
+  text-decoration: none;
 }
