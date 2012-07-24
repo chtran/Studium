@@ -1,0 +1,58 @@
+%div.row-fluid
+  %div.span1
+  %div.span10
+    %div.home-hero
+      %div.row-fluid
+        %div.span8
+          %div.carousel.slide#home-slide
+            %div.carousel-inner
+              %div.item.active 
+                = image_tag("images/homepage/midu1.jpg")
+                %div.carousel-caption
+                  %h4 Personalized statistics
+                  %p Ben canh do thi Midu rat xinh
+              %div.item
+                = image_tag("images/homepage/midu2.jpg")
+                %div.carousel-caption
+                  %h4 Study with your friends
+                  %p Ben canh nua thi dep
+            %a.carousel-control.left{"href" => "#home-slide", "data-slide" => "prev"} &lsaquo;
+            %a.carousel-control.right{"href" => "#home-slide", "data-slide" => "next"} &rsaquo;
+          %script{type: "javascript"}
+            :plain
+                $('carousel').carousel();
+        %div.span4
+          %form.well#home-signin
+            %h3#new_to_studium New to Studium? Sign up!
+            %hr
+            %fieldset
+              %div.control-group
+                %label.control-label Full name
+                %div.controls
+                  %input{type: "text"}
+              %div.control-group
+                %label.control-label Email
+                %div.controls
+                  %input{type: "text"}
+              %div.control-group
+                %label.control-label Password
+                %div.controls
+                  %input{type: "text"}
+              %div.control-group
+                %label.control-label Confirm Password
+                %div.controls
+                  %input{type: "text"}
+              %div.control-group
+                %a.btn.btn-large.btn-primary Signup
+                =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), {class: "btn btn-primary"}
+                %a.btn.btn-large.btn-success Learn more
+%div.row-fluid
+  %div.span1
+  %div.span5
+    %blockquote
+      %p Best site ever! I have never seen something quite like this before. Dude this is crazy!
+      %small Craig Soffer
+  %div.span5
+    %blockquote
+      %p Hello I'm Mark Zuckerberg. I'm a billionaire. I don't know Chau and Kien and I don't have a fucking clue what is Studium
+      %small Mark Zuckerberg
