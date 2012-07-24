@@ -31,9 +31,7 @@ class PusherController < ApplicationController
             room.update_attribute("active",false)
             room.users.each do |u|
               u.update_attribute(:status, 0)
-            publish_async("presence-rooms", "enter_room_recent_activities", {
-              user_id: current_user.id,
-              room_id: room.id,
+            publish_async("presence-rooms", "leave_room_recent_activities", {
               room_title: room.title,
               user_name: current_user.name
             })
