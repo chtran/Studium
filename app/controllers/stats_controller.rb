@@ -26,7 +26,7 @@ class StatsController < ApplicationController
   end
 
   def intervalize(histories)
-    interval = 600
+    interval = 3600*24
     data = {}
     interval_data = []
     histories.each do |h|

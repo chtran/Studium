@@ -1,30 +1,36 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.home-hero {
-  padding: 30px;
-  margin-bottom: 25px;
-  background-color: #DDD;
-  border-radius: 6px;
-}
-
-#hero{
-  background: url("/assets/images/homepage/bg_trans_1.png") repeat  #F3F1F8;
-  -khtml-opacity: 0.9;
-  opacity: 0.9;
+.myhero{
+  background: url("/assets/images/homepage/bg3.jpg") repeat-x  #F3F1F8;
   background-color: #EEE;
   border-bottom: grey;
+  -khtml-opacity: 0.85;
+  opacity: 0.85;
+  padding: 50px;
+  margin-bottom: 30px;
 }
 
-.navbar-big{
-  min-height: 49px;
-  padding-top: 10px;
+.myhero p {
   font-size: 18px;
+  font-weight: 200;
+  line-height: 27px;
+  color: inherit;
+}
+.navbar-big{
+  min-height: 50px;
+  padding-top: 10px;
+  font-size: 15px;
 }
 #home-slide {
   padding: 20px;
   box-shadow: 0 0 20px #999;
   background: white;
+}
+#home-slide p {
+  margin-top: 5px;
+  color: white;
+  font-size:14px;
 }
 
 #home-description {
@@ -45,7 +51,7 @@
 }
 
 .intro{
-  background: url("/assets/images/homepage/bg3.jpg") repeat-x  #F3F1F8;
+  background: url("/assets/images/homepage/bg_trans_1.png") repeat  #F3F1F8;
 }
 
 .intro p {
