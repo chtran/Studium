@@ -3,7 +3,11 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
+    @user = current_user.attributes
     @friends = current_user.friends
+    @image = current_user.profile.image
+    @rank = User.where("exp > (?)", @user["exp"]).count + 1
+    @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
     current_user.update_attribute(:status,0) unless current_user.status==0
