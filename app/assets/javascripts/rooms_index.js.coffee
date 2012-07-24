@@ -10,8 +10,8 @@ $(->
           $("#room_list").html(data)
       })
 
-    # Subscribe to the "rooms/create" channel
-    channel.bind("create", (data) ->
+    # Subscribe to the "rooms_change" event
+    channel.bind("rooms_change", (data) ->
       update_room_list()
     )
 

@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
     @room = Room.new(params[:room])
     if @room.save
       # See application_controller for publish_async method.
-      publish_async("presence-rooms", "create", {room_id: @room.id})
+      publish_async("presence-rooms", "rooms_change", {})
       redirect_to room_join_path(@room.id)
     else
       redirect_to rooms_path, alert: "Error creating room"
