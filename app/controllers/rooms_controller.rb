@@ -39,6 +39,11 @@ class RoomsController < ApplicationController
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
+    publish_async("presence-rooms", "enter", {
+      user_id: current_user.id,
+      room_id: @room.id
+    })
+
     @reload = (@room.users.count==1).to_s
   end
 

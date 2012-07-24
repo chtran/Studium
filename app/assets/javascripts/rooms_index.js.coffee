@@ -14,6 +14,13 @@ $(->
     channel.bind("create", (data) ->
       update_room_list()
     )
+
+    
+    channel.bind("enter", (data)->
+      alert(data.user_id + " vao " + data.room_id)  
+    )
+
+
     user_channel.bind("invite", (data) ->
       $("#invitation .modal-footer #accept").attr("href","/rooms/join/"+data.room_id)
       $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!") 
@@ -21,6 +28,8 @@ $(->
     )
 
     update_room_list()
+
+
 
   if $("#rooms_index").length
     init()

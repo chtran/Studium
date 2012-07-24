@@ -1,0 +1,10 @@
+%div.pre-scrollable
+  %ul.nav.nav-tabs.nav-stacked
+    - friends.each do |f|
+      %li
+        %a{href: user_profile_path(f)}
+          =image_tag(f.profile.image)
+          = f.name
+          - if f.room_id!=0
+            is in room #{f.room_id}
+

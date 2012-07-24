@@ -1,5 +1,10 @@
 %div.row-fluid#rooms_index
   %div.span3
+    %div#profile
+    %div#friend_list
+      %h3 Friends
+      = render "friend_list", friends: @friends   %div#
+
   %div.span6
     %div.accordion.text-center#room_list
     %br
@@ -21,5 +26,9 @@
         %a.btn.btn-primary#accept Accept
   %div.span3
     %div#friend_list
-      %h3 Friends
+      %h3 Recent Activities
+      = render "friend_list", friends: @friends 
+    
+    %div#ranking
+      %h3 Ranking
       = render "friend_list", friends: @friends
