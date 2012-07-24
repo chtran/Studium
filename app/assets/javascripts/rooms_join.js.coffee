@@ -17,7 +17,8 @@ $(->
         type: "POST",
         url : "/rooms/kick",
         data: {
-          user_id: member.id
+          user_id: member.id,
+          room_id: room_id
         },
         success: (data) ->
           update_users();

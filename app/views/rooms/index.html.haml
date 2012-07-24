@@ -3,7 +3,7 @@
     %div#profile
     %div#friend_list
       %h3 Friends
-      = render "friend_list", friends: @friends   %div#
+      = render "friend_list", friends: @friends   
 
   %div.span6
     %div.accordion.text-center#room_list
@@ -25,9 +25,9 @@
         %a.btn{"data-dismiss"=>"modal"}Reject
         %a.btn.btn-primary#accept Accept
   %div.span3
-    %div#friend_list
+    %div#recent_activities
       %h3 Recent Activities
-      = render "friend_list", friends: @friends 
+      = render "recent_activities" 
     
     %div#ranking
       %h3 Ranking

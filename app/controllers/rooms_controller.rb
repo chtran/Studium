@@ -39,11 +39,6 @@ class RoomsController < ApplicationController
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
-    publish_async("presence-rooms", "enter", {
-      user_id: current_user.id,
-      room_id: @room.id
-    })
-
     @reload = (@room.users.count==1).to_s
   end
 
@@ -125,9 +120,13 @@ class RoomsController < ApplicationController
   #         Publish users_change event
   def kick
     user = User.find(params[:user_id])
-    old_room_id = user.room_id
+    room = Room.find(params[:room_id])
     user.update_attributes({room_id: 0, status: 0})
-    publish_async("presence-room_#{old_room_id}", "users_change", {})
+    publish_async("presence-room_#{room.id}", "users_change", {})
+    publish_async("presence-rooms", "leave_room_recent_activities", {
+      old_room_name: room.title,
+      user_name: user.name
+    })
     render :text => "Kicked", :status => '200'
   end
   # Input: question_id

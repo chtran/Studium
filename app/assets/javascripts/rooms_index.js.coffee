@@ -16,10 +16,22 @@ $(->
     )
 
     
-    channel.bind("enter", (data)->
-      alert(data.user_id + " vao " + data.room_id)  
+    channel.bind("enter_room_recent_activities", (data)->
+      msg = data.user_name + ' has joined room ' + data.room_title
+      $("#recent_activities #activities_list").append(
+        '<li>
+          <a> '+ msg + ' 
+        </li>') 
     )
 
+
+    channel.bind("leave_room_recent_activities", (data)->
+      msg = data.user_name + ' has left room ' + data.room_title
+      $("#recent_activities #activities_list").append(
+        '<li>
+          <a> '+ msg + ' 
+        </li>') 
+    )
 
     user_channel.bind("invite", (data) ->
       $("#invitation .modal-footer #accept").attr("href","/rooms/join/"+data.room_id)
