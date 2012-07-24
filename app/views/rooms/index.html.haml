@@ -1,9 +1,19 @@
 %div.row-fluid#rooms_index
   %div.span3
     %div#profile
+      %div.row-fluid
+        %div.span4
+          =image_tag(@image)
+        %div.span8
+          %h3= @user["name"]
+          %ul
+            %li= @user["email"]
+            %li EXP: #{@user["exp"]}
+            %li Rank: #{@rank}
+
     %div#friend_list
       %h3 Friends
-      = render "friend_list", friends: @friends   
+      = render "friend_list", friends: @friends
 
   %div.span6
     %div.accordion.text-center#room_list
@@ -31,4 +41,4 @@
     
     %div#ranking
       %h3 Ranking
-      = render "friend_list", friends: @friends
+      = render "top_users", top_users: @top_users

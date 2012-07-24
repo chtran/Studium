@@ -1,0 +1,12 @@
+%div
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Exp
+    %tbody
+      - top_users.each do |u|
+        %tr
+          %td= u.name
+          %td= u.exp
+
