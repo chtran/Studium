@@ -9,6 +9,16 @@ class Room < ActiveRecord::Base
 
   # Input: a number indicating some status
   # Return: true if every user in the room has the given status, false otherwise
+  def owner
+    #owner_array returns an array of 2 elements, the first one is the user_id, second one is number of questions answered in the room
+    #if there's no user in the room, in returns []
+    owner_array = History.where(
+      room_id: self.id, 
+      user_id: self.users.collect {|u| u.id}
+    ).group(:user_id).count.max
+    return User.find(owner_array[0]) if owner_array
+  end
+
   def status_checker(i)
     self.users
         .select(:status)

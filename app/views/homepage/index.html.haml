@@ -23,6 +23,7 @@
           $('carousel').carousel();
         %div#home-description
           =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), {class: "btn btn-primary btn-large"}
+          =link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2), {class: "btn btn-primary btn-large"}
 
       %div.span2
 %div.row-fluid#home-quote

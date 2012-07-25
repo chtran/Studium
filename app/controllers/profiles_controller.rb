@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_update!,only: [:edit,:update]
 
   def show
+    gon.user_id = params[:user_id]
   end
 
   def edit

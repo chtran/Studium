@@ -3,12 +3,12 @@
     %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
       %div.row-fluid
         %div.span2
-          =image_tag("http://graph.facebook.com/1397060296/picture?type=square")
+          =image_tag(room.owner.profile.image) if room.owner
         %div.span8
           %h3=room.title
-          %span.label.label-success Math
+          %span.label.label-success= room.room_mode.title
         %div.span2
-          %small 1 hour ago
+          %small= time_ago_in_words(room.created_at) + " ago"
   %div.accordion-body.collapse{id: "room_#{room.id}"}
     %div.accordion-inner
       %div.span6

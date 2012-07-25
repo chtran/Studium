@@ -3,6 +3,9 @@
 Devise.setup do |config|
   require 'omniauth-facebook'
   config.omniauth :facebook,Studium::Application.config.facebook_app_id, Studium::Application.config.facebook_secret 
+
+  require "omniauth-google-oauth2"
+  config.omniauth :google_oauth2, "160570006886.apps.googleusercontent.com", "iRRrylswMcPmgY9CPnxk5_Ts", { access_type: "offline", approval_prompt: "" }
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
