@@ -1,4 +1,8 @@
-%div.pre-scrollable
+%div.myhead
+  %div.row-fluid
+    %div.span6
+      %h3 Friends
+%div.mousescroll
   %ul.nav.nav-tabs.nav-stacked
     - friends.each do |f|
       %li
@@ -7,4 +11,9 @@
           = f.name
           - if f.room_id!=0
             is in room #{f.room_id}
-
+:javascript
+  $(".mousescroll").slimscroll({
+    color: '#666',
+    size: '10px',
+    height: '150px'
+  });

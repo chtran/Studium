@@ -13,4 +13,22 @@
 .mycontainer {
   margin-top: 20px;
 }
+i{
+  font-size: 25px;
+}
+.navbar-inner .span4 {
+  padding: 5px;
+}
+#dropdown-nav{
+  width: 250px;
+  padding-bottom: 10px;
+}
 
+#dropdown-nav h4{
+  color: #222;
+
+}
+
+#dropdown-nav small{
+  font-size: 12px;
+}

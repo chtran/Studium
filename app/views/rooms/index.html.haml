@@ -2,23 +2,32 @@
   %div.span3
     %div#profile
       %div.row-fluid
-        %div.span4
-          =image_tag(@image)
-        %div.span8
-          %h3= @user["name"]
-          %ul
-            %li= @user["email"]
-            %li EXP: #{@user["exp"]}
-            %li Rank: #{@rank}
+        %table.table.table-bordered
+          %tbody
+            %tr
+              %td{:colspan => '2'}
+                %div.span4
+                  =image_tag(@image)
+                %div.span8
+                  %h3= @name
+                  %small View my profile
+            %tr
+              %td 
+                %strong #{@user["exp"]}
+                %small EXP
+              %td 
+                %strong #{@rank}
+                %small Rank
+    
+    %div.separator
 
-    %div#friend_list
-      %h3 Friends
+    %div.accordion#friend_list
       = render "friend_list", friends: @friends
 
-  %div.span6
-    %div.accordion.text-center#room_list
+
+  %div.span5
+    %div.accordion#room_list
     %br
-    %a.btn.btn-primary{"data-toggle"=>"modal", "href"=>"#new_room"}New room
     %div.modal.hide#new_room
       %div.modal-header
         %button.close{"type" => "button", "data-dismiss" => "modal"}x
@@ -34,7 +43,7 @@
       %div.modal-footer
         %a.btn{"data-dismiss"=>"modal"}Reject
         %a.btn.btn-primary#accept Accept
-  %div.span3
+  %div.span4
     %div#recent_activities
       %h3 Recent Activities
       = render "recent_activities" 

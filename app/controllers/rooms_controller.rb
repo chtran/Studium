@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def index
     @user = current_user.attributes
+    @name = current_user.name
     @friends = current_user.friends
     @image = current_user.profile.image
     @rank = User.where("exp > (?)", @user["exp"]).count + 1

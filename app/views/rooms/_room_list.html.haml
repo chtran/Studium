@@ -1,2 +1,8 @@
+%div.myhead
+  %div.row-fluid
+    %div.span6
+      %h3 Room list
+    %div.span6
+      %a.btn.btn-primary{"data-toggle"=>"modal", "href"=>"#new_room"}New room
 - @rooms.each do |room|
   = render "room_item", room: room

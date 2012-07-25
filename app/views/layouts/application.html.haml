@@ -11,6 +11,7 @@
     = include_gon
     = stylesheet_link_tag "application",media: "all"
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:300"
+    = stylesheet_link_tag "jquery.scroll"
     = javascript_include_tag "application"
     -#= javascript_include_tag "http://localhost:9292/faye.js"
     = javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
@@ -27,6 +28,7 @@
       })();
 
     = javascript_include_tag "javascripts/jquery.countdown.min"
+    = javascript_include_tag "javascripts/jquery.scroll"
     = csrf_meta_tags
 
     %script{type: "text/javascript", src: "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"}
@@ -39,24 +41,42 @@
   %body{class: controller.controller_name}
     %div.navbar.navbar-fixed-top
       %div.navbar-inner.navbar-big
-        %div.container
-          %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target"=> ".nav-collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
-            Studium
-          %div.nav-collapse
-            %ul.nav.pull-right
-              - if user_signed_in?
-                %li= link_to current_user.email,"/users/#{current_user.id}/profile"
-                %li= link_to "Statistics",stats_path
-                - if current_user.admin?
-                  %li= link_to "Admin Page",admin_index_path
+        %div.row-fluid
+          %div.container
+            %div.span3
+              %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target"=> ".nav-collapse"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
+                Studium
+                %i.icon-home.icon-white
+            %div.span5
+            %div.nav-collapse.span4
+              %ul.nav.pull-right
+                - if user_signed_in?
+                  %li.dropdown
+                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                      %i.icon-user.icon-white
+                      %b.caret
+                    %ul.dropdown-menu#dropdown-nav
+                      %li
+                        %a{href: "users/#{current_user.id}/profile"}
+                          %div.row-fluid
+                            %div.span4
+                              = image_tag(current_user.profile.image)
+                            %div.span8
+                              %div
+                                %b=current_user.name
+                              %small View my profile
+                      %li.divider
+                      %li
+                        =link_to "Statistics", stats_path
+                  - if current_user.admin?
+                    %li= link_to "Admin Page",admin_index_path
+                  %li.divider-vertical
 
-                %li= link_to "Sign out",destroy_user_session_path, method: :delete
-              - else
-                %li= link_to "Sign in",new_user_session_path
+                  %li= link_to "Sign out",destroy_user_session_path, method: :delete
     %div.container-fluid
       %div.row-fluid.notice-alert
         -# Notifications

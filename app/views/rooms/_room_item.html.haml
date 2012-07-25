@@ -1,7 +1,14 @@
 %div.accordion-group
   %div.accordion-heading
-    %a.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
-      =room.title
+    %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
+      %div.row-fluid
+        %div.span2
+          =image_tag("http://graph.facebook.com/1397060296/picture?type=square")
+        %div.span8
+          %h3=room.title
+          %span.label.label-success Math
+        %div.span2
+          %small 1 hour ago
   %div.accordion-body.collapse{id: "room_#{room.id}"}
     %div.accordion-inner
       %div.span6

@@ -1,9 +1,51 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-#current_question li.selected {
-  font-weight: bold;
+#profile strong {
+  font-size:18px;
+  float: right;
 }
-.choices .correct {
-  font-style: italic;
+#profile small {
+  color: #999;
+}
+#room_list small {
+  color: #999;
+}
+.accordion-group {
+  margin-bottom: 2px;
+  border: 0px;
+  border-bottom: 1px solid #E5E5E5;
+}
+.accordion {
+  margin-bottom: 18px;
+  border: 1px solid #E5E5E5;
+  border-bottom: 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  
+}
+.myhead {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  border-bottom: 1px solid #E5E5E5;
+}
+.myhead a.btn {
+  float:right;
+  margin-right: 7px;
+}
+
+.accordion-body.collapse .dl-horizontal{
+  padding-bottom: 2px;
+
+}
+.accordion-body.collapse .btn {
+  margin-top:15px;
+  margin-right: 27px;
+  float:right;
+}
+
+.separator{
+  height: 30px;
+
 }
