@@ -60,6 +60,10 @@ Studium::Application.routes.draw do
   get "admin/reports/users", to: "admin/reports#users"
   post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
 
+  post "messages/send_message", to: "messages#send_message"
+  resources :messages
+
   post "friendships/request", to: "friendships#request"
+
   root to: "homepage#index",as: :index
 end
