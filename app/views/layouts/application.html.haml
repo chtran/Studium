@@ -59,15 +59,34 @@
                 - if user_signed_in?
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                      %i.icon-comment.icon-white
+                      %b.caret
+                    %ul.dropdown-menu#dropdown-nav
+                      -current_user.received_messages.limit(4).each do |msg|
+                        %li
+                          %a{href: "/messages"}
+                            %div.row-fluid
+                              %div.span3
+                                = image_tag(User.find(msg.sender_id).profile.image)
+                              %div.span9
+                                %div
+                                  %b= User.find(msg.sender_id).name
+                                %small Content goes here
+                        %li.divider
+                      %li
+                        =link_to "View all messages", messages_path
+
+                  %li.dropdown
+                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-user.icon-white
                       %b.caret
                     %ul.dropdown-menu#dropdown-nav
                       %li
                         %a{href: "/users/#{current_user.id}/profile"}
                           %div.row-fluid
-                            %div.span4
+                            %div.span3
                               = image_tag(current_user.profile.image)
-                            %div.span8
+                            %div.span9
                               %div
                                 %b=current_user.name
                               %small View my profile
