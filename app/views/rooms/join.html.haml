@@ -1,5 +1,16 @@
 %div.row-fluid#room_settings
-  %div.span9
+  %div.span8
+  %div.span1
+    %a.btn.btn-danger#quit Quit
+    %div.modal.hide#quit_modal{reload: @reload}
+      %div.modal-header
+        %h3 Quit room
+      %div.modal-body
+        %p Are you sure you want to quit?
+      %div.modal-footer
+        =link_to "Yes, take me to the review page", room_review_path, {class: "btn btn-primary"}
+        =link_to "Yes, take me to the room list", rooms_path, {class: "btn btn-primary"}
+        %a.btn{"href" =>"#", "data-dismiss" => "modal"} No
   %div.span1
     %div#timer.pull-right{display: "inline"}
   %div.span1
