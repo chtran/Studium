@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725162856) do
+ActiveRecord::Schema.define(:version => 20120725170348) do
 
   create_table "category_types", :force => true do |t|
     t.string   "category_name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20120725162856) do
     t.boolean  "correct",       :default => false
   end
 
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "histories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -39,13 +46,17 @@ ActiveRecord::Schema.define(:version => 20120725162856) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "string"
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "body"
     t.text     "title"
+  end
+
+  create_table "messages_buffers", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "paragraphs", :force => true do |t|
@@ -73,7 +84,6 @@ ActiveRecord::Schema.define(:version => 20120725162856) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "image"
-    t.string   "link"
   end
 
   create_table "question_types", :force => true do |t|

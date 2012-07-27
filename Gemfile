@@ -58,6 +58,7 @@ gem "paperclip"
 gem "pusher"
 gem "thin"
 gem "omniauth-facebook"
+gem 'omniauth-google-oauth2'
 gem "koala"
 gem "em-http-request"
 gem "gon"
