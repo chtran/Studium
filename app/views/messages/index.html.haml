@@ -1,0 +1,8 @@
+%a.btn.btn-primary.btn-large{'data-toggle' => 'modal', 'href'=>'#new_message'} 
+  New Message
+%div.modal.hide#new_message
+  %div.modal-header
+    %button.close{"type" => "button", "data-dismiss" => "modal"}x
+    %h3 New Message
+  %div.modal-body
+    =render "new"

@@ -1,0 +1,21 @@
+= form_for 'messages/send', :html => {:class =>"form-horizontal"} do |f|
+  %fieldset
+    - if @message.errors.any?
+      %ul
+        - @message.errors.full_messages.each do |msg|
+          %li=msg
+
+    %div.control-group
+      = f.label :receiver_id, "To", :class => "control-label"
+      %div.controls
+        = f.text_field :receiver_id, :class => "input-xlarge"
+    %div.control-group 
+      = f.label :title, "Title", :class => "control-label"
+      %div.controls
+        = f.text_field :title, :class => "input-xlarge"
+    %div.control-group    
+      = f.label :body, "Body", :class => "control-label"
+      %div.controls
+        = f.text_area :body, :class => "input-xlarge", :rows => "5"
+    %div.form-actions
+      = f.submit class:"btn btn-primary"

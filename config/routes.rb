@@ -24,6 +24,7 @@ Studium::Application.routes.draw do
 
   resources :category_types
   resources :question_types
+  resources :messages
   namespace "admin" do
     namespace "materials" do
       root to: "base#index",as: "admin_materials_index"
@@ -60,5 +61,6 @@ Studium::Application.routes.draw do
   get "admin/reports/users", to: "admin/reports#users"
   post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
 
+  post "messages/send", to: "messages#send"
   root to: "homepage#index",as: :index
 end

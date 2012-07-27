@@ -114,5 +114,17 @@ class User < ActiveRecord::Base
     return Question.where("id IN (?)", questions_id)
   end
 
+  def sent_messages
+    Message.where("sender_id = ?", self.id)
+  end
+
+  def received_messages
+    Message.where("receiver_id = ?", self.id)
+  end
+
+  def messages
+    Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id)
+  end
+
 
 end
