@@ -71,9 +71,6 @@ class RoomsController < ApplicationController
     if params[:choice_id]
       @choice_id = params[:choice_id]
       new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-      publish_async("presence-room_#{@room.id}", "update_histories", {
-        history_id: new_history_item.id
-      })
     end
     current_user.update_attribute(:status, 2)
     @room.save
@@ -92,6 +89,9 @@ class RoomsController < ApplicationController
     @room = current_user.room
     current_user.update_attribute(:status, 3)
     publish_async("presence-room_#{@room.id}","users_change",{})
+    publish_async("presence-room_#{@room.id}", "update_histories", {
+      history_id: new_history_item.id
+    })
     if @room.show_next_question?
       if @next_question = choose_question!(@room)
         @room.users.each do |user|

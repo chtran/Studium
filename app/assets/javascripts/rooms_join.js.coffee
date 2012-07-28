@@ -57,7 +57,6 @@ $(->
       true;
     );
 
-
     # Input: none
     # Effect: update the user list to div#top_nav
     update_users = ->
