@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728192207) do
+ActiveRecord::Schema.define(:version => 20120728193631) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20120728192207) do
     t.datetime "updated_at",                     :null => false
     t.text     "description"
     t.boolean  "legendary",   :default => false
+  end
+
+  create_table "badges_users", :id => false, :force => true do |t|
+    t.integer "badge_id"
+    t.integer "user_id"
   end
 
   create_table "category_types", :force => true do |t|
@@ -186,10 +191,5 @@ ActiveRecord::Schema.define(:version => 20120728192207) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_badges", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "badge_id"
-  end
 
 end
