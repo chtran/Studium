@@ -1,11 +1,21 @@
-%div#questions
-  - @histories.each do |history|
-    %div
-      %div
-        %p= history.question.prompt
-      %div
-        %p= "You chose: #{history.choice.choice_letter}"
-      %div
-        %p Correct answers:
-        - history.question.correct_choices.each do |choice|
-          ="#{choice.choice_letter} "
+%div.row-fluid#rooms_review
+  %div.span4
+  %div.span8
+    %div#questions
+      - @questions.each do |question|
+        %div.question{question_id: question[:id]}
+          %div.lead.prompt
+            %p= question[:prompt].parse(question_id: question[:id], is_passage: false).html_safe
+          %div
+            - question[:choices].each do |choice|
+              %div.row-fluid.btn.disabled{class: choice[:result]}
+                %div.span2= choice[:data].choice_letter
+                %div.span8= choice[:data].content
+        - if question[:paragraph]
+          %div.paragraph
+            %a.btn.btn-primary.show_paragraph Show paragraph
+            %div.paragraph-content.hide.prettyprint.pre-scrollable.linenums
+              =question[:paragraph].content.parse(question_id: question[:id], is_passage: true).html_safe
+
+    %div#done.pull-right
+      =link_to "Done", rooms_path, {class: "btn btn-primary"}
