@@ -30,6 +30,10 @@ class MessagesController < ApplicationController
 
   end
 
+  def show
+    @message = Message.find(params[:id])
+  end
+
   def send_message
     @params = params
   end

@@ -4,9 +4,13 @@
       -@received_messages.each do |msg|
         %tr
           %td
-            =image_tag(User.find(msg.sender_id).profile.image)
-            =msg.title
-            =msg.sender_id
+            %a{href: "messages/show/" + msg.id.to_s}
+              %div.row-fluid
+                %div.span1
+                  =image_tag(User.find(msg.sender_id).profile.image)
+                %div.span11.message-body
+                  %h3 #{User.find(msg.sender_id).name}
+                  %small= msg.body[0..36] + " ..."
 
   %a.btn.btn-primary.btn-large#create_message_btn{'data-toggle' => 'modal', 'href'=>'#new_message'} 
     New Message

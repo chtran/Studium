@@ -61,6 +61,7 @@ Studium::Application.routes.draw do
   post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
 
   post "messages/send_message", to: "messages#send_message"
+  get "messages/show/:id", to: "messages#show"
   resources :messages
 
   post "friendships/request", to: "friendships#request"
