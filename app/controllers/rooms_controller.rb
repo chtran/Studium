@@ -125,7 +125,10 @@ class RoomsController < ApplicationController
       room_title: room.title,
       user_name: current_user.name
     })
-    @question_ids = current_user.histories.where(room_id: current_user.room_id).includes(:question).select("questions.id").map {|r| r.question.id}
+    @histories = current_user.histories
+                                .where(room_id: current_user.room_id)
+                                .joins(:choice)
+                                .includes(:question)
 
     current_user.update_attributes({room_id: 0, status: 0})
   end

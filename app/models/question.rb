@@ -32,4 +32,8 @@ class Question < ActiveRecord::Base
       end
     end
   end
+
+  def correct_choices
+    self.choices.where(correct: true)
+  end
 end

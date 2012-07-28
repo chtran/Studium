@@ -1,1 +1,11 @@
 %div#questions
+  - @histories.each do |history|
+    %div
+      %div
+        %p= history.question.prompt
+      %div
+        %p= "You chose: #{history.choice.choice_letter}"
+      %div
+        %p Correct answers:
+        - history.question.correct_choices.each do |choice|
+          ="#{choice.choice_letter} "
