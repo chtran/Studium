@@ -119,9 +119,15 @@ class RoomsController < ApplicationController
   # Request type: GET
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
-  def quit
+  def review
+    room = current_user.room
+    publish_async("presence-rooms", "leave_room_recent_activities", {
+      room_title: room.title,
+      user_name: current_user.name
+    })
+    @question_ids = current_user.histories.where(room_id: current_user.room_id).includes(:question).select("questions.id").map {|r| r.question.id}
+
     current_user.update_attributes({room_id: 0, status: 0})
-    redirect_to rooms_path
   end
 
   # Request type: POST

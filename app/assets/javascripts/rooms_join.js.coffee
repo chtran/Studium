@@ -253,6 +253,11 @@ $(->
       })
       $("#chat .chat_message").val("")
     )
+  $("#quit").live("click", ->
+    $("#quit_modal").modal("show")
+  )
+
+    
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length
     init()
