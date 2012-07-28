@@ -27,17 +27,16 @@ $(->
 
               <div class = 'span9'>
                 <div>
-                  <b>#{User.find(data.sender_id).profile.name}</b>
+                  <b>#{data.sender}</b>
                 </div>
                 <small>#{data.body[0..36] + ' ...'}</small>
               </div>
             </div>
           </a>
-        </li>")
-
-#        <li class = 'divider'>
-#        </li>
-#      ")
+        </li>
+        <li class = 'divider'>
+        </li>
+      ")
 
     )
     channel.bind("enter_room_recent_activities", (data)->
