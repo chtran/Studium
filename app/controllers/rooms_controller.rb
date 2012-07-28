@@ -75,9 +75,18 @@ class RoomsController < ApplicationController
     current_user.update_attribute(:status, 2)
     @room.save
     publish_async("presence-room_#{@room.id}", "users_change", {})
-    publish("presence-room_#{@room.id}", "show_explanation", {
-      question_id: @current_question.id
-    }) if @room.show_explanation?
+    if @room.show_explanation?
+      # Consider badges
+      BadgeManager.awardBadges current_user,@room.question,Choice.find(@choice_id)
+
+      publish("presence-room_#{@room.id}", "show_explanation", {
+        question_id: @current_question.id
+      }) 
+
+      publish_async("presence-room_#{@room.id}", "update_histories", {
+        history_id: new_history_item.id
+      })
+    end
     render :text => "OK", :status => "200"
   end
   
@@ -89,9 +98,6 @@ class RoomsController < ApplicationController
     @room = current_user.room
     current_user.update_attribute(:status, 3)
     publish_async("presence-room_#{@room.id}","users_change",{})
-    publish_async("presence-room_#{@room.id}", "update_histories", {
-      history_id: new_history_item.id
-    })
     if @room.show_next_question?
       if @next_question = choose_question!(@room)
         @room.users.each do |user|

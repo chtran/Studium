@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728193631) do
+ActiveRecord::Schema.define(:version => 20120728203322) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20120728193631) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
-    t.integer  "user_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.text     "description"
@@ -186,7 +185,6 @@ ActiveRecord::Schema.define(:version => 20120728193631) do
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
-    t.integer  "badge_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
