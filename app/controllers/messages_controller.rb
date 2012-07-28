@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @params = params
     publish_async("user_#{params[:message][:receiver_id]}", "message", {
-body: params[:message][:body],
+      body: params[:message][:body],
       title: params[:message][:title],
       sender: current_user.name,
       sender_id: current_user.id,
@@ -28,6 +28,10 @@ body: params[:message][:body],
         redirect_to messages_path, notice: "Sender and Receiver could not be the same"
     end
 
+  end
+
+  def show
+    @message = Message.find(params[:id])
   end
 
   def send_message

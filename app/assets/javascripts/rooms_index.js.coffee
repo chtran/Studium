@@ -15,7 +15,30 @@ $(->
       update_room_list()
     )
 
-    
+    user_channel.bind("message", (data)->
+      $("#dropdown-message").prepend("
+      
+        <li>
+          <a href='/messages'>
+            <div class = 'row-fluid'>
+              <div class = 'span3'> 
+                <img alt='Picture?type=square' src = #{data.image}>
+              </div>
+
+              <div class = 'span9'>
+                <div>
+                  <b>#{data.sender}</b>
+                </div>
+                <small>#{data.body[0..36] + ' ...'}</small>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class = 'divider'>
+        </li>
+      ")
+
+    )
     channel.bind("enter_room_recent_activities", (data)->
       msg = data.user_name + ' has joined room ' + data.room_title
       $("#recent_activities #activities_list").prepend(
@@ -39,8 +62,8 @@ $(->
       $("#invitation").modal("show")
     )
 
-    update_room_list()
 
+    update_room_list()
 
 
   if $("#rooms_index").length

@@ -19,16 +19,16 @@ i{
 .navbar-inner .span4 {
   padding: 5px;
 }
-#dropdown-nav{
+.mydropdown-nav{
   width: 350px;
   padding-bottom: 10px;
 }
 
-#dropdown-nav h4{
+.mydropdown-nav h4{
   color: #222;
 
 }
 
-#dropdown-nav small{
+.mydropdown-nav small{
   font-size: 12px;
 }
