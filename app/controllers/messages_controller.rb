@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @params = params
     publish_async("user_#{params[:message][:receiver_id]}", "message", {
-body: params[:message][:body],
+      body: params[:message][:body],
       title: params[:message][:title],
       sender: current_user.name,
       sender_id: current_user.id,
