@@ -116,6 +116,7 @@ class RoomsController < ApplicationController
     })
     render text: "OK", status: "200"
   end
+
   # Request type: GET
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
@@ -145,6 +146,7 @@ class RoomsController < ApplicationController
     })
     render :text => "Kicked", :status => '200'
   end
+
   # Input: question_id
   # Return: HTML of that question
   def show_question
