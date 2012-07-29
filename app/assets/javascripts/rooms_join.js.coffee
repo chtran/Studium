@@ -49,8 +49,7 @@ $(->
     );
 
     channel.bind("chat_message", (data) ->
-      # Add the chat message to the chat content	
-      $(".chat-content").append("<p>"+data.message+"</p>");
+      $(".chat-content").append(data.message);
       $(".chat-content p:last-child").effect("highlight",{},2000);
       true;
     );
@@ -261,9 +260,7 @@ $(->
         url: "/rooms/chat_message",
         data: {
           message: message
-        },
-        success: (data) ->
-          $(".chat-content").append(data);
+        }
       })
       $("#chat .chat_message").val("")
     )

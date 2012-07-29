@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729163951) do
+ActiveRecord::Schema.define(:version => 20120729175252) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20120729163951) do
     t.datetime "updated_at",    :null => false
   end
 
-  create_table "chat_message_like", :force => true do |t|
+  create_table "chat_message_likes", :force => true do |t|
     t.integer  "chat_message_id"
     t.integer  "user_id"
     t.datetime "created_at",      :null => false
