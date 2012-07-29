@@ -60,7 +60,8 @@ class StatsController < ApplicationController
   end
 
   def show
-    histories = current_user.histories
+    @user=User.find params[:user_id]
+    histories = @user.histories
     #when the page is loaded for the first time,
     #show stats of today
     interval = 1
