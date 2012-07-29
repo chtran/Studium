@@ -1,8 +1,10 @@
 # Add Category types to categories table
+CategoryType.destroy_all
 CategoryType.create! category_name: "Critical Reading"
 CategoryType.create! category_name: "Math"
 CategoryType.create! category_name: "Writing (Multiple Choice)"
 
+QuestionType.destroy_all
 QuestionType.create! type_name: "Sentence Completion",category_type: CategoryType.find_by_category_name!("Critical Reading"),need_paragraph: false
 QuestionType.create! type_name: "Reading",category_type: CategoryType.find_by_category_name!("Critical Reading"),need_paragraph: true
 QuestionType.create! type_name: "Sentence Improvement",category_type: CategoryType.find_by_category_name!("Writing (Multiple Choice)"),need_paragraph: false
@@ -31,3 +33,11 @@ Badge.create! name: "Avid Reader Lv1",description: "50 correct reading questions
 Badge.create! name: "Avid Reader Lv2",description: "100 correct reading questions, 20 of which in a row."
 Badge.create! name: "Avid Reader Lv3",description: "500 correct reading questions, 50 of which in a row."
 Badge.create! name: "Bookworm",description: "1000 correct reading questions, 100 of which in a row.",legendary: true
+
+RoomMode.destroy_all
+RoomMode.create! title: "Replay", namespace: "replay"
+RoomMode.create! title: "Shuffled", namespace: "shuffled"
+RoomMode.create! title: "Smart", namespace: "smart"
+RoomMode.create! title: "Math", namespace: "math"
+RoomMode.create! title: "Writing (Multiple Choice)", namespace: "writing"
+RoomMode.create! title: "Critical Reading", namespace: "cr"
