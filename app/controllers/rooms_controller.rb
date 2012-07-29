@@ -66,28 +66,14 @@ class RoomsController < ApplicationController
   def choose
     @room = current_user.room
     @current_question = @room.question
+    channel="presence-room_#{@room.id}"
+    current_user.update_attribute(:status, 2)
+    publish_async(channel, "users_change", {})
     if params[:choice_id]
       @choice_id = params[:choice_id]
       new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-    end
-    current_user.update_attribute(:status, 2)
-    @room.save
-    publish_async("presence-room_#{@room.id}", "users_change", {})
-    if @room.show_explanation?
-      channel="presence-room_#{@room.id}"
-
-      # Show explanantion
-      publish(channel, "show_explanation", {
-        question_id: @current_question.id
-      }) 
-
-      # Update the histories of the room
-      publish_async(channel, "update_histories", {
-        history_id: new_history_item.id
-      })
-
       # Consider badges
-      badges=BadgeManager.awardBadges(current_user,@room.question,Choice.find(@choice_id))
+      badges=BadgeManager.awardBadges(current_user,@current_question,Choice.find(@choice_id))
 
       # If user received some badge(s), post the news
       unless badges.empty?
@@ -102,6 +88,22 @@ class RoomsController < ApplicationController
           })
         end
       end
+    end
+    if @room.show_explanation?
+      # Update the histories of the room
+      history_items = History.where(room_id: @room.id, question_id: @current_question.id, user_id: @room.users)
+                             .group(:user_id)
+
+      history_items.each do |h|
+        publish_async(channel, "update_histories", {
+          history_id: h.id
+        })
+      end
+      
+      # Show explanantion
+      publish(channel, "show_explanation", {
+        question_id: @current_question.id
+      }) 
     end
     render :text => "OK", :status => "200"
   end
