@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729055101) do
+ActiveRecord::Schema.define(:version => 20120729163951) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.string   "category_name"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "chat_message_like", :force => true do |t|
+    t.integer  "chat_message_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "chat_messages", :force => true do |t|
+    t.text     "content"
+    t.integer  "owner_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "choices", :force => true do |t|
@@ -117,9 +131,11 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.datetime "date_of_birth"
     t.string   "school"
     t.integer  "user_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "image"
+    t.integer  "reputation",    :default => 0
+    t.integer  "exp",           :default => 1400
   end
 
   create_table "question_types", :force => true do |t|
@@ -145,13 +161,6 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.integer  "room_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "reputations", :force => true do |t|
-    t.integer  "value",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "profile_id"
   end
 
   create_table "reputations_users", :force => true do |t|
@@ -202,7 +211,6 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.boolean  "admin",                  :default => false
     t.integer  "room_id"
     t.integer  "status",                 :default => 0
-    t.integer  "exp",                    :default => 1400
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"

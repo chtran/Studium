@@ -62,9 +62,6 @@ class User < ActiveRecord::Base
     User.where(id: friend_ids)
   end
 
-  def rank
-    User.where("exp > (?)", self.exp).count + 1
-  end
 
   def import_facebook_friends
     uids = facebook.get_connections("me","friends").collect {|f| f["id"]}
@@ -95,16 +92,20 @@ class User < ActiveRecord::Base
   def lose_to!(question)
     expectation = expected(question)
     change = (32*expectation[:user]).to_i
-    self.decrement!(:exp, change)
+    profile=self.profile
+    profile.decrement!(:exp, change)
     question.increment!(:exp, change)
+    profile.save!
     return change
   end
 
   def win_to!(question)
     expectation = expected(question)
     change = (32*expectation[:question]).to_i
-    self.increment!(:exp, change)
+    profile=self.profile
+    profile.increment!(:exp, change)
     question.decrement!(:exp, change)
+    profile.save!
     return change
   end
 
@@ -156,4 +157,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def exp
+    self.profile.exp
+  end
+
+  def reputation
+    self.profile.reputation
+  end
+
+  def rank
+    User.joins(:profile).where("exp > (?)", self.exp).count + 1
+  end
 end
