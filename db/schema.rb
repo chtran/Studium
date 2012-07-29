@@ -11,20 +11,52 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725170348) do
+ActiveRecord::Schema.define(:version => 20120728231319) do
+
+  create_table "badge_managers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "correct_qiar_counter",   :default => 0
+    t.integer  "question_counter",       :default => 0
+    t.integer  "perfect_replay_counter", :default => 0
+    t.integer  "math_q_counter",         :default => 0
+    t.integer  "math_qiar_counter",      :default => 0
+    t.integer  "wr_q_counter",           :default => 0
+    t.integer  "wr_qiar_counter",        :default => 0
+    t.integer  "cr_q_counter",           :default => 0
+    t.integer  "cr_qiar_counter",        :default => 0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "badges", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.text     "description"
+    t.boolean  "legendary",          :default => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "badges_users", :id => false, :force => true do |t|
+    t.integer "badge_id"
+    t.integer "user_id"
+  end
 
   create_table "category_types", :force => true do |t|
     t.string   "category_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "choices", :force => true do |t|
     t.integer  "question_id"
     t.text     "content"
     t.string   "choice_letter"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.boolean  "correct",       :default => false
   end
 
@@ -62,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20120725170348) do
   create_table "paragraphs", :force => true do |t|
     t.text     "content"
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "permissions", :force => true do |t|
@@ -71,8 +103,8 @@ ActiveRecord::Schema.define(:version => 20120725170348) do
     t.integer  "user_id"
     t.integer  "thing_id"
     t.string   "thing_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "profiles", :force => true do |t|
@@ -81,15 +113,15 @@ ActiveRecord::Schema.define(:version => 20120725170348) do
     t.datetime "date_of_birth"
     t.string   "school"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "image"
   end
 
   create_table "question_types", :force => true do |t|
     t.integer  "category_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "type_name"
     t.boolean  "need_paragraph",   :default => false
   end
@@ -97,8 +129,8 @@ ActiveRecord::Schema.define(:version => 20120725170348) do
   create_table "questions", :force => true do |t|
     t.text     "prompt"
     t.integer  "exp",              :default => 1400
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "paragraph_id"
     t.integer  "question_type_id"
     t.string   "title"
@@ -148,8 +180,8 @@ ActiveRecord::Schema.define(:version => 20120725170348) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false
     t.integer  "room_id"
     t.integer  "status",                 :default => 0

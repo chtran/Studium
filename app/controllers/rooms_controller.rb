@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
-    @user = current_user.attributes
+    @user = current_user
     @name = current_user.name
     @friends = current_user.friends
     @image = current_user.profile.image
@@ -71,16 +71,35 @@ class RoomsController < ApplicationController
     if params[:choice_id]
       @choice_id = params[:choice_id]
       new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-      publish_async("presence-room_#{@room.id}", "update_histories", {
-        history_id: new_history_item.id
-      })
     end
     current_user.update_attribute(:status, 2)
     @room.save
     publish_async("presence-room_#{@room.id}", "users_change", {})
-    publish("presence-room_#{@room.id}", "show_explanation", {
-      question_id: @current_question.id
-    }) if @room.show_explanation?
+    if @room.show_explanation?
+      channel="presence-room_#{@room.id}"
+
+      # Show explanantion
+      publish(channel, "show_explanation", {
+        question_id: @current_question.id
+      }) 
+
+      # Update the histories of the room
+      publish_async(channel, "update_histories", {
+        history_id: new_history_item.id
+      })
+
+      # Consider badges
+      badges=BadgeManager.awardBadges(current_user,@room.question,Choice.find(@choice_id))
+
+      # If user received some badge(s), post the news
+      unless badges.empty?
+        badges.each do |badge|
+          publish_async(channel,"update_news",{
+            news: "#{current_user.email} received new badge: #{badge.name}"
+          })
+        end
+      end
+    end
     render :text => "OK", :status => "200"
   end
   
@@ -116,16 +135,36 @@ class RoomsController < ApplicationController
     })
     render text: "OK", status: "200"
   end
+
   # Request type: GET
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def review
-    room = current_user.room
+    #room = current_user.room
+    room = Room.find(46)
     publish_async("presence-rooms", "leave_room_recent_activities", {
       room_title: room.title,
       user_name: current_user.name
     })
-    @question_ids = current_user.histories.where(room_id: current_user.room_id).includes(:question).select("questions.id").map {|r| r.question.id}
+    histories = current_user.histories
+                                .where(room_id: room.id)
+                                .joins(:choice)
+                                .includes(:question)
+    @questions = histories.collect do |h| {
+        id: h.question_id,
+        prompt: h.question.prompt,
+        paragraph: h.question.paragraph,
+        choices: h.question.choices.collect do |c| {
+          data: c,
+          result: if h.question.correct_choice_ids.include? c.id
+                    "correct"
+                  elsif c.id==h.choice_id
+                    "selected"
+                  end
+          }
+        end
+      }
+    end
 
     current_user.update_attributes({room_id: 0, status: 0})
   end
@@ -145,6 +184,7 @@ class RoomsController < ApplicationController
     })
     render :text => "Kicked", :status => '200'
   end
+
   # Input: question_id
   # Return: HTML of that question
   def show_question

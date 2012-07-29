@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_one :profile,dependent: :destroy
   accepts_nested_attributes_for :profile
 
+  has_and_belongs_to_many :badges
+
   def self.find_for_auth(auth, signed_in_resource=nil)
     user = User.where(email: auth.info.email).first
     if !user

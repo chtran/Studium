@@ -32,4 +32,12 @@ class Question < ActiveRecord::Base
       end
     end
   end
+
+  def correct_choices
+    self.choices.where(correct: true)
+  end
+
+  def correct_choice_ids
+    self.choices.where(correct: true).collect {|c| c.id}
+  end
 end
