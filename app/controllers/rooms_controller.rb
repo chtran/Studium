@@ -92,7 +92,7 @@ class RoomsController < ApplicationController
       # If user received some badge(s), post the news
       unless badges.empty?
         badges.each do |badge|
-          news="#{current_user.email} received new badge: #{badge.name}"
+          news="#{current_user.name} has received #{badge.name} badge. Congratulations!"
           publish_async(channel,"update_news",{
             news: news
           })
