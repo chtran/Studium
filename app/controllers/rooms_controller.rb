@@ -3,11 +3,6 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
-    @user = current_user
-    @name = current_user.name
-    @friends = current_user.friends
-    @image = current_user.profile.image
-    @rank = User.where("exp > (?)", @user["exp"]).count + 1
     @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
@@ -140,8 +135,7 @@ class RoomsController < ApplicationController
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def review
-    #room = current_user.room
-    room = Room.find(46)
+    room = current_user.room
     publish_async("presence-rooms", "leave_room_recent_activities", {
       room_title: room.title,
       user_name: current_user.name
