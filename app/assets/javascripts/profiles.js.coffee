@@ -4,13 +4,12 @@
 
 $(->
   if $("#profile-info").length
-    user_id=$("#profile-info").data("user-id")
-    alert(user_id)
+    alert(gon.user_id)
     $.ajax({
       type: "GET",
       url: "/stats/show",
       data: {
-        user_id: user_id
+        user_id: gon.user_id
       },
       success: (data) ->
         $("#statistics").html(data.stats_content)
