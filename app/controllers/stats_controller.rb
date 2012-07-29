@@ -59,6 +59,19 @@ class StatsController < ApplicationController
     @subject_data = performance_recently(histories, interval)
   end
 
+  def show
+    histories = current_user.histories
+    #when the page is loaded for the first time,
+    #show stats of today
+    interval = 1
+    @subject_data = performance_recently(histories, interval)
+
+    stats_content=render_to_string partial: "stats"
+    render json: {
+      stats_content: stats_content
+    }
+  end
+
   def pull
     category_type_id = params[:category_type_id].to_i
     histories = current_user.histories
