@@ -76,16 +76,29 @@ class RoomsController < ApplicationController
     @room.save
     publish_async("presence-room_#{@room.id}", "users_change", {})
     if @room.show_explanation?
-      # Consider badges
-      BadgeManager.awardBadges current_user,@room.question,Choice.find(@choice_id)
+      channel="presence-room_#{@room.id}"
 
-      publish("presence-room_#{@room.id}", "show_explanation", {
+      # Show explanantion
+      publish(channel, "show_explanation", {
         question_id: @current_question.id
       }) 
 
-      publish_async("presence-room_#{@room.id}", "update_histories", {
+      # Update the histories of the room
+      publish_async(channel, "update_histories", {
         history_id: new_history_item.id
       })
+
+      # Consider badges
+      badges=BadgeManager.awardBadges(current_user,@room.question,Choice.find(@choice_id))
+
+      # If user received some badge(s), post the news
+      unless badges.empty?
+        badges.each do |badge|
+          publish_async(channel,"update_news",{
+            news: "#{current_user.email} received new badge: #{badge.name}"
+          })
+        end
+      end
     end
     render :text => "OK", :status => "200"
   end

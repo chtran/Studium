@@ -7,6 +7,7 @@ class BadgeManager < ActiveRecord::Base
 
     def awardBadges(user,question,choice)
       user_entry=BadgeManager.find_or_create_by_user_id(user.id)
+      @badges=[]
 
       # Increment/Reset counters
       if choice.correct?
@@ -20,6 +21,8 @@ class BadgeManager < ActiveRecord::Base
 
       # Consider badges
       consider_badges(user_entry)
+
+      return @badges
     end
 
     def awardReplayBadge(user,question,counter)
@@ -64,6 +67,7 @@ class BadgeManager < ActiveRecord::Base
 
     def consider_undefeated_badges(user_entry)
       user=user_entry.user
+      badge=nil
       if user_entry.correct_qiar_counter==10
         badge=Badge.find_by_name!("10-undefeated")
         user.badges << badge
@@ -74,6 +78,8 @@ class BadgeManager < ActiveRecord::Base
         badge=Badge.find_by_name!("100-undefeated")
         user.badges << badge
       end
+
+      @badges << badge if badge!=nil
     end
 
     def consider_altruist_badges(user_entry)
@@ -82,6 +88,7 @@ class BadgeManager < ActiveRecord::Base
 
     def consider_scholar_badges(user_entry)
       user=user_entry.user
+      badge=nil
       if user_entry.question_counter==100
         badge=Badge.find_by_name!("Scholar Lv1")
         user.badges << badge
@@ -95,6 +102,8 @@ class BadgeManager < ActiveRecord::Base
         badge=Badge.find_by_name!("Legendary Scholar")
         user.badges << badge
       end
+
+      @badges << badge if badge!=nil
     end
 
     def consider_reviewer_badges(user_entry)
@@ -103,6 +112,7 @@ class BadgeManager < ActiveRecord::Base
 
     def consider_mathematician_badges(user_entry)
       user=user_entry.user
+      badge=nil
       badge1=Badge.find_by_name!("Mathematician Lv1")
       badge2=Badge.find_by_name!("Mathematician Lv2")
       badge3=Badge.find_by_name!("Legendary Mathematician")
@@ -113,10 +123,13 @@ class BadgeManager < ActiveRecord::Base
       elsif user_entry.math_q_counter>=1000 and user_entry.math_qiar_counter>=50 and !user.badges.include?(badge3)
         user.badges << badge3
       end
+
+      @badges << badge if badge!=nil
     end
 
     def consider_pen_badges(user_entry)
       user=user_entry.user
+      badge=nil
       badge1=Badge.find_by_name!("Silver Pen")
       badge2=Badge.find_by_name!("Gem Pen")
       badge3=Badge.find_by_name!("Golden Pen")
@@ -136,10 +149,13 @@ class BadgeManager < ActiveRecord::Base
       elsif user_entry.wr_q_counter>=1000 and user_entry.math_qiar_counter>=100 and !user.badges.include?(badge5)
         user.badges << badge5
       end
+
+      @badges << badge if badge!=nil
     end
 
     def consider_reader_badges(user_entry)
       user=user_entry.user
+      badge=nil
       badge1=Badge.find_by_name!("Avid Reader Lv1")
       badge2=Badge.find_by_name!("Avid Reader Lv2")
       badge3=Badge.find_by_name!("Avid Reader Lv3")
@@ -153,6 +169,8 @@ class BadgeManager < ActiveRecord::Base
       elsif user_entry.cr_q_counter>=1000 and user_entry.cr_qiar_counter>=50 and !user.badges.include?(badge4)
         user.badges << badge4
       end
+
+      @badges << badge if badge!=nil
     end
   end
 end

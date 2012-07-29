@@ -24,11 +24,24 @@ $(->
           update_users();
       });
     );
+
     # Update the histories
     channel.bind("update_histories", (data) ->
       update_histories(data.history_id);
       true;
     );
+
+    # Update news
+    channel.bind("update_news", (data) ->
+      $news="<p>"+data.news+"</p>"
+      $("#history").append($news);
+      $("#history p:last").effect("highlight",2000);
+      #$("#history").animate({
+      #  scrollTop: $("#history p:last").position().top
+      #},1000);
+      true;
+    );
+
     # Listen to the "users_change" event which keeps track of users joining/leaving the room
     channel.bind("users_change", (data) ->
       update_users();
