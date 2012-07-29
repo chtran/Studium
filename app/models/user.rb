@@ -149,15 +149,11 @@ class User < ActiveRecord::Base
   end
 
   def self.return_hash_data
-    result = []
-    self.all.each do |u|
-      temp = {}
-      temp["name"]= u.name
-      temp["id"] = u.id
-      result << temp
+    self.all.collect do |u| {
+      "name" => u.name,
+      "id" => u.id
+    }
     end
-
-    return result
   end
 
 end
