@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     User.where(id: friend_ids)
   end
 
+  def rank
+    User.where("exp > (?)", self.exp).count + 1
+  end
+
   def import_facebook_friends
     uids = facebook.get_connections("me","friends").collect {|f| f["id"]}
     friends = User.where("uid IN (?)", uids)
