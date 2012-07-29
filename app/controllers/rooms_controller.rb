@@ -120,8 +120,7 @@ class RoomsController < ApplicationController
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def review
-    #room = current_user.room
-    room = Room.find(46)
+    room = current_user.room
     publish_async("presence-rooms", "leave_room_recent_activities", {
       room_title: room.title,
       user_name: current_user.name
