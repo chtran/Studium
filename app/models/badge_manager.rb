@@ -82,8 +82,13 @@ class BadgeManager < ActiveRecord::Base
       @badges << badge if badge!=nil
     end
 
-    def consider_altruist_badges(user_entry)
+    def consider_altruist_badges(user,reputation)
+      altruist_badge=Badge.find_by_name! "Altruist"
 
+      if reputation>=10 and !user.badges.include?(altruist_badge)
+        user.badges << altruist_badge
+        user.save!
+      end
     end
 
     def consider_scholar_badges(user_entry)

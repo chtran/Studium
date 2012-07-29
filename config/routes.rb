@@ -11,6 +11,7 @@ Studium::Application.routes.draw do
   get "/users/:user_id/profile", to: "profiles#show", as: "user_profile"
   get "/users/:user_id/profile/edit", to: "profiles#edit",as: "edit_user_profile"
   put "/users/:user_id/profile",to: "profiles#update"
+  post "/users/:user_id/profile/increase_reputation",to: "profiles#increase_reputation",as: :increase_reputation
 
   get "/admin",to: "homepage#admin",as: "admin_index"
   get "/admin/materials",to: "admin/materials/base#index",as: "admin_materials"

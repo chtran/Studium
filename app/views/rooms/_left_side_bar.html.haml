@@ -9,7 +9,7 @@
                 =image_tag(image)
               %div.span8
                 %h3= name
-                %small View my profile
+                %small= link_to "View my profile","/users/#{current_user.id}/profile"
           %tr
             %td 
               %strong #{user.exp}
@@ -17,6 +17,10 @@
             %td 
               %strong #{rank}
               %small Rank
+          %tr
+            %td
+              %strong #{user.profile.reputation.value}
+              %small Reputation
             %td 
               %strong #{user.badges.count}
               %small Badges

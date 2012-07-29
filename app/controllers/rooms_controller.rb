@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     @name = current_user.name
     @friends = current_user.friends
     @image = current_user.profile.image
-    @rank = User.where("exp > (?)", @user["exp"]).count + 1
+    @rank = User.where("exp > (?)", @user.exp).count + 1
     @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
@@ -233,21 +233,15 @@ class RoomsController < ApplicationController
       @message = messages[:incorrect] + " You lost "+@change.to_s+" exp."
       @style = styles[:incorrect]
     end
-    render :partial => "show_explanation"
+    render partial: "show_explanation"
   end
 
   # Request type: POST
   # Returns a message to put in a chat box
   def chat_message
     @room=current_user.room
-    message=current_user.email+": "+ params[:message]
-    publish_async("presence-room_#{@room.id}","chat_message", {
-      message: message
-    })
 
-    render json: {
-      message: message
-    }
+    render partial: "chat_message"
   end
 
   # Request type: POST
