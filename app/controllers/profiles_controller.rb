@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_filter :find_user
   before_filter :find_profile
   before_filter :authenticate_update!,only: [:edit,:update]
+  before_filter :authenticate_user!,only: [:increase_reputation]
 
   def show
     gon.user_id = params[:user_id]
@@ -19,6 +20,19 @@ class ProfilesController < ApplicationController
   rescue
     flash[:alert]="Profile has not been updated."
     render "edit"
+  end
+
+  def increase_reputation
+    reputation_increase=params[:reputation_increase]
+
+    if current_user!=@profile.user and !@profile.reputation.users.include?(current_user)
+      reputation=@profile.reputation
+      reputation.value+=reputation_increase.to_i
+      reputation.users << current_user
+      reputation.save!
+    end
+
+    redirect_to index_path
   end
 
 private

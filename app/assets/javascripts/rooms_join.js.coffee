@@ -261,7 +261,9 @@ $(->
         url: "/rooms/chat_message",
         data: {
           message: message
-        }
+        },
+        success: (data) ->
+          $(".chat-content").append(data);
       })
       $("#chat .chat_message").val("")
     )

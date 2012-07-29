@@ -8,8 +8,8 @@
               %div.span4
                 =image_tag(current_user.profile.image)
               %div.span8
-                %h3= current_user.name
-                %small View my profile
+                %h3= @name
+                %small= link_to "View my profile","/users/#{current_user.id}/profile"
           %tr
             %td 
               %strong #{current_user.exp}
@@ -17,6 +17,10 @@
             %td 
               %strong #{current_user.rank}
               %small Rank
+          %tr
+            %td
+              %strong #{current_user.profile.reputation.value}
+              %small Reputation
             %td 
               %strong #{current_user.badges.count}
               %small Badges
@@ -43,6 +47,3 @@
         size: '10px',
         height: '150px'
       });
-
-
-
