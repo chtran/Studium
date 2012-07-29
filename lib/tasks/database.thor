@@ -1,10 +1,12 @@
 class Database < Thor
   desc "populate [FILENAME]","populate the database with SAT questions."
   method_options force: :boolean
+  method_options verbose: :boolean
   def populate(filename)
     require File.expand_path("config/environment.rb")
 
     # Read the specified file and create questions
+    verbose=options[:verbose]
     file=File.open filename,"r"
     lines=IO.readlines filename
     question=nil
@@ -25,7 +27,7 @@ class Database < Thor
 
       if line=~/\<End Paragraph\>/
         paragraph.save!
-        puts "Created Paragraph with id #{paragraph.id}"
+        puts "Created Paragraph with id #{paragraph.id}" if verbose
         paragraph=nil
       end
 
@@ -56,10 +58,10 @@ class Database < Thor
         elsif line=~/\<End Question\>/
           if question.persisted?
             question.save!
-            puts "Updated question with id: #{question.id}" 
+            puts "Updated question with id: #{question.id}" if verbose 
           else
             question.save!
-            puts "Created question with id: #{question.id}" 
+            puts "Created question with id: #{question.id}" if verbose 
           end
           
           if paragraph
@@ -73,11 +75,11 @@ class Database < Thor
 
     if question
       if question.persisted?
-        puts "Updated question with id: #{question.id}" 
+        puts "Updated question with id: #{question.id}" if verbose 
         question.save!
       else
         question.save!
-        puts "Created question with id: #{question.id}" 
+        puts "Created question with id: #{question.id}" if verbose 
       end
 
     end

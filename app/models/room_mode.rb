@@ -15,9 +15,11 @@ class RoomMode < ActiveRecord::Base
     elsif self.namespace == "replay"
       output = room.users[0].failed_questions
     elsif self.namespace == "smart"
-      exp_array = room.users.select(:profile).select(:exp).order(:exp)
-      min_exp = exp_array.first.exp
-      max_exp = exp_array.last.exp
+      profile_array=room.users.map {|user| user.profile}
+      exp_array = profile_array.map {|profile| profile.exp}.sort
+      debugger
+      min_exp = exp_array.first
+      max_exp = exp_array.last
       output = unmastered_questions.where(exp: (min_exp-50)..(max_exp+50))
     elsif self.namespace == "shuffled"
       output = Question.order(:id)
