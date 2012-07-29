@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
-    @user = current_user.attributes
+    @user = current_user
     @name = current_user.name
     @friends = current_user.friends
     @image = current_user.profile.image
