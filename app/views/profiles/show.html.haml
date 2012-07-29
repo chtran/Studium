@@ -5,6 +5,8 @@
     %a{"href" => "#profile", "data-toggle" => "tab"} Profile
   %li
     %a{"href" => "#statistics", "data-toggle" => "tab"} Statistics
+  %li
+    %a{"href" => "#badges", "data-toggle" => "tab"} Badges
 %div.tab-content
   %div.tab-pane#activities
   %div.tab-pane.active#profile
@@ -23,3 +25,7 @@
           %td Date of Birth
           %td= @profile.date_of_birth.strftime '%m/%d/%Y'
   %div.tab-pane#statistics
+  %div.tab-pane#badges
+    = link_to "All Badges",badges_path,class: "btn btn-primary"
+    %br
+    = render "badges/badge_list"

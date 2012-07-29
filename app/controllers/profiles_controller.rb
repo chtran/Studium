@@ -5,6 +5,8 @@ class ProfilesController < ApplicationController
 
   def show
     gon.user_id = params[:user_id]
+
+    @badges=current_user.badges
   end
 
   def edit
