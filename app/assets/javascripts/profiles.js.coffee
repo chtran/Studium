@@ -4,6 +4,7 @@
 
 $(->
   if $("#profile-info").length
+    user_id=$("#profile-info").data("user-id")
     alert(user_id)
     $.ajax({
       type: "GET",

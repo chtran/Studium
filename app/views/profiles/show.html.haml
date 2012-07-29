@@ -1,7 +1,4 @@
-= javascript_tag do
-  window.user_id= "#{@user.id}"
-
-%ul.nav.nav-tabs#profile-info
+%ul.nav.nav-tabs#profile-info{"data-user-id" => "#{@user.id}"}
   %li
     %a{"href" => "#activities", "data-toggle" => "tab"} Recent Activities
   %li.active
