@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "body"
-    t.text     "title"
   end
 
   create_table "messages_buffers", :force => true do |t|
@@ -159,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20120729055101) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "namespace"
   end
 
   create_table "rooms", :force => true do |t|

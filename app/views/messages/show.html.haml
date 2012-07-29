@@ -1,2 +1,5 @@
-%h3 #{User.find(@message.sender_id).name}
-%p #{@message.body}
+%div.row-fluid
+  = render "rooms/left_side_bar", friends: @friends, image: @image, name: @name, user: @user, rank: @rank
+  %div.span8
+    %h3 #{User.find(@message.sender_id).name}
+    %p #{@message.body}

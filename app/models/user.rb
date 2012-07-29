@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     User.where(id: friend_ids)
   end
 
+  def rank
+    User.where("exp > (?)", self.exp).count + 1
+  end
+
   def import_facebook_friends
     uids = facebook.get_connections("me","friends").collect {|f| f["id"]}
     friends = User.where("uid IN (?)", uids)
@@ -144,5 +148,16 @@ class User < ActiveRecord::Base
     Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id).order("created_at DESC")
   end
 
+  def self.return_hash_data
+    result = []
+    self.all.each do |u|
+      temp = {}
+      temp["name"]= u.name
+      temp["id"] = u.id
+      result << temp
+    end
+
+    return result
+  end
 
 end

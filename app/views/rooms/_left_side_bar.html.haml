@@ -4,25 +4,25 @@
       %table.table.table-bordered
         %tbody
           %tr
-            %td{:colspan => '2'}
+            %td{:colspan => '3'}
               %div.span4
-                =image_tag(image)
+                =image_tag(current_user.profile.image)
               %div.span8
-                %h3= name
+                %h3= @name
                 %small= link_to "View my profile","/users/#{current_user.id}/profile"
           %tr
             %td 
-              %strong #{user.exp}
+              %strong #{current_user.exp}
               %small EXP
             %td 
-              %strong #{rank}
+              %strong #{current_user.rank}
               %small Rank
           %tr
             %td
-              %strong #{user.profile.reputation.value}
+              %strong #{current_user.profile.reputation.value}
               %small Reputation
             %td 
-              %strong #{user.badges.count}
+              %strong #{current_user.badges.count}
               %small Badges
   
   %div.separator
@@ -34,7 +34,7 @@
           %h3 Friends
     %div.mousescroll
       %ul.nav.nav-tabs.nav-stacked
-        - friends.each do |f|
+        - current_user.friends.each do |f|
           %li
             %a{href: user_profile_path(f)}
               =image_tag(f.profile.image)
@@ -47,6 +47,3 @@
         size: '10px',
         height: '150px'
       });
-
-
-

@@ -1,26 +1,27 @@
 %div.row-fluid#messages_index
-  = render "rooms/left_side_bar", friends: @friends, image: @image, name: @name, user: @user, rank: @rank
+  = render "rooms/left_side_bar"
   %div.span8
     %div#message
       %table.table
         %thead
           %tr
             %td 
-            %h3 Messages
+              %h3 Messages
+            %td 
+              %a.btn.btn-primary.btn-large#create_message_btn{'data-toggle' => 'modal', 'href'=>'#new_message'} 
+                New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
             %tr
-              %td
+              %td{"colspan" => 2}
                 %a{href: "messages/show/" + msg.id.to_s}
                   %div.row-fluid
                     %div.span1
                       =image_tag(User.find(msg.sender_id).profile.image)
                     %div.span11.message-body
-                      %h3 #{User.find(msg.sender_id).name}
-                      %small= msg.body[0..36] + " ..."
+                      %h3.sender-name #{User.find(msg.sender_id).name}
+                      %small.content= msg.body[0..36] + " ..."
 
-      %a.btn.btn-primary.btn-large#create_message_btn{'data-toggle' => 'modal', 'href'=>'#new_message'} 
-        New Message
       %div.modal.hide#new_message
         %div.modal-header
           %button.close{"type" => "button", "data-dismiss" => "modal"}x
