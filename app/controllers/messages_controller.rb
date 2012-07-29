@@ -11,7 +11,8 @@ class MessagesController < ApplicationController
     gon.user_id = current_user.id
     @new_room = Room.new
     
-
+    gon.hash_data = User.return_hash_data
+    
     @message = Message.new
     @received_messages = current_user.received_messages
     gon.user_id = current_user.id
@@ -42,6 +43,15 @@ class MessagesController < ApplicationController
   end
 
   def show
+    @user = current_user.attributes
+    @name = current_user.name
+    @friends = current_user.friends
+    @image = current_user.profile.image
+    @rank = User.where("exp > (?)", @user["exp"]).count + 1
+    @top_users = User.order("exp DESC").limit(5)
+    gon.user_id = current_user.id
+    @new_room = Room.new
+    
     @message = Message.find(params[:id])
   end
 

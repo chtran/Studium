@@ -1,7 +1,20 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.message-body{
+.sender-name{
   color: #222;
 }
 
+.content{
+  font-size: 13px;
+  color: #666; 
+}
+
+#create_message_btn{
+  float:right;
+}
+
+#input-body{
+  margin-top: 25px;
+
+}

@@ -15,8 +15,14 @@ $(->
                 #{data.title}
                 #{data.sender_id}
             </td>
-          </tr> ");
+          </tr>");
     );
+    
+    available_names = gon.hash_data
+    $("#input-receiver").tokenInput(available_names, 
+      {
+        theme: "facebook"
+      });
 
   if $('#message').length
     init();
