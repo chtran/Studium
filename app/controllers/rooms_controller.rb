@@ -242,7 +242,7 @@ class RoomsController < ApplicationController
   def chat_message
     @room=current_user.room
 
-    @chat_message=ChatMessage.create! content: params[:message]
+    @chat_message=ChatMessage.create! content: params[:message],owner_id: current_user.id
     chat_message=render_to_string partial: "chat_message/chat_message"
 
     publish_async("presence-room_#{@room.id}", "chat_message", {
