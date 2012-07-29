@@ -7,13 +7,21 @@ $(->
     user_channel = client.subscribe("user_" + gon.user_id);
     
     user_channel.bind("message", (data) ->
-      info = data.title
+      console.log(data)
       $("#messages_body").prepend("
           <tr>
-            <td>
-              <img alt='Picture?type=square' src = #{data.image}>
-                #{data.title}
-                #{data.sender_id}
+            <td colspan = '2'>
+              <a href ='messages/show/#{data.message_id}'>
+                <div class = 'row-fluid'>
+                  <div class = 'span1'>
+                    <img alt='Picture?type=square' src = #{data.image}>
+                  </div>
+
+                  <div class = 'span11 message-body'>
+                    <h3 class = 'sender-name'> #{data.sender} </h3>
+                    <small class = 'content'> #{data.body[0..36] + ' ...'}</small>
+                </div>
+              </a>
             </td>
           </tr>");
     );
