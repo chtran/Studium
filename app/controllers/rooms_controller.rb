@@ -44,10 +44,8 @@ class RoomsController < ApplicationController
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
-    publish_async("presence-rooms", "enter_room_recent_activities", {
-      user_name: current_user.name,
-      room_title: @room.title
-    
+    publish_async("presence-rooms", "update_recent_activities", {
+      message: "#{current_user.name} has joined room #{@room.title}"
     })
     @reload = (@room.users.count==1).to_s
   end
@@ -94,8 +92,13 @@ class RoomsController < ApplicationController
       # If user received some badge(s), post the news
       unless badges.empty?
         badges.each do |badge|
+          news="#{current_user.name} has received #{badge.name} badge. Congratulations!"
           publish_async(channel,"update_news",{
-            news: "#{current_user.email} received new badge: #{badge.name}"
+            news: news
+          })
+
+          publish_async("presence-rooms", "update_recent_activities", {
+            message: news
           })
         end
       end
@@ -141,9 +144,8 @@ class RoomsController < ApplicationController
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def review
     room = current_user.room
-    publish_async("presence-rooms", "leave_room_recent_activities", {
-      room_title: room.title,
-      user_name: current_user.name
+    publish_async("presence-rooms", "update_recent_activities", {
+      message: "#{current_user.name} has left room #{@room.title}."
     })
     histories = current_user.histories
                                 .where(room_id: room.id)

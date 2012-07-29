@@ -7,6 +7,12 @@ class Reputation < ActiveRecord::Base
   before_save :consider_altruist_badge
 
   def consider_altruist_badge
-    BadgeManager.consider_altruist_badges(self.profile.user,self.value)
+    altruist_badge=BadgeManager.consider_altruist_badges(self.profile.user,self.value)
+  
+    if altruist_badge!=nil
+      publish_async("presence-rooms", "update_recent_activities", {
+        message: "User #{current_user.name} has received #{altruist_badge.name} badge. Congratulations!"
+      })
+    end
   end
 end

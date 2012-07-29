@@ -39,20 +39,11 @@ $(->
       ")
 
     )
-    channel.bind("enter_room_recent_activities", (data)->
-      msg = data.user_name + ' has joined room ' + data.room_title
+
+    channel.bind("update_recent_activities", (data) ->
       $("#recent_activities #activities_list").prepend(
         '<li>
-          <a> '+ msg + ' 
-        </li>') 
-    )
-
-
-    channel.bind("leave_room_recent_activities", (data)->
-      msg = data.user_name + ' has left room ' + data.room_title
-      $("#recent_activities #activities_list").prepend(
-        '<li>
-          <a> '+ msg + ' 
+          <a> '+ data.message + ' 
         </li>') 
     )
 
