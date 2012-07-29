@@ -3,7 +3,8 @@
     %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
       %div.row-fluid
         %div.span2
-          =image_tag(room.owner.profile.image) if room.owner
+          - if room.owner and room.owner.profile.image
+            =image_tag(room.owner.profile.image)
         %div.span8
           %h3=room.title
           %span.label.label-success= room.room_mode.title
