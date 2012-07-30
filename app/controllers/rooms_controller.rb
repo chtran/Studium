@@ -38,6 +38,7 @@ class RoomsController < ApplicationController
 
   def join
     @room = Room.find(params[:room_id])
+    gon.user_id = current_user.id
     gon.room_id = @room.id
     current_user.update_attributes({
       room_id: @room.id,
@@ -179,15 +180,15 @@ class RoomsController < ApplicationController
   # Effect: Kick the user from the room (set room_id and status to 0)
   #         Publish users_change event
   def kick
-    user = User.find(params[:user_id])
-    room = Room.find(params[:room_id])
-    user.update_attributes({room_id: 0, status: 0})
-    publish_async("presence-room_#{room.id}", "users_change", {})
-    publish_async("presence-rooms", "leave_room_recent_activities", {
-      room_title: room.title,
-      user_name: user.name
-    })
-    render :text => "Kicked", :status => '200'
+#    user = User.find(params[:user_id])
+#    room = Room.find(params[:room_id])
+#    user.update_attributes({room_id: 0, status: 0})
+#    publish_async("presence-room_#{room.id}", "users_change", {})
+#    publish_async("presence-rooms", "leave_room_recent_activities", {
+#      room_title: room.title,
+#      user_name: user.name
+#    })
+#    render :text => "Kicked", :status => '200'
   end
 
   # Input: question_id

@@ -41,6 +41,19 @@ class PusherController < ApplicationController
             puts "Deactivated room #{room_id}"
           end
         end
+
+        if event["channel"].match /^user_(\d+)$/
+          user_id = $1.to_i
+          case event["name"]
+          when 'channel_occupied'
+          when 'channel_vacated'
+            user = User.find(user_id)
+            if user.room_id != 0 
+              user.update_attributes({room_id: 0, status: 0})
+            end
+          end
+        end
+
       end
       render text: 'ok'
     else
