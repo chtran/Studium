@@ -23,16 +23,29 @@ class ProfilesController < ApplicationController
   end
 
   def increase_reputation
+    chat_message=ChatMessage.find params[:chat_message_id]
     reputation_increase=params[:reputation_increase]
 
-    if current_user!=@profile.user and !@profile.reputation.users.include?(current_user)
-      reputation=@profile.reputation
-      reputation.value+=reputation_increase.to_i
-      reputation.users << current_user
-      reputation.save!
+    if current_user!=@profile.user and !chat_message.users.include?(current_user)
+      @profile.reputation+=reputation_increase.to_i
+      chat_message.users << current_user
+      chat_message.save!
+      @profile.save!
+
+      consider_altruist_badge(@profile.user,@profile.reputation)
     end
 
     redirect_to index_path
+  end
+
+  def consider_altruist_badge(user,reputation)
+    altruist_badge=BadgeManager.consider_altruist_badges(user,reputation)
+  
+    if altruist_badge!=nil
+      publish_async("presence-rooms", "update_recent_activities", {
+        message: "User #{user.name} has received #{altruist_badge.name} badge. Congratulations!"
+      })
+    end
   end
 
 private

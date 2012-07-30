@@ -89,9 +89,9 @@ class BadgeManager < ActiveRecord::Base
         user.badges << altruist_badge
         user.save!
         altruist_badge
+      else
+        nil
       end
-
-      nil
     end
 
     def consider_scholar_badges(user_entry)

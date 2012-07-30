@@ -21,36 +21,38 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :badges
 
-  def self.find_for_auth(auth, signed_in_resource=nil)
-    user = User.where(email: auth.info.email).first
-    if !user
-      user = User.create(provider:auth.provider,
-                         uid:auth.uid,
-                         email: auth.info.email,
-                         password: Devise.friendly_token[0,20],
-                         oauth_token: auth.credentials.token)
-      profile = Profile.new(first_name: auth.info.first_name,
-                            last_name: auth.info.last_name,
-                            image: auth.info.image)
-      profile.user = user
-      profile.save
-    else
-      user.update_attribute(:oauth_token, auth.credentials.token)
-      user.profile.update_attributes({
-        image: auth.info.image,
-      })
+  class << self
+    def find_for_auth(auth, signed_in_resource=nil)
+      user = User.where(email: auth.info.email).first
+      if !user
+        user = User.create(provider:auth.provider,
+                           uid:auth.uid,
+                           email: auth.info.email,
+                           password: Devise.friendly_token[0,20],
+                           oauth_token: auth.credentials.token)
+        profile = Profile.new(first_name: auth.info.first_name,
+                              last_name: auth.info.last_name,
+                              image: auth.info.image)
+        profile.user = user
+        profile.save
+      else
+        user.update_attribute(:oauth_token, auth.credentials.token)
+        user.profile.update_attributes({
+          image: auth.info.image,
+        })
+      end
+      user
     end
-    user
-  end
 
-  def self.find_for_facebook_auth(auth, signed_in_resource=nil)
-    user = User.find_for_auth(auth, signed_in_resource)
-    user.import_facebook_friends
-    return user
-  end
+    def find_for_facebook_auth(auth, signed_in_resource=nil)
+      user = User.find_for_auth(auth, signed_in_resource)
+      user.import_facebook_friends
+      return user
+    end
 
-  def self.find_for_google_oauth2(auth, signed_in_resource=nil)
-    User.find_for_auth(auth, signed_in_resource)
+    def find_for_google_oauth2(auth, signed_in_resource=nil)
+      User.find_for_auth(auth, signed_in_resource)
+    end
   end
 
   def facebook
@@ -62,9 +64,6 @@ class User < ActiveRecord::Base
     User.where(id: friend_ids)
   end
 
-  def rank
-    User.where("exp > (?)", self.exp).count + 1
-  end
 
   def import_facebook_friends
     uids = facebook.get_connections("me","friends").collect {|f| f["id"]}
@@ -95,16 +94,20 @@ class User < ActiveRecord::Base
   def lose_to!(question)
     expectation = expected(question)
     change = (32*expectation[:user]).to_i
-    self.decrement!(:exp, change)
+    profile=self.profile
+    profile.decrement!(:exp, change)
     question.increment!(:exp, change)
+    profile.save!
     return change
   end
 
   def win_to!(question)
     expectation = expected(question)
     change = (32*expectation[:question]).to_i
-    self.increment!(:exp, change)
+    profile=self.profile
+    profile.increment!(:exp, change)
     question.decrement!(:exp, change)
+    profile.save!
     return change
   end
 
@@ -156,4 +159,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def exp
+    self.profile.exp
+  end
+
+  def reputation
+    self.profile.reputation
+  end
+
+  def rank
+    User.joins(:profile).where("exp > (?)", self.exp).count + 1
+  end
 end

@@ -5,6 +5,8 @@ Studium::Application.routes.draw do
   get "/pusher_key", to: "application#pusher_key"
   get "users/index"
 
+  get "stats/show", to: "stats#show"
+
   get "/awaiting_confirmation",to: "users#dashboard",as: :confirm_user
   get "/dashboard",to: "users#dashboard",as: :user_root
 
