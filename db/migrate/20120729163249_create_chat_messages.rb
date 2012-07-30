@@ -14,7 +14,9 @@ class CreateChatMessages < ActiveRecord::Migration
       t.timestamps
     end
 
-    remove_column :profiles,:reputation
+    if column_exists? :profiles,:reputation
+      remove_column :profiles,:reputation
+    end
     add_column :profiles,:reputation,:integer,default: 0
   end
 end
