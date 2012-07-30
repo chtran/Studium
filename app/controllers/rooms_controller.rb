@@ -3,12 +3,10 @@ class RoomsController < ApplicationController
   protect_from_forgery
 
   def index
-    @user = current_user
     @name = current_user.name
     @friends = current_user.friends
     @image = current_user.profile.image
-    @rank = User.where("exp > (?)", @user.exp).count + 1
-    @top_users = User.order("exp DESC").limit(5)
+    @top_users = User.joins(:profile).order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
     #current_user.update_attribute(:status,0) unless current_user.status==0
@@ -40,6 +38,7 @@ class RoomsController < ApplicationController
 
   def join
     @room = Room.find(params[:room_id])
+    gon.user_id = current_user.id
     gon.room_id = @room.id
     current_user.update_attribute(:room_id, @room.id)
     choose_question!(@room) if !@room.question
@@ -177,15 +176,15 @@ class RoomsController < ApplicationController
   # Effect: Kick the user from the room (set room_id and status to 0)
   #         Publish users_change event
   def kick
-    user = User.find(params[:user_id])
-    room = Room.find(params[:room_id])
-    user.update_attributes({room_id: 0, status: 0})
-    publish_async("presence-room_#{room.id}", "users_change", {})
-    publish_async("presence-rooms", "leave_room_recent_activities", {
-      room_title: room.title,
-      user_name: user.name
-    })
-    render :text => "Kicked", :status => '200'
+#    user = User.find(params[:user_id])
+#    room = Room.find(params[:room_id])
+#    user.update_attributes({room_id: 0, status: 0})
+#    publish_async("presence-room_#{room.id}", "users_change", {})
+#    publish_async("presence-rooms", "leave_room_recent_activities", {
+#      room_title: room.title,
+#      user_name: user.name
+#    })
+#    render :text => "Kicked", :status => '200'
   end
 
   # Input: question_id
@@ -244,7 +243,16 @@ class RoomsController < ApplicationController
   def chat_message
     @room=current_user.room
 
-    render partial: "chat_message"
+    @chat_message=ChatMessage.create! content: params[:message],owner_id: current_user.id
+    chat_message=render_to_string partial: "chat_message/chat_message"
+
+    publish_async("presence-room_#{@room.id}", "chat_message", {
+      message: chat_message
+    })
+
+    render json: {
+      message: chat_message
+    }
   end
 
   # Request type: POST

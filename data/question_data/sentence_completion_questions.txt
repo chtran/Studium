@@ -1,7 +1,6 @@
 Question: CR(Sentence Completion)
 Prompt: Onions are <bl /> food; they can be used to settle digestive difficulties and neutralize stomach acids.
 Title: CR 1
-Exp: 15
 Choice A_correct: a medicinal
 Choice B: an artificial
 Choice B: a flavorful
@@ -11,7 +10,6 @@ Choice E: a delicious
 Question: CR(Sentence Completion)
 Prompt: Jeremiah was not only <bl /> but also <bl />: he was exceedingly adept at his work and could mediate disputes between colleagues without offending anyone.
 Title: CR 2
-Exp: 15
 Choice A: deft..arrogant
 Choice B_correct: skillful..diplomatic
 Choice C: elegant..derivative
@@ -22,7 +20,6 @@ Choice E: hapless..blasphemous
 Question: CR(Sentence Completion)
 Prompt: Since polar bears live in dens of snow and ice, global warming threatens to <bl /> their survival. 
 Title: CR 3
-Exp: 15
 Choice A: increase
 Choice B: modify
 Choice C_correct: endanger
@@ -33,7 +30,6 @@ Choice E: demonize
 Question: CR(Sentence Completion)
 Prompt: Because there was a fierce storm coming in, the flight was <bl /> indefinitely
 Title: CR 4
-Exp: 15
 Choice A_correct: postponed
 Choice B: justified
 Choice C: calculated
@@ -44,7 +40,6 @@ Choice E: advanced
 Question: CR(Sentence Completion)
 Prompt: Uncertain as to the cause of the car accident, the police reported the investigation as <bl />.
 Title: CR 5
-Exp: 15
 Choice A: significant
 Choice B: absolute
 Choice C: elementary
@@ -55,7 +50,6 @@ Choice E_correct: unsolved
 Question: CR(Sentence Completion)
 Prompt: Because polar bears spend their entire lives on the ice, the continued existence of the polar ice caps is <bl /> their survival.
 Title: CR 6
-Exp: 15
 Choice A: expeditious for
 Choice B: contiguous on
 Choice C: abnormal to
@@ -66,7 +60,6 @@ Choice E: inadequate to
 Question: CR(Sentence Completion)
 Prompt: The natives of the secluded island were known for being reclusive, but when they got computers and internet access, they became <bl /> by the idea of <bl /> the outside world.
 Title: CR 7
-Exp: 15
 Choice A: withdrawn..changing
 Choice B: outgoing..knowing
 Choice C: careless..introducing

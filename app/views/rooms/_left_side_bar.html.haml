@@ -6,7 +6,8 @@
           %tr
             %td{:colspan => '3'}
               %div.span4
-                =image_tag(current_user.profile.image)
+                - if current_user.profile.image
+                  =image_tag(current_user.profile.image)
               %div.span8
                 %h3= @name
                 %small= link_to "View my profile","/users/#{current_user.id}/profile"
@@ -19,7 +20,7 @@
               %small Rank
           %tr
             %td
-              %strong #{current_user.profile.reputation.value}
+              %strong #{current_user.reputation}
               %small Reputation
             %td 
               %strong #{current_user.badges.count}

@@ -6,24 +6,26 @@ $(->
   init = ->
     # Get room_id from gon
     room_id = gon.room_id
-
+    user_id = gon.user_id
+    
     channel = client.subscribe("presence-room_"+room_id);
     rooms_channel = client.subscribe("presence-rooms")
+    user_channel = client.subscribe("user_" + gon.user_id)
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
-    channel.bind('pusher:member_removed', (member) ->
+#   channel.bind('pusher:member_removed', (member) ->
       # Send a POST request to rooms#kick, which kick the user from the room
       # Performance might be not ideal because everyone in the room will kick this member at the same time (we need only one)
-      $.ajax({
-        type: "POST",
-        url : "/rooms/kick",
-        data: {
-          user_id: member.id,
-          room_id: room_id
-        },
-        success: (data) ->
-          update_users();
-      });
-    );
+#     $.ajax({
+#        type: "POST",
+#        url : "/rooms/kick",
+#        data: user_id
+#          user_id: member.id,
+#          room_id: room_id
+#        },
+#        success: (data) ->
+#          update_users();
+#      });
+#    );
 
     # Update the histories
     channel.bind("update_histories", (data) ->
@@ -49,8 +51,7 @@ $(->
     );
 
     channel.bind("chat_message", (data) ->
-      # Add the chat message to the chat content	
-      $(".chat-content").append("<p>"+data.message+"</p>");
+      $(".chat-content").append(data.message);
       $(".chat-content p:last-child").effect("highlight",{},2000);
       true;
     );
@@ -261,9 +262,7 @@ $(->
         url: "/rooms/chat_message",
         data: {
           message: message
-        },
-        success: (data) ->
-          $(".chat-content").append(data);
+        }
       })
       $("#chat .chat_message").val("")
     )

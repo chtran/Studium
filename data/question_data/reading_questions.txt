@@ -5,7 +5,6 @@ Paragraph Content: " I have a great deal of difficulty in beginning to write <br
 Question: CR(Reading) 
 Prompt: In lines 23-24, Esther says, “When I love a person very tenderly indeed, it seems to brighten.” To what “it” is she referring?
 Title: Reading Question 1
-Exp: 20
 Choice A: sorrow and bitterness
 Choice B: excitement and anticipation
 Choice C_correct: insight and acumen
