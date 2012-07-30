@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729175252) do
+ActiveRecord::Schema.define(:version => 20120730034538) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -154,6 +154,10 @@ ActiveRecord::Schema.define(:version => 20120729175252) do
     t.integer  "paragraph_id"
     t.integer  "question_type_id"
     t.string   "title"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "questions_buffers", :force => true do |t|

@@ -12,6 +12,14 @@ class Question < ActiveRecord::Base
   has_many :choices
   accepts_nested_attributes_for :choices, :reject_if => lambda { |c| c[:content].blank?}, :allow_destroy => true
 
+  has_attached_file :image,
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV["S3_BUCKER_NAME"],
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+  }
+
   def contains_correct_choice
     choices = self.choices
     is_choice_blank=false
