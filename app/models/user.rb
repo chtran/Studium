@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
 
   def failed_questions
     questions_id = self.histories
-                       .where("question_id IN (?)", self.answered_questions.collect(&:id))
+                       .where(question_id: self.answered_questions.collect(&:id))
                        .where("question_id NOT IN (?)", self.mastered_questions.empty? ? "" : self.mastered_questions.collect(&:id)) 
                        .select("histories.question_id")
                        .uniq
