@@ -4,7 +4,6 @@
 
 $(->
   if $("#profile-info").length
-    alert(gon.user_id)
     $.ajax({
       type: "GET",
       url: "/stats/show",
