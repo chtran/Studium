@@ -40,7 +40,10 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:room_id])
     gon.user_id = current_user.id
     gon.room_id = @room.id
-    current_user.update_attribute(:room_id, @room.id)
+    current_user.update_attributes({
+      room_id: @room.id,
+      status: 0
+    })
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
     publish_async("presence-rooms", "update_recent_activities", {
@@ -90,8 +93,9 @@ class RoomsController < ApplicationController
     end
     if @room.show_explanation?
       # Update the histories of the room
-      history_items = History.where(room_id: @room.id, question_id: @current_question.id, user_id: @room.users)
-                             .group(:user_id)
+      history_items = @room.users.collect do |user|
+        History.where(room_id: @room.id, question_id: @current_question.id).last
+      end
 
       history_items.each do |h|
         publish_async(channel, "update_histories", {
