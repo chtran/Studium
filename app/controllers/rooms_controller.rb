@@ -206,6 +206,7 @@ class RoomsController < ApplicationController
       question_choices=render_to_string(@question.choices).html_safe
 
       render json: {
+        question_image_url: @question.image_file_name!=nil ? @question.image.url : "",
         question_prompt: @question.prompt.parse(question_id: @question.id,is_passage: false).html_safe,
         question_choices: question_choices,
         paragraph: @question.paragraph ? @question.paragraph.content.parse(question_id: @question.id,is_passage: true).html_safe : ""
