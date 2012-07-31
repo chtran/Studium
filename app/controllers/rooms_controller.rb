@@ -97,11 +97,14 @@ class RoomsController < ApplicationController
       history_items = @room.users.collect do |user|
         History.where(room_id: @room.id, question_id: @current_question.id).last
       end
+      puts "history_items: " + history_items.to_s
 
       history_items.each do |h|
-        publish_async(channel, "update_histories", {
-          history_id: h.id
-        })
+        if h
+          publish_async(channel, "update_histories", {
+            history_id: h.id
+          })
+        end
       end
 
       # Show explanantion
