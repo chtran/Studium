@@ -40,15 +40,12 @@ group :development,:test do
   gem "ZenTest"
   gem "email_spec"
   gem "ruby-debug19"
-  gem "sqlite3"
   gem "simplecov"
   gem "factory_girl_rails"
 end
 
-group :production do
-  gem "pg"
-end
 
+gem "pg"
 gem "haml"
 gem "haml-rails"
 gem "devise"
