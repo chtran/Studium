@@ -4,6 +4,8 @@
     %div.span5
       %span Prompt:
   %div.hero-unit.border-1px
+    - if question.image
+      = image_tag(question.image.url)
     %p= question.prompt.parse(question_id: question.id,is_passage: false).html_safe
     - question.choices.each do |choice|
       = check_box_tag :question,:choice,choice.correct?,disabled: true
