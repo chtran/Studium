@@ -16,11 +16,11 @@ Studium::Application.routes.draw do
     post "increase_reputation",action: "increase_reputation",as: :increase_reputation
   end
 
+  get "admin", to: "homepage#admin",as: "admin_index"
+
   resources :category_types
   resources :question_types
   namespace "admin" do
-    root to: "homepage#admin",as: "index"
-
     get "reports/users", to: "reports#users"
 
     namespace "materials" do
