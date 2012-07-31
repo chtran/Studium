@@ -8,7 +8,7 @@
       %div.modal-body
         %p Are you sure you want to quit?
       %div.modal-footer
-        =link_to "Yes, take me to the review page", room_review_path, {class: "btn btn-primary"}
+        =link_to "Yes, take me to the review page", room_review_path(@room.id), {class: "btn btn-primary"}
         =link_to "Yes, take me to the room list", rooms_path, {class: "btn btn-primary"}
         %a.btn{"href" =>"#", "data-dismiss" => "modal"} No
   %div.span1

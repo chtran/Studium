@@ -47,7 +47,7 @@ Studium::Application.routes.draw do
   post "/rooms/room_list", to: "rooms#room_list"
   post "/rooms/user_list", to: "rooms#user_list"
   post "/rooms/ready", to: "rooms#ready"
-  get "/review", to: "rooms#review", as: "room_review"
+  get "/review/:room_id", to: "rooms#review", as: "room_review"
   post "/rooms/kick", to: "rooms#kick"
   post "/histories/show_history",to: "histories#show_history"
   post "/rooms/show_histories",to: "rooms#show_histories"
