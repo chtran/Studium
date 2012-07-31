@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730034538) do
+ActiveRecord::Schema.define(:version => 20120731130226) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(:version => 20120730034538) do
     t.string   "image"
     t.integer  "reputation",    :default => 0
     t.integer  "exp",           :default => 1400
+    t.integer  "gp",            :default => 0
+    t.integer  "level",         :default => 1
   end
 
   create_table "question_types", :force => true do |t|

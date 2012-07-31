@@ -252,12 +252,12 @@ class RoomsController < ApplicationController
     if current_user.status != 0 
       if params[:choice_id] and Choice.find(params[:choice_id]).correct?
         @change = current_user.win_to!(@question)
-        @message = messages[:correct] + " You won "+@change.to_s+" exp!"
+        @message = messages[:correct]
         @style = styles[:correct]
       # If there's no choice_id (user hasn't chosen a choice) or the chosen choice is incorrect
       else
         @change = current_user.lose_to!(@question)
-        @message = messages[:incorrect] + " You lost "+@change.to_s+" exp."
+        @message = messages[:incorrect]
         @style = styles[:incorrect]
       end
     end

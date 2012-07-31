@@ -3,10 +3,14 @@
     %tr
       %th Name
       %th Exp
+      %th GP
+      %th Level
       %th Status
   %tbody
     - @user_list.each do |user|
       %tr
         %td= user.name
         %td= user.exp
+        %td= user.gp
+        %td= user.level
         %td= user.status_message
