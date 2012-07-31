@@ -12,6 +12,10 @@
     = f.label :prompt,"Question Prompt"
     = f.text_area :prompt,{cols: 30,rows: 7}
 
+  %div.control-group.text-center
+    = f.label :image
+    = f.file_field :image
+
   %div.well.form-inline
     - index=1
     = f.fields_for :choices do |builder|

@@ -14,11 +14,8 @@ class Question < ActiveRecord::Base
 
   has_attached_file :image,
     storage: :s3,
-    s3_credentials: {
-      bucket: ENV["S3_BUCKER_NAME"],
-      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
-  }
+    s3_credentials: "#{Rails.root}/config/keys/aws3_sec_credentials",
+    path: "images/"
 
   def contains_correct_choice
     choices = self.choices

@@ -206,6 +206,7 @@ class RoomsController < ApplicationController
       question_choices=render_to_string(@question.choices).html_safe
 
       render json: {
+        question_image_url: @question.image_file_name!=nil ? @question.image.url : "",
         question_prompt: @question.prompt.parse(question_id: @question.id,is_passage: false).html_safe,
         question_choices: question_choices,
         paragraph: @question.paragraph ? @question.paragraph.content.parse(question_id: @question.id,is_passage: true).html_safe : ""
@@ -239,15 +240,17 @@ class RoomsController < ApplicationController
       incorrect: "alert alert-error"
     }
     # If there's a choice_id (user chose a choice) and that choice is correct
-    if params[:choice_id] and Choice.find(params[:choice_id]).correct?
-      @change = current_user.win_to!(@question)
-      @message = messages[:correct] + " You won "+@change.to_s+" exp!"
-      @style = styles[:correct]
-    # If there's no choice_id (user hasn't chosen a choice) or the chosen choice is incorrect
-    else
-      @change = current_user.lose_to!(@question)
-      @message = messages[:incorrect] + " You lost "+@change.to_s+" exp."
-      @style = styles[:incorrect]
+    if current_user.status != 0 
+      if params[:choice_id] and Choice.find(params[:choice_id]).correct?
+        @change = current_user.win_to!(@question)
+        @message = messages[:correct] + " You won "+@change.to_s+" exp!"
+        @style = styles[:correct]
+      # If there's no choice_id (user hasn't chosen a choice) or the chosen choice is incorrect
+      else
+        @change = current_user.lose_to!(@question)
+        @message = messages[:incorrect] + " You lost "+@change.to_s+" exp."
+        @style = styles[:incorrect]
+      end
     end
     render partial: "show_explanation"
   end

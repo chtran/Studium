@@ -20,7 +20,7 @@
     %div.span4
       %span.label.label-info Filter
       %div.filter-form.well.form-inline
-        = form_tag admin_materials_questions_path,method: "get",remote: true do
+        = form_tag admin_materials_questions_path,method: :get,remote: true do
           %div.control-group
             = label :category_type,:id,"Category"
             = select :category_type,:id,@category_types
@@ -35,6 +35,6 @@
   %div.row
     %div.span8
     %div.span2
-      =link_to "Add Question",add_new_materials_question_path,class: "white-text btn btn-primary"
+      =link_to "Add Question",admin_materials_add_question_path,class: "white-text btn btn-primary"
 
   = render "questions_accordion",questions: @questions

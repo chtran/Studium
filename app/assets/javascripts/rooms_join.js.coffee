@@ -97,6 +97,11 @@ $(->
             alert(data.message)
             window.location.replace("/rooms")
           else
+            if data.question_image_url!=""
+              $image_url=$("<img src=\""+data.question_image_url+"\"></img>")
+              $(".question_image").html($image_url)
+            else
+              $(".question_image").html("")
             $("#prompt").html(data.question_prompt);
             $("#choices").html(data.question_choices);
             if data.paragraph != ""

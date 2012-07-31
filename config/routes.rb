@@ -3,73 +3,85 @@ Studium::Application.routes.draw do
   resources :badges
 
   get "/pusher_key", to: "application#pusher_key"
-  get "users/index"
 
-  get "stats/show", to: "stats#show"
+  get "users/index"
 
   get "/awaiting_confirmation",to: "users#dashboard",as: :confirm_user
   get "/dashboard",to: "users#dashboard",as: :user_root
 
-  get "/users/:user_id/profile", to: "profiles#show", as: "user_profile"
-  get "/users/:user_id/profile/edit", to: "profiles#edit",as: "edit_user_profile"
-  put "/users/:user_id/profile",to: "profiles#update"
-  post "/users/:user_id/profile/increase_reputation",to: "profiles#increase_reputation",as: :increase_reputation
+  controller :profiles,path: "/users/:user_id/profile" do
+    get action: "show", as: "user_profile"
+    get "edit", action: "edit",as: "edit_user_profile"
+    put action: "update"
+    post "increase_reputation",action: "increase_reputation",as: :increase_reputation
+  end
 
-  get "/admin",to: "homepage#admin",as: "admin_index"
-  get "/admin/materials",to: "admin/materials/base#index",as: "admin_materials"
-  get "/admin/materials/questions/add_question",to: "admin/materials/questions#category_selection",as: "add_new_materials_question" 
-
-  get "/admin/materials/questions/edit_paragraph",to: "admin/materials/questions#edit_paragraph",as: "admin_materials_question_edit_paragraph"
-
-  get ":controller/:action.:format"
-
-  get "/admin/materials/questions/cancel_edit_question",to: "admin/materials/questions#cancel_edit_question"
-  get "/admin/materials/questions/remove_paragraph",to: "admin/materials/questions#remove_paragraph"
-  get "/admin/materials/questions/remove_choice",to: "admin/materials/questions#remove_choice"
+  get "admin", to: "homepage#admin",as: "admin_index"
 
   resources :category_types
   resources :question_types
   namespace "admin" do
+    get "reports/users", to: "reports#users"
+
     namespace "materials" do
-      root to: "base#index",as: "admin_materials_index"
+      root to: "base#index",as: "index"
+
       resources :questions
+
+      controller :questions do
+        get "cancel_edit_question",action: "cancel_edit_question"
+        get "remove_paragraph",action: "remove_paragraph"
+        get "remove_choice",action: "remove_choice"
+        get "add_question",action: "category_selection",as: "add_question" 
+        get "edit_paragraph",action: "edit_paragraph",as: "admin_materials_question_edit_paragraph"
+      end
+
       resources :paragraphs
     end
   end
 
   resources :rooms
-  get "/rooms/join/:room_id", to: "rooms#join", as:"room_join"
-  #get "/choose/:room_id/:choice_id", to: "rooms#choose", as:"room_choose_choice"
-  post "/rooms/choose", to: "rooms#choose", as: "room_choose_choice"
-  post "/rooms/show_question", to: "rooms#show_question", as: "room_show_question"
-  post "/rooms/show_explanation", to: "rooms#show_explanation", as: "room_show_explanation"
-  #post "/rooms/show_new_room_item", to: "rooms#show_new_room_item"
-  post "/rooms/room_list", to: "rooms#room_list"
-  post "/rooms/user_list", to: "rooms#user_list"
-  post "/rooms/ready", to: "rooms#ready"
-  get "/review/:room_id", to: "rooms#review", as: "room_review"
-  post "/rooms/kick", to: "rooms#kick"
-  post "/histories/show_history",to: "histories#show_history"
-  post "/rooms/show_histories",to: "rooms#show_histories"
-  post "/rooms/invite", to: "rooms#invite"
 
-  post "/pusher/auth", to: "pusher#auth"
-  post "/pusher/webhook", to: "pusher#webhook"
+  controller :rooms,path: "/rooms",as: "room" do
+    get "/join/:room_id", action: "join", as: "join"
+    post "/choose",action: "choose", as: "choose_choice"
+    post "/show_question",action: "show_question", as: "show_question"
+    post "/show_explanation",action: "show_explanation", as: "show_explanation"
+    post "/room_list",action: "room_list"
+    post "/user_list",action: "user_list"
+    post "/ready",action: "ready"
+    post "/kick",action: "kick"
+    post "/show_histories",action: "show_histories"
+    post "/invite",action: "invite"
+    post "/chat_message",action: "chat_message",as: "chat_message"
+    get "/review/:room_id", to: "rooms#review", as: "review"
+  end
+
+  post "/histories/show_history",to: "histories#show_history"
+
+  controller :pusher,path: "/pusher" do
+    post "/auth", action: "auth"
+    post "/webhook", action: "webhook"
+  end
+
   devise_for :users,controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
 
-  get "/stats", to: "stats#index", as: "stats"
-  get "/stats/pull_pro_bar/:interval", to:"stats#pull_pro_bar"
-  get "/stats/pull/:category_type_id", to: "stats#pull"
-  get "/stats/pull_stacked/:category_type_id", to: "stats#pull_stacked"
+  controller :stats,path: "/stats" do
+    root action: "index", as: "stats"
+    get "/show", action: "show"
+    get "pull_pro_bar/:interval", action:"pull_pro_bar"
+    get "pull/:category_type_id", action: "pull"
+    get "pull_stacked/:category_type_id", action: "pull_stacked"
+  end
 
-  get "admin/reports/users", to: "admin/reports#users"
-  post "rooms/chat_message",to: "rooms#chat_message",as: "room_chat_message"
 
-  post "messages/send_message", to: "messages#send_message"
-  get "messages/show/:id", to: "messages#show"
-  resources :messages
+  resources :messages do
+    post "send_message", action: "send_message"
+  end
 
   post "friendships/request", to: "friendships#request"
 
   root to: "homepage#index",as: :index
+
+  get ":controller/:action.:format"
 end
