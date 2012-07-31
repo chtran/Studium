@@ -1,17 +1,12 @@
-= form_for @message, :html => {:class =>"form-horizontal"} do |f|
+= form_tag 'messages/create/', :method => 'get', :class =>"form-horizontal" do 
   %fieldset
-    - if @message.errors.any?
-      %ul
-        - @message.errors.full_messages.each do |msg|
-          %li=msg
-
     %div.control-group
-      = f.label :receiver_id, "To", :class => "control-label"
+      = label_tag 'receiver_id', "To", :class => "control-label"
       %div.controls
-        = f.text_field :receiver_id, :class => "input-xlarge", :id => "input-receiver"
+        = text_field_tag 'receiver_id', '', :class => "input-xlarge", :id => "input-receiver"
     %div.control-group    
-      = f.label :body, "Body", :class => "control-label"
+      = label_tag 'body', "Body", :class => "control-label"
       %div.controls
-        = f.text_area :body, :class => "input-xlarge", :rows => "5", :id => "input-body"
+        = text_area_tag 'body', '',  :class => "input-xlarge", :rows => "5", :id => "input-body"
     %div.form-actions
-      = f.submit class:"btn btn-primary", :value => "Send Message"
+      = submit_tag 'Send Message', class:"btn btn-primary"

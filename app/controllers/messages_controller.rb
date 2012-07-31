@@ -15,29 +15,29 @@ class MessagesController < ApplicationController
   end
 
   def create
-    params[:message][:receiver_id] = params[:message][:receiver_id].to_i
-    params[:message][:sender_id] = current_user.id
-    @message = Message.new(params[:message])
-    @params = params
-    if @message.mes_valid?
-      if @message.save
-        notice = "Message sent"
-      else
-        notice = "Message could not be sent"
-      end
-      @new_message = current_user.sent_messages.first
-      publish_async("user_#{params[:message][:receiver_id]}", "message", {
-        message_id: @new_message.id,
-        body: params[:message][:body],
-        sender: current_user.name,
-        sender_id: current_user.id,
-        image: current_user.profile.image
-      })
+    receiver_id = params[:receiver_id] 
+    receiver_id = receiver_id.split(',')
 
-      redirect_to messages_path, notice:  notice
-    else
-        redirect_to messages_path, notice: "Sender and Receiver could not be the same"
+    receiver_id.each do |r_id|
+      r_id = r_id.to_i
+      @message = Message.new(:receiver_id => r_id, :sender_id => current_user.id, :body => params[:body])
+      if @message.save
+        @new_message = current_user.sent_messages.first
+        publish_async("user_#{r_id}", "message", {
+          message_id: @new_message.id,
+          body: params[:body],
+          sender: current_user.name,
+          sender_id: current_user.id,
+          image: current_user.profile.image
+        })
+      else
+        notice = "Message could not be sent to " + User.find(r_id).name
+      end
+
     end
+    if !notice then notice = "Message(s) sent" end
+    redirect_to messages_path, notice:  notice
+
 
   end
 

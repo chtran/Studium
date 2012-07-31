@@ -74,10 +74,11 @@ Studium::Application.routes.draw do
     get "pull_stacked/:category_type_id", action: "pull_stacked"
   end
 
+  get "messages/show/:id", to: "messages#show"
+  post "send_message", to: "messages#send_message"
+  get "messages/create/", to:"messages#create"
+  resources :messages
 
-  resources :messages do
-    post "send_message", action: "send_message"
-  end
 
   post "friendships/request", to: "friendships#request"
 
