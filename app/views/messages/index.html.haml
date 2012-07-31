@@ -14,10 +14,10 @@
           -@received_messages.each do |msg|
             %tr
               %td{"colspan" => 2}
-                %a{href: "messages/show/" + msg.id.to_s}
+                = link_to msg do
                   %div.row-fluid
                     %div.span1
-                      =image_tag(User.find(msg.sender_id).profile.image)
+                      = image_tag User.find(msg.sender_id).profile.image
                     %div.span11.message-body
                       %h3.sender-name #{User.find(msg.sender_id).name}
                       %small.content= msg.body[0..36] + " ..."
