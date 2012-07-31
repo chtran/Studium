@@ -70,15 +70,13 @@ class RoomsController < ApplicationController
     @room = current_user.room
     @current_question = @room.question
     channel="presence-room_#{@room.id}"
-    current_user.update_attribute(:status, 2)
     publish_async(channel, "users_change", {})
     if params[:choice_id]
       @choice_id = params[:choice_id]
       new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
       # Consider badges
       badges=BadgeManager.awardBadges(current_user,@current_question,Choice.find(@choice_id))
-
-      # If user received some badge(s), post the news
+        # If user received some badge(s), post the news
       unless badges.empty?
         badges.each do |badge|
           news="#{current_user.name} has received #{badge.name} badge. Congratulations!"
@@ -92,6 +90,8 @@ class RoomsController < ApplicationController
         end
       end
     end
+    
+    current_user.update_attribute(:status, 2)
     if @room.show_explanation?
       # Update the histories of the room
       history_items = @room.users.collect do |user|
@@ -103,12 +103,13 @@ class RoomsController < ApplicationController
           history_id: h.id
         })
       end
-      
+
       # Show explanantion
       publish(channel, "show_explanation", {
         question_id: @current_question.id
       }) 
     end
+
     render :text => "OK", :status => "200"
   end
   
@@ -119,8 +120,8 @@ class RoomsController < ApplicationController
   def ready
     return unless current_user.status==2
     @room = current_user.room
-    current_user.update_attribute(:status, 3)
     publish_async("presence-room_#{@room.id}","users_change",{})
+    current_user.update_attribute(:status, 3)
     if @room.show_next_question?
       if @next_question = choose_question!(@room)
         @room.users.each do |user|
@@ -130,11 +131,14 @@ class RoomsController < ApplicationController
       else
         question_id = 0
       end
+      #Publish next_question
+      #If there're questions left, publish question_id
+      #Else, publish question_id = 0, it will redirect user out of the room
       publish("presence-room_#{@room.id}","next_question", {
         question_id: question_id
       })
+      render :text => "OK", :status => "200"
     end
-    render :text => "OK", :status => "200"
   end
 
   def invite

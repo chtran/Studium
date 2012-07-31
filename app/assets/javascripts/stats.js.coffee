@@ -134,10 +134,10 @@ $(->
                 total_answers_id = "total_answers_" + s['name'];
                 correct_answers_id = "correct_answers_" + s['name']
                 percent = s["data"]["percent"]
-                document.getElementById(bar_id).style.width = percent.toString()+'%';
-                document.getElementById(percent_id).innerHTML = s['data']['percent']+'%';
-                document.getElementById(total_answers_id).innerHTML = s['data']['total_answers'];
-                document.getElementById(correct_answers_id).innerHTML = s['data']['correct_answers'];
+                $('#bar_id').style.width = percent.toString()+'%';
+                $('#percent_id').html(s['data']['percent']+'%');
+                $('#total_answers_id').html(s['data']['total_answers']);
+                $('#correct_answers_id').html( s['data']['correct_answers']);
           })
     
     if $("#interval_btn").length then recent(1);
@@ -174,7 +174,7 @@ $(->
       c_stacked(0);
 
 
-  if $("#stats-containee").length
+  if $("#stats-container").length
     init()
  )
 
