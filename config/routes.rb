@@ -54,9 +54,9 @@ Studium::Application.routes.draw do
     post "/show_histories",action: "show_histories"
     post "/invite",action: "invite"
     post "/chat_message",action: "chat_message",as: "chat_message"
+    get "/review/:room_id", to: "rooms#review", as: "review"
   end
 
-  get "/review", to: "rooms#review", as: "room_review"
   post "/histories/show_history",to: "histories#show_history"
 
   controller :pusher,path: "/pusher" do

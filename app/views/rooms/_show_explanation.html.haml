@@ -3,11 +3,12 @@
 %div.row-fluid{class: @style}
   %p= @message
 
-- @question.choices.each do |choice|
-  - result = choice.correct ? "btn-success" : ""
-  %div.row-fluid.btn.each_choice.disabled{id: choice.id.to_s, class: result}
-    %div.span1
-      - if (choice.correct)
-        %i.icon-white.icon-ok
-    %div.span2= choice.choice_letter
-    %div.span6= choice.content
+- @choices.each do |choice|
+  %div.row-fluid.btn.each_choice.disabled{id: choice[:data].id.to_s, class: choice[:result]}
+    %div.span2= choice[:data].choice_letter
+    %div.span8= choice[:data].content
+:javascript
+  $(".correct").addClass("btn-success")
+               .append("<div class='span2'><i class='icon-ok icon-white' /></div>")
+  $(".selected").addClass("btn-danger")
+                .append("<div class='span2'>Your choice</div>")

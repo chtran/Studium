@@ -148,9 +148,9 @@ class RoomsController < ApplicationController
   # User quiting the room
   # Note: this is different from kick since it's user clicking the quit button, not closing the window. It's called by the user himself
   def review
-    room = current_user.room
+    room = Room.find(params[:room_id])
     publish_async("presence-rooms", "update_recent_activities", {
-      message: "#{current_user.name} has left room #{@room.title}."
+      message: "#{current_user.name} has left room #{room.title}."
     })
     histories = current_user.histories
                                 .where(room_id: room.id)
@@ -219,8 +219,18 @@ class RoomsController < ApplicationController
   # Return: HTML of the explanation for the question in the room the user is in
   def show_explanation
     @room = current_user.room
-    return if !@room.show_explanation?
     @question = @room.question
+    return if !@room.show_explanation?
+    @choices = @question.choices.collect do |choice| {
+      data: choice,
+      result: if choice.correct
+                "correct"
+              elsif choice.id==params[:choice_id].to_i
+                "selected"
+              end
+    }
+    end
+    puts @choices
     messages = {
       correct: "Congratulations! You got the right answer.",
       incorrect: "Sorry, you got the wrong answer. See explanation below."
