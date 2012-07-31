@@ -67,15 +67,18 @@ class BadgeManager < ActiveRecord::Base
 
     def consider_undefeated_badges(user_entry)
       user=user_entry.user
+      badge1=Badge.find_by_name!("10-undefeated")
+      badge2=Badge.find_by_name!("50-undefeated")
+      badge3=Badge.find_by_name!("100-undefeated")
       badge=nil
-      if user_entry.correct_qiar_counter==10
-        badge=Badge.find_by_name!("10-undefeated")
+      if user_entry.correct_qiar_counter==10 and !user.badges
+        badge=badge1
         user.badges << badge
       elsif user_entry.correct_qiar_counter==50
-        badge=Badge.find_by_name!("50-undefeated")
+        badge=badge2
         user.badges << badge
       elsif user_entry.correct_qiar_counter==100
-        badge=Badge.find_by_name!("100-undefeated")
+        badge=badge3
         user.badges << badge
       end
 
@@ -96,18 +99,22 @@ class BadgeManager < ActiveRecord::Base
 
     def consider_scholar_badges(user_entry)
       user=user_entry.user
+      badge1=Badge.find_by_name!("Scholar Lv1")
+      badge2=Badge.find_by_name!("Scholar Lv2")
+      badge3=Badge.find_by_name!("Scholar Lv3")
+      badge4=Badge.find_by_name!("Legendary Scholar")
       badge=nil
-      if user_entry.question_counter==100
-        badge=Badge.find_by_name!("Scholar Lv1")
+      if user_entry.question_counter==100 and !user.badges.include?(badge1)
+        badge=badge1
         user.badges << badge
-      elsif user_entry.question_counter==1000
-        badge=Badge.find_by_name!("Scholar Lv2")
+      elsif user_entry.question_counter==1000 and !user.badges.include?(badge2)
+        badge=badge2
         user.badges << badge
-      elsif user_entry.question_counter==5000
-        badge=Badge.find_by_name!("Scholar Lv3")
+      elsif user_entry.question_counter==5000 and !user.badges.include?(badge3)
+        badge=badge3
         user.badges << badge
-      elsif user_entry.question_counter==10000
-        badge=Badge.find_by_name!("Legendary Scholar")
+      elsif user_entry.question_counter==10000 and !user.badges.include?(badge4)
+        badge=badge4
         user.badges << badge
       end
 
@@ -125,10 +132,13 @@ class BadgeManager < ActiveRecord::Base
       badge2=Badge.find_by_name!("Mathematician Lv2")
       badge3=Badge.find_by_name!("Legendary Mathematician")
       if user_entry.math_q_counter>=50 and user_entry.math_qiar_counter>=5 and !user.badges.include?(badge1)
+        badge=badge1
         user.badges << badge1
       elsif user_entry.math_q_counter>=100 and user_entry.math_qiar_counter>=20 and !user.badges.include?(badge2)
+        badge=badge2
         user.badges << badge2
       elsif user_entry.math_q_counter>=1000 and user_entry.math_qiar_counter>=50 and !user.badges.include?(badge3)
+        badge=badge3
         user.badges << badge3
       end
 
@@ -147,14 +157,19 @@ class BadgeManager < ActiveRecord::Base
         badge=Badge.find_by_name!("Wood Brush")
         user.badges << badge
       elsif user_entry.wr_q_counter>=100 and user_entry.math_qiar_counter>=10 and !user.badges.include?(badge1)
+        badge=badge1
         user.badges << badge1
       elsif user_entry.wr_q_counter>=200 and user_entry.math_qiar_counter>=20 and !user.badges.include?(badge2)
+        badge=badge2
         user.badges << badge2
       elsif user_entry.wr_q_counter>=300 and user_entry.math_qiar_counter>=30 and !user.badges.include?(badge3)
+        badge=badge3
         user.badges << badge3
       elsif user_entry.wr_q_counter>=400 and user_entry.math_qiar_counter>=40 and !user.badges.include?(badge4)
+        badge=badge4
         user.badges << badge4
       elsif user_entry.wr_q_counter>=1000 and user_entry.math_qiar_counter>=100 and !user.badges.include?(badge5)
+        badge=badge5
         user.badges << badge5
       end
 
@@ -169,12 +184,16 @@ class BadgeManager < ActiveRecord::Base
       badge3=Badge.find_by_name!("Avid Reader Lv3")
       badge4=Badge.find_by_name!("Bookworm")
       if user_entry.cr_q_counter>=50 and user_entry.cr_qiar_counter>=5 and !user.badges.include?(badge1)
+        badge=badge1
         user.badges << badge1
       elsif user_entry.cr_q_counter>=100 and user_entry.cr_qiar_counter>=20 and !user.badges.include?(badge2)
+        badge=badge2
         user.badges << badge2
       elsif user_entry.cr_q_counter>=500 and user_entry.cr_qiar_counter>=30 and !user.badges.include?(badge3)
+        badge=badge3
         user.badges << badge3
       elsif user_entry.cr_q_counter>=1000 and user_entry.cr_qiar_counter>=50 and !user.badges.include?(badge4)
+        badge=badge4
         user.badges << badge4
       end
 
