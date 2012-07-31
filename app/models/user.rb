@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include User::MessageHelper
   include User::ProfileHelper
   include User::FriendshipHelper
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -15,6 +16,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :room_id, :status, :provider, :uid, :oauth_token
+
   # Status:
   # 0 - not in any room
   # 1 - answering a question

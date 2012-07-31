@@ -18,15 +18,15 @@ Studium::Application.routes.draw do
 
   get "admin", to: "homepage#admin",as: "admin_index"
 
-  resources :category_types
-  resources :question_types
+  resources :category_types,:question_types,:rooms,:messages
+
   namespace "admin" do
     get "reports/users", to: "reports#users"
 
     namespace "materials" do
       root to: "base#index",as: "index"
 
-      resources :questions
+      resources :questions,:paragraphs
 
       controller :questions do
         get "cancel_edit_question",action: "cancel_edit_question"
@@ -35,12 +35,8 @@ Studium::Application.routes.draw do
         get "add_question",action: "category_selection",as: "add_question" 
         get "edit_paragraph",action: "edit_paragraph",as: "admin_materials_question_edit_paragraph"
       end
-
-      resources :paragraphs
     end
   end
-
-  resources :rooms
 
   controller :rooms,path: "/rooms",as: "room" do
     get "/join/:room_id", action: "join", as: "join"
@@ -73,11 +69,6 @@ Studium::Application.routes.draw do
     get "pull/:category_type_id", action: "pull"
     get "pull_stacked/:category_type_id", action: "pull_stacked"
   end
-
-  get "messages/show/:id", to: "messages#show"
-  post "send_message", to: "messages#send_message"
-  get "messages/create/", to:"messages#create"
-  resources :messages
 
 
   post "friendships/request", to: "friendships#request"

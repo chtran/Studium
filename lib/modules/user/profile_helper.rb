@@ -3,6 +3,7 @@ class User
     def test
       self.profile 
     end
+
     def name
       self.profile.first_name + " " + self.profile.last_name
     end
