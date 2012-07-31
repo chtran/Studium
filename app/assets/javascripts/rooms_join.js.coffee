@@ -137,7 +137,7 @@ $(->
       # Send a POST request to "/rooms/choose" (rooms#choose)
       $.ajax({
         type: "POST",
-        url: "/rooms/choose/",
+        url: "/rooms/confirm/",
         data: {
           choice_id: choice_id
         }

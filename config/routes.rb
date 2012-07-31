@@ -44,7 +44,7 @@ Studium::Application.routes.draw do
 
   controller :rooms,path: "/rooms",as: "room" do
     get "/join/:room_id", action: "join", as: "join"
-    post "/choose",action: "choose", as: "choose_choice"
+    post "/confirm",action: "confirm", as: "confirm"
     post "/show_question",action: "show_question", as: "show_question"
     post "/show_explanation",action: "show_explanation", as: "show_explanation"
     post "/room_list",action: "room_list"

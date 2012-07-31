@@ -65,7 +65,8 @@ class RoomsController < ApplicationController
   # Input params: choice_id, room_id
   # Effect: create new history item, choose next question
   # Return: current question's id, next question's id, selected choice's id 
-  def choose
+  def confirm
+    return unless current_user.status==1
     @room = current_user.room
     @current_question = @room.question
     channel="presence-room_#{@room.id}"
@@ -116,6 +117,7 @@ class RoomsController < ApplicationController
   # Effect: change user's status to 3 (Ready). 
   #   If everyone is ready then choose next question and publish_async to /rooms/next_question
   def ready
+    return unless current_user.status==2
     @room = current_user.room
     current_user.update_attribute(:status, 3)
     publish_async("presence-room_#{@room.id}","users_change",{})
