@@ -65,53 +65,55 @@ class RoomsController < ApplicationController
   # Input params: choice_id, room_id
   # Effect: create new history item, choose next question
   # Return: current question's id, next question's id, selected choice's id 
-  def choose
-    if current_user.status == 1
-      @room = current_user.room
-      @current_question = @room.question
-      channel="presence-room_#{@room.id}"
-      current_user.update_attribute(:status, 2)
-      publish_async(channel, "users_change", {})
-      if params[:choice_id]
-        @choice_id = params[:choice_id]
-        new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
-        # Consider badges
-        badges=BadgeManager.awardBadges(current_user,@current_question,Choice.find(@choice_id))
-
+  def confirm
+    return unless current_user.status==1
+    @room = current_user.room
+    @current_question = @room.question
+    channel="presence-room_#{@room.id}"
+    publish_async(channel, "users_change", {})
+    if params[:choice_id]
+      @choice_id = params[:choice_id]
+      new_history_item = History.create({user_id: current_user.id, room_id: @room.id, question_id: @room.question.id, choice_id: @choice_id})
+      # Consider badges
+      badges=BadgeManager.awardBadges(current_user,@current_question,Choice.find(@choice_id))
         # If user received some badge(s), post the news
-        unless badges.empty?
-          badges.each do |badge|
-            news="#{current_user.name} has received #{badge.name} badge. Congratulations!"
-            publish_async(channel,"update_news",{
-              news: news
-            })
+      unless badges.empty?
+        badges.each do |badge|
+          news="#{current_user.name} has received #{badge.name} badge. Congratulations!"
+          publish_async(channel,"update_news",{
+            news: news
+          })
 
-            publish_async("presence-rooms", "update_recent_activities", {
-              message: news
-            })
-          end
+          publish_async("presence-rooms", "update_recent_activities", {
+            message: news
+          })
         end
       end
+    end
     
-      if @room.show_explanation?
-        # Update the histories of the room
-        history_items = @room.users.collect do |user|
-          History.where(room_id: @room.id, question_id: @current_question.id).last
-        end
+    current_user.update_attribute(:status, 2)
+    if @room.show_explanation?
+      # Update the histories of the room
+      history_items = @room.users.collect do |user|
+        History.where(room_id: @room.id, question_id: @current_question.id).last
+      end
+      puts "history_items: " + history_items.to_s
 
-        history_items.each do |h|
+      history_items.each do |h|
+        if h
           publish_async(channel, "update_histories", {
             history_id: h.id
           })
         end
-        
-        # Show explanantion
-        publish(channel, "show_explanation", {
-          question_id: @current_question.id
-        }) 
       end
-      render :text => "OK", :status => "200"
+
+      # Show explanantion
+      publish(channel, "show_explanation", {
+        question_id: @current_question.id
+      }) 
     end
+
+    render :text => "OK", :status => "200"
   end
   
   # Request type: POST
@@ -119,23 +121,25 @@ class RoomsController < ApplicationController
   # Effect: change user's status to 3 (Ready). 
   #   If everyone is ready then choose next question and publish_async to /rooms/next_question
   def ready
-    if current_user.status == 2
-      @room = current_user.room
-      current_user.update_attribute(:status, 3)
-      publish_async("presence-room_#{@room.id}","users_change",{})
-      if @room.show_next_question?
-        if @next_question = choose_question!(@room)
-          @room.users.each do |user|
-            current_user.update_attribute(:status, 1)
-          end
-          question_id = @next_question.id
-        else
-          question_id = 0
+    return unless current_user.status==2
+    @room = current_user.room
+    publish_async("presence-room_#{@room.id}","users_change",{})
+    current_user.update_attribute(:status, 3)
+    if @room.show_next_question?
+      if @next_question = choose_question!(@room)
+        @room.users.each do |user|
+          current_user.update_attribute(:status, 1)
         end
-        publish("presence-room_#{@room.id}","next_question", {
-          question_id: question_id
-        })
+        question_id = @next_question.id
+      else
+        question_id = 0
       end
+      #Publish next_question
+      #If there're questions left, publish question_id
+      #Else, publish question_id = 0, it will redirect user out of the room
+      publish("presence-room_#{@room.id}","next_question", {
+        question_id: question_id
+      })
       render :text => "OK", :status => "200"
     end
   end
