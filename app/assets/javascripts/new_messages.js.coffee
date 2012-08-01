@@ -33,6 +33,9 @@ $(->
           ")
         )
     })
+
+    $('.icon-comment').click ->
+      $(".icon-comment").css('color', '#999')
   
   if $("#dropdown-message").length
     init()
