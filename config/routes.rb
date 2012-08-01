@@ -12,9 +12,9 @@ Studium::Application.routes.draw do
   # Profile Routes
   controller :profiles,path: "/users/:user_id/profile" do
     get action: "show", as: "user_profile"
-    get "edit", action: "edit",as: "edit_user_profile"
+    get :edit,as: "edit_user_profile"
     put action: "update"
-    post "increase_reputation",action: "increase_reputation",as: :increase_reputation
+    post :increase_reputation,as: :increase_reputation
   end
 
   # Category Type Routes
@@ -27,16 +27,16 @@ Studium::Application.routes.draw do
   resources :rooms,only: [:index,:create]
   controller :rooms,path: "/rooms",as: "room" do
     get "/join/:room_id", action: "join", as: "join"
-    post "/confirm",action: "confirm", as: "confirm"
-    post "/show_question",action: "show_question", as: "show_question"
-    post "/show_explanation",action: "show_explanation", as: "show_explanation"
-    post "/room_list",action: "room_list"
-    post "/user_list",action: "user_list"
-    post "/ready",action: "ready"
-    post "/kick",action: "kick"
-    post "/show_histories",action: "show_histories"
-    post "/invite",action: "invite"
-    post "/chat_message",action: "chat_message",as: "chat_message"
+    post :confirm
+    post :show_question
+    post :show_explanation
+    post :room_list
+    post :user_list
+    post :ready
+    post :kick
+    post :show_histories
+    post :invite
+    post :chat_message
     get "/review/:room_id", to: "rooms#review", as: "review"
   end
 
@@ -55,11 +55,11 @@ Studium::Application.routes.draw do
       resources :questions,:paragraphs
 
       controller :questions do
-        get "cancel_edit_question",action: "cancel_edit_question"
-        get "remove_paragraph",action: "remove_paragraph"
-        get "remove_choice",action: "remove_choice"
-        get "add_question",action: "category_selection",as: "add_question" 
-        get "edit_paragraph",action: "edit_paragraph",as: "admin_materials_question_edit_paragraph"
+        get :cancel_edit_question
+        get :remove_paragraph
+        get :remove_choice
+        get :category_selection,as: "add_question" 
+        get :edit_paragraph,as: "admin_materials_question_edit_paragraph"
       end
     end
   end
@@ -70,14 +70,14 @@ Studium::Application.routes.draw do
   # Pusher routes
   get "/pusher_key", to: "application#pusher_key"
   controller :pusher,path: "/pusher" do
-    post "/auth", action: "auth"
-    post "/webhook", action: "webhook"
+    post :auth
+    post :webhook
   end
 
   # Stats routes
   controller :stats,path: "/stats" do
     root action: "index", as: "stats"
-    get "/show", action: "show"
+    get :show
     get "pull_pro_bar/:interval", action:"pull_pro_bar"
     get "pull/:category_type_id", action: "pull"
     get "pull_stacked/:category_type_id", action: "pull_stacked"
