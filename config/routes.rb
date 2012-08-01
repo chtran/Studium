@@ -83,15 +83,10 @@ Studium::Application.routes.draw do
     get "pull_stacked/:category_type_id", action: "pull_stacked"
   end
 
-<<<<<<< HEAD
-  get "messages/show/:id", to: "messages#show"
-  get "messages/create/", to:"messages#create"
   resources :messages
 
 
-=======
   # Friendship routes
->>>>>>> aed88c23628dbfc43677591a2997f44bace697bf
   post "friendships/request", to: "friendships#request"
 
   # Root page

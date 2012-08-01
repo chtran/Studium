@@ -12,21 +12,10 @@
                 New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
-<<<<<<< HEAD
             -if msg.read then bgcolor = '#fff'
             -else bgcolor = '#eee'
-            %tr
-              %td{"colspan" => 2, "bgcolor" => "#{bgcolor}"}
-                = link_to msg do
-                  %div.row-fluid
-                    %div.span1
-                      = image_tag User.find(msg.sender_id).profile.image
-                    %div.span11.message-body
-                      %h3.sender-name #{User.find(msg.sender_id).name}
-                      %small.content= msg.body[0..36] + " ..."
-=======
-            = render msg
->>>>>>> aed88c23628dbfc43677591a2997f44bace697bf
+
+            = render msg, bgcolor: bgcolor
 
       %div.modal.hide#new_message
         %div.modal-header
