@@ -36,6 +36,7 @@ Studium::Application.routes.draw do
     post :kick
     post :show_histories
     post :invite
+    post :show_current_user
     post :chat_message
     get "/review/:room_id", to: "rooms#review", as: "review"
   end

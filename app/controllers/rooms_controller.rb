@@ -318,4 +318,10 @@ class RoomsController < ApplicationController
     @room=Room.find params[:room_id]
     render @room.histories
   end
+
+  def show_current_user
+    render json: {
+      id: current_user.id
+    }
+  end
 end
