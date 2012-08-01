@@ -16,25 +16,27 @@ $(->
     )
 
     user_channel.bind("message", (data)->
-      $("#dropdown-message").prepend(" 
-        <li bgcolor = '#eee'>
-          <a href='/messages/'#{data.message_id.to_s}>
-            <div class = 'row-fluid'>
-              <div class = 'span3'> 
-                <img alt='Picture?type=square' src = #{data.image}>
-              </div>
-
-              <div class = 'span9'>
-                <div>
-                  <b>#{data.sender}</b>
+      $("#dropdown-message").prepend("
+        <div style='background-color: #eee'>
+          <li bgcolor = '#eee'>
+            <a href=#{'/messages/' + data.message_id}>
+              <div class = 'row-fluid'>
+                <div class = 'span3'> 
+                  <img alt='Picture?type=square' src = #{data.image}>
                 </div>
-                <small>#{data.body[0..36] + ' ...'}</small>
+
+                <div class = 'span9'>
+                  <div>
+                    <b>#{data.sender}</b>
+                  </div>
+                  <small>#{data.body[0..36] + ' ...'}</small>
+                </div>
               </div>
-            </div>
-          </a>
-        </li>
-        <li class = 'divider'>
-        </li>
+            </a>
+          </li>
+          <li class = 'divider'>
+          </li>
+        </div>
       ")
     )
 

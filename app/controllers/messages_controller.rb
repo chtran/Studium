@@ -24,8 +24,9 @@ class MessagesController < ApplicationController
       @message = Message.new params[:message]
       @message.sender_id=current_user.id
       @message.receiver_id=r_id
-      @new_message = current_user.sent_messages.first
       if @message.save
+
+        @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
           message_html: render_to_string(@message),
           sender: User.find(@message.receiver_id).name,

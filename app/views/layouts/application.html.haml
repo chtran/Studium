@@ -65,7 +65,7 @@
                       -current_user.received_messages.limit(4).each do |msg|
                         - if msg.read then bgcolor = '#fff'
                         - else bgcolor = '#eee'
-                        %div{:bgcolor => bgcolor}
+                        %div{:style => "background-color: #{bgcolor}"}
                           %li
                             %a{href: "/messages/"+msg.id.to_s}
                               %div.row-fluid
@@ -75,7 +75,7 @@
                                   %div
                                     %b= User.find(msg.sender_id).name
                                   %small= msg.body[0..36] + ' ...'
-                        %li.divider
+                          %li.divider
                       %li
                         =link_to "View all messages", messages_path
 
