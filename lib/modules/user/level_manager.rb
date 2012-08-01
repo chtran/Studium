@@ -12,7 +12,10 @@ class User
     end
 
     def update_level(win)
-      self.profile.increment!(:gp, win ? WIN_GP : LOSE_GP)
+      #self.profile.increment!(:gp, win ? WIN_GP : LOSE_GP)
+      profile = self.profile
+      profile.gp += WIN_GP
+      profile.save
       new_level = LevelManager.level_for(self.gp)
       level_changed = new_level != self.level
 
