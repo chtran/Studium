@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_cache_buster
 
   before_filter :authenticate_view!,only: [:show]
   
@@ -25,10 +24,14 @@ class MessagesController < ApplicationController
       @message = Message.new params[:message]
       @message.sender_id=current_user.id
       @message.receiver_id=r_id
-
+      @new_message = current_user.sent_messages.first
       if @message.save
         publish_async("user_#{r_id}", "message", {
-          message_html: render_to_string(@message)
+          message_html: render_to_string(@message),
+          sender: User.find(@message.receiver_id).name,
+          body: params[:message][:body],
+          image: current_user.profile.image,
+          message_id: @new_message.id
         })
       else
         alert = "Message could not be sent to " + User.find(r_id).name
@@ -43,12 +46,6 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
     @message.update_attributes(:read => true)
-  end
-
-  def set_cache_buster
-    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-    response.headers["pragma"] = "no-cache"
-    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
 private
