@@ -12,6 +12,7 @@
                 New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
+<<<<<<< HEAD
             -if msg.read then bgcolor = '#fff'
             -else bgcolor = '#eee'
             %tr
@@ -23,10 +24,13 @@
                     %div.span11.message-body
                       %h3.sender-name #{User.find(msg.sender_id).name}
                       %small.content= msg.body[0..36] + " ..."
+=======
+            = render msg
+>>>>>>> aed88c23628dbfc43677591a2997f44bace697bf
 
       %div.modal.hide#new_message
         %div.modal-header
           %button.close{"type" => "button", "data-dismiss" => "modal"}x
           %h3 New Message
         %div.modal-body
-          =render "new" 
+          = render "form" 

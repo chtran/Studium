@@ -1,0 +1,12 @@
+= form_for @message,class: "form-horizontal" do |f|
+  %fieldset
+    %div.control-group
+      = label_tag :receiver_id, "To", class: "control-label"
+      %div.controls
+        = text_field_tag :receiver_id,nil, class: "input-xlarge", id: "input-receiver"
+    %div.control-group    
+      = f.label :body, class: "control-label"
+      %div.controls
+        = f.text_area :body, class: "input-xlarge", rows: "5", id: "input-body"
+    %div.form-actions
+      = f.submit 'Send Message', class: "btn btn-primary"

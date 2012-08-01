@@ -212,29 +212,29 @@ $(->
 
 
     # Update the user list the first time
-    update_users();
+    update_users()
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
     $(".question_active#current_question #choices .each_choice").live("click", ->
-      $(this).siblings().removeClass("btn-primary");
-      $(this).addClass("btn-primary");
+      $(this).siblings().removeClass("btn-primary")
+      $(this).addClass("btn-primary")
       contents = $(this).find(".choice_content").text().split("..")
       count = 1
       for content in contents
         $("#blank_"+count).val(content)
         count++
-      $("#confirm").show();
-      true;
-    );
+      $("#confirm").show()
+      true
+    )
 
     # User confirming the answer
     $(".question_active#current_question #confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
       choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id");
       confirm_answer(choice_id);
-      true;
-    );
+      true
+    )
     # User clicking "ready"
     $("#ready").live("click", ready);
     
@@ -279,5 +279,4 @@ $(->
   # Only execute the above code if the page is rooms_join
   if $("#rooms_join").length
     init()
-
-);
+)

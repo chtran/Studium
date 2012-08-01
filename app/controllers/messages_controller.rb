@@ -2,10 +2,9 @@ class MessagesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
 
+  before_filter :authenticate_view!,only: [:show]
   
   def index
-
-
     @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
@@ -23,25 +22,22 @@ class MessagesController < ApplicationController
 
     receiver_id.each do |r_id|
       r_id = r_id.to_i
-      @message = Message.new(:receiver_id => r_id, :sender_id => current_user.id, :body => params[:body], :read => false)
+      @message = Message.new params[:message]
+      @message.sender_id=current_user.id
+      @message.receiver_id=r_id
+
       if @message.save
-        @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
-          message_id: @new_message.id,
-          body: params[:body],
-          sender: current_user.name,
-          sender_id: current_user.id,
-          image: current_user.profile.image
+          message_html: render_to_string(@message)
         })
       else
-        notice = "Message could not be sent to " + User.find(r_id).name
+        alert = "Message could not be sent to " + User.find(r_id).name
+        redirect_to messages_path, alert: alert
       end
 
     end
-    if !notice then notice = "Message(s) sent" end
-    redirect_to messages_path, notice:  notice
 
-
+    redirect_to messages_path, notice: "Message(s) sent"
   end
 
   def show
@@ -55,4 +51,14 @@ class MessagesController < ApplicationController
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
+private
+  def authenticate_view!
+    @message = Message.find(params[:id])
+
+    # Redirect to index if the current user is not the sender or 
+    # receiver of the currently viewed message
+    if current_user!=@message.sender and current_user!=@message.receiver
+      redirect_to messages_path,alert: "The message you were looking for could not be found."
+    end
+  end
 end
