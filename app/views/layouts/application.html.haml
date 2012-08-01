@@ -62,16 +62,19 @@
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message
                       -current_user.received_messages.limit(4).each do |msg|
-                        %li
-                          %a{href: "/messages"}
-                            %div.row-fluid
-                              %div.span3
-                                = image_tag(User.find(msg.sender_id).profile.image)
-                              %div.span9
-                                %div
-                                  %b= User.find(msg.sender_id).name
-                                %small= msg.body[0..36] + ' ...'
-                        %li.divider
+                        - if msg.read then bgcolor = '#fff'
+                        - else bgcolor = '#eee'
+                        %div{:style => "background-color: #{bgcolor}"}
+                          %li
+                            %a{href: "/messages/"+msg.id.to_s}
+                              %div.row-fluid
+                                %div.span3
+                                  = image_tag(User.find(msg.sender_id).profile.image)
+                                %div.span9
+                                  %div
+                                    %b= User.find(msg.sender_id).name
+                                  %small= msg.body[0..36] + ' ...'
+                          %li.divider
                       %li
                         =link_to "View all messages", messages_path
 

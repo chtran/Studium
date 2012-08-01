@@ -14,7 +14,7 @@ Studium::Application.routes.draw do
     get action: "show", as: "user_profile"
     get :edit,as: "edit_user_profile"
     put action: "update"
-    post :increase_reputation,as: :increase_reputation
+    post :increase_reputation
   end
 
   # Category Type Routes
@@ -37,6 +37,7 @@ Studium::Application.routes.draw do
     post :show_histories
     post :invite
     post :chat_message
+    post :show_current_user
     get "/review/:room_id", to: "rooms#review", as: "review"
   end
 
@@ -44,7 +45,7 @@ Studium::Application.routes.draw do
   get "admin", to: "homepage#admin",as: "admin_index"
   namespace "admin" do
     # Report
-    get "reports/users", to: "reports#users"
+    get "reports/users"
 
     # Material namespace
     namespace "materials" do
