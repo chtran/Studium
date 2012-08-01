@@ -10,7 +10,7 @@ $(->
       console.log(data)
       $("#messages_body").prepend("
           <tr>
-            <td colspan = '2'>
+            <td colspan = '2' bgcolor = '#eee'>
               <a href ='messages/show/#{data.message_id}'>
                 <div class = 'row-fluid'>
                   <div class = 'span1'>
@@ -18,7 +18,7 @@ $(->
                   </div>
 
                   <div class = 'span11 message-body'>
-                    <h3 class = 'sender-name'> #{data.sender} </h3>
+                    <h3 class = 'sender-name'><b> #{data.sender} </b></h3>
                     <small class = 'content'> #{data.body[0..36] + ' ...'}</small>
                 </div>
               </a>

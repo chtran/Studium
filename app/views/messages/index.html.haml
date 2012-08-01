@@ -12,8 +12,10 @@
                 New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
+            -if msg.read then bgcolor = '#fff'
+            -else bgcolor = '#eee'
             %tr
-              %td{"colspan" => 2}
+              %td{"colspan" => 2, "bgcolor" => "#{bgcolor}"}
                 = link_to msg do
                   %div.row-fluid
                     %div.span1

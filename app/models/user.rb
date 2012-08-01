@@ -151,6 +151,7 @@ class User < ActiveRecord::Base
     Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id).order("created_at DESC")
   end
 
+
   def self.return_hash_data
     self.all.collect do |u| {
       "name" => u.name,

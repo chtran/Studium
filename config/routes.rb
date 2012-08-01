@@ -75,7 +75,6 @@ Studium::Application.routes.draw do
   end
 
   get "messages/show/:id", to: "messages#show"
-  post "send_message", to: "messages#send_message"
   get "messages/create/", to:"messages#create"
   resources :messages
 
