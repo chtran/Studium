@@ -18,7 +18,7 @@ $(->
     user_channel.bind("message", (data)->
       $("#dropdown-message").prepend(" 
         <li bgcolor = '#eee'>
-          <a href='/messages/show/'#{data.message_id}>
+          <a href='/messages/'#{data.message_id.to_s}>
             <div class = 'row-fluid'>
               <div class = 'span3'> 
                 <img alt='Picture?type=square' src = #{data.image}>

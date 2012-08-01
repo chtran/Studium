@@ -67,7 +67,7 @@
                         - else bgcolor = '#eee'
                         %div{:bgcolor => bgcolor}
                           %li
-                            %a{href: "/messages"}
+                            %a{href: "/messages/"+msg.id.to_s}
                               %div.row-fluid
                                 %div.span3
                                   = image_tag(User.find(msg.sender_id).profile.image)
