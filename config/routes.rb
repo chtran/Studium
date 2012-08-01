@@ -70,7 +70,6 @@ Studium::Application.routes.draw do
     get "pull_stacked/:category_type_id", action: "pull_stacked"
   end
 
-
   post "friendships/request", to: "friendships#request"
 
   root to: "homepage#index",as: :index

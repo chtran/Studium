@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
   attr_accessible  :body, :sender_id, :receiver_id
 
   belongs_to :conversation
+  belongs_to :sender,class_name: "User"
+  belongs_to :receiver,class_name: "User"
 
   def mes_valid?
     return self.sender_id != self.receiver_id

@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authenticate_view!,only: [:show]
 
   def index
     @top_users = User.order("exp DESC").limit(5)
@@ -43,6 +44,16 @@ class MessagesController < ApplicationController
     gon.user_id = current_user.id
     @new_room = Room.new
     
+  end
+
+private
+  def authenticate_view!
     @message = Message.find(params[:id])
+
+    # Redirect to index if the current user is not the sender or 
+    # receiver of the currently viewed message
+    if current_user!=@message.sender and current_user!=@message.receiver
+      redirect_to messages_path,alert: "The message you were looking for could not be found."
+    end
   end
 end
