@@ -21,4 +21,7 @@ en:
         title: "Question Title"
         choices: ""
         choice: ""
+      
+      room:
+        title: ""
 

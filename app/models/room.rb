@@ -2,10 +2,11 @@ class Room < ActiveRecord::Base
   belongs_to :question
   belongs_to :room_mode
   has_many :questions_buffers
-  has_many :questions, :through => :questions_buffers
+  has_many :questions, through: :questions_buffers
   has_many :users
   has_many :histories
-  validates :room_mode_id, :presence => true
+  validates :room_mode_id, presence: true
+  validates :title,uniqueness: {message: "This room's title has already been taken."}
 
   # Input: a number indicating some status
   # Return: true if every user in the room has the given status, false otherwise
@@ -41,4 +42,7 @@ class Room < ActiveRecord::Base
                 .inject { |this,that| this & that }
   end
 
+  def to_param
+    "#{self.title}".parameterize
+  end
 end

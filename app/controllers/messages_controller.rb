@@ -28,7 +28,8 @@ class MessagesController < ApplicationController
 
       if @message.save
         publish_async("user_#{r_id}", "message", {
-          message_html: render_to_string(@message)
+          message_row: render_to_string(@message),
+          message_item: render_to_string(partial: "message_item",locals: {message: @message})
         })
       else
         alert = "Message could not be sent to " + User.find(r_id).name

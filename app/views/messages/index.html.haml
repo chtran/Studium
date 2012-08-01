@@ -12,10 +12,9 @@
                 New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
-            -if msg.read then bgcolor = '#fff'
-            -else bgcolor = '#eee'
-
-            = render msg, bgcolor: bgcolor
+            %tr
+              %td
+                = render msg
 
       %div.modal.hide#new_message
         %div.modal-header

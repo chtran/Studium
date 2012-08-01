@@ -3,14 +3,17 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(->
-  if $("#profile-info").length
-    $.ajax({
-      type: "GET",
-      url: "/stats/show",
-      data: {
-        user_id: gon.user_id
-      },
-      success: (data) ->
-        $("#statistics").html(data.stats_content)
-    })
+  current_controller=gon.current_controller
+  current_action=gon.current_action
+  if current_controller=="profiles" and current_action=="show"
+    if $("#profile-info").length
+      $.ajax({
+        type: "GET",
+        url: "/stats/show",
+        data: {
+          user_id: gon.user_id
+        },
+        success: (data) ->
+          $("#statistics").html(data.stats_content)
+      })
 )

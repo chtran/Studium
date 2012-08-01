@@ -1,0 +1,11 @@
+%li
+  = link_to message do
+    %div.row-fluid
+      %div.span3
+        = image_tag message.sender.profile.image
+      %div.span9
+        %div
+          %b= message.sender.name
+        %small= truncate message.body,length: 36
+
+%li.divider

@@ -26,4 +26,4 @@
                   %td= user.profile.first_name+" "+user.profile.last_name
                   - order+= 1
       %div.span6
-        = link_to "Join", room_join_path(room_id: room.id), {class: "btn btn-primary"}
+        = link_to "Join", room_join_path(room), {class: "btn btn-primary"}

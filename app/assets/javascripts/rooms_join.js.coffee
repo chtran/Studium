@@ -8,7 +8,7 @@ $(->
     room_id = gon.room_id
     user_id = gon.user_id
     
-    channel = client.subscribe("presence-room_"+room_id);
+    channel = client.subscribe("presence-room_"+room_id)
     rooms_channel = client.subscribe("presence-rooms")
     user_channel = client.subscribe("user_" + gon.user_id)
     # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
@@ -23,53 +23,53 @@ $(->
 #          room_id: room_id
 #        },
 #        success: (data) ->
-#          update_users();
-#      });
-#    );
+#          update_users()
+#      })
+#    )
 
     # Update the histories
     channel.bind("update_histories", (data) ->
-      update_histories(data.history_id);
-      true;
-    );
+      update_histories(data.history_id)
+      true
+    )
 
     # Update news
     channel.bind("update_news", (data) ->
       $news="<p>"+data.news+"</p>"
-      $("#history").append($news);
-      $("#history p:last").effect("highlight",2000);
+      $("#history").append($news)
+      $("#history p:last").effect("highlight",2000)
       #$("#history").animate({
       #  scrollTop: $("#history p:last").position().top
-      #},1000);
-      true;
-    );
+      #},1000)
+      true
+    )
 
     # Listen to the "users_change" event which keeps track of users joining/leaving the room
     channel.bind("users_change", (data) ->
-      update_users();
-      true;
-    );
+      update_users()
+      true
+    )
 
     channel.bind("chat_message", (data) ->
-      $(".chat-content").append(data.message);
-      $(".chat-content p:last-child").effect("highlight",{},2000);
-      true;
-    );
+      $(".chat-content").append(data.message)
+      $(".chat-content p:last-child").effect("highlight",{},2000)
+      true
+    )
 
     # Listen to the "show_explanation" event which keeps track of whether to show explanation or not
     channel.bind("show_explanation", (data) ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $("#current_question .each_choice.btn-primary").attr("id");
-      show_explanation(data.question_id, choice_id);
-      true;
-    );
+      choice_id = $("#current_question .each_choice.btn-primary").attr("id")
+      show_explanation(data.question_id, choice_id)
+      true
+    )
 
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
       $("#observing").modal("hide")
       change_question(data.question_id)
-      true;
-    );
+      true
+    )
 
     # Input: none
     # Effect: update the user list to div#top_nav
@@ -78,10 +78,10 @@ $(->
         type: "POST",
         url: "/rooms/user_list",
         success: (data) ->
-          $("#top_nav").html(data);
-          true;
-      });
-      true;
+          $("#top_nav").html(data)
+          true
+      })
+      true
 
     # Input: question_id
     # Effect: changes HTML content of #current_question to show the new question
@@ -102,17 +102,17 @@ $(->
               $(".question_image").html($image_url)
             else
               $(".question_image").html("")
-            $("#prompt").html(data.question_prompt);
-            $("#choices").html(data.question_choices);
+            $("#prompt").html(data.question_prompt)
+            $("#choices").html(data.question_choices)
             if data.paragraph != ""
               $("#paragraph").html(data.paragraph).show()
             else
               $("#paragraph").hide()
-            $("#ready").hide();
-            $("#current_question").addClass("question_active");
-            setup_timer(60,confirm_answer);
-      });
-      true;
+            $("#ready").hide()
+            $("#current_question").addClass("question_active")
+            setup_timer(60,confirm_answer)
+      })
+      true
 
     # Input: question_id and choice_id
     # Effect: render the explanation for the given question
@@ -124,16 +124,16 @@ $(->
           choice_id: choice_id
         },
         success: (data) ->
-          $("#choices").html(data);
-          setup_timer(60, ready);
-      });
+          $("#choices").html(data)
+          setup_timer(60, ready)
+      })
       # Show the ready button
-      $("#ready").show();
+      $("#ready").show()
       # Remove the confirm button
-      $("#confirm").hide();
+      $("#confirm").hide()
 
     confirm_answer = (choice_id) ->
-      $("#timer").countdown("destroy");
+      $("#timer").countdown("destroy")
       # Send a POST request to "/rooms/choose" (rooms#choose)
       $.ajax({
         type: "POST",
@@ -141,21 +141,21 @@ $(->
         data: {
           choice_id: choice_id
         }
-      });
+      })
       # Remove question_active class so that the choices are not clickable
-      $("#current_question").removeClass("question_active");
+      $("#current_question").removeClass("question_active")
       # Disable the button for each choice
-      $(".each_choice").addClass("disabled");
+      $(".each_choice").addClass("disabled")
     
     # Input: none
     # Effect: send a POST request to ready
     ready = ->
-      $("#timer").countdown("destroy");
+      $("#timer").countdown("destroy")
       $.ajax({
         type: "POST",
         url: "/rooms/ready",
-      });
-      true;
+      })
+      true
 
     # Update the latest history
     update_histories=(history_id)->
@@ -166,13 +166,13 @@ $(->
           history_id: history_id
         },
         success: (data) ->
-          $("#history").append(data);
-          $("#history p:last").effect("highlight",2000);
+          $("#history").append(data)
+          $("#history p:last").effect("highlight",2000)
           #$("#history").animate({
           #  scrollTop: $("#history p:last").position().top
-          #},1000);
-      });
-      true;
+          #},1000)
+      })
+      true
 
     # Show all the previous histories
     update_previous_histories= ->
@@ -183,9 +183,9 @@ $(->
           room_id: room_id
         },
         success: (data) ->
-          $("#history").html(data);
-      });
-      true;
+          $("#history").html(data)
+      })
+      true
 
 
     # Input: time(seconds), callback(function)
@@ -197,12 +197,12 @@ $(->
         format: 'S',
         description: '',
         onExpiry: callback
-      });
+      })
       # Set question the first time
     
     if $("#observing").attr("reload") == "true"
-      current_question_id = $("#question_container").attr("question_id");
-      change_question(current_question_id);
+      current_question_id = $("#question_container").attr("question_id")
+      change_question(current_question_id)
     else
       $("#observing").modal({
         keyboard: false,
@@ -231,15 +231,15 @@ $(->
     # User confirming the answer
     $(".question_active#current_question #confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id");
-      confirm_answer(choice_id);
+      choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id")
+      confirm_answer(choice_id)
       true
     )
     # User clicking "ready"
-    $("#ready").live("click", ready);
+    $("#ready").live("click", ready)
     
     # Invite modal
-    $("#invite_button").live("click", -> 
+    $("#invite_button").live("click", ->
       user_list = $("#invite .modal-body p")
       user_list.text("")
       rooms_channel.members.each((member) ->
@@ -284,6 +284,8 @@ $(->
 
     
   # Only execute the above code if the page is rooms_join
-  if $("#rooms_join").length
+  current_controller=gon.current_controller
+  current_action=gon.current_action
+  if current_controller=="rooms" and current_action=="join"
     init()
 )

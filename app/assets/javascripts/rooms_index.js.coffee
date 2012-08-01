@@ -15,48 +15,23 @@ $(->
       update_room_list()
     )
 
-    user_channel.bind("message", (data)->
-      $("#dropdown-message").prepend("
-      
-        <li>
-          <a href='/messages'>
-            <div class = 'row-fluid'>
-              <div class = 'span3'> 
-                <img alt='Picture?type=square' src = #{data.image}>
-              </div>
-
-              <div class = 'span9'>
-                <div>
-                  <b>#{data.sender}</b>
-                </div>
-                <small>#{data.body[0..36] + ' ...'}</small>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li class = 'divider'>
-        </li>
-      ")
-
-    )
-
     channel.bind("update_recent_activities", (data) ->
       $("#recent_activities #activities_list").prepend(
         '<li>
           <a> '+ data.message + ' 
-        </li>') 
+        </li>')
     )
 
     user_channel.bind("invite", (data) ->
       $("#invitation .modal-footer #accept").attr("href","/rooms/join/"+data.room_id)
-      $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!") 
+      $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!")
       $("#invitation").modal("show")
     )
 
-
     update_room_list()
 
-
-  if $("#rooms_index").length
+  current_controller=gon.current_controller
+  current_action=gon.current_action
+  if  current_controller=="rooms" and current_action=="index"
     init()
 )

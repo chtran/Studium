@@ -32,12 +32,16 @@ class RoomsController < ApplicationController
       publish_async("presence-rooms", "rooms_change", {})
       redirect_to room_join_path(@room.id)
     else
-      redirect_to rooms_path, alert: "Error creating room"
+      alert=""
+      @room.errors.full_messages.each do |msg|
+        alert+=msg+"\n"
+      end
+      redirect_to rooms_path, alert: alert
     end
   end
 
   def join
-    @room = Room.find(params[:room_id])
+    @room = Room.find_by_title! params[:room_title]
     gon.user_id = current_user.id
     gon.room_id = @room.id
     current_user.update_attributes({

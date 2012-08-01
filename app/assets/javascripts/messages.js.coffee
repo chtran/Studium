@@ -7,9 +7,8 @@ $(->
     user_channel = client.subscribe("user_" + gon.user_id)
     
     user_channel.bind("message", (data) ->
-      console.log(data)
-
-      $("#messages_body").prepend(data.message_html)
+      $("#messages_body").prepend(data.message_row)
+      $("#dropdown-message").prepend(data.message_item)
     )
     
     available_names = gon.hash_data
@@ -18,6 +17,8 @@ $(->
         theme: "facebook"
       })
 
-  if $('#message').length
+  current_controller=gon.current_controller
+  current_action=gon.current_action
+  if (current_controller=="messages" or current_controller=="rooms") and current_action=="index"
     init()
 )

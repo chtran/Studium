@@ -26,7 +26,7 @@ Studium::Application.routes.draw do
   # Rooms_controller routes
   resources :rooms,only: [:index,:create]
   controller :rooms,path: "/rooms",as: "room" do
-    get "/join/:room_id", action: "join", as: "join"
+    get "/join/:room_title", action: "join", as: "join"
     post :confirm
     post :show_question
     post :show_explanation
