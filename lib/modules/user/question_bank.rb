@@ -11,9 +11,10 @@ class User
     end
 
     def failed_questions
+      mastered_questions = self.mastered_questions
       questions_id = self.histories
                          .where(question_id: self.answered_questions.collect(&:id))
-                         .where("question_id NOT IN (?)", self.mastered_questions.empty? ? "" : self.mastered_questions.collect(&:id)) 
+                         .where("question_id NOT IN (?)", mastered_questions.empty? ? "0" : mastered_questions.collect(&:id))
                          .select("histories.question_id")
                          .uniq
                          .collect(&:question_id)

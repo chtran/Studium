@@ -1,6 +1,6 @@
 %li
   = link_to message do
-    %div.row-fluid
+    %div.row-fluid{bgcolor: message.read? ? "#fff" : "#eee"}
       %div.span3
         = image_tag message.sender.profile.image
       %div.span9
