@@ -157,7 +157,7 @@ $(->
       });
       true;
 
-
+    # Update the latest history
     update_histories=(history_id)->
       $.ajax({
         type: "POST",
@@ -238,6 +238,7 @@ $(->
     # User clicking "ready"
     $("#ready").live("click", ready);
     
+    # Invite modal
     $("#invite_button").live("click", -> 
       user_list = $("#invite .modal-body p")
       user_list.text("")
@@ -249,6 +250,7 @@ $(->
       $("#invite.modal").modal("show")
     )
     
+    # When user invites some other user
     $(".invite_link").live("click", ->
       $.ajax({
         type: "POST",
@@ -260,17 +262,22 @@ $(->
           alert("Invited "+$(this).text())
       })
     )
+
+    # Send the message if it's not nil
     $("#chat .chat_send").live("click", ->
       message = $("#chat .chat_message").val()
-      $.ajax({
-        type: "POST",
-        url: "/rooms/chat_message",
-        data: {
-          message: message
-        }
-      })
-      $("#chat .chat_message").val("")
+      if message!=""
+        $.ajax({
+          type: "POST",
+          url: "/rooms/chat_message",
+          data: {
+            message: message
+          }
+        })
+        $("#chat .chat_message").val("")
     )
+
+  # show modal asking whether the user wants to go after quitting the room
   $("#quit").live("click", ->
     $("#quit_modal").modal("show")
   )
