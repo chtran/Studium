@@ -26,11 +26,7 @@ class MessagesController < ApplicationController
       if @message.save
         @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
-          message_id: @new_message.id,
-          body: @message.body,
-          sender: current_user.name,
-          sender_id: current_user.id,
-          image: current_user.profile.image
+          message_html: render_to_string(@new_message)
         })
       else
         alert = "Message could not be sent to " + User.find(r_id).name
