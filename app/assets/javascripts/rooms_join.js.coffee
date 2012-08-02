@@ -218,7 +218,7 @@ $(->
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $("#choices .each_choice").live("click", ->
+    $(".question_active #choices .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
       contents = $(this).find(".choice_content").text().split("..")
@@ -233,7 +233,7 @@ $(->
     # User confirming the answer
     $("#confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id")
+      choice_id = $(".question_active .each_choice.btn-primary").attr("id")
       confirm_answer(choice_id)
       true
     )
