@@ -244,9 +244,13 @@ $(->
     $("#invite_button").live("click", ->
       user_list = $("#invite .modal-body p")
       user_list.text("")
+      current_user=rooms_channel.members.me
+      data="Active Users: <br />"
       rooms_channel.members.each((member) ->
-        console.log(member)
-        data = "<div><a href='#' class='invite_link' user_id="+member.id+">"+member.info.name+"</a></div>"
+        if member.id-current_user.id!=0
+          console.log(member)
+          data = "<div><a href='#' class='invite_link' user_id="+member.id+">"+member.info.name+"</a></div>"
+
         user_list.append(data)
       )
       $("#invite.modal").modal("show")
