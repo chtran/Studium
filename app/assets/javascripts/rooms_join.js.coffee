@@ -221,12 +221,17 @@ $(->
     $(".question_active .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
+
+      # For vocab reading questions
       # There can be multiple blanks -> get the array of all the blanks
       contents = $(this).find(".choice_content").text().split("..")
       count = 1
       for content in contents
         $("#blank_"+count).val(content)
         count++
+
+
+
       $("#confirm").show()
       true
     )
