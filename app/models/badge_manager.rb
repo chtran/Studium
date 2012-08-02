@@ -71,13 +71,13 @@ class BadgeManager < ActiveRecord::Base
       badge2=Badge.find_by_name!("50-undefeated")
       badge3=Badge.find_by_name!("100-undefeated")
       badge=nil
-      if user_entry.correct_qiar_counter==10 and !user.badges
+      if user_entry.correct_qiar_counter==10 and !user.badges.include? badge1
         badge=badge1
         user.badges << badge
-      elsif user_entry.correct_qiar_counter==50
+      elsif user_entry.correct_qiar_counter==50 and !user.badges.include? badge2
         badge=badge2
         user.badges << badge
-      elsif user_entry.correct_qiar_counter==100
+      elsif user_entry.correct_qiar_counter==100 and !user.badges.include? badge3
         badge=badge3
         user.badges << badge
       end

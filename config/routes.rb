@@ -28,6 +28,7 @@ Studium::Application.routes.draw do
   controller :rooms,path: "/rooms",as: "room" do
     #get "/join/:room_title", action: "join", as: "join"
     get "/join/:room_id", action: "join", as: "join" 
+    get :leave_room
     post :confirm
     post :show_question
     post :show_explanation
@@ -86,7 +87,6 @@ Studium::Application.routes.draw do
   end
 
   resources :messages
-
 
   # Friendship routes
   post "friendships/request", to: "friendships#request"

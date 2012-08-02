@@ -91,6 +91,14 @@ class RoomsController < ApplicationController
           publish_async("presence-rooms", "update_recent_activities", {
             message: news
           })
+
+          message=render_to_string partial: "badges/badge_notification",locals: {badge: badge}
+          publish_async("user_#{current_user.id}","notification",{
+            title: "Got new badge",
+            message: message,
+            type: "success"
+          })
+
         end
       end
     end
@@ -320,6 +328,19 @@ class RoomsController < ApplicationController
   def show_histories
     @room=Room.find params[:room_id]
     render @room.histories
+  end
+
+  def leave_room
+    room=current_user.room
+    current_user.room=nil
+    current_user.save
+
+    if room.users.length==0
+      room.destroy
+    end
+
+    # Update room list for other people
+    publish_async("presence-rooms", "rooms_change", {})
   end
 
 end
