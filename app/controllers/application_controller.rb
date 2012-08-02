@@ -37,6 +37,7 @@ private
 
     gon.current_controller=@current_controller
     gon.current_action=@current_action
-    gon.user_id = current_user.id
+
+    gon.user_id = current_user.id if signed_in?
   end
 end

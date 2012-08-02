@@ -62,7 +62,7 @@
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message
                       -current_user.received_messages.limit(4).each do |msg|
-                        = render partial: "messages/message_item",locals: {message: msg}
+                        = render partial: "messages/message_item_list",locals: {message: msg}
                       %li
                         =link_to "View all messages", messages_path
 
