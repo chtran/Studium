@@ -54,6 +54,9 @@ class RoomsController < ApplicationController
     publish_async("presence-rooms", "update_recent_activities", {
       message: "#{current_user.name} has joined room #{@room.title}"
     })
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to rooms_path,alert: "The room you were looking for could not be found."
   end
 
   # Request type: POST
@@ -91,6 +94,14 @@ class RoomsController < ApplicationController
           publish_async("presence-rooms", "update_recent_activities", {
             message: news
           })
+
+          message=render_to_string partial: "badges/badge_notification",locals: {badge: badge}
+          publish_async("user_#{current_user.id}","notification",{
+            title: "Got new badge",
+            message: message,
+            type: "success"
+          })
+
         end
       end
     end
@@ -243,7 +254,6 @@ class RoomsController < ApplicationController
               end
     }
     end
-    puts @choices
     messages = {
       correct: "Congratulations! You got the right answer.",
       incorrect: "Sorry, you got the wrong answer. See explanation below."
@@ -321,6 +331,19 @@ class RoomsController < ApplicationController
   def show_histories
     @room=Room.find params[:room_id]
     render @room.histories
+  end
+
+  def leave_room
+    room=current_user.room
+    current_user.room=nil
+    current_user.save
+
+    if room.users.length==0
+      room.destroy
+    end
+
+    # Update room list for other people
+    publish_async("presence-rooms", "rooms_change", {})
   end
 
 end

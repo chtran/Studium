@@ -15,11 +15,11 @@
 
 %div.row-fluid#rooms_join
   %div.span9
-    %div.row-fluid
+    %div.row-fluid.question_active#current_question
       %div.span6#paragraph.prettyprint.pre-scrollable.linenums
       %div.span6#question_container{room_id: @room.id, question_id: @room.question_id}
         %div.question_image
-        %div.prompt_container#current_question.question_active
+        %div.prompt_container
           %h4 Question
           %div.row-fluid
             %div.span2

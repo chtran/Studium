@@ -59,7 +59,7 @@ $(->
     # Listen to the "show_explanation" event which keeps track of whether to show explanation or not
     channel.bind("show_explanation", (data) ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $("#current_question .each_choice.btn-primary").attr("id")
+      choice_id = $(".each_choice.btn-primary").attr("id")
       show_explanation(data.question_id, choice_id)
       true
     )
@@ -218,7 +218,7 @@ $(->
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $("#choices .each_choice").live("click", ->
+    $(".question_active #choices .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
       contents = $(this).find(".choice_content").text().split("..")
@@ -233,7 +233,7 @@ $(->
     # User confirming the answer
     $("#confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id")
+      choice_id = $(".question_active .each_choice.btn-primary").attr("id")
       confirm_answer(choice_id)
       true
     )
@@ -279,6 +279,23 @@ $(->
         $("#chat .chat_message").val("")
     )
 
+    # When unload
+    warning=true
+    window.onbeforeunload= ->
+      if warning
+        return "Are you sure you want to leave the room?"
+
+    unload_page= ->
+      $.ajax({
+        type: "GET",
+        url: "/rooms/leave_room",
+        async: false,
+        success: ->
+          alert "Bye!"
+      })
+
+    $(window).unload(unload_page)
+
   # show modal asking whether the user wants to go after quitting the room
   $("#quit").live("click", ->
     $("#quit_modal").modal("show")
@@ -290,4 +307,5 @@ $(->
   current_action=gon.current_action
   if current_controller=="rooms" and current_action=="join"
     init()
+
 )
