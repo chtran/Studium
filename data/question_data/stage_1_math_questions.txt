@@ -1,0 +1,19 @@
+Question: Math(Math (Multiple Choice))
+Prompt: How many numbers are shared by the two sets below? <br /><br />Set A: 2,5,8,13,18<br/>Set B: 3,4,5,9,11,14,18
+Title: Math Q1
+Choice A: Zero
+Choice B_correct: Two
+Choice C: Five
+Choice D: Seven
+Choice E: Twelve
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In the number 0.257, which of the following does the digit 7 represent?
+Title: Math Q2
+Choice A: 7\times\frac{1}{10}
+Choice B: 7\times\frac{1}{100} 
+Choice C_correct: 7\times\frac{1}{1000} 
+Choice D: 7\times\frac{1}{10000} 
+Choice E: 7\times\frac{1}{100000} 
+<End Question>

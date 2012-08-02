@@ -229,6 +229,7 @@ class RoomsController < ApplicationController
       @question = Question.find(params[:question_id])
       question_choices=render_to_string(@question.choices).html_safe
 
+      @is_math=@question.question_type.math?
       render json: {
         question_image_url: @question.image_file_name!=nil ? @question.image.url : "",
         question_prompt: @question.prompt.parse(question_id: @question.id,is_passage: false).html_safe,

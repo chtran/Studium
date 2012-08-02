@@ -7,6 +7,10 @@ class String
         .underline(options[:question_id])
   end
 
+  def parse_latex
+    return "<math>"+self+"</math>"
+  end
+
   def highlight_render(question_id)
     result = self
     

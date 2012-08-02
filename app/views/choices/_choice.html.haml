@@ -1,3 +1,3 @@
 %div.row-fluid.btn.each_choice{id: choice.id.to_s}
   %div.span2.choice_letter= choice.choice_letter
-  %div.span8.choice_content= choice.content
+  %div.span8.choice_content= @is_math ? choice.content.parse_latex : choice.content
