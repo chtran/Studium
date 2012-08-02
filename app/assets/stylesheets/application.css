@@ -13,7 +13,7 @@
 .mycontainer {
   margin-top: 20px;
 }
-i{
+.navbar i{
   font-size: 25px;
 }
 .navbar-inner .span4 {
@@ -33,4 +33,5 @@ i{
   font-size: 12px;
 }
 
-
+.user_component{
+}

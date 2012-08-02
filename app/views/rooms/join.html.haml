@@ -1,21 +1,18 @@
-%div.row-fluid#room_settings
-  %div.span9
-    %div.row-fluid
-      %div.span2
-        %div#room_mode.btn.btn-info= @room.room_mode.title
-      %div.span7
-      %div.span3
-        %div#timer.pull-right{display: "inline"}
-  %div.span3    
+%div.row-fluid.room_settings
+  %div.span8
+    %h2#room_tite
+      = 'Room ' + @room.title
+      %small#room_mode=  @room.room_mode.title
+  %div.span1
+    %div#timer.pull-right{display: "inline"}
+  %div.span3
     %div.row-fluid
       %div.span9
         %a.btn.btn-danger#quit Quit
       %div.span3.pull-right
         %div
           %a.btn.btn-primary#invite_button Invite
-%div.row-fluid#divider
-  %div.span9
-  %div.span3
+
 %div.row-fluid#rooms_join
   %div.span9
     %div.row-fluid
