@@ -330,4 +330,15 @@ class RoomsController < ApplicationController
     render @room.histories
   end
 
+  def leave_room
+    debugger
+    room=current_user.room
+    current_user.room=nil
+    current_user.save
+
+    if room.users.length==0
+      room.destroy
+    end
+  end
+
 end

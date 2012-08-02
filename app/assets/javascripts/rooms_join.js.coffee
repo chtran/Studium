@@ -279,6 +279,23 @@ $(->
         $("#chat .chat_message").val("")
     )
 
+    # When unload
+    warning=true
+    window.onbeforeunload= ->
+      if warning
+        return "Are you sure you want to leave the room?"
+
+    unload_page= ->
+      $.ajax({
+        type: "GET",
+        url: "/rooms/leave_room",
+        async: false,
+        success: ->
+          alert "Bye!"
+      })
+
+    $(window).unload(unload_page)
+
   # show modal asking whether the user wants to go after quitting the room
   $("#quit").live("click", ->
     $("#quit_modal").modal("show")
@@ -290,4 +307,5 @@ $(->
   current_action=gon.current_action
   if current_controller=="rooms" and current_action=="join"
     init()
+
 )
