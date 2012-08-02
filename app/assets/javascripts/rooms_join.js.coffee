@@ -59,7 +59,7 @@ $(->
     # Listen to the "show_explanation" event which keeps track of whether to show explanation or not
     channel.bind("show_explanation", (data) ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $("#current_question .each_choice.btn-primary").attr("id")
+      choice_id = $(".each_choice.btn-primary").attr("id")
       show_explanation(data.question_id, choice_id)
       true
     )

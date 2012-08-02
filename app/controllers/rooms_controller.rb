@@ -243,7 +243,6 @@ class RoomsController < ApplicationController
               end
     }
     end
-    puts @choices
     messages = {
       correct: "Congratulations! You got the right answer.",
       incorrect: "Sorry, you got the wrong answer. See explanation below."
