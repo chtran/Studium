@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   def pusher_key
     render :text => Pusher.key
   end
-
 private
 
   def authenticate_admin!
@@ -37,6 +36,6 @@ private
 
     gon.current_controller=@current_controller
     gon.current_action=@current_action
-    gon.user_id = current_user.id
+    gon.user_id = current_user ? current_user.id : 0
   end
 end
