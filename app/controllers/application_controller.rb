@@ -5,7 +5,7 @@ Pusher.secret = Studium::Application.config.pusher_secret
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :initialize_controller_action_info
+  before_filter :initialize_gon
 
   def pusher_key
     render :text => Pusher.key
@@ -31,11 +31,12 @@ private
     Pusher[channel].trigger_async(event,data)
   end
 
-  def initialize_controller_action_info
+  def initialize_gon
     @current_controller=controller_name
     @current_action=action_name
 
     gon.current_controller=@current_controller
     gon.current_action=@current_action
+    gon.user_id = current_user.id
   end
 end

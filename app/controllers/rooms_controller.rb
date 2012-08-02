@@ -41,9 +41,11 @@ class RoomsController < ApplicationController
   end
 
   def join
-    @room = Room.find_by_title! params[:room_title]
+    #@room = Room.find_by_title! params[:room_title].to_s
+    @room = Room.find(params[:room_id])
     gon.user_id = current_user.id
     gon.room_id = @room.id
+    gon.observing = (@room.users.count==1).to_s
     current_user.update_attributes({
       room_id: @room.id,
       status: 0
@@ -53,7 +55,6 @@ class RoomsController < ApplicationController
     publish_async("presence-rooms", "update_recent_activities", {
       message: "#{current_user.name} has joined room #{@room.title}"
     })
-    @reload = (@room.users.count==1).to_s
   end
 
   # Request type: POST
@@ -323,9 +324,4 @@ class RoomsController < ApplicationController
     render @room.histories
   end
 
-  def show_current_user
-    render json: {
-      id: current_user.id
-    }
-  end
 end

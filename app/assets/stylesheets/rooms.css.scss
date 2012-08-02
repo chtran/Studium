@@ -40,9 +40,9 @@
 
 }
 .accordion-body.collapse .btn {
-  margin-top:15px;
-  margin-right: 27px;
-  float:right;
+  //margin-top:15px;
+  //margin-right: 27px;
+  //float:right;
 }
 
 .separator{
@@ -62,4 +62,9 @@
   top: 100px;
   left: 50px;
   width: 400px;
+}
+
+.control .btn{
+  margin-top: 15px;
+
 }

@@ -29,13 +29,13 @@
 %div.row-fluid#rooms_join
   %div.span9
     %div.row-fluid
-      %div.modal.hide#observing{reload: @reload}
+      -#%div.modal.hide#observing{reload: @reload}
         %div.modal-header
           %h3 Waiting...
         %div.modal-body
           %p Please wait for the next round to begin
-      %div.span5#paragraph.prettyprint.pre-scrollable.linenums
-      %div.span5#question_container{room_id: @room.id, question_id: @room.question_id}
+      %div.span6#paragraph.prettyprint.pre-scrollable.linenums
+      %div.span6#question_container{room_id: @room.id, question_id: @room.question_id}
         %div.question_image
         %div.prompt_container#current_question.question_active
           %h4 Question
@@ -43,15 +43,15 @@
             %div.span2
             %div.span10
               %p.lead#prompt
-          %div.row-fluid.choices_container
-            %h4 Choices
-            %div.row-fluid
-              %div.span2
-              %div.span8
-                %div#choices
-          %div.pull-right
-            %a.btn.btn-primary#confirm{style: "display:none"} Confirm
-            %a.btn.btn-primary#ready{style: "display:none"} Ready
+      %div.span6
+        %h4 Choices
+        %div.row-fluid
+          %div.span2
+          %div.span8
+            %div#choices
+            %div.pull-right.control
+              %a.btn.btn-primary#confirm{style: "display:none"} Confirm
+              %a.btn.btn-primary#ready{style: "display:none"} Ready
   %div.span3
     %div#top_nav
     %div#bottom_nav
