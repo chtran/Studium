@@ -218,9 +218,10 @@ $(->
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $(".question_active #choices .each_choice").live("click", ->
+    $(".question_active .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
+      # There can be multiple blanks -> get the array of all the blanks
       contents = $(this).find(".choice_content").text().split("..")
       count = 1
       for content in contents

@@ -33,7 +33,7 @@ class String
     count=0
     while result=~/(.*?)<bl \/>(.*)/m
       count+=1
-      result=$1+%Q[<input type="text" id="blank_#{count}" class="span3 focused" style="display:inline" />]+$2
+      result=$1+%Q[<input type="text" id="blank_#{count}" class="span3 focused" style="display:inline; text-align:center" />]+$2
       result.gsub!(/\n/,"")
     end
     
