@@ -7,14 +7,17 @@
             %div.thumbnail
               = image_tag(user.profile.image)
           %div.span9
+            %h4= user.name
             %div.row-fluid
-              %div.span7
-                %h4= user.name
+              %div.span8
               %div.span4
                 %label.label.label-info= user.status_message
+            %div.row-fluid.user-stats
+              %div.span1
+                %i.icon-star-empty
+              %div.span3  
+                %p= "GP #{user.gp}"
+              %div.span1
+                %i.icon-ok
               %div.span4
-                %label.label.label-inverse
-                  %i.icon-fire= " GP #{user.gp}"
-              %div.span4
-                %label.label.label-inverse
-                  %i.icon-star= " Level #{user.level}"
+                %p= "LEVEL #{user.level}"
