@@ -41,15 +41,14 @@ class RoomsController < ApplicationController
   end
 
   def join
-    #@room = Room.find_by_title! params[:room_title].to_s
-    @room = Room.find(params[:room_id])
+    @room = Room.find params[:room_id]
     gon.user_id = current_user.id
     gon.room_id = @room.id
-    gon.observing = (@room.users.count==1).to_s
     current_user.update_attributes({
       room_id: @room.id,
       status: 0
     })
+    gon.observing = (@room.users.count==1).to_s
     choose_question!(@room) if !@room.question
     publish_async("presence-room_#{@room.id}","users_change", {})
     publish_async("presence-rooms", "update_recent_activities", {

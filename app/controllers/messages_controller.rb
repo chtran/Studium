@@ -26,10 +26,24 @@ class MessagesController < ApplicationController
       @message.receiver_id=r_id
       if @message.save
 
+        message_row=render_to_string(@message)
+        message_item=render_to_string(partial: "message_item",locals: {message: @message})
+        message_item_list=render_to_string(partial: "message_item_list",locals: {message: @message})
+
+        # Receiver's message-receive event
         @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
-          message_row: render_to_string(@message),
-          message_item: render_to_string(partial: "message_item",locals: {message: @message})
+          message_row: message_row,
+          message_item: message_item 
+        })
+
+        # Receiver's message-notification event
+        title="New Message"
+        type="notice"
+        publish_async("user_#{r_id}","notification",{
+          title: title,
+          message: message_item,
+          type: type
         })
       else
         alert = "Message could not be sent to " + User.find(r_id).name

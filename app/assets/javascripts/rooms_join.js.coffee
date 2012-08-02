@@ -202,7 +202,7 @@ $(->
       })
       # Set question the first time
     
-    if gon.observing == "true"
+    if gon.observing=="true"
       current_question_id = $("#question_container").attr("question_id")
       change_question(current_question_id)
     else

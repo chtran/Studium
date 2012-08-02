@@ -12,9 +12,9 @@
                 New Message
         %tbody#messages_body
           -@received_messages.each do |msg|
-            - @bgcolor = msg.read? ? '#fff' : '#eee'
-
-            = render msg, bgcolor: @bgcolor
+            %tr
+              %td{"colspan" => 2, bgcolor: msg.read? ? "#fff" : "#eee"}
+                = render msg
 
       %div.modal.hide#new_message
         %div.modal-header
