@@ -39,6 +39,20 @@ class User < ActiveRecord::Base
     return array[self.status]
   end
 
+  def leave_room
+    if self.room_id!=nil
+      room = self.room
+      Pusher["presence-rooms"].trigger_async("leave_room_recent_activities", {
+        room_title: room.title,
+        user_name: self.name
+      })
+      self.room = nil
+      self.status = 0
+      self.save
+      room.deactivate if room.users.count==0
+    end
+  end
+
   def self.return_hash_data
     self.all.collect do |u| {
       "name" => u.name,
