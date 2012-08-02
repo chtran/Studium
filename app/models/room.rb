@@ -41,8 +41,4 @@ class Room < ActiveRecord::Base
     return users.collect { |u| u.mastered_questions } 
                 .inject { |this,that| this & that }
   end
-
-  def to_param
-    "#{self.title}".parameterize
-  end
 end

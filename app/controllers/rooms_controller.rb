@@ -41,7 +41,7 @@ class RoomsController < ApplicationController
   end
 
   def join
-    @room = Room.find params[:id]
+    @room = Room.find params[:room_id]
     gon.user_id = current_user.id
     gon.room_id = @room.id
     current_user.update_attributes({
