@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
     if @room.save
       # See application_controller for publish_async method.
       publish_async("presence-rooms", "rooms_change", {})
-      redirect_to room_join_path(@room.id)
+      redirect_to room_join_path(@room.title)
     else
       alert=""
       @room.errors.full_messages.each do |msg|
@@ -41,7 +41,7 @@ class RoomsController < ApplicationController
   end
 
   def join
-    @room = Room.find_by_title! params[:room_title]
+    @room = Room.find_by_title! params[:room_title].to_s
     gon.user_id = current_user.id
     gon.room_id = @room.id
     current_user.update_attributes({
