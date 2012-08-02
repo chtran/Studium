@@ -13,18 +13,18 @@
                 %small= link_to "View my profile","/users/#{current_user.id}/profile"
           %tr
             %td 
-              %strong #{current_user.exp}
-              %small EXP
+              %strong #{current_user.gp}
+              %small GP
             %td 
-              %strong #{current_user.rank}
-              %small Rank
+              %strong #{current_user.level}
+              %small Level
           %tr
             %td
               %strong #{current_user.reputation}
               %small Reputation
             %td 
-              %strong #{current_user.badges.count}
-              %small Badges
+              %strong #{current_user.rank}
+              %small Rank
   
   %div.separator
 
