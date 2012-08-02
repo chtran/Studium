@@ -24,20 +24,13 @@ class PusherController < ApplicationController
         if event["channel"].match /^presence-room_(\d+)$/
           room_id = $1.to_i
           case event["name"]
-          when 'channel_occupied'
-            Room.find(room_id).update_attribute("active",true)
           when 'channel_vacated'
             room = Room.find(room_id)
-            room.update_attribute("active",false)
+            room.deactivate
             room.users.each do |u|
-              publish_async("presence-rooms", "leave_room_recent_activities", {
-                room_title: room.title,
-                user_name: u.name
-              })
-              u.update_attributes({status: 0, room_id: 0})
+              u.leave_room
             end
             publish_async("presence-rooms", "rooms_change", {})
-            room.users = []
             puts "Deactivated room #{room_id}"
           end
         end
@@ -48,9 +41,7 @@ class PusherController < ApplicationController
           when 'channel_occupied'
           when 'channel_vacated'
             user = User.find(user_id)
-            if user.room_id != 0 
-              user.update_attributes({room_id: 0, status: 0})
-            end
+            user.leave_room
           end
         end
 

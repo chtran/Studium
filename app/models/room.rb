@@ -6,6 +6,7 @@ class Room < ActiveRecord::Base
   has_many :users
   has_many :histories
   validates :room_mode_id, presence: true
+  attr_accessible :title, :room_mode_id
 
   # Input: a number indicating some status
   # Return: true if every user in the room has the given status, false otherwise
@@ -17,6 +18,10 @@ class Room < ActiveRecord::Base
       user_id: self.users.collect {|u| u.id}
     ).group(:user_id).count.max
     return User.find(owner_array[0]) if owner_array
+  end
+
+  def deactivate
+    self.update_attribute(:active, false)
   end
 
   def status_checker(i)

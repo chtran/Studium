@@ -2,7 +2,7 @@
   %div.accordion-heading
     %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
       %div.row-fluid
-        %div.span2
+        %div.span2.profile_image
           - if room.owner and room.owner.profile.image
             =image_tag(room.owner.profile.image)
         %div.span8

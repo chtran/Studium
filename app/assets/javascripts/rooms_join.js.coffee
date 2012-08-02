@@ -7,7 +7,7 @@ $(->
     # Get room_id from gon
     room_id = gon.room_id
     user_id = gon.user_id
-    
+
     channel = client.subscribe("presence-room_"+room_id)
     rooms_channel = client.subscribe("presence-rooms")
     user_channel = client.subscribe("user_" + gon.user_id)
@@ -95,6 +95,7 @@ $(->
         success: (data) ->
           if data.message
             alert(data.message)
+            window.onbeforeunload=null
             window.location.replace("/rooms")
           else
             if data.question_image_url!=""
@@ -106,7 +107,7 @@ $(->
             $("#choices").html(data.question_choices)
             if data.paragraph != ""
               if !$("#paragraph").length
-                $("#question_container").prepend("<div class='span6 prettyprint pre-scrollable linenums' id='paragraph'></div>")
+                $("#current_question").append("<div class='span6 prettyprint pre-scrollable linenums' id='paragraph'></div>")
               $("#paragraph").html(data.paragraph).show()
             else
               $("#paragraph").remove()
@@ -218,14 +219,20 @@ $(->
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $(".question_active #choices .each_choice").live("click", ->
+    $(".question_active .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
+
+      # For vocab reading questions
+      # There can be multiple blanks -> get the array of all the blanks
       contents = $(this).find(".choice_content").text().split("..")
       count = 1
       for content in contents
         $("#blank_"+count).val(content)
         count++
+
+
+
       $("#confirm").show()
       true
     )
@@ -283,6 +290,13 @@ $(->
         $("#chat .chat_message").val("")
     )
 
+    # stats about users popover when users' div are hovered in users_list
+#    $("a[rel=popover]").popover()
+    $('.hover-data').popover(
+      selector: '.user_component',
+      placement: 'left'
+    )
+    
     # When unload
     warning=true
     window.onbeforeunload= ->

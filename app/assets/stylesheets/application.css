@@ -13,7 +13,7 @@
 .mycontainer {
   margin-top: 20px;
 }
-i{
+.navbar i{
   font-size: 25px;
 }
 .navbar-inner .span4 {
@@ -32,5 +32,4 @@ i{
 .mydropdown-nav small{
   font-size: 12px;
 }
-
 

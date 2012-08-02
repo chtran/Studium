@@ -9,8 +9,7 @@ class RoomsController < ApplicationController
     @top_users = User.joins(:profile).order("exp DESC").limit(5)
     gon.user_id = current_user.id
     @new_room = Room.new
-    #current_user.update_attribute(:status,0) unless current_user.status==0
-    #current_user.update_attribute(:room_id,0) unless current_user.room_id==0
+    current_user.update_attribute(:status,0) unless current_user.status==0
   end
 
   # Request type: POST
@@ -19,10 +18,6 @@ class RoomsController < ApplicationController
   def room_list
     @rooms = Room.where(:active => true)
     render partial: "room_list"
-  end
-
-  def new
-    @room = Room.new
   end
 
   def create
@@ -42,18 +37,22 @@ class RoomsController < ApplicationController
 
   def join
     @room = Room.find params[:room_id]
-    gon.user_id = current_user.id
-    gon.room_id = @room.id
-    current_user.update_attributes({
-      room_id: @room.id,
-      status: 0
-    })
-    gon.observing = (@room.users.count==1).to_s
-    choose_question!(@room) if !@room.question
-    publish_async("presence-room_#{@room.id}","users_change", {})
-    publish_async("presence-rooms", "update_recent_activities", {
-      message: "#{current_user.name} has joined room #{@room.title}"
-    })
+    if @room.active?
+      gon.user_id = current_user.id
+      gon.room_id = @room.id
+      current_user.update_attributes({
+        room_id: @room.id,
+        status: 0
+      })
+      gon.observing = (@room.users.count==1).to_s
+      choose_question!(@room) if !@room.question
+      publish_async("presence-room_#{@room.id}","users_change", {})
+      publish_async("presence-rooms", "update_recent_activities", {
+        message: "#{current_user.name} has joined room #{@room.title}"
+      })
+    else
+      redirect_to rooms_path,alert: "The room you were looking for has been deactivated"
+    end
 
   rescue ActiveRecord::RecordNotFound
     redirect_to rooms_path,alert: "The room you were looking for could not be found."
@@ -195,24 +194,6 @@ class RoomsController < ApplicationController
         end
       }
     end
-
-    current_user.update_attributes({room_id: 0, status: 0})
-  end
-
-  # Request type: POST
-  # Other users kicking some user (because he closed his window)
-  # Effect: Kick the user from the room (set room_id and status to 0)
-  #         Publish users_change event
-  def kick
-#    user = User.find(params[:user_id])
-#    room = Room.find(params[:room_id])
-#    user.update_attributes({room_id: 0, status: 0})
-#    publish_async("presence-room_#{room.id}", "users_change", {})
-#    publish_async("presence-rooms", "leave_room_recent_activities", {
-#      room_title: room.title,
-#      user_name: user.name
-#    })
-#    render :text => "Kicked", :status => '200'
   end
 
   # Input: question_id
@@ -305,20 +286,18 @@ class RoomsController < ApplicationController
   end
   # Generate new questions for the input room when it run out of buffer questions
   def generate_questions!(room)
-    room_questions = room.room_mode.generate_questions(room)
-    room.questions = room_questions.all
-    return room_questions.empty? ? false : room_questions
+    room.questions = room.room_mode.generate_questions(room)
   end
 
   # Choose new question from buffer questions
   def choose_question!(room)
     questions = room.questions.empty? ? generate_questions!(room) : room.questions
     # Temporarily choose a random question from buffer
-    if !questions
-      room.update_attribute(:question_id, 0)
+    if questions.empty?
+      room.update_attribute(:question_id, nil)
       return false
     end
-    next_question = questions.order('RANDOM()').first
+    next_question = questions.first
     # Delete the next_question from the buffer
     QuestionsBuffer
       .where({room_id: room.id, question_id:next_question.id})
@@ -335,16 +314,10 @@ class RoomsController < ApplicationController
   end
 
   def leave_room
-    room=current_user.room
-    current_user.room=nil
-    current_user.save
-
-    if room.users.length==0
-      room.destroy
-    end
-
+    current_user.leave_room
     # Update room list for other people
     publish_async("presence-rooms", "rooms_change", {})
+    render text: "OK", status: "200"
   end
 
 end

@@ -37,7 +37,7 @@ class String
     count=0
     while result=~/(.*?)<bl \/>(.*)/m
       count+=1
-      result=$1+%Q[<input type="text" id="blank_#{count}" class="span3 focused" style="display:inline" />]+$2
+      result=$1+%Q[<input type="text" id="blank_#{count}" class="span3 focused" style="display:inline; text-align:center" />]+$2
       result.gsub!(/\n/,"")
     end
     
@@ -79,7 +79,7 @@ class String
         choice_letter="D" if count==4
         choice_letter="E" if count==5
 
-        result=$1+%Q[<span id="question_#{question_id}_underline_#{choice_letter}"><u>]+$2+%Q[</u></span>]+$3
+        result=$1+%Q[<span id="underline_#{choice_letter}"><u>]+$2+%Q[</u></span>]+$3
         count+=1
       end
     end
