@@ -12,7 +12,7 @@
           %small= time_ago_in_words(room.created_at) + " ago"
   %div.accordion-body.collapse{id: "room_#{room.id}"}
     %div.accordion-inner
-      %div.span6
+      %div.span8
         %dl.dl-horizontal
           %dt Created at
           %dd= room.created_at.localtime
@@ -25,5 +25,6 @@
                   %td= order
                   %td= user.profile.first_name+" "+user.profile.last_name
                   - order+= 1
-      %div.span6
-        = link_to "Join", room_join_path(room), {class: "btn btn-primary"}
+      %div.span2
+      %div.span2
+        = link_to "Join", room_join_path(room.id), {class: "btn btn-primary"}

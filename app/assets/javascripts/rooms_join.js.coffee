@@ -105,12 +105,14 @@ $(->
             $("#prompt").html(data.question_prompt)
             $("#choices").html(data.question_choices)
             if data.paragraph != ""
+              if !$("#paragraph").length
+                $("#question_container").prepend("<div class='span6 prettyprint pre-scrollable linenums' id='paragraph'></div>")
               $("#paragraph").html(data.paragraph).show()
             else
-              $("#paragraph").hide()
+              $("#paragraph").remove()
             $("#ready").hide()
             $("#current_question").addClass("question_active")
-            setup_timer(60,confirm_answer)
+            setup_timer(600,confirm_answer)
       })
       true
 
@@ -200,7 +202,7 @@ $(->
       })
       # Set question the first time
     
-    if $("#observing").attr("reload") == "true"
+    if gon.observing == "true"
       current_question_id = $("#question_container").attr("question_id")
       change_question(current_question_id)
     else
@@ -216,7 +218,7 @@ $(->
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $(".question_active#current_question #choices .each_choice").live("click", ->
+    $("#choices .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
       contents = $(this).find(".choice_content").text().split("..")
@@ -229,7 +231,7 @@ $(->
     )
 
     # User confirming the answer
-    $(".question_active#current_question #confirm").live("click", ->
+    $("#confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
       choice_id = $(".question_active#current_question .each_choice.btn-primary").attr("id")
       confirm_answer(choice_id)
