@@ -54,6 +54,9 @@ class RoomsController < ApplicationController
     publish_async("presence-rooms", "update_recent_activities", {
       message: "#{current_user.name} has joined room #{@room.title}"
     })
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to rooms_path,alert: "The room you were looking for could not be found."
   end
 
   # Request type: POST
