@@ -331,7 +331,6 @@ class RoomsController < ApplicationController
   end
 
   def leave_room
-    debugger
     room=current_user.room
     current_user.room=nil
     current_user.save
@@ -339,6 +338,9 @@ class RoomsController < ApplicationController
     if room.users.length==0
       room.destroy
     end
+
+    # Update room list for other people
+    publish_async("presence-rooms", "rooms_change", {})
   end
 
 end
