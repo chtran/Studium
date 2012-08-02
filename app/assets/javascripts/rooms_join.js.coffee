@@ -95,6 +95,7 @@ $(->
         success: (data) ->
           if data.message
             alert(data.message)
+            window.onbeforeunload=null
             window.location.replace("/rooms")
           else
             if data.question_image_url!=""
@@ -106,7 +107,7 @@ $(->
             $("#choices").html(data.question_choices)
             if data.paragraph != ""
               if !$("#paragraph").length
-                $("#question_container").prepend("<div class='span6 prettyprint pre-scrollable linenums' id='paragraph'></div>")
+                $("#current_question").append("<div class='span6 prettyprint pre-scrollable linenums' id='paragraph'></div>")
               $("#paragraph").html(data.paragraph).show()
             else
               $("#paragraph").remove()

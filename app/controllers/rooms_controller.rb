@@ -285,20 +285,18 @@ class RoomsController < ApplicationController
   end
   # Generate new questions for the input room when it run out of buffer questions
   def generate_questions!(room)
-    room_questions = room.room_mode.generate_questions(room)
-    room.questions = room_questions.all
-    return room_questions.empty? ? false : room_questions
+    room.questions = room.room_mode.generate_questions(room)
   end
 
   # Choose new question from buffer questions
   def choose_question!(room)
     questions = room.questions.empty? ? generate_questions!(room) : room.questions
     # Temporarily choose a random question from buffer
-    if !questions
-      room.update_attribute(:question_id, 0)
+    if questions.empty?
+      room.update_attribute(:question_id, nil)
       return false
     end
-    next_question = questions.order('RANDOM()').first
+    next_question = questions.first
     # Delete the next_question from the buffer
     QuestionsBuffer
       .where({room_id: room.id, question_id:next_question.id})
