@@ -284,6 +284,13 @@ $(->
         $("#chat .chat_message").val("")
     )
 
+    # stats about users popover when users' div are hovered in users_list
+#    $("a[rel=popover]").popover()
+    $('.hover-data').popover(
+      selector: '.user_component',
+      placement: 'left'
+    )
+    
     # When unload
     warning=true
     window.onbeforeunload= ->

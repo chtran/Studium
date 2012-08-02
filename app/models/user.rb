@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   def self.return_hash_data
     self.all.collect do |u| {
-      "name" => u.name,
+      "name" => u.name + '  (' + u.email + ')',
       "id" => u.id
     }
     end
