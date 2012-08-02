@@ -91,6 +91,14 @@ class RoomsController < ApplicationController
           publish_async("presence-rooms", "update_recent_activities", {
             message: news
           })
+
+          message=render_to_string partial: "badges/badge_notification",locals: {badge: badge}
+          publish_async("user_#{current_user.id}","notification",{
+            title: "Got new badge",
+            message: message,
+            type: "success"
+          })
+
         end
       end
     end
