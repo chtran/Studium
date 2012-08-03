@@ -13,8 +13,8 @@ class Sc < Thor
     puts "Solution: " if verbose
     lines.each do |line|
       if line=~/^(\d+)\.\s*(.*)$/
-        solution[$1]=$2.upcase
-        puts "Question #{$1}: #{solution[$1]}" if verbose
+        solution[$1.to_i]=$2.upcase
+        puts "Question #{$1.to_i}: #{solution[$1]}" if verbose
       end
     end
     file=File.open filename,"r"
@@ -23,11 +23,12 @@ class Sc < Thor
     question = nil
     num = nil
     prompt = nil
+    choice = nil
 
     lines.each do |line|
-      if line=~/^(\d+)\.\s*(.*)$/
+      if line=~/^(\d+)\.?\s*(.*)$/
         question = question_type.questions.new
-        num = $1
+        num = $1.to_i
         puts "Creating Question #{num}" if verbose
         prompt = $2.strip.gsub(/-+/,"<bl />")
         puts "Prompt: #{prompt}" if verbose
@@ -53,6 +54,7 @@ class Sc < Thor
           question = nil
           num = nil
           choice = nil
+          prompt = nil
         end
       end
 
