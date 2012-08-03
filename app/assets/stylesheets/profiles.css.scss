@@ -2,20 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #profile-info  li a{
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 
 }
 
 #profile-info{
   margin-right: 0px;
   margin-left: 70px;
+  padding-left: 30px;
+  border-left: 1px solid #DDD;
 }
 
 .tab-content{
   padding-top: 40px;
   padding-left: 15px;
+  border-top: 1px solid #DDD;
+  border-right: 1px solid #DDD;
 }
+
+
 
 .line-big{
   height: 100px;
@@ -34,7 +40,9 @@
   padding-bottom: 2px;
   padding-left: 2px;
   padding-right: 2px;
-  width: 480px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  width: 700px;
   overflow: hidden;
   background: #000000;
   background: rgba(0, 0, 0, 0.8);
@@ -67,5 +75,14 @@
 
 .arrow-container{
   float:left;
-  padding-top: 40px;
+  margin-top: 40px;
+}
+
+#profile-content{
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.status-container{
+  margin-left: 30px;
 }
