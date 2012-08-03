@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   validates :title,:prompt, :question_type_id, presence: true
   validates :prompt,uniqueness: true
   validate :contains_correct_choice
+  validate :sentence_completion_contains_blank
 
   belongs_to :paragraph
   belongs_to :question_type
@@ -37,6 +38,15 @@ class Question < ActiveRecord::Base
       end
     end
   end
+
+  def sentence_completion_contains_blank
+    has_blank = self.prompt=~/<bl \/>/
+    if self.question_type.type_name=="Sentence Completion" and !has_blank 
+      errors.add(:blank, "Sentence completion must have at least one blank")
+    end
+  end
+
+
 
   def correct_choices
     self.choices.where(correct: true)
