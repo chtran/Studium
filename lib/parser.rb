@@ -5,6 +5,17 @@ class String
         .blank
         .linebreak(options[:is_passage])
         .underline(options[:question_id])
+        .parse_latex
+  end
+
+  def parse_latex
+    result=self
+
+    while result=~/(.*)<latex>(.*?)<\/latex>(.*)/m
+      result=$1+"<script type=\"math/tex; mode=display\">"+$2+"</script>"+$3
+    end
+
+    result
   end
 
   def highlight_render(question_id)

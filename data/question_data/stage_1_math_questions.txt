@@ -1,0 +1,499 @@
+Question: Math(Math (Multiple Choice))
+Prompt: How many numbers are shared by the two sets below? <br /><br />Set A: 2,5,8,13,18<br/>Set B: 3,4,5,9,11,14,18
+Title: Math Q1
+Choice A: Zero
+Choice B_correct: Two
+Choice C: Five
+Choice D: Seven
+Choice E: Twelve
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In the number 0.257, which of the following does the digit 7 represent?
+Title: Math Q2
+Choice A: <latex>7\times\frac{1}{10}</latex>
+Choice B: <latex>7\times\frac{1}{100}</latex> 
+Choice C_correct: <latex>7\times\frac{1}{1000}</latex>
+Choice D: <latex>7\times\frac{1}{10000}</latex>
+Choice E: <latex>7\times\frac{1}{100000}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If 5p + m = 7 and m = 7, what is the value of p?
+Title: Math Q3
+Choice A_correct: <latex>0</latex>
+Choice B: <latex>\frac{1}{5}</latex> 
+Choice C: <latex>\frac{2}{5}</latex>
+Choice D: <latex>\frac{7}{5}</latex>
+Choice E: <latex>\frac{14}{5}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: There are 20 packages of bagels on a shelf in a store and each package contains the same number of bagels. If 3 of these packages contain a total of 18 bagels. How many bagels are there in 7 of these packages?
+Title: Math Q4
+Choice A: 21
+Choice B: 36
+Choice C: 40
+Choice D_correct: 42
+Choice E: 49
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If xyz = z and the value of x is 0, which of the following must be true?
+Title: Math Q5
+Choice A: y = 0
+Choice B_correct: z = 0
+Choice C: xy = 1
+Choice D: y = 1
+Choice E: z = 1
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The price of a certain type of cherry can range from $2.50 to $3.00 per pound, and the price of a certain type of roll can range from $0.80 to $1.10 per dozen. To be sure of having enough money to buy c pounds of these cherries and r dozens of these rolls, a person needs at least how many dolars, in terms of c and r?
+Title: Math Q6
+Choice A: <latex>\frac{c + r}{3 + 1.1}</latex>
+Choice B: <latex>\frac{c}{3} + \frac{r}{1.1}</latex> 
+Choice C_correct: <latex>2.5c + 0.8r</latex>
+Choice D: <latex>3c + 1.1r</latex>
+Choice E: <latex>(3 + 1.1)(c + r)</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: 30 is divisible by all of the following EXCEPT:
+Title: Math Q7
+Choice A: 3
+Choice B: 5
+Choice C: 6
+Choice D: 10
+Choice E_correct: 14
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A new college student is randomly assigned to one of 120 dorm rooms. The student has an equal chance of receiving each of the rooms as an assignment. If exactly 24 of the rooms are painted yellow, what is the probability that the student will be assigned a room that is painted yellow?
+Title: Math Q8
+Choice A: <latex>\frac{1}{3}</latex>
+Choice B: <latex>\frac{1}{4}</latex> 
+Choice C_correct: <latex>\frac{1}{5}</latex>
+Choice D: <latex>\frac{1}{24}</latex>
+Choice E: <latex>\frac{1}{120}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If a + b = 5, what is the value of a + b - 7?
+Title: Math Q9
+Choice A_correct: -2
+Choice B: 0
+Choice C: 2
+Choice D: 4
+Choice E: 5
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Note: Figure not drawn to scale. <br />In the figure provided, segments AD, BE, and CF intersect at point O. If the measure of angle FOA is 90° and BE bisects angle AOC, what is the measure of angle DOE?
+Title: Math Q10
+Choice A: <latex>35$^\circ$</latex>
+Choice B_correct: <latex>45$^\circ$</latex> 
+Choice C: <latex>55$^\circ$</latex>
+Choice D: <latex>65$^\circ$</latex>
+Choice E: <latex>75$^\circ$</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: It costs Billy $20 for a pass to get into the amusement park, plus $3 every time he goes on a ride. Assuming Billy only spends money on a pass and rides, which of the following expressions represents the total amount of money Billy will spend during one trip to the amusement park if he goes on n rides?
+Title: Math Q11
+Choice A: 23n
+Choice B: 20 + n
+Choice C: (20 + n)3
+Choice D: 20n + 3
+Choice E_correct: 20 + 3n
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The chart to the left shows a breakdown of the type of pets registered in a small town. Every dot in the chart represents the same number of animals. If there were 50 registered dogs, how many cats were registered?
+Title: Math Q12
+Choice A: 28
+Choice B: 30
+Choice C_correct: 35
+Choice D: 40
+Choice E: 42
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A certain integer, n, is both less than 80 and divisible by three. What is the greatest possible value of n?
+Title: Math Q13
+Choice A: 75
+Choice B: 76
+Choice C: 77
+Choice D_correct: 78
+Choice E: 79
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A figure's axis of symmetry is a line such that if the figure were folded in half across it, the two halves would be identical. As shown in the figure provided, the number 0 has at least two different axes of symmetry. Which of the following numbers also has at least two different axes of symmetry? 
+Title: Math Q14
+Choice A: 2
+Choice B: 3
+Choice C: 5
+Choice D_correct: 8
+Choice E: 9
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In a class of n students, the number of girls is one more than the number of boys. What is the number of girls in the class, in terms of n?
+Title: Math Q15
+Choice A: <latex>\frac{n}{2}</latex>
+Choice B: <latex>\frac{n}{2} + 1</latex> 
+Choice C_correct: <latex>\frac{(n + 1)}{2}</latex>
+Choice D: <latex>\frac{(2n + 1)}{2}</latex>
+Choice E: <latex>\frac{(n - 1)}{2}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The table to the left shows how many restaurants in a city were rated at 0, 1, 2, 3, or 4 stars. One restaurant ceased operations, and the average number of stars became equal to the median number of stars. How many stars did the restaurant that closed have?
+Title: Math Q16
+Choice A: 0
+Choice B: 1
+Choice C_correct: 2
+Choice D: 3
+Choice E: 4
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The first term of an arithmetic sequence is 7, and the common difference between terms is 5. The nth term of the sequence is equal to 87. <br />What is the value of n?
+Title: Math Q17
+Choice A: 5
+Choice B: 7
+Choice C: 16
+Choice D_correct: 17
+Choice E: 18
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Alfred has drawn the figure to the left, in which lines m, n, and p intersect at the same point. Which of the following pairs of angle measures would NOT allow him to determine the value of a?
+Title: Math Q18
+Choice A_correct: b and e
+Choice B: b and c
+Choice C: c and e
+Choice D: b and f
+Choice E: e and f
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If 5y - 6 = 24, then 3y + 2 =
+Title: Math Q19
+Choice A: 6
+Choice B: 9
+Choice C: 18
+Choice D_correct: 20
+Choice E: 24
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The Spartans have a total of 9 wrestlers on their team. To be eligible to compete in their weight class, a wrestler must weigh between 130 and 150 lbs. The combined weight of the entire team could be which of the following?
+Title: Math Q20
+Choice A: 1000 lbs
+Choice B: 1100 lbs
+Choice C_correct: 1200 lbs
+Choice D: 1400 lbs
+Choice E: 2520 lbs
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The figure provided represents a triangular pool. Malcolm marks the deep end of the pool by tying a rope to point C. He then connects the rope to point M (not shown) on side AB so that CM is perpendicular to AB. If the rope contains no slack, which of the following could be its length in the water?
+Title: Math Q21
+Choice A_correct: 4
+Choice B: 5
+Choice C: 6
+Choice D: 7
+Choice E: 8
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In the figure to the left, what is the measure of angle C, in degrees?
+Title: Math Q22
+Choice A: 20
+Choice B: 30
+Choice C: 36
+Choice D: 50
+Choice E_correct: 60
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: On a hot summer day, Mary sold 56 cups of lemonade. She sold <latex>\frac{1}{8}</latex>  of the lemonade before lunch,<latex>\frac{1}{4}</latex>  during lunch,<latex>\frac{1}{7}</latex> in the afternoon, and the remaining cups in the evening?
+Title: Math Q23
+Choice A: 7 cup
+Choice B: 8 cups
+Choice C: 14 cups
+Choice D_correct: 27 cups
+Choice E: 29 cups
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If 5 more than half a certain number is 1 less than the number, what is the number?
+Title: Math Q24
+Choice A: -6
+Choice B: 7
+Choice C: 11
+Choice D_correct: 12
+Choice E: 16
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: When n is added to a set of numbers, the average (arithmetic mean) of the new set is equal to n. If the original set was {5, 5, 8, 18}, what is the value of n?
+Title: Math Q25
+Choice A: 5
+Choice B: 6
+Choice C: 8
+Choice D_correct: 9
+Choice E: 10
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: The average (arithmetic mean) weight of Joe and Larry is 155 lbs. The average weight drops to 142 lbs when Sarah joins the group. How much does Sarah weigh?
+Title: Math Q26
+Choice A: 109 lbs
+Choice B_correct: 116 lbs
+Choice C: 123 lbs
+Choice D: 130 lbs
+Choice E: 157 lbs
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: According to the graph provided, which of the cities had the greatest increase in population from 2004 to 2005?
+Title: Math Q27
+Choice A_correct: Albion
+Choice B: Benton
+Choice C: Columbia
+Choice D: Dixon 
+Choice E: Evanston 
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Chrissy has a square sandbox that is 6 x 6 ft. Inside this sandbox is a built-in square toy chest with a side length of x feet.. Which of the following represents the area of the sandbox, not including the chest?
+Title: Math Q28
+Choice A: <latex>12 - 2x</latex>
+Choice B: <latex>12 - x^{2}</latex> 
+Choice C: <latex>36 - 2x</latex>
+Choice D: <latex>x^{2} - 36</latex>
+Choice E_correct: <latex>36 - x^{2} </latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>9^{x+1} = 3^{x+6}</latex>, then x must equal
+Title: Math Q29
+Choice A: 1
+Choice B: 2
+Choice C: 3
+Choice D_correct: 4
+Choice E: 5
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A junkyard pays customers at a flat rate for their cars based upon the number of used parts it can resell. The total payment P, in dollars, is determined by <latex>P(x) = \frac{x + 27}{.05}</latex>, where x is the number of usable parts. How many functioning parts must a car ha
+Title: Math Q30
+Choice A: 19
+Choice B_correct: 23
+Choice C: 50
+Choice D: 66
+Choice E: 77
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Sally is playing a computer game that she can win by correctly identifying a set of 3 numbers. The game gives her the following hints: At least two of the numbers are odd. Exactly two of the numbers are divisible by 3. None of the numbers is divisible by 9. Which of the following sets of numbers could be Sally’s correct choice?
+Title: Math Q31
+Choice A: {24,17,27}
+Choice B_correct: {15,20,39}
+Choice C: {21,35,11}
+Choice D: {17,32,36}
+Choice E: {33,16,24}
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If y > 5, which of the following equations is equivalent to <latex>y - 5 = \sqrt{(y+3)}</latex>?
+Title: Math Q32
+Choice A: <latex>y = y{^2}</latex>
+Choice B: <latex>y = y{^2} + 22</latex>
+Choice C: <latex>y = y{^2} - 10y</latex>
+Choice D_correct: <latex>y = y{^2} - 10y + 22</latex>
+Choice E: <latex>y = y{^2} - 10y + 28</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Steven counts the number of jellybeans in a jar. If the number is odd, he doubles the number by adding more jellybeans, and if the number is even, he does nothing. After Steven has counted the jellybeans and made any adjustments, there are 34 jellybeans in the jar. Which of the following numbers could possibly represent the original number of jellybeans? <br />I. 17 <br />II. 34 <br />III. 68
+Title: Math Q33
+Choice A: I only
+Choice B: II only
+Choice C_correct: I and II only
+Choice D: I and III only
+Choice E: I, II, and III
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A scientist has recorded some experimental data in terms of hours and minutes, but now he would like to convert it all to minutes. If a reaction took h hours and m minutes, how many minutes did it take?
+Title: Math Q34
+Choice A: <latex>60(h + m)</latex>
+Choice B_correct: <latex>60h + m</latex>
+Choice C: <latex>h + 60m</latex>
+Choice D: <latex>\frac{(h + m)}{60}</latex>
+Choice E: <latex>\frac{h + m}{60}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: What are all the possible values of y that satisfy the equation (3 – y)(3y – 6) = 0?
+Title: Math Q35
+Choice A: 0 only
+Choice B: 2 only
+Choice C: 3 only
+Choice D_correct: 2 and 3 only
+Choice E: 0, 2, and 3
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>a^{5} = b^{15}</latex>, what is the value of a expressed in terms of b?
+Title: Math Q36
+Choice A: <latex>b^{\frac{1}{3}}</latex>
+Choice B_correct: <latex>b^{3}</latex>
+Choice C: <latex>b^{5}</latex>
+Choice D: <latex>b^{10}</latex>
+Choice E: <latex>b^{75}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Jake and Amanda sit in the same straight line row in class. They sit exactly 6 feet apart. If Jake sits 3 feet from Ted, which of the following could be true? <br />I. Ted sits 9 feet from Amanda. <br />II. Ted sits 3 feet from Amanda. <br />III. Ted sits 3 root 5 feet from Amanda.
+Title: Math Q37
+Choice A: I only
+Choice B: II only
+Choice C: III only
+Choice D: I and II only
+Choice E_correct: I, II, and III
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>\frac{3a + 3b}{5x - 5y} = \frac{1}{5}</latex>, then <latex>\frac{12a + 12b}{15x - 15y} must equal
+Title: Math Q38
+Choice A: <latex>\frac{4}{5}</latex>
+Choice B: <latex>\frac{4}{9}</latex>
+Choice C_correct: <latex>\frac{4}{15}</latex> 
+Choice D: <latex>\frac{1}{5}</latex>
+Choice E: <latex>\frac{3}{20}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Highland High School lies exactly halfway between the East and West bridges of town. Piggy's Pizza lies halfway between the high school and the East bridge. Paul's sub shop lies somewhere between the high school and the West bridge. All buildings form a straight line from the East bridge to the West Bridge. If Paul's is 8 miles from the West Bridge and Piggy's is 13 miles from the East bridge, how far is it from Paul's to Piggy's?
+Title: Math Q39
+Choice A: 10
+Choice B: 18
+Choice C: 26
+Choice D_correct: 31
+Choice E: 44
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In the set all of numbers 1 to 80, inclusive, how many numbers are NOT perfect squares?
+Title: Math Q40
+Choice A: 8
+Choice B: 27
+Choice C: 40
+Choice D: 70
+Choice E_correct: 72
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A series of consecutive integers ranges from -17 to k. If the sum of the series is 78, what is the value of k?
+Title: Math Q41
+Choice A: 17
+Choice B_correct: 21
+Choice C: 62
+Choice D: 78
+Choice E: 96
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Bill works at an aquarium. One of the exhibits is being redone. The old structure is a rectangular solid measuring 9ft long x 4ft wide x 1ft high. After Bill cleans out the exhibit, the tank is half full with only water. If Bill is to pour this water into an empty tank with the dimensions 6ft long x 2ft wide x 3ft high, how high will the water reach in the new tank?
+Title: Math Q42
+Choice A: <latex>\frac{1}{2} ft</latex>
+Choice B: <latex>1 ft</latex>
+Choice C_correct: <latex>1.5 ft</latex> 
+Choice D: <latex>3 ft</latex>
+Choice E: <latex>4.5 ft</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If a, b and x are to be assigned distinct values from the set of numbers containing the integers 3, 4, and 5, how many unique values will be possible for the expression <latex>x^{(a + b)}</latex>?
+Title: Math Q43
+Choice A_correct: Three
+Choice B: Four
+Choice C: Five
+Choice D: Seven
+Choice E: Ten
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If a is a positive integer such that <latex>a^{4} = h</latex> and <latex>a^{6} = g</latex>, which of the following must equal <latex>a^{14}</latex>?
+Title: Math Q44
+Choice A: <latex>8h + g</latex>
+Choice B_correct: <latex>gh^{2}</latex>
+Choice C: <latex>g + 8</latex> 
+Choice D: <latex>h^{2} - g</latex>
+Choice E: <latex>g^{4} - 10</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>y = \frac{4(x + 3)}{b}</latex>, then x + 3 must equal
+Title: Math Q45
+Choice A_correct: <latex>\frac{by}{4}</latex>
+Choice B: <latex>4by</latex>
+Choice C: <latex>\frac{4}{by}</latex> 
+Choice D: <latex>\frac{b}{3} - y</latex>
+Choice E: <latex>\frac{b}{4} + y</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: For this system of equations, which of the following must be true?<br />xy = 1<br />xyz = 14<br />xyzt = 7<br/>rxy = 0
+Title: Math Q46
+Choice A: <latex>x = \frac{1}{2}</latex>
+Choice B: <latex>y = 0</latex>
+Choice C_correct: <latex>r = 0</latex> 
+Choice D: <latex>t = 2</latex>
+Choice E: <latex>z = -14</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>3 + \frac{3}{4} = y + \frac{y}{4}</latex> then y could =
+Title: Math Q47
+Choice A: <latex>\frac{1}{4}</latex>
+Choice B: <latex>\frac{1}{3}</latex>
+Choice C: <latex>1</latex> 
+Choice D: <latex>\frac{4}{3}</latex>
+Choice E_correct: <latex>3</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If two straight lines cross at a single point in space and keep going, what is the sum of their intersecting angles?
+Title: Math Q48
+Choice A: 90
+Choice B: 180
+Choice C_correct: 360
+Choice D: 480
+Choice E: Cannot be determined from the given information.
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: 3, 7, 8, 2, 9, 3, 7, 8, 2, 9, 3, 7, 8, 2, 9, ... <br />If the above sequence is repeated indefinitely, what will be the product of its 54th and 121st term?
+Title: Math Q49
+Choice A_correct: 6
+Choice B: 18
+Choice C: 27
+Choice D: 81
+Choice E: Cannot be determined from the given information.
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Mary is a personal trainer. She is scheduled to see 4 clients today. Each session is <latex>1\frac{1}{4}</latex> hours long and Mary needs 15 minutes after each session to fill out paperwork. If lunch is 1 hour long and Mary has no other breaks throughout the day, what time must she start her first session in order to be done by 3pm?
+Title: Math Q50
+Choice A: 7 am
+Choice B: 7:30 am
+Choice C_correct: 8 am
+Choice D: 8:30 am
+Choice E: 9 am
+<End Question>

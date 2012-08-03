@@ -3,9 +3,9 @@
   %tbody
     - @user_list.each do |user|
       %tr
-        %td.row-fluid.user_component.well.hover-data
-          %div.span3
-            %a
+        %td.row-fluid.user_component.well
+          %a.hover-data{href: "#",rel: "popover",  "data-original-title" => "Quality", "data-content" => "test"}
+            %div.span3
               %div.thumbnail
                 = image_tag(user.profile.image)
           %div.span9

@@ -64,3 +64,4 @@ gem "rack-mini-profiler"
 # Work around; default to rake 0.8.7 because 0.9 breaks rails
 gem "rake","0.9.2.2"
 gem "friendly_id"
+gem "mathjax-rails"
