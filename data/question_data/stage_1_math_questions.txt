@@ -17,3 +17,13 @@ Choice C_correct: <latex>7\times\frac{1}{1000}</latex>
 Choice D: <latex>7\times\frac{1}{10000}</latex>
 Choice E: <latex>7\times\frac{1}{100000}</latex>
 <End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>5p + m = 7</latex> and <latex>m = 7</latex>, what is the value of p?
+Title: Math Q3
+Choice A_correct: <latex>0</latex>
+Choice B: <latex>\frac{1}{5}</latex> 
+Choice C: <latex>\frac{2}{5}</latex>
+Choice D: <latex>\frac{7}{5}</latex>
+Choice E: <latex>\frac{14}{5}</latex>
+<End Question>
