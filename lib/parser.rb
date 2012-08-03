@@ -9,11 +9,13 @@ class String
   end
 
   def parse_latex
-    if self=~/<latex>(.+)<\/latex>/m
-      "<script type=\"math/tex; mode=display\">"+$1+"</script>"
-    else
-      self
+    result=self
+
+    while result=~/(.*)<latex>(.*?)<\/latex>(.*)/m
+      result=$1+"<script type=\"math/tex; mode=display\">"+$2+"</script>"+$3
     end
+
+    result
   end
 
   def highlight_render(question_id)
