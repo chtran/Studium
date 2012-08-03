@@ -208,13 +208,18 @@ class RoomsController < ApplicationController
       }
     else
       @question = Question.find(params[:question_id])
+
+      # Question contents, to be returned to the ajax requestor
       question_choices=render_to_string(@question.choices).html_safe
+      question_prompt=@question.prompt.parse(question_id: @question.id,is_passage: false).html_safe
+      paragraph=@question.paragraph ? @question.paragraph.content.parse(question_id: @question.id,is_passage: true).html_safe : ""
+      question_image_url=@question.image_file_name!=nil ? @question.image.url : ""
 
       render json: {
-        question_image_url: @question.image_file_name!=nil ? @question.image.url : "",
-        question_prompt: @question.prompt.parse(question_id: @question.id,is_passage: false).html_safe,
+        question_image_url: question_image_url,
+        question_prompt: question_prompt,
         question_choices: question_choices,
-        paragraph: @question.paragraph ? @question.paragraph.content.parse(question_id: @question.id,is_passage: true).html_safe : ""
+        paragraph: paragraph
       }
     end
   end

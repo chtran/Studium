@@ -114,6 +114,9 @@ $(->
             $("#ready").hide()
             $("#current_question").addClass("question_active")
             setup_timer(600,confirm_answer)
+
+            # Reload MathJax
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub])
       })
       true
 
@@ -129,6 +132,9 @@ $(->
         success: (data) ->
           $("#choices").html(data)
           setup_timer(60, ready)
+
+          # Reload MathJax
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub])
       })
       # Show the ready button
       $("#ready").show()
@@ -222,12 +228,17 @@ $(->
     $(".question_active .each_choice").live("click", ->
       $(this).siblings().removeClass("btn-primary")
       $(this).addClass("btn-primary")
+
+      # For vocab reading questions
       # There can be multiple blanks -> get the array of all the blanks
       contents = $(this).find(".choice_content").text().split("..")
       count = 1
       for content in contents
         $("#blank_"+count).val(content)
         count++
+
+
+
       $("#confirm").show()
       true
     )
@@ -285,6 +296,13 @@ $(->
         $("#chat .chat_message").val("")
     )
 
+    # stats about users popover when users' div are hovered in users_list
+#    $("a[rel=popover]").popover()
+    $('.hover-data').popover(
+      selector: '.user_component',
+      placement: 'left'
+    )
+    
     # When unload
     warning=true
     window.onbeforeunload= ->
@@ -307,7 +325,6 @@ $(->
     $("#quit_modal").modal("show")
   )
 
-    
   # Only execute the above code if the page is rooms_join
   current_controller=gon.current_controller
   current_action=gon.current_action

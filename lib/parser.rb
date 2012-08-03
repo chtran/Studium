@@ -5,6 +5,15 @@ class String
         .blank
         .linebreak(options[:is_passage])
         .underline(options[:question_id])
+        .parse_latex
+  end
+
+  def parse_latex
+    if self=~/<latex>(.+)<\/latex>/m
+      "<script type=\"math/tex; mode=display\">"+$1+"</script>"
+    else
+      self
+    end
   end
 
   def highlight_render(question_id)
@@ -75,7 +84,7 @@ class String
         choice_letter="D" if count==4
         choice_letter="E" if count==5
 
-        result=$1+%Q[<span id="question_#{question_id}_underline_#{choice_letter}"><u>]+$2+%Q[</u></span>]+$3
+        result=$1+%Q[<span id="underline_#{choice_letter}"><u>]+$2+%Q[</u></span>]+$3
         count+=1
       end
     end

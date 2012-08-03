@@ -31,7 +31,7 @@ class Database < Thor
         paragraph=nil
       end
 
-      if line=~/Question:\s?CR\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m
+      if line=~/Question:\s?CR\((.+)\)/m or line=~/Question:\s?WR\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m
         if options[:force]
           type=$1
         else
@@ -40,7 +40,10 @@ class Database < Thor
       end
 
       if line=~/Prompt:\s?(.+)/m
-        question=find_or_create_question_with_type_and_prompt(type,$1.rstrip) if options[:force]
+        if options[:force]
+          question=find_or_create_question_with_type_and_prompt(type,$1.rstrip)
+          question.choices.each &:destroy if question.choices.any?
+        end
         question.prompt=$1.rstrip if question
       end
 
@@ -206,6 +209,8 @@ class Database < Thor
     QuestionType.create! type_name: "Sentence Improvement",category_type: CategoryType.find_by_category_name!("Writing (Multiple Choice)"),need_paragraph: false
     QuestionType.create! type_name: "Error Identification",category_type: CategoryType.find_by_category_name!("Writing (Multiple Choice)"),need_paragraph: false
     QuestionType.create! type_name: "Paragraph Improvement",category_type: CategoryType.find_by_category_name!("Writing (Multiple Choice)"),need_paragraph: true
+    QuestionType.create! type_name: "Math (Multiple Choice)",category_type: CategoryType.find_by_category_name!("Math"),need_paragraph: false
+    QuestionType.create! type_name: "Math (Grid-in)",category_type: CategoryType.find_by_category_name!("Math"),need_paragraph: false
   end
 
   desc "seed_room_modes","seed the database with room modes"

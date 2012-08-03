@@ -2,9 +2,8 @@
   %p= @message
 
 - @choices.each do |choice|
-  %div.row-fluid.btn.each_choice.disabled{id: choice[:data].id.to_s, class: choice[:result]}
-    %div.span2= choice[:data].choice_letter
-    %div.span8= choice[:data].content
+  = render partial: "choices/choice",locals: {choice: choice[:data],choice_class: "disabled #{choice[:result]}"}
+
 :javascript
   $(".correct").addClass("btn-success")
                .append("<div class='span2'><i class='icon-ok icon-white' /></div>")
