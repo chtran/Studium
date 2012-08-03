@@ -31,7 +31,7 @@ class Database < Thor
         paragraph=nil
       end
 
-      if line=~/Question:\s?CR\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m
+      if line=~/Question:\s?CR\((.+)\)/m or line=~/Question:\s?Math\((.+)\)/m or line=~/Question:\s?Writing\((.+)\)/m
         if options[:force]
           type=$1
         else
@@ -49,7 +49,7 @@ class Database < Thor
           question.title=$1.rstrip
         elsif line=~/Exp:\s?(.+)/m
           question.exp=$1.rstrip.to_i
-        elsif line=~/Choice (\w)(_correct)?:\s?(.+)/m
+        elsif line=~/Choice (\w)(_correct)?:\s?(.+)/m or line=~/\((\w)\)(_correct)?:?\s?(.+)/m
           choice=question.choices.new
           choice.correct=$2=="_correct" || false
           choice.choice_letter=$1
