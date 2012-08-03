@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!,only: [:increase_reputation]
 
   def show
-    gon.user_id = params[:user_id]
+    gon.user_id = current_user.id
 
     @badges=current_user.badges
   end

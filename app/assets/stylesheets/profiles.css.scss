@@ -1,3 +1,44 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#profile-info  li a{
+  padding-left: 40px;
+  padding-right: 40px;
+
+}
+
+#profile-info{
+  margin-right: 0px;
+  margin-left: 70px;
+}
+
+.tab-content{
+  padding-top: 40px;
+  padding-left: 15px;
+}
+
+.line-big{
+  height: 100px;
+}
+
+.line-small{
+  height: 40px;
+}
+
+#profile-image{
+  
+}
+
+.status{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.arrow{
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-right: 5px solid #000000;
+  border-bottom: 5px solid transparent;
+}
