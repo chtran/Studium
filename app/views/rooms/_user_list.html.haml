@@ -1,9 +1,10 @@
 %table.table.table-condensed
+  <script src= "assets/twitter/bootstrap/bootstrap-popover.js?body=1" type="text/javascript"></script>
   %tbody
     - @user_list.each do |user|
       %tr
         %td.row-fluid.user_component.well
-          %a.hover-data{'rel'=> 'popover',  'data-origin-title' => "Quality", "data-content" => "test"}
+          %a.hover-data{href: "#",rel: "popover",  "data-original-title" => "Quality", "data-content" => "test"}
             %div.span3
               %div.thumbnail
                 = image_tag(user.profile.image)

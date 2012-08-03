@@ -5,10 +5,15 @@ class String
         .blank
         .linebreak(options[:is_passage])
         .underline(options[:question_id])
+        .parse_latex
   end
 
   def parse_latex
-    return "<math>"+self+"</math>"
+    if self=~/<latex>(.+)<\/latex>/m
+      "<script type=\"math/tex; mode=display\">"+$1+"</script>"
+    else
+      self
+    end
   end
 
   def highlight_render(question_id)

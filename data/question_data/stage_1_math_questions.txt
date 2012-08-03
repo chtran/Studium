@@ -11,9 +11,9 @@ Choice E: Twelve
 Question: Math(Math (Multiple Choice))
 Prompt: In the number 0.257, which of the following does the digit 7 represent?
 Title: Math Q2
-Choice A: 7\times\frac{1}{10}
-Choice B: 7\times\frac{1}{100} 
-Choice C_correct: 7\times\frac{1}{1000} 
-Choice D: 7\times\frac{1}{10000} 
-Choice E: 7\times\frac{1}{100000} 
+Choice A: <latex>7\times\frac{1}{10}</latex>
+Choice B: <latex>7\times\frac{1}{100}</latex> 
+Choice C_correct: <latex>7\times\frac{1}{1000}</latex>
+Choice D: <latex>7\times\frac{1}{10000}</latex>
+Choice E: <latex>7\times\frac{1}{100000}</latex>
 <End Question>
