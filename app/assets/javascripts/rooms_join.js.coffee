@@ -298,10 +298,9 @@ $(->
 
     # stats about users popover when users' div are hovered in users_list
 #    $("a[rel=popover]").popover()
-    $('.hover-data').popover(
-      selector: '.user_component',
-      placement: 'left'
-    )
+#    $('.hover-data').popover({
+#      placement: 'left'
+#    })
     
     # When unload
     warning=true
