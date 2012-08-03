@@ -1,6 +1,5 @@
 %div.row-fluid
   %div.span3
-    %div.arrow
     %a.thumbnail#profile-image
       %img{:src => 'http://placehold.it/260x180'}
     %div.tabbable.tabs-left
@@ -16,9 +15,12 @@
           %a{"href" => "#badges", "data-toggle" => "tab"} Badges
         %div.line
   %div.span9
+    %div.arrow-container
+      %div.arrow
     %div.status
-      %div
-        %h1 Sample Status
+      %div.status-content
+        %h3 Sample Status
+
     %div.tab-content
       %div.tab-pane#activities
       %div.tab-pane.active#profile
