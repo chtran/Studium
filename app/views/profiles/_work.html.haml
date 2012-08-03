@@ -1,0 +1,28 @@
+%table.table.table-work
+  %thead
+    %tr
+      %td.about-title
+        %i.icon-briefcase
+        %strong Work and Education
+      %td 
+      %td
+        - if current_user==@user
+          %a.btn.btn-primary#edit-btn
+            %i.icon-edit 
+            Edit
+  %tbody
+    %tr
+      %td.about-subtitle 
+        %strong Employers
+      %td.about-picture
+        %img{:src => 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yS/r/SakaC0tDjfm.png'}
+      %td.about-content
+        %strong Add your employers here 
+    %tr
+      %td.about-subtitle 
+        %strong Schools
+      %td.about-picture
+        %img{:src => 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yS/r/SakaC0tDjfm.png'}
+      %td.about-content
+        %strong Add your School here 
+

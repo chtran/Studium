@@ -8,7 +8,7 @@
         %li
           %a{"href" => "#activities", "data-toggle" => "tab"} Recent Activities
         %li.active
-          %a{"href" => "#profile", "data-toggle" => "tab"} Profile
+          %a{"href" => "#profile", "data-toggle" => "tab"} About 
         %li
           %a{"href" => "#statistics", "data-toggle" => "tab"} Statistics
         %li
@@ -22,23 +22,12 @@
         %div.status-content
           %h3 Sample Status
 
-    %div.tab-content
+    %div.tab-content#profile-details
       %div.tab-pane#activities
-      %div.tab-pane.active#profile
-        - if current_user==@user
-          %i.icon-edit= link_to "Edit",edit_user_profile_path(@user)
-        %br
-        %table.table.table-striped
-          %tr
-            %td Full name
-            %td= @profile.first_name + " " + @profile.last_name
-          %tr
-            %td School
-            %td= @profile.school
-          - if @profile.date_of_birth
-            %tr
-              %td Date of Birth
-              %td= @profile.date_of_birth.strftime '%m/%d/%Y'
+      %div.tab-pane.active.row-fluid#about
+        = render 'work'
+        - if @profile.date_of_birth
+          %td= @profile.date_of_birth.strftime '%m/%d/%Y'
       %div.tab-pane#statistics
       %div.tab-pane#badges
         = link_to "All Badges",badges_path,class: "btn btn-primary"

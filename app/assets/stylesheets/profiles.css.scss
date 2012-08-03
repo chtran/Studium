@@ -21,8 +21,6 @@
   border-right: 1px solid #DDD;
 }
 
-
-
 .line-big{
   height: 100px;
 }
@@ -86,3 +84,41 @@
 .status-container{
   margin-left: 30px;
 }
+
+#edit-btn{
+  float:right;
+}
+
+#profile-details{
+  padding-right: 30px;
+}
+
+#about .about-title strong{
+  color: #333;
+  font-size: 13px;
+}
+
+#about .about-subtitle strong{
+  color: #999;
+  font-size: 13px;
+}
+
+#about tbody td{
+  padding-bottom: 20px;
+}
+
+.about-title{
+  width: 200px;
+}
+
+.about-picture{
+  width: 50px;
+}
+
+.about-content strong{
+  color: #3B5998;
+  font-size: 12px;
+}
+
+
+
