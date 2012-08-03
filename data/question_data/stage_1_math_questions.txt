@@ -297,3 +297,203 @@ Choice C: 50
 Choice D: 66
 Choice E: 77
 <End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Sally is playing a computer game that she can win by correctly identifying a set of 3 numbers. The game gives her the following hints: At least two of the numbers are odd. Exactly two of the numbers are divisible by 3. None of the numbers is divisible by 9. Which of the following sets of numbers could be Sally’s correct choice?
+Title: Math Q31
+Choice A: {24,17,27}
+Choice B_correct: {15,20,39}
+Choice C: {21,35,11}
+Choice D: {17,32,36}
+Choice E: {33,16,24}
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If y > 5, which of the following equations is equivalent to <latex>y - 5 = \sqrt{(y+3)}</latex>?
+Title: Math Q32
+Choice A: <latex>y = y{^2}</latex>
+Choice B: <latex>y = y{^2} + 22</latex>
+Choice C: <latex>y = y{^2} - 10y</latex>
+Choice D_correct: <latex>y = y{^2} - 10y + 22</latex>
+Choice E: <latex>y = y{^2} - 10y + 28</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Steven counts the number of jellybeans in a jar. If the number is odd, he doubles the number by adding more jellybeans, and if the number is even, he does nothing. After Steven has counted the jellybeans and made any adjustments, there are 34 jellybeans in the jar. Which of the following numbers could possibly represent the original number of jellybeans? <br />I. 17 <br />II. 34 <br />III. 68
+Title: Math Q33
+Choice A: I only
+Choice B: II only
+Choice C_correct: I and II only
+Choice D: I and III only
+Choice E: I, II, and III
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A scientist has recorded some experimental data in terms of hours and minutes, but now he would like to convert it all to minutes. If a reaction took h hours and m minutes, how many minutes did it take?
+Title: Math Q34
+Choice A: <latex>60(h + m)</latex>
+Choice B_correct: <latex>60h + m</latex>
+Choice C: <latex>h + 60m</latex>
+Choice D: <latex>\frac{(h + m)}{60}</latex>
+Choice E: <latex>\frac{h + m}{60}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: What are all the possible values of y that satisfy the equation (3 – y)(3y – 6) = 0?
+Title: Math Q35
+Choice A: 0 only
+Choice B: 2 only
+Choice C: 3 only
+Choice D_correct: 2 and 3 only
+Choice E: 0, 2, and 3
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>a^{5} = b^{15}</latex>, what is the value of a expressed in terms of b?
+Title: Math Q36
+Choice A: <latex>b^{\frac{1}{3}}</latex>
+Choice B_correct: <latex>b^{3}</latex>
+Choice C: <latex>b^{5}</latex>
+Choice D: <latex>b^{10}</latex>
+Choice E: <latex>b^{75}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Jake and Amanda sit in the same straight line row in class. They sit exactly 6 feet apart. If Jake sits 3 feet from Ted, which of the following could be true? <br />I. Ted sits 9 feet from Amanda. <br />II. Ted sits 3 feet from Amanda. <br />III. Ted sits 3 root 5 feet from Amanda.
+Title: Math Q37
+Choice A: I only
+Choice B: II only
+Choice C: III only
+Choice D: I and II only
+Choice E_correct: I, II, and III
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>\frac{3a + 3b}{5x - 5y} = \frac{1}{5}</latex>, then <latex>\frac{12a + 12b}{15x - 15y} must equal
+Title: Math Q38
+Choice A: <latex>\frac{4}{5}</latex>
+Choice B: <latex>\frac{4}{9}</latex>
+Choice C_correct: <latex>\frac{4}{15}</latex> 
+Choice D: <latex>\frac{1}{5}</latex>
+Choice E: <latex>\frac{3}{20}</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Highland High School lies exactly halfway between the East and West bridges of town. Piggy's Pizza lies halfway between the high school and the East bridge. Paul's sub shop lies somewhere between the high school and the West bridge. All buildings form a straight line from the East bridge to the West Bridge. If Paul's is 8 miles from the West Bridge and Piggy's is 13 miles from the East bridge, how far is it from Paul's to Piggy's?
+Title: Math Q39
+Choice A: 10
+Choice B: 18
+Choice C: 26
+Choice D_correct: 31
+Choice E: 44
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: In the set all of numbers 1 to 80, inclusive, how many numbers are NOT perfect squares?
+Title: Math Q40
+Choice A: 8
+Choice B: 27
+Choice C: 40
+Choice D: 70
+Choice E_correct: 72
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: A series of consecutive integers ranges from -17 to k. If the sum of the series is 78, what is the value of k?
+Title: Math Q41
+Choice A: 17
+Choice B_correct: 21
+Choice C: 62
+Choice D: 78
+Choice E: 96
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Bill works at an aquarium. One of the exhibits is being redone. The old structure is a rectangular solid measuring 9ft long x 4ft wide x 1ft high. After Bill cleans out the exhibit, the tank is half full with only water. If Bill is to pour this water into an empty tank with the dimensions 6ft long x 2ft wide x 3ft high, how high will the water reach in the new tank?
+Title: Math Q42
+Choice A: <latex>\frac{1}{2} ft</latex>
+Choice B: <latex>1 ft</latex>
+Choice C_correct: <latex>1.5 ft</latex> 
+Choice D: <latex>3 ft</latex>
+Choice E: <latex>4.5 ft</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If a, b and x are to be assigned distinct values from the set of numbers containing the integers 3, 4, and 5, how many unique values will be possible for the expression <latex>x^{(a + b)}</latex>?
+Title: Math Q43
+Choice A_correct: Three
+Choice B: Four
+Choice C: Five
+Choice D: Seven
+Choice E: Ten
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If a is a positive integer such that <latex>a^{4} = h</latex> and <latex>a^{6} = g</latex>, which of the following must equal <latex>a^{14}</latex>?
+Title: Math Q44
+Choice A: <latex>8h + g</latex>
+Choice B_correct: <latex>gh^{2}</latex>
+Choice C: <latex>g + 8</latex> 
+Choice D: <latex>h^{2} - g</latex>
+Choice E: <latex>g^{4} - 10</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>y = \frac{4(x + 3)}{b}</latex>, then x + 3 must equal
+Title: Math Q45
+Choice A_correct: <latex>\frac{by}{4}</latex>
+Choice B: <latex>4by</latex>
+Choice C: <latex>\frac{4}{by}</latex> 
+Choice D: <latex>\frac{b}{3} - y</latex>
+Choice E: <latex>\frac{b}{4} + y</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: For this system of equations, which of the following must be true?<br />xy = 1<br />xyz = 14<br />xyzt = 7<br/>rxy = 0
+Title: Math Q46
+Choice A: <latex>x = \frac{1}{2}</latex>
+Choice B: <latex>y = 0</latex>
+Choice C_correct: <latex>r = 0</latex> 
+Choice D: <latex>t = 2</latex>
+Choice E: <latex>z = -14</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If <latex>3 + \frac{3}{4} = y + \frac{y}{4}</latex> then y could =
+Title: Math Q47
+Choice A: <latex>\frac{1}{4}</latex>
+Choice B: <latex>\frac{1}{3}</latex>
+Choice C: <latex>1</latex> 
+Choice D: <latex>\frac{4}{3}</latex>
+Choice E_correct: <latex>3</latex>
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: If two straight lines cross at a single point in space and keep going, what is the sum of their intersecting angles?
+Title: Math Q48
+Choice A: 90
+Choice B: 180
+Choice C_correct: 360
+Choice D: 480
+Choice E: Cannot be determined from the given information.
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: 3, 7, 8, 2, 9, 3, 7, 8, 2, 9, 3, 7, 8, 2, 9, ... <br />If the above sequence is repeated indefinitely, what will be the product of its 54th and 121st term?
+Title: Math Q49
+Choice A_correct: 6
+Choice B: 18
+Choice C: 27
+Choice D: 81
+Choice E: Cannot be determined from the given information.
+<End Question>
+
+Question: Math(Math (Multiple Choice))
+Prompt: Mary is a personal trainer. She is scheduled to see 4 clients today. Each session is <latex>1\frac{1}{4}</latex> hours long and Mary needs 15 minutes after each session to fill out paperwork. If lunch is 1 hour long and Mary has no other breaks throughout the day, what time must she start her first session in order to be done by 3pm?
+Title: Math Q50
+Choice A: 7 am
+Choice B: 7:30 am
+Choice C_correct: 8 am
+Choice D: 8:30 am
+Choice E: 9 am
+<End Question>
