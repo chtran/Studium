@@ -1,5 +1,0 @@
-%p
-  = params[:message]
-  = form_tag "/users/#{current_user.id}/profile/increase_reputation",remote: true,class: "form-inline" do
-    = hidden_field_tag :reputation_increase,"1"
-    = submit_tag "Vote"
