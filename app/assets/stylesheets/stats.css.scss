@@ -6,29 +6,13 @@
   float: right;
 }
 
-.progress{
-  width: 500px;
+.stats-subtitle strong{
+  color: #999;
+  font-size: 13px;
 }
 
-.progress-bar-container{
-  width: 650px;
-}
-
-.perform-stats{
-  padding-top: 30px;
-}
-
-#stats-container{
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-#description-progress{
-  padding-bottom: 50px;
+.stats-title strong{
   color: #333;
-
+  font-size: 13px;
 }
 
-#description-column{
-  padding-top: 50px;
-}
