@@ -25,6 +25,7 @@
           -@color = "success" if s[:id]%3 == 2
           -@color = "warning" if s[:id]%3 == 0
           %div.progress.progress-striped.active{:class => "progress-#{@color}"}
+            %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
           %div.stats-text.row-fluid
             %div.span3
               %strong{:id => "percent_#{s[:name]}"}
@@ -38,6 +39,5 @@
               %strong{:id => "correct_answers_#{s[:name]}"}
                 =s[:data][:correct_answers]
 
-            %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
 
 

@@ -120,6 +120,8 @@ class StatsController < ApplicationController
     histories = current_user.histories
 
     @correct_interval, @key_interval = percent_interval(histories, category_type_id)
+    @correct_interval = @correct_interval.reverse
+    @key_interval = @key_interval.reverse
     data = {
       key_interval: @key_interval, 
       correct_interval: @correct_interval
@@ -139,6 +141,7 @@ class StatsController < ApplicationController
     histories = current_user.histories
     category_type_id = params[:category_type_id].to_i
     data_interval, key_interval = intervalize(histories)
+
     data_interval.values.each do |d|
       total_value, correct_value = total_answers(d, category_type_id)
       incorrect_value = total_value - correct_value
@@ -147,9 +150,9 @@ class StatsController < ApplicationController
     end
 
     data = {
-      key_interval: key_interval,
-      correct_data: correct_data,
-      incorrect_data: incorrect_data
+      key_interval: key_interval.reverse,
+      correct_data: correct_data.reverse,
+      incorrect_data: incorrect_data.reverse
     }
 
     render :json => data, status => "200"

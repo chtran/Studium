@@ -47,7 +47,7 @@ $(->
               marker: {
                 symbol: 'square'
               },
-              data: [2,3,4,5,4,3,2]
+              data: data['correct_interval'] 
             }]
           })
       })
@@ -71,7 +71,7 @@ $(->
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Total fruit consumption'
+                        text: 'Number of questions'
                     },
                     stackLabels: {
                         enabled: true,
