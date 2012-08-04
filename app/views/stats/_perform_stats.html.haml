@@ -10,11 +10,11 @@
             %span.caret
           %ul.dropdown-menu
             %li
-              %a#today Today
+              %a#today{:href => '#'} Today
             %li
-              %a#last_week Last week
+              %a#last_week{:href => '#'} Last week
             %li
-              %a#last_month Last month
+              %a#last_month{:href => '#'} Last month
   %tbody
     -@subject_data.each do |s|
       %tr
