@@ -3,6 +3,7 @@ class Paragraph < ActiveRecord::Base
   accepts_nested_attributes_for :questions, :reject_if => lambda { |q| q[:title].blank?}, :allow_destroy => true
 
   validates :title, :content, presence: true
+  validates :content,uniqueness: true
   validate :contains_questions
 
   def contains_questions
