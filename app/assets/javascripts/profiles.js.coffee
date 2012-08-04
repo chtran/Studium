@@ -5,6 +5,7 @@
 $(->
   current_controller=gon.current_controller
   current_action=gon.current_action
+  current_user_id = gon.user_id
   if current_controller=="profiles" and current_action=="show"
     if $("#profile-info").length
       $.ajax({
@@ -16,4 +17,11 @@ $(->
         success: (data) ->
           $("#statistics").html(data.stats_content)
       })
+      
+#      $.ajax({
+#        type: "GET",
+#        url: "/users/#{current_user_id}/profile/show_about",
+#        success: (data) ->
+#          $("#about").html(data.work_content)
+#      })
 )

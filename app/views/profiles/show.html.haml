@@ -6,9 +6,9 @@
       %ul.nav.nav-tabs#profile-info
         %div.line-small
         %li
-          %a{"href" => "#activities", "data-toggle" => "tab"} Recent Activities
+          %a{"href" => "#about", "data-toggle" => "tab"}About 
         %li.active
-          %a{"href" => "#profile", "data-toggle" => "tab"} About 
+          %a{"href" => "#profile", "data-toggle" => "tab"} Recent Activities 
         %li
           %a{"href" => "#statistics", "data-toggle" => "tab"} Statistics
         %li
@@ -23,11 +23,9 @@
           %h3 Sample Status
 
     %div.tab-content#profile-details
-      %div.tab-pane#activities
-      %div.tab-pane.active.row-fluid#about
-        = render 'work'
-        - if @profile.date_of_birth
-          %td= @profile.date_of_birth.strftime '%m/%d/%Y'
+      %div.tab-pane#about
+        =render 'work'
+      %div.tab-pane.active#activities
       %div.tab-pane#statistics
       %div.tab-pane#badges
         = link_to "All Badges",badges_path,class: "btn btn-primary"

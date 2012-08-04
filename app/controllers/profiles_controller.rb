@@ -48,6 +48,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+#  def show_about
+#    work_content = render_to_string partial: "work"
+#    render json: {
+#      work_content: work_content, 
+#    }
+#  end
+
+
 private
   def find_user
     @user=User.find params[:user_id]
@@ -63,4 +71,5 @@ private
   def authenticate_update!
     redirect_to index_url,alert: "You do not have permission to update the profile of that user." unless user_signed_in? and current_user==@user
   end
+
 end
