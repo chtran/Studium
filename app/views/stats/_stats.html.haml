@@ -1,24 +1,31 @@
 %div#stats-container
   =render 'stats/perform_stats', :subject_data => @subject_data 
-  %div.btn-group.subject-button
-    %div.btn.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
-      All Subjects
-      %span.caret
-    %ul.dropdown-menu#dropdown-subjects
-      -@subject_data.each do |s|
-        %li
-          %a{:id => "#{s[:id]}_graph"} #{s[:name]}
+  %div.stats-title
+    %strong Progress Graph
+    %div.btn-group.subject-button
+      %div.btn.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
+        All Subjects
+        %span.caret
+      %ul.dropdown-menu#dropdown-subjects
+        -@subject_data.each do |s|
+          %li
+            %a{:id => "#{s[:id]}_graph"} #{s[:name]}
+  %hr
 
   %div#graph
 
-  %div.btn-group.subject-button
-    %div.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
-      All Subjects
-      %span.caret
-    %ul.dropdown-menu.dropdown-subjects
-      -@subject_data.each do |s|
-        %li
-          %a{:id => "#{s[:id]}_column"} #{s[:name]}
+  %div.stats-title
+    %strong Progress Column
+    %div.btn-group.subject-button
+      %div.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+        All Subjects
+        %span.caret
+      %ul.dropdown-menu.dropdown-subjects
+        -@subject_data.each do |s|
+          %li
+            %a{:id => "#{s[:id]}_column"} #{s[:name]}
+
+  %hr
 
   %div#column_stacked
 

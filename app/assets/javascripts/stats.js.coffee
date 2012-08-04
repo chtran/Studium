@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
   if $("#stats-container").length
-    alert('day roi')
     progress = (id)->
       $.ajax({
         type: "GET",
@@ -15,7 +14,7 @@ $(->
               type: 'spline'
             },
             title: {
-              text: 'Your percentage of correct answers progress'
+              text:'', 
             },
             xAxis: {
               categories: data['key_interval']
@@ -48,7 +47,7 @@ $(->
               marker: {
                 symbol: 'square'
               },
-              data: [2,3,4]
+              data: [2,3,4,5,4,3,2]
             }]
           })
       })
@@ -64,7 +63,7 @@ $(->
                     type: 'column'
                 },
                 title: {
-                    text: 'Stacked column chart'
+                    text: ''
                 },
                 xAxis: {
                     categories: data['key_interval']
