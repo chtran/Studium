@@ -13,7 +13,6 @@ class ProfilesController < StatsController
     interval = 1
     @subject_data = performance_recently(histories, interval)
 
-
     gon.user_id = current_user.id
 
     @badges=current_user.badges

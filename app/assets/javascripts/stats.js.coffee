@@ -151,13 +151,8 @@ $(->
       recent(30);
 
 
-    number_of_categories = $('#dropdown-subjects li').length;
-    range = [1..number_of_categories];
-    for id in range
-      $("#"+id.toString()+"_graph").click -> 
-        graph(this);
-      $("#"+id.toString()+"_column").click -> 
-        graph(this);
+    $('.dropdown-subjects li a').click ->
+      graph(this)
 
     graph = (subject)->
       offset = subject.id.split("_")[1];
