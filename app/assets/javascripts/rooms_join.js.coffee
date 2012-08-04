@@ -96,7 +96,6 @@ $(->
               $("#paragraph").html(data.paragraph).show()
             else
               $("#paragraph").remove()
-            $("#ready").hide()
             $("#current_question").addClass("question_active")
             setup_timer(600,confirm_answer)
 
@@ -144,6 +143,7 @@ $(->
     # Effect: send a POST request to ready
     ready = ->
       $("#timer").countdown("destroy")
+      $("#ready").hide()
       $.ajax({
         type: "POST",
         url: "/rooms/ready",

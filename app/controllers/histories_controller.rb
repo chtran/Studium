@@ -16,7 +16,7 @@ class HistoriesController < ApplicationController
   end
 
 private
-  
+
   def find_history
     @history=History.find params[:history_id]
   end
