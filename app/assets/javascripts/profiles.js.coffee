@@ -8,15 +8,15 @@ $(->
   current_user_id = gon.user_id
   if current_controller=="profiles" and current_action=="show"
     if $("#profile-info").length
-      $.ajax({
-        type: "GET",
-        url: "/stats/show",
-        data: {
-          user_id: gon.user_id
-        },
-        success: (data) ->
-          $("#statistics").html(data.stats_content)
-      })
+#      $.ajax({
+#        type: "GET",
+#        url: "/stats/show",
+#        data: {
+#          user_id: gon.user_id
+#        },
+#        success: (data) ->
+#          $("#statistics").html(data.stats_content)
+#      })
       $('#post-btn').click ->
         $.ajax({
           type: "POST",
