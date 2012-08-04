@@ -24,10 +24,12 @@ $(->
           data:{
             status: $('.status-content textarea').val()
           }
-          success: () ->
+          success: (data) ->
+            new_status = $('.status-content textarea').val()
+            $('p#status').text(new_status)
             $('.status-content textarea').val('')
         })
-      
+
       $('.status-content textarea').click ->
         $('.status-content textarea').attr('rows', 4)
         event.stopPropagation()

@@ -50,9 +50,12 @@ class ProfilesController < ApplicationController
 
   def update_status
     profile_status = params[:status]
-    if profile_status != ''
-      current_user.profile.update_attribute(:status, profile_status)
-    end
+    status_partial = render_to_string partial: 'status'
+    current_user.profile.update_attribute(:status, profile_status)
+
+    render json: {
+      status_partial: status_partial
+    }
   end
 
 
