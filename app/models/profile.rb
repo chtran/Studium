@@ -1,6 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
-
+  has_many :wallposts
   validates :first_name,:last_name,presence: true
 
   before_save :set_default_image
