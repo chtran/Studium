@@ -62,6 +62,22 @@
   -moz-background-clip: padding-box;
   background-clip: padding-box;verflow: hidden;
 }
+
+.status-content i{
+  font-size: 15px;
+  margin-top:5px;
+  margin-left: 10px;
+}
+
+.status-content #post-btn{
+}
+
+.status-content textarea{
+  width: 610px;
+  margin-left: 0px;
+}
+
+
 .arrow{
   top: 50%;
   left: 0;

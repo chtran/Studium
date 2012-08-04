@@ -48,12 +48,10 @@ class ProfilesController < ApplicationController
     end
   end
 
-#  def show_about
-#    work_content = render_to_string partial: "work"
-#    render json: {
-#      work_content: work_content, 
-#    }
-#  end
+  def update_status
+    profile_status = params[:status]
+    current_user.profile.update_attribute(:status, profile_status)
+  end
 
 
 private

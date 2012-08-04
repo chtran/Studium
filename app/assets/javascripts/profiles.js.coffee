@@ -17,11 +17,13 @@ $(->
         success: (data) ->
           $("#statistics").html(data.stats_content)
       })
-      
-#      $.ajax({
-#        type: "GET",
-#        url: "/users/#{current_user_id}/profile/show_about",
-#        success: (data) ->
-#          $("#about").html(data.work_content)
-#      })
+      $('#post-btn').click ->
+        $.ajax({
+          type: "POST",
+          url: "/users/#{current_user_id}/profile/update_status",
+          data:{
+            status: $('.status-content textarea').val()
+          }
+          success: () ->
+        })
 )
