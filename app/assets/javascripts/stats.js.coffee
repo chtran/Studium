@@ -122,18 +122,21 @@ $(->
     recent = (interval)->
       $.ajax({
           type: "GET",
-          url: "stats/pull_pro_bar/"+interval.toString(),
+          url: "/stats/pull_pro_bar/" + interval.toString(),
+          data: {
+          }
           success: (subject_data)->
               for s in subject_data
-                bar_id = "bar-"+s['name'];
-                percent_id = "percent_" + s['name'];
-                total_answers_id = "total_answers_" + s['name'];
-                correct_answers_id = "correct_answers_" + s['name']
+                bar_id = ("#bar-"+s['id']).toString()
+                percent_id = "#percent_" + s['id']
+                incorrect_answers_id = "#incorrect_answers_" + s['id']
+                correct_answers_id = "#correct_answers_" + s['id']
                 percent = s["data"]["percent"]
-                $('#bar_id').style.width = percent.toString()+'%';
-                $('#percent_id').html(s['data']['percent']+'%');
-                $('#total_answers_id').html(s['data']['total_answers']);
-                $('#correct_answers_id').html( s['data']['correct_answers']);
+
+                $(bar_id).css('width', percent + '%')
+                $(percent_id).html(percent+'%')
+                $(incorrect_answers_id).html(s['data']['total_answers']-s['data']['correct_answers'])
+                $(correct_answers_id).html( s['data']['correct_answers'])
           })
     
     if $("#interval_btn").length then recent(1);

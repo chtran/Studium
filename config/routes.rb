@@ -41,7 +41,9 @@ Studium::Application.routes.draw do
     post :invite
     post :chat_message
     post :show_current_user
+    
     get "/review/:room_id", to: "rooms#review", as: "review"
+
   end
 
   # Admin-related routes
@@ -82,7 +84,8 @@ Studium::Application.routes.draw do
   controller :stats,path: "/stats" do
     root action: "index", as: "stats"
     get :show
-    get "pull_pro_bar/:interval", action:"pull_pro_bar"
+    post :pull_pro_bar
+    get 'pull_pro_bar/:interval', action: 'pull_pro_bar'
     get "pull/:category_type_id", action: "pull"
     get "pull_stacked/:category_type_id", action: "pull_stacked"
   end
