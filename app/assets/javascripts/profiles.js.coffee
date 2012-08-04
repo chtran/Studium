@@ -31,7 +31,7 @@ $(->
         })
 
       $('.status-content textarea').click ->
-        $('.status-content textarea').attr('rows', 4)
+        $('.status-content textarea').attr('rows', 3)
         event.stopPropagation()
       $(document).click  ->
         $('.status-content textarea').attr('rows', 2)

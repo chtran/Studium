@@ -17,11 +17,12 @@
         %div.line-big
   %div.span8#profile-content
     %div.status-content
-      =render 'status'
+      = render 'status'
 
     %div.tab-content#profile-details
       %div.tab-pane#about
-        =render 'work'
+        = render 'personal_info'
+        = render 'work'
       %div.tab-pane.active#activities
       %div.tab-pane#statistics
       %div.tab-pane#badges
