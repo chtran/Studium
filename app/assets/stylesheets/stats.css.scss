@@ -13,6 +13,28 @@
 
 .stats-title strong{
   color: #333;
-  font-size: 13px;
+  font-size: 14px;
 }
 
+.progress-bar-container{
+  width: 550px;
+}
+
+.progress-bar-container .progress{
+  width: 500px;
+}
+.stats-text strong{
+  color: #222;
+  font-size: 12px;
+}
+
+.stats-text i{
+  font-size: 9px;
+}
+.stats-text i.icon-ok{
+  color: #468847
+}
+
+.stats-text i.icon-remove{
+  color: red
+}

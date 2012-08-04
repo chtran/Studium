@@ -1,41 +1,47 @@
-%div.btn-group.subject-button
-  %div.btn.btn-primary.dropdown-toggle#interval_btn{"data-toggle" => "dropdown"}
-    Select time
-    %span.caret
-  %ul.dropdown-menu
-    %li
-      %a#today Today
-    %li
-      %a#last_week Last week
-    %li
-      %a#last_month Last month
+%div.row-fluid
+
     
 %table.table
   %thead
     %tr
+      %td.stats-title
+        %strong Performance recently
       %td 
-      %td 
-      %td.about-title 
-        %strong Question Answered
-      %td Correct
+        %div.btn-group.subject-button
+          %div.btn.btn-primary.dropdown-toggle#interval_btn{"data-toggle" => "dropdown"}
+            Time
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a#today Today
+            %li
+              %a#last_week Last week
+            %li
+              %a#last_month Last month
   %tbody
     -@subject_data.each do |s|
       %tr
         %td.stats-subtitle
           %strong= s[:name]
         %td.progress-bar-container
-          %p{:id => "percent_#{s[:name]}"}
-            ="#{s[:data][:percent]}%"
           -@color = "primary" if s[:id]%3 == 1
           -@color = "success" if s[:id]%3 == 2
           -@color = "warning" if s[:id]%3 == 0
           %div.progress.progress-striped.active{:class => "progress-#{@color}"}
-            %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
-        %td{:id => "total_answers_#{s[:name]}"} 
-          =s[:data][:total_answers]
-        %td{:id => "correct_answers_#{s[:name]}"}
-          =s[:data][:correct_answers]
+          %div.stats-text.row-fluid
+            %div.span3
+              %strong{:id => "percent_#{s[:name]}"}
+                = "#{s[:data][:percent]}%"
+            %div.span3  
+              %i.icon-ok
+              %strong{:id => "total_answers_#{s[:name]}"}  
+                =s[:data][:total_answers]
+            %div.span3  
+              %i.icon-remove
+              %strong{:id => "correct_answers_#{s[:name]}"}
+                =s[:data][:correct_answers]
 
+            %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
 
 %div.btn-group.subject-button
   %div.btn.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
