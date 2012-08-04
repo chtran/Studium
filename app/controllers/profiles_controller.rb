@@ -50,7 +50,9 @@ class ProfilesController < ApplicationController
 
   def update_status
     profile_status = params[:status]
-    current_user.profile.update_attribute(:status, profile_status)
+    if profile_status != ''
+      current_user.profile.update_attribute(:status, profile_status)
+    end
   end
 
 

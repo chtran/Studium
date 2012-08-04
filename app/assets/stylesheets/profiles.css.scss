@@ -29,8 +29,9 @@
   height: 40px;
 }
 
-#profile-image{
-  
+#profile-image img{
+  width: 250px;
+  height: 250px;
 }
 
 .status{
@@ -38,7 +39,7 @@
   padding-bottom: 2px;
   padding-left: 2px;
   padding-right: 2px;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 40px;
   width: 700px;
   overflow: hidden;
@@ -53,7 +54,7 @@
 }
 
 .status-content{
-  padding: 14px;
+  padding-bottom: 14px;
   background-color: #ffffff;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -64,17 +65,27 @@
 }
 
 .status-content i{
-  font-size: 15px;
   margin-top:5px;
-  margin-left: 10px;
+  margin-right: 10px;
+  color: #999;
 }
 
-.status-content #post-btn{
+.status-content p{
+  margin-left: 20px;
+  font-size: 15px;
 }
 
-.status-content textarea{
+.status-content .before #post-btn{
+  margin-top: 14px;
+}
+
+.status-content textarea#before{
   width: 610px;
-  margin-left: 0px;
+  margin: 14px;
+}
+
+.status-content textarea#after{
+  width: 610px;
 }
 
 

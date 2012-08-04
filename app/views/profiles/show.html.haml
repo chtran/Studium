@@ -1,7 +1,7 @@
 %div.row-fluid
   %div.span3
     %a.thumbnail#profile-image
-      %img{:src => 'http://placehold.it/260x180'}
+      %img{:src => 'http://apsroorkee.com/images/teachers/nopic.png'}
     %div.tabbable.tabs-left
       %ul.nav.nav-tabs#profile-info
         %div.line-small
@@ -15,14 +15,7 @@
           %a{"href" => "#badges", "data-toggle" => "tab"} Badges
         %div.line-big
   %div.span8#profile-content
-    %div.status-container
-      %div.arrow-container
-        %div.arrow
-      %div.status
-        %div.status-content
-          %textarea{:rows => 2}
-          %div.btn.btn-success.btn-small#post-btn
-            Share
+    =render 'status'
 
     %div.tab-content#profile-details
       %div.tab-pane#about

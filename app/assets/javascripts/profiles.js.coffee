@@ -25,5 +25,12 @@ $(->
             status: $('.status-content textarea').val()
           }
           success: () ->
+            $('.status-content textarea').val('')
         })
+      
+      $('.status-content textarea').click ->
+        $('.status-content textarea').attr('rows', 4)
+        event.stopPropagation()
+      $(document).click  ->
+        $('.status-content textarea').attr('rows', 2)
 )
