@@ -1,1 +1,1 @@
-%p= "#{history.user.name} answered #{history.choice.choice_letter} for question #{history.question.title}"
+%p.hide= "#{@history.user.name} #{@result} for question \"#{@history.question.title}\""

@@ -6,6 +6,13 @@ class String
         .linebreak(options[:is_passage])
         .underline(options[:question_id])
         .parse_latex
+        .blurb
+  end
+
+  def blurb
+    result = self
+    result.gsub("<blurb>","<span class='blurb'>")
+          .gsub("<blurb />","</span>")
   end
 
   def parse_latex

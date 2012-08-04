@@ -11,21 +11,6 @@ $(->
     channel = client.subscribe("presence-room_"+room_id)
     rooms_channel = client.subscribe("presence-rooms")
     user_channel = client.subscribe("user_" + gon.user_id)
-    # Listen to the "pusher:member_removed" event which keep tracks of user leaving the room
-#   channel.bind('pusher:member_removed', (member) ->
-      # Send a POST request to rooms#kick, which kick the user from the room
-      # Performance might be not ideal because everyone in the room will kick this member at the same time (we need only one)
-#     $.ajax({
-#        type: "POST",
-#        url : "/rooms/kick",
-#        data: user_id
-#          user_id: member.id,
-#          room_id: room_id
-#        },
-#        success: (data) ->
-#          update_users()
-#      })
-#    )
 
     # Update the histories
     channel.bind("update_histories", (data) ->
@@ -133,13 +118,12 @@ $(->
           $("#choices").html(data)
           setup_timer(60, ready)
 
+          $("#history .hide").removeClass("hide").effect("highlight",2000)
           # Reload MathJax
           MathJax.Hub.Queue(["Typeset",MathJax.Hub])
       })
       # Show the ready button
       $("#ready").show()
-      # Remove the confirm button
-      $("#confirm").hide()
 
     confirm_answer = (choice_id) ->
       $("#timer").countdown("destroy")
@@ -176,23 +160,9 @@ $(->
         },
         success: (data) ->
           $("#history").append(data)
-          $("#history p:last").effect("highlight",2000)
           #$("#history").animate({
           #  scrollTop: $("#history p:last").position().top
           #},1000)
-      })
-      true
-
-    # Show all the previous histories
-    update_previous_histories= ->
-      $.ajax({
-        type: "POST",
-        url: "/rooms/show_histories",
-        data: {
-          room_id: room_id
-        },
-        success: (data) ->
-          $("#history").html(data)
       })
       true
 
@@ -247,6 +217,8 @@ $(->
     $("#confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
       choice_id = $(".question_active .each_choice.btn-primary").attr("id")
+      # Remove the confirm button
+      $("#confirm").hide()
       confirm_answer(choice_id)
       true
     )
