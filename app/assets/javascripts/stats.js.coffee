@@ -2,59 +2,55 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
-  init = ->
-
+  if $("#stats-container").length
     progress = (id)->
       $.ajax({
         type: "GET",
         url: "/stats/pull/"+id.toString(),
         success: (data)->
-##
           chart = new Highcharts.Chart({
-              chart: {
-                  renderTo: 'graph',
-                  type: 'spline'
-              },
+            chart: {
+              renderTo: 'graph',
+              type: 'spline'
+            },
+            title: {
+              text:'', 
+            },
+            xAxis: {
+              categories: data['key_interval']
+            },
+            yAxis: {
               title: {
-                  text: 'Your percentage of correct answers progress'
+                text: 'percent'
               },
-              xAxis: {
-                  categories: data['key_interval']
-              },
-              yAxis: {
-                  title: {
-                      text: 'percent'
-                  },
-                  labels: {
+              labels: {
 #                  formatter: ->
 #                    console.log(this)
 #                    return this['value'] +'%'
+              }
+            },
+            tooltip: {
+              crosshairs: true,
+              shared: true
+            },
+            plotOptions: {
+              spline: {
+                marker: {
+                  radius: 4,
+                  lineColor: '#666666',
+                  lineWidth: 1
                   }
+              }
+            },
+            series: [{
+              name: 'Percent Of Correct Answers'
+              marker: {
+                symbol: 'square'
               },
-              tooltip: {
-                  crosshairs: true,
-                  shared: true
-              },
-              plotOptions: {
-                  spline: {
-                      marker: {
-                          radius: 4,
-                          lineColor: '#666666',
-                          lineWidth: 1
-                      }
-                  }
-              },
-              series: [{
-                  name: 'Percent Of Correct Answers'
-                  marker: {
-                      symbol: 'square'
-                  },
-                  data: data['correct_interval']
-              }]
-          });
-##
-        
-      });
+              data: [2,3,4,5,4,3,2]
+            }]
+          })
+      })
 
     c_stacked = (id)->
         $.ajax({
@@ -67,7 +63,7 @@ $(->
                     type: 'column'
                 },
                 title: {
-                    text: 'Stacked column chart'
+                    text: ''
                 },
                 xAxis: {
                     categories: data['key_interval']
@@ -152,7 +148,7 @@ $(->
       recent(30);
 
 
-    number_of_categories = document.getElementById('dropdown-subjects').getElementsByTagName('li').length;
+    number_of_categories = $('#dropdown-subjects li').length;
     range = [1..number_of_categories];
     for id in range
       $("#"+id.toString()+"_graph").click -> 
@@ -172,9 +168,5 @@ $(->
 
     if $("#column_stacked").length
       c_stacked(0);
-
-
-  if $("#stats-container").length
-    init()
- )
+)
 

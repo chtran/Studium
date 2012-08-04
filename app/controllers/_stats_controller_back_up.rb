@@ -1,6 +1,28 @@
 class StatsController < ApplicationController
+  before_filter :authenticate_user!
 
+ 
+  def index
+    histories = current_user.histories
+    #when the page is loaded for the first time,
+    #show stats of today
+    interval = 1
+    @subject_data = performance_recently(histories, interval)
+  end
 
+  def show
+    @user=User.find params[:user_id]
+    histories = @user.histories
+    #when the page is loaded for the first time,
+    #show stats of today
+    interval = 1
+    @subject_data = performance_recently(histories, interval)
+
+    stats_content=render_to_string partial: "stats"
+    render json: {
+      stats_content: stats_content
+    }
+  end
  
   #Return the correct percent of an user
   #of a subject (or all) over histories

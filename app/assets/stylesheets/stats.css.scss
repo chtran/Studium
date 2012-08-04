@@ -4,31 +4,48 @@
 
 .subject-button{
   float: right;
+
 }
 
-.progress{
-  width: 500px;
+.perform-stats .dropdown-menu{
+  left: auto; 
+  right: 0;
+}
+
+.stats-subtitle strong{
+  color: #999;
+  font-size: 13px;
+}
+
+.stats-title strong{
+  color: #333;
+  font-size: 14px;
 }
 
 .progress-bar-container{
-  width: 650px;
+  width: 550px;
 }
 
-.perform-stats{
-  padding-top: 30px;
+.progress-bar-container .progress{
+  width: 500px;
+}
+.stats-text strong{
+  color: #222;
+  font-size: 12px;
 }
 
-#stats-container{
-  padding-left: 50px;
-  padding-right: 50px;
+.stats-text i{
+  font-size: 9px;
+}
+.stats-text i.icon-ok{
+  color: #468847
 }
 
-#description-progress{
-  padding-bottom: 50px;
-  color: #333;
-
+.stats-text i.icon-remove{
+  color: red
 }
 
-#description-column{
-  padding-top: 50px;
+#graph{
+  width: 600px;
+  margin-left: 50px;
 }

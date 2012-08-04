@@ -1,0 +1,20 @@
+%div.arrow-container
+  %div.arrow
+%div.status
+  %div.status-content
+    %div.accordion#accordion-status
+      %div.accordion-group
+        %div.accordion-heading
+          %div.accordion-toggle.row-fluid{'data-toggle' => 'collapse', 'data-parent'=>'#accordion-status', 'href'=>'#collapseStatus' }
+            %div.span11
+              %p#status=current_user.profile.status
+            %div.span1
+              %a{:rel=>'tooltip', 'data-original-title' => 'Click to update your status'}
+                %i.icon-pencil
+        %div.accordion-body.collapse#collapseStatus
+          %div.accordion-inner
+            %textarea#after{:rows => 2}
+            %div.btn.btn-success.btn-small#post-btn
+              Share
+        
+

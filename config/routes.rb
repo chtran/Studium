@@ -15,6 +15,7 @@ Studium::Application.routes.draw do
     get :edit,as: "edit_user_profile"
     put action: "update"
     post :increase_reputation
+    post :update_status 
   end
 
   # Category Type Routes

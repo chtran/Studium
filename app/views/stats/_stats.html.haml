@@ -1,76 +1,31 @@
 %div#stats-container
-
-  %div.well
-    %h1#stats-title Your Personal Statistics
-  %div.perform-stats
+  =render 'stats/perform_stats', :subject_data => @subject_data 
+  %div.stats-title
+    %strong Progress Graph
     %div.btn-group.subject-button
-      %div.btn.btn-large.btn-primary.dropdown-toggle#interval_btn{"data-toggle" => "dropdown"}
-        Select time
-        %span.caret
-      %ul.dropdown-menu
-        %li
-          %a#today Today
-        %li
-          %a#last_week Last week
-        %li
-          %a#last_month Last month
-    %div 
-      %h2 
-        Performance 
-        %small recently
-      %hr
-      
-      %table.table
-        %thead
-          %tr
-            %th Subject
-            %th Accuracy (%)
-            %th Question Answered
-            %th Correct
-        %tbody
-          -@subject_data.each do |s|
-            %tr
-              %td #{s[:name]}
-              %td.progress-bar-container
-                %p{:id => "percent_#{s[:name]}"}
-                  ="#{s[:data][:percent]}%"
-                -@color = "primary" if s[:id]%3 == 1
-                -@color = "success" if s[:id]%3 == 2
-                -@color = "warning" if s[:id]%3 == 0
-                %div.progress.progress-striped.active{:class => "progress-#{@color}"}
-                  %div.bar{:style => "width: #{s[:data][:percent]}%", :id => "bar-#{s[:name]}"}
-              %td{:id => "total_answers_#{s[:name]}"} 
-                =s[:data][:total_answers]
-              %td{:id => "correct_answers_#{s[:name]}"}
-                =s[:data][:correct_answers]
-
-
-  %div.perform-stats
-    %div.btn-group.subject-button
-      %div.btn.btn-large.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
+      %div.btn.btn-success.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
         %span.caret
       %ul.dropdown-menu#dropdown-subjects
         -@subject_data.each do |s|
           %li
             %a{:id => "#{s[:id]}_graph"} #{s[:name]}
-    %div 
-      %h2 
-        Performance 
-        %small overall
-      %hr
-    %h3#description-progress The graph shows your progress over time, measured by percent of correct answers
+  %hr
+
   %div#graph
-  %div
-    %div
-      %h3#description-column Columns stacked graph shows the number of correct and incorrect answers  
+
+  %div.stats-title
+    %strong Progress Column
     %div.btn-group.subject-button
-      %div.btn.btn-large.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
+      %div.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"} 
         All Subjects
         %span.caret
       %ul.dropdown-menu.dropdown-subjects
         -@subject_data.each do |s|
           %li
             %a{:id => "#{s[:id]}_column"} #{s[:name]}
+
+  %hr
+
   %div#column_stacked
 

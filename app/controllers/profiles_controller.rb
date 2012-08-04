@@ -1,11 +1,20 @@
-class ProfilesController < ApplicationController
+class ProfilesController < StatsController
   before_filter :find_user
   before_filter :find_profile
   before_filter :authenticate_update!,only: [:edit,:update]
   before_filter :authenticate_user!,only: [:increase_reputation]
 
   def show
-    gon.user_id = params[:user_id]
+
+    @user=User.find params[:user_id]
+    histories = @user.histories
+    #when the page is loaded for the first time,
+    #show stats of today
+    interval = 1
+    @subject_data = performance_recently(histories, interval)
+
+
+    gon.user_id = current_user.id
 
     @badges=current_user.badges
   end
@@ -48,6 +57,17 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def update_status
+    profile_status = params[:status]
+    status_partial = render_to_string partial: 'status'
+    current_user.profile.update_attribute(:status, profile_status)
+
+    render json: {
+      status_partial: status_partial
+    }
+  end
+
+
 private
   def find_user
     @user=User.find params[:user_id]
@@ -63,4 +83,5 @@ private
   def authenticate_update!
     redirect_to index_url,alert: "You do not have permission to update the profile of that user." unless user_signed_in? and current_user==@user
   end
+
 end

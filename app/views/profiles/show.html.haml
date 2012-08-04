@@ -1,31 +1,33 @@
-%ul.nav.nav-tabs#profile-info
-  %li
-    %a{"href" => "#activities", "data-toggle" => "tab"} Recent Activities
-  %li.active
-    %a{"href" => "#profile", "data-toggle" => "tab"} Profile
-  %li
-    %a{"href" => "#statistics", "data-toggle" => "tab"} Statistics
-  %li
-    %a{"href" => "#badges", "data-toggle" => "tab"} Badges
-%div.tab-content
-  %div.tab-pane#activities
-  %div.tab-pane.active#profile
-    - if current_user==@user
-      %i.icon-edit= link_to "Edit",edit_user_profile_path(@user)
-    %br
-    %table.table.table-striped
-      %tr
-        %td Full name
-        %td= @profile.first_name + " " + @profile.last_name
-      %tr
-        %td School
-        %td= @profile.school
-      - if @profile.date_of_birth
-        %tr
-          %td Date of Birth
-          %td= @profile.date_of_birth.strftime '%m/%d/%Y'
-  %div.tab-pane#statistics
-  %div.tab-pane#badges
-    = link_to "All Badges",badges_path,class: "btn btn-primary"
-    %br
-    = render "badges/badge_list"
+%div.row-fluid
+  %div.span3#profile-name
+    %p=current_user.name
+    %a.thumbnail#profile-image
+      %img{:src => 'http://apsroorkee.com/images/teachers/nopic.png'}
+    %div.tabbable.tabs-left
+      %ul.nav.nav-tabs#profile-info
+        %div.line-small
+        %li
+          %a{"href" => "#about", "data-toggle" => "tab"}About 
+        %li.active
+          %a{"href" => "#profile", "data-toggle" => "tab"} Recent Activities 
+        %li
+          %a{"href" => "#statistics", "data-toggle" => "tab"} Statistics
+        %li
+          %a{"href" => "#badges", "data-toggle" => "tab"} Badges
+        %div.line-big
+  %div.span8#profile-content
+    %div.status-content
+      = render 'status'
+
+    %div.tab-content#profile-details
+      %div.tab-pane#about
+        = render 'personal_info'
+        = render 'work'
+      %div.tab-pane.active#activities
+      %div.tab-pane#statistics
+        = render 'stats/stats'
+      %div.tab-pane#badges
+        = link_to "All Badges",badges_path,class: "btn btn-primary"
+        %br
+        = render "badges/badge_list"
+  %div.span1
