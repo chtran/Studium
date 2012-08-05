@@ -17,7 +17,6 @@ $(->
           $('#accordion-wall textarea').val('')
       })
 
-  
 
     profile_channel.bind("update_wallposts", (data)->
       new_post_html = "
