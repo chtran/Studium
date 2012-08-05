@@ -17,7 +17,7 @@ class ProfilesController < StatsController
     gon.user_id = current_user.id
     gon.viewed_user_id = params[:user_id]
     @viewed_user = User.find(params[:user_id])
-    @wallposts   = @viewed_user.profile.wallposts
+    @wallposts   = @viewed_user.profile.wallposts.find(:all, :order=>'created_at DESC')
     # end of wallposts data
 
     @badges=current_user.badges
