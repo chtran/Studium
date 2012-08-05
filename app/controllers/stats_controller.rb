@@ -1,4 +1,4 @@
-class StatsController < WallpostsController
+class StatsController < ApplicationController
 
 
  
