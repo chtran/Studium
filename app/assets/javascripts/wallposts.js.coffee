@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(->
   if $('.wall-container').length
-    profile_channel = client.subscribe("profile_"+gon.profile_id)
+    profile_channel = client.subscribe("profile_"+gon.viewed_user_id)
     receiver_id = gon.viewed_user_id
     $('.wall-container #post-btn').click ->
       $.ajax({

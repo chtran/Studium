@@ -7,7 +7,7 @@
         %div.accordion-heading
           %div.accordion-toggle.row-fluid{'data-toggle' => 'collapse', 'data-parent'=>'#accordion-status', 'href'=>'#collapseStatus' }
             %div.span11
-              %p#status= @viewed_user.profile.status
+              %p#status= @viewed_user.profile.status if @viewed_user
             %div.span1
               %a{:rel=>'tooltip', 'data-original-title' => 'Click to update your status'}
                 %i.icon-pencil

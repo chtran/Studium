@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   belongs_to :room
   has_many :histories,dependent: :destroy
   has_one :profile,dependent: :destroy
+  has_many :wallposts, foreign_key: "receiver_id"
   accepts_nested_attributes_for :profile
 
   has_and_belongs_to_many :badges
