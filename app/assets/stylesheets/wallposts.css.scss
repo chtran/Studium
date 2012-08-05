@@ -1,22 +1,32 @@
 // Place all the styles related to the Wallposts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.wall-container .wallpost-container{
+  margin-bottom: 30px;
+}
+
+.wall-container .wallpost-content-container{
+  margin-left: 0px;
+}
+
 #accordion-wall .accordion-inner{
   background-color: #eee;
 }
 
-#accordion-wall textarea{
-  width: 605px;
+.wallpost-container textarea{
+  width: 593px;
 }
 
 .wall-image {
   width: 70px;
   height: 70px;
+  margin-right: 0;
 }
 
 .thumbnail-wall-image{
   width:72px;
   height: 72px;
+  margin-right: 0;
 }
 
 .wall-container .arrow{
@@ -24,7 +34,7 @@
   left: 0;
   margin-top: -5px;
   border-top: 5px solid transparent;
-  border-right: 5px solid #000000;
+  border-right: 5px solid #999;
   border-bottom: 5px solid transparent;
 }
 
@@ -35,8 +45,7 @@
   padding-right: 2px;
   width: auto;
   overflow: hidden;
-  background: #000000;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: #ddd;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -55,3 +64,9 @@
   -moz-background-clip: padding-box;
   background-clip: padding-box;verflow: hidden;
 }
+
+.time-ago{
+  font-size: 12px;
+  color: #666 
+}
+

@@ -7,7 +7,7 @@ $(->
     $('.wall-container #post-btn').click ->
       $.ajax({
         type: 'POST',
-        url : '/wallposts/create',
+        url : '/wallposts/create_wallpost',
         data:{
           receiver_id: receiver_id,
           sender_id  : gon.user_id,

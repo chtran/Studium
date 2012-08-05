@@ -1,6 +1,6 @@
 class WallpostsController < ApplicationController
 
-  def create
+  def create_wallpost
 #    @wallpost = Wallpost.new(params[:wallpost])
     receiver_id = params[:receiver_id]
     sender_id   = params[:sender_id]
@@ -15,11 +15,8 @@ class WallpostsController < ApplicationController
     }
 
     w = Wallpost.new(new_wallpost)
-    if !w.save
-      flash[:notice] ='cannot save'
-    else
-      flash[:notice] ='saved'
-    end
+    w.save
   end
+
 
 end

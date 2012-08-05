@@ -13,8 +13,12 @@ class ProfilesController < StatsController
     interval = 1
     @subject_data = performance_recently(histories, interval)
 
+    # Wallposts data
     gon.user_id = current_user.id
     gon.viewed_user_id = params[:user_id]
+    @viewed_user = User.find(params[:user_id])
+    @wallposts   = @viewed_user.profile.wallposts
+    # end of wallposts data
 
     @badges=current_user.badges
   end

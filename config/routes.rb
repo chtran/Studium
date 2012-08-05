@@ -95,7 +95,7 @@ Studium::Application.routes.draw do
   # Wallposts routes
   controller :wallposts, path: '/wallposts' do
     root action: 'index', as: 'wallposts'
-    post :create
+    post :create_wallpost
   end
 
   resources :wallposts
