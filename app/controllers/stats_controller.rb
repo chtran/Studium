@@ -130,49 +130,5 @@ class StatsController < WallpostsController
 #  end
 
 
-  #render to stats/pull_stacked/:id 
-  #time of different intervals, number of correct answers
-  # and incorrect answers of each interval
-
-  def pull_stacked
-    correct_data = []
-    incorrect_data = []
-
-    histories = current_user.histories
-    category_type_id = params[:category_type_id].to_i
-    data_interval, key_interval = intervalize(histories)
-
-    data_interval.values.each do |d|
-      total_value, correct_value = total_answers(d, category_type_id)
-      incorrect_value = total_value - correct_value
-      correct_data << correct_value
-      incorrect_data << incorrect_value
-    end
-
-    data = {
-      key_interval: key_interval.reverse,
-      correct_data: correct_data.reverse,
-      incorrect_data: incorrect_data.reverse
-    }
-
-    render :json => data, status => "200"
-  
-  end
-  
-
-  def pull_pro_bar
-    correct_data = []
-    incorrect_data = []
-    #
-    #interval will be 1 (for today), or 7 (for last week), 
-    #14 (for last two weeks), or 30 (for last month)
-    #(Actually interval could be any integer)
-    interval =  params[:interval]
-    interval = interval.to_i
-    histories = current_user.histories
-    subject_data = performance_recently(histories, interval)
-   
-    render :json => subject_data, status => "200"
-  end
 
 end

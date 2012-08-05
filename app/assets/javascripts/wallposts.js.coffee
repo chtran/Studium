@@ -15,6 +15,7 @@ $(->
           content    : $('#accordion-wall textarea').val().toString() 
         }
         success : ->
+          $('#accordion-wall textarea').val('')
       })
 
   
