@@ -113,9 +113,7 @@ class RoomsController < ApplicationController
       # Update the histories of the room
 
       # Show explanantion
-      publish_async(channel, "show_explanation", {
-        question_id: @current_question.id
-      })
+      publish_async(channel, "show_explanation", {})
     end
 
     render :text => "OK", :status => "200"
@@ -222,34 +220,45 @@ class RoomsController < ApplicationController
     @room = current_user.room
     @question = @room.question
     return if !@room.show_explanation?
+    last_choice = current_user.histories.last.choice
+    current_user_choice = last_choice.question_id==@question.id ? last_choice : nil
+
     @choices = @question.choices.collect do |choice| {
       data: choice,
       result: if choice.correct
                 "correct"
-              elsif choice.id==params[:choice_id].to_i
+              elsif current_user_choice and choice.id==current_user_choice.id
                 "selected"
-              end
+              end,
+      selected: @room.users.all.select {|u| u.histories.last.choice_id == choice.id}
     }
     end
     messages = {
       correct: "Congratulations! You got the right answer.",
-      incorrect: "Sorry, you got the wrong answer. See explanation below."
+      incorrect: "Sorry, you got the wrong answer. See explanation below.",
+      blank: "You didn't select an answer. See explanation below."
     }
     styles = {
       correct: "alert alert-success",
-      incorrect: "alert alert-error"
+      incorrect: "alert alert-error",
+      blank: "alert"
     }
     # If there's a choice_id (user chose a choice) and that choice is correct
-    if current_user.status != 0 
-      if params[:choice_id] and Choice.find(params[:choice_id]).correct?
-        @change = current_user.win_to!(@question)
-        @message = messages[:correct]
-        @style = styles[:correct]
-      # If there's no choice_id (user hasn't chosen a choice) or the chosen choice is incorrect
-      else
+    if current_user.status != 0
+      #If user didn't select answer
+      if !current_user_choice
+        @change= current_user.lose_to!(@question)
+        @message = messages[:blank]
+        @style = styles[:blank]
+      #If user chose an incorrect answer
+      elsif !current_user_choice.correct?
         @change = current_user.lose_to!(@question)
         @message = messages[:incorrect]
         @style = styles[:incorrect]
+      else
+        @change = current_user.win_to!(@question)
+        @message = messages[:correct]
+        @style = styles[:correct]
       end
     end
     render partial: "show_explanation"

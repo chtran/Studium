@@ -2,10 +2,17 @@
   %p= @message
 
 - @choices.each do |choice|
-  = render partial: "choices/choice",locals: {choice: choice[:data],choice_class: "disabled #{choice[:result]}"}
+  %div.row-fluid.btn.each_choice.disabled{id: choice[:data].id.to_s,class: choice[:result] }
+    %div.span2.choice_letter= choice[:data].choice_letter
+    %div.span8.choice_content
+      %div
+        = choice[:data].content.parse_latex.html_safe
+      %div.selected_users
+        - choice[:selected].each do |user|
+          = image_tag user.profile.image, {"rel" => "tooltip", "data-original-title"=> user.name }
 
 :javascript
   $(".correct").addClass("btn-success")
                .append("<div class='span2'><i class='icon-ok icon-white' /></div>")
   $(".selected").addClass("btn-danger")
-                .append("<div class='span2'>Your choice</div>")
+  $(".selected_users img").tooltip()
