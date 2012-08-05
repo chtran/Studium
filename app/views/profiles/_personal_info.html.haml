@@ -5,6 +5,7 @@
         %i.icon-user
         %strong Personal Information
       %td
+      %td
         - if current_user==@user
           %a.btn.btn-primary.edit-btn
             %i.icon-edit 
@@ -15,6 +16,9 @@
         %strong Name
       %td.about-text
         %p= @viewed_user.name 
+      %td
+        - if current_user == @user
+          %i.icon-edit       
     %tr
       %td.about-subtitle 
         %strong Email 
@@ -23,6 +27,9 @@
         - message = @viewed_user.email 
       %td.about-text
         %p= message
+      %td
+        - if current_user == @user
+          %i.icon-edit       
     %tr
       %td.about-subtitle 
         %strong Birthday
@@ -31,6 +38,9 @@
         - message = @viewed_user.profile.date_of_birth  
       %td.about-text
         %p= message
+      %td
+        - if current_user == @user
+          %i.icon-edit       
     %tr
       %td.about-subtitle
         %strong School
@@ -39,4 +49,6 @@
         - message = @viewed_user.profile.school 
       %td.about-text
         %p= message
-
+      %td
+        - if current_user == @user
+          %i.icon-edit

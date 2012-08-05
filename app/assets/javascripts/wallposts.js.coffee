@@ -11,7 +11,6 @@ $(->
         url : '/wallposts/create_wallpost',
         data:{
           receiver_id: receiver_id,
-          sender_id  : gon.user_id,
           content    : $('#accordion-wall textarea').val().toString() 
         }
         success : ->
@@ -26,7 +25,7 @@ $(->
         <div>
           <div class = 'row-fluid wallpost-container'>
             <div class = 'span2'>
-              <div clas = 'thumbnail thumbnail-wall-image'>
+              <div class = 'thumbnail thumbnail-wall-image'>
                 <img alt='Picture?type=square' class='wall-image' src= #{data.sender_image}>
               </div>
             </div>

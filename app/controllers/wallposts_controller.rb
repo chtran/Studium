@@ -3,7 +3,7 @@ class WallpostsController < ApplicationController
   def create_wallpost
 #    @wallpost = Wallpost.new(params[:wallpost])
     receiver_id = params[:receiver_id].to_i
-    sender_id   = params[:sender_id].to_i
+    sender_id   = current_user.id.to_i
     content     = params[:content].to_s
     profile_id  = User.find(receiver_id).profile.id.to_s
 
