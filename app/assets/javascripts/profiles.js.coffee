@@ -7,9 +7,6 @@ $(->
   current_action=gon.current_action
   current_user_id = gon.user_id
   if current_controller=="profiles" and current_action=="show"
-    alert(gon.user_id)
-    console.log(gon.params)
-    alert(gon.params)
     if $("#profile-info").length
 #      $.ajax({
 #        type: "GET",

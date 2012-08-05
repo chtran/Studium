@@ -92,6 +92,15 @@ Studium::Application.routes.draw do
 
   resources :messages
 
+  # Wallposts routes
+  controller :wallposts, path: '/wallposts' do
+    root action: 'index', as: 'wallposts'
+    post :create
+  end
+
+  resources :wallposts
+
+
   # Friendship routes
   post "friendships/request", to: "friendships#request"
 

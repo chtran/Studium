@@ -14,6 +14,7 @@ class ProfilesController < StatsController
     @subject_data = performance_recently(histories, interval)
 
     gon.user_id = current_user.id
+    gon.viewed_user_id = params[:user_id]
 
     @badges=current_user.badges
   end
