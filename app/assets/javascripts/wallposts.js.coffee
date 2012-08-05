@@ -51,7 +51,7 @@ $(->
           </div>
         </div>
       "
-      $('.all-wallposts').prepend(new_post_html)
+      $('.all-wallposts').prepend($(new_post_html).hide().fadeIn(2000))
 
     )
 
