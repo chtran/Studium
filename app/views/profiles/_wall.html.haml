@@ -15,19 +15,7 @@
           %div.accordion-inner
             %div.btn.btn-success.btn-small#post-btn
               Share
-  - @wallposts.each do |w|
-    %hr
-    %div.row-fluid.wallpost-container
-      %div.span2
-        %div.thumbnail.thumbnail-wall-image
-          = image_tag(User.find(w.sender_id).profile.image, :class => 'wall-image')
-      %div.span10.wallpost-content-container
-        %div.arrow-container
-          %div.arrow
-        %div.wallpost
-          %div.wallpost-content.row-fluid
-            %div.span9
-              %h4= User.find(w.sender_id).name
-            %div.span3
-              %p.time-ago= time_ago_in_words(Date.today)
-            %p= w.content
+  %div.all-wallposts
+    - @wallposts.each do |w|
+      =render 'each_wallpost', w: w
+
