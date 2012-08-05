@@ -6,7 +6,7 @@ $(->
     progress = (id)->
       $.ajax({
         type: "GET",
-        url: "/stats/pull/"+id.toString(),
+        url: "/users/#{gon.viewed_user_id}/profile/pull/"+id.toString(),
         success: (data)->
           chart = new Highcharts.Chart({
             chart: {
@@ -55,7 +55,7 @@ $(->
     c_stacked = (id)->
         $.ajax({
           type: "GET",
-          url: "/stats/pull_stacked/"+id.toString(),
+          url: "/users/#{gon.viewed_user_id}/profile/pull_stacked/"+id.toString(),
           success: (data)->
             chart_column = new Highcharts.Chart({
                 chart: {
@@ -122,7 +122,7 @@ $(->
     recent = (interval)->
       $.ajax({
           type: "GET",
-          url: "/stats/pull_pro_bar/" + interval.toString(),
+          url: "/users/#{gon.viewed_user_id}/profile/pull_pro_bar/" + interval.toString(),
           data: {
           }
           success: (subject_data)->

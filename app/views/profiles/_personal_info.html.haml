@@ -14,29 +14,29 @@
       %td.about-subtitle 
         %strong Name
       %td.about-text
-        %p= current_user.name 
+        %p= @viewed_user.name 
     %tr
       %td.about-subtitle 
         %strong Email 
       - message = 'Update Your Email'
-      - if current_user.email 
-        - message = current_user.email 
+      - if @viewed_user.email 
+        - message = @viewed_user.email 
       %td.about-text
         %p= message
     %tr
       %td.about-subtitle 
         %strong Birthday
       - message = 'Update Your Birthday'
-      - if current_user.profile.date_of_birth
-        - message = current_user.profile.date_of_birth  
+      - if @viewed_user.profile.date_of_birth
+        - message = @viewed_user.profile.date_of_birth  
       %td.about-text
         %p= message
     %tr
       %td.about-subtitle
         %strong School
       - message = 'Update Your School'
-      - if current_user.profile.school 
-        - message = current_user.profile.school 
+      - if @viewed_user.profile.school 
+        - message = @viewed_user.profile.school 
       %td.about-text
         %p= message
 

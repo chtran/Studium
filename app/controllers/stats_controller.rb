@@ -115,19 +115,19 @@ class StatsController < WallpostsController
   # render data of the form [percent, percent, percent,..] and 
   # [time, time, time, ..] 
   
-  def pull
-    category_type_id = params[:category_type_id].to_i
-    histories = current_user.histories
+#  def pull
+#    category_type_id = params[:category_type_id].to_i
+#    histories = current_user.histories
 
-    @correct_interval, @key_interval = percent_interval(histories, category_type_id)
-    @correct_interval = @correct_interval.reverse
-    @key_interval = @key_interval.reverse
-    data = {
-      key_interval: @key_interval, 
-      correct_interval: @correct_interval
-    }
-    render :json => data, :status => "200"
-  end
+#    @correct_interval, @key_interval = percent_interval(histories, category_type_id)
+#    @correct_interval = @correct_interval.reverse
+#    @key_interval = @key_interval.reverse
+#    data = {
+#      key_interval: @key_interval, 
+#      correct_interval: @correct_interval
+#    }
+#    render :json => data, :status => "200"
+#  end
 
 
   #render to stats/pull_stacked/:id 

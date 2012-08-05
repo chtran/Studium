@@ -16,6 +16,9 @@ Studium::Application.routes.draw do
     put action: "update"
     post :increase_reputation
     post :update_status 
+    get 'pull_pro_bar/:interval', action: 'pull_pro_bar'
+    get "pull/:category_type_id", action: "pull"
+    get "pull_stacked/:category_type_id", action: "pull_stacked"  
   end
 
   # Category Type Routes
@@ -81,14 +84,12 @@ Studium::Application.routes.draw do
   end
 
   # Stats routes
-  controller :stats,path: "/stats" do
-    root action: "index", as: "stats"
-    get :show
-    post :pull_pro_bar
-    get 'pull_pro_bar/:interval', action: 'pull_pro_bar'
-    get "pull/:category_type_id", action: "pull"
-    get "pull_stacked/:category_type_id", action: "pull_stacked"
-  end
+#  controller :stats,path: "/stats" do
+#    root action: "index", as: "stats"
+#    get :show
+#    post :pull_pro_bar
+
+#  end
 
   resources :messages
 

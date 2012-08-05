@@ -19,7 +19,7 @@
     -@subject_data.each do |s|
       %tr
         %td.stats-subtitle
-          %strong= s[:id]
+          %strong= s[:name]
         %td.progress-bar-container
           -@color = "primary" if s[:id]%3 == 1
           -@color = "success" if s[:id]%3 == 2
