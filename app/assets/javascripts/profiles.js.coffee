@@ -35,6 +35,17 @@ $(->
       $(document).click  ->
         $('.status-content textarea').attr('rows', 2)
 
+      $("#add-me").live("click", ->
+        $.ajax({
+          type: "POST",
+          url: "/friendships/add",
+          data: {
+            friend_id: gon.viewed_user_id
+          },
+          success: (data)->
+            $("#add-me").hide()
+        })
+      )
       update_info = "
         <input type= 'text' class = 'input-large update-info'>
         <div class = 'btn btn-primary'>Save</div> 

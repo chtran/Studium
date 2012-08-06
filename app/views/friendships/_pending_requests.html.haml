@@ -1,0 +1,7 @@
+- if requesters.empty?
+  %li
+    %a No new friend request
+-else
+  -requesters.each do |requester|
+    %li{friend_id: requester.id}
+      %a{href: "/users/#{requester.id}/profile"}= requester.name

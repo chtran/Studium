@@ -52,10 +52,16 @@
               %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
                 Studium
                 %i.icon-home.icon-white
-            %div.span5
-            %div.nav-collapse.span4
+            %div.span4
+            %div.nav-collapse.span5
               %ul.nav.pull-right
                 - if user_signed_in?
+                  %li.dropdown
+                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                      %i.icon-globe.icon-white
+                      %b.caret
+                    %ul.dropdown-menu.mydropdown-nav#dropdown-requests
+                      = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-comment.icon-white
@@ -65,7 +71,6 @@
                         = render partial: "messages/message_item_list",locals: {message: msg}
                       %li
                         =link_to "View all messages", messages_path
-
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-user.icon-white

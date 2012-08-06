@@ -1,6 +1,12 @@
 %div.row-fluid
   %div.span3#profile-name
-    %p=@viewed_user.name
+    %div
+      %p
+        =@viewed_user.name
+        -if @relationship=="stranger"
+          %a.btn.btn-primary#add-me Add as friend
+        -elsif @relationship=="requester"
+          %a.btn.btn-primary#add-me Accept friend request
     %a.thumbnail#profile-image
       %img{:src => 'http://apsroorkee.com/images/teachers/nopic.png'}
     %div.tabbable.tabs-left
