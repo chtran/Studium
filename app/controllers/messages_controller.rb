@@ -6,7 +6,6 @@ class MessagesController < ApplicationController
   def index
     @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
-    @new_room = Room.new
     
     gon.hash_data = User.return_hash_data
     
