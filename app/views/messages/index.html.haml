@@ -11,10 +11,11 @@
               %a.btn.btn-primary.btn-large#create_message_btn{'data-toggle' => 'modal', 'href'=>'#new_message'} 
                 New Message
         %tbody#messages_body
-          -@received_messages.each do |msg|
+          -@messages_by_users.each do |user,messages|
+            - message=messages.last
             %tr
-              %td{"colspan" => 2, bgcolor: msg.read? ? "#fff" : "#eee"}
-                = render msg
+              %td{"colspan" => 2, bgcolor: message.read? ? "#fff" : "#eee"}
+                = render partial: "message_chain",locals: {message: message,user: user}
 
       %div.modal.hide#new_message
         %div.modal-header

@@ -1,7 +1,0 @@
-= link_to message do
-  %div.row-fluid
-    %div.span1
-      = image_tag User.find(message.sender_id).profile.image
-    %div.span11.message-body
-      %h3.sender-name #{User.find(message.sender_id).name}
-      %small.content= truncate message.body,length: 36

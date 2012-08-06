@@ -470,8 +470,8 @@
   bottom:auto;
   left:auto;
   right:-30px; /* value = - border-left-width - border-right-width */
-  border-width:15px 0 15px 30px;
-  border-color:transparent #5a8f00;
+  border-width:17px 0 9px 30px;
+  border-color:transparent gray;
 }
 
 /* creates the smaller  triangle */

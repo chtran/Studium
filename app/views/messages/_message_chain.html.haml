@@ -1,0 +1,7 @@
+%a{class: "message-link",href: "messages/read/#{message.id}"}
+  %div.row-fluid
+    %div.span1
+      = image_tag user.profile.image
+    %div.span11.message-body
+      %h3.sender-name #{user.name}
+      %small.content= truncate message.body,length: 36

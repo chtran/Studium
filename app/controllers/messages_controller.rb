@@ -9,9 +9,19 @@ class MessagesController < ApplicationController
     
     gon.hash_data = User.return_hash_data
     
+    # Create a new message
     @message = Message.new
-    @received_messages = current_user.received_messages
     gon.user_id = current_user.id
+
+    # Organize messages into groups by users
+    @messages=current_user.all_messages
+    @messages_by_users={}
+    @messages.each do |message|
+      user=message.sender==current_user ? message.receiver : message.sender
+      messages=@messages_by_users[user] || []
+      messages << message
+      @messages_by_users[user]=messages 
+    end
   end
 
   def create
@@ -54,9 +64,15 @@ class MessagesController < ApplicationController
     redirect_to messages_path, notice: "Message(s) sent"
   end
 
-  def show
-    @message = Message.find(params[:id])
-    @message.update_attributes(:read => true)
+  def read
+    # Get the last messag
+    @message = Message.find(params[:message_id])
+    @message.update_attributes!(read: true)
+
+    # Find messages in the intersection of the arrays of sender's messages and receiver's messages
+    sender_messages=@message.sender.all_messages
+    receiver_messages=@message.receiver.all_messages
+    @messages=(sender_messages & receiver_messages).sort_by!(&:created_at)
   end
 
 private
