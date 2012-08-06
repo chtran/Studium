@@ -4,10 +4,8 @@
       %div.thumbnail.thumbnail-wall-image
         = image_tag(current_user.profile.image, :class => 'wall-image')
     %div.span10.wallpost-content-container
-      %div.arrow-container
-        %div.arrow
-      %div.accordion-heading.wallpost#accordion-wall
-        %div.accordion-toggle.wallpost-content{'data-toggle' => 'collapse', 'data-parent'=>'#accordion-wall', 'href'=>'#collapseWall' }
+      %div.accordion-heading.triangle-right.left#accordion-wall
+        %div.accordion-toggle{'data-toggle' => 'collapse', 'data-parent'=>'#accordion-wall', 'href'=>'#collapseWall' }
           %h4= current_user.name
           %hr
           %textarea{:rows => 3}
