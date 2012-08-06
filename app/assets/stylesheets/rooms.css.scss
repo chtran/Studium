@@ -105,10 +105,6 @@
 #choices .alert {
   padding: 8px 8px 8px 14px;
 }
-.profile_image img {
-  width: 50px;
-  height: 50px;
-}
 
 .selected_users img {
   width: 20px;
@@ -131,4 +127,8 @@
   width: 49px;
   height: 24px;
   display: inline-block;
+}
+
+.chat-content {
+  max-height: 200px;
 }
