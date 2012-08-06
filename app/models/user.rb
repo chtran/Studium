@@ -24,12 +24,13 @@ class User < ActiveRecord::Base
   # 3 - reviewing the answer
 
   belongs_to :room
+
   has_many :histories,dependent: :destroy
   has_one :profile,dependent: :destroy
   has_many :wallposts, foreign_key: "receiver_id"
-  accepts_nested_attributes_for :profile
-
   has_and_belongs_to_many :badges
+
+  accepts_nested_attributes_for :profile
 
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)

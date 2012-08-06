@@ -13,19 +13,21 @@ Studium::Application.routes.draw do
   controller :profiles,path: "/users/:user_id/profile" do
     get action: "show", as: "user_profile"
     get :edit,as: "edit_user_profile"
-    put action: "update"
+    put action: :update
     post :increase_reputation
     post :update_status 
-    get 'pull_pro_bar/:interval', action: 'pull_pro_bar'
-    get "pull/:category_type_id", action: "pull"
-    get "pull_stacked/:category_type_id", action: "pull_stacked"  
+    get 'pull_pro_bar/:interval', action: :pull_pro_bar
+    get "pull/:category_type_id", action: :pull
+    get "pull_stacked/:category_type_id", action: :pull_stacked
   end
 
   # Category Type Routes
   resources :category_types,:question_types,only: [:new,:create,:index] 
 
   # Message routes
-  resources :messages,only: [:index,:create,:show]
+  resources :messages,only: [:index,:create] do
+    get "/read/:message_id",action: :read,on: :collection
+  end
 
   # Rooms_controller routes
   resources :rooms,only: [:index,:create]

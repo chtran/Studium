@@ -1,0 +1,18 @@
+%div
+  %div.row-fluid
+    %div.span2
+    %div.span6.triangle-border.right
+      %div
+        %div.row-fluid
+          %div.span9
+            %h4= message.sender.name
+
+          %div.span3
+            %p.time-ago= time_ago_in_words(message.created_at) + " ago"
+
+          %p= message.body
+
+    %div.span2
+      %div.thumbnail
+        %img.message-image{alt: "Picture?type=square", src: message.sender.profile.image}
+
