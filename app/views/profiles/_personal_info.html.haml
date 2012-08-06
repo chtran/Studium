@@ -18,25 +18,25 @@
     %tr
       %td.about-subtitle 
         %strong Email 
-      - message = 'Update Your Email'
+      - message = ''
       - if @viewed_user.email 
         - message = @viewed_user.email 
       %td.about-text
         %p= message
-      %td
-        - if current_user == @user
-          %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
-            %i.icon-edit 
     %tr
       %td.about-subtitle 
         %strong Birthday
-      - message = 'Update Your Birthday'
+      - message = ''
       - if @viewed_user.profile.date_of_birth
         - message = @viewed_user.profile.date_of_birth  
       %td.about-text
         %p= message
-      %td
-        - if current_user == @user
-          %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
-            %i.icon-edit      
+    %tr
+      %td.about-subtitle 
+        %strong School
+      - message = ''
+      - if @viewed_user.profile.school
+        - message = @viewed_user.profile.school  
+      %td.about-text
+        %p= message
 
