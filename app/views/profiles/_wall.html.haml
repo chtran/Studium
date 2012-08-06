@@ -16,6 +16,6 @@
             %div.btn.btn-success.btn-small#post-btn
               Share
   %div.all-wallposts
-    - @wallposts.each do |w|
-      =render 'each_wallpost', w: w
+    - @wallposts.each do |post|
+      = render post
 
