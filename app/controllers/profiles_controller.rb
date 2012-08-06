@@ -2,7 +2,7 @@ class ProfilesController < StatsController
   before_filter :find_user
   before_filter :find_profile
   before_filter :authenticate_update!,only: [:edit,:update]
-  before_filter :authenticate_user!,only: [:increase_reputation]
+  before_filter :authenticate_user!,only: [:increase_reputation, :show]
 
   def show
 
