@@ -1,7 +1,2 @@
-%a{class: "message-link",href: "messages/read/#{message.id}"}
-  %div.row-fluid
-    %div.span1
-      = image_tag user.profile.image
-    %div.span11.message-body
-      %h3.sender-name #{user.name}
-      %small.content= truncate message.body,length: 36
+%a{class: "message-link message-#{user.id}",href: "messages/read/#{message.id}"}
+  = render partial: "message_chain_content",locals: {user: user,message: message}

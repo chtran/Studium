@@ -1,4 +1,4 @@
-= form_for @message, :html => {:class => "form-horizontal"} do |f|
+= form_for @message,remote: true, :html => {:class => "form-horizontal"} do |f|
   %fieldset
     %div.control-group
       = label_tag :receiver_id, "To", class: "control-label"

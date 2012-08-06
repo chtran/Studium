@@ -4,6 +4,8 @@
   %div.span8
     %h2= @message.receiver.name
     %hr
-    %div.messages.pre-scrollable
+    %div.conversation_messages.pre-scrollable
       - @messages.each do |message|
         = render partial: partial_view_for_message(message),locals: {message: message} 
+
+    = render "reply"
