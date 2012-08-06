@@ -191,7 +191,7 @@ class RoomsController < ApplicationController
     require "parser"
     current_user.update_attribute(:status, 1)
     publish_async("presence-room_#{current_user.room_id}", "users_change", {})
-    if params[:question_id]=="0"
+    if !params[:question_id]
       render json: {
         message: "Sorry, we ran out of questions for you"
       }
