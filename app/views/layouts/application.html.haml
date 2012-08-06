@@ -80,7 +80,7 @@
                         %a{href: "/users/#{current_user.id}/profile"}
                           %div.row-fluid
                             %div.span3
-                              = image_tag(current_user.profile.image)
+                              = image_tag(current_user.profile.image, :class => "profile-pic")
                             %div.span9
                               %div
                                 %b=current_user.name

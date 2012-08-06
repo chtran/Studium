@@ -7,7 +7,7 @@
             %td{:colspan => '3'}
               %div.span4
                 - if current_user.profile.image
-                  =image_tag(current_user.profile.image)
+                  =image_tag(current_user.profile.image, :class => "profile-pic")
               %div.span8
                 %h3= current_user.name
                 %small= link_to "View my profile","/users/#{current_user.id}/profile"
@@ -38,7 +38,7 @@
         - current_user.friends.each do |f|
           %li
             %a{href: user_profile_path(f)}
-              =image_tag(f.profile.image)
+              =image_tag(f.profile.image, :class => "profile-pic")
               = f.name
               - if f.room_id
                 is in room #{f.room_id}

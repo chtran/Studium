@@ -20,7 +20,7 @@
                   %div.span4
                     %h2= "##{user.rank}"
                   %div.span8
-                    = image_tag(user.profile.image)
+                    = image_tag(user.profile.image,:class => "profile-pic")
                 %div.span7
                   %h4= user.name
                   %div.user-stats.row-fluid
