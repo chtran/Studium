@@ -22,7 +22,8 @@
                   %div.span8
                     = image_tag(user.profile.image,:class => "profile-pic")
                 %div.span7
-                  %h4= user.name
+                  %a{href:"/users/#{user.id}/profile"}
+                    %h4= user.name
                   %div.user-stats.row-fluid
                     %div.span2
                       %i.icon-star-empty
