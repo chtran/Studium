@@ -1,0 +1,6 @@
+- @messages_by_users.each do |user,messages|
+  - message=messages.last
+  %tr
+    %td
+      = render partial: "messages/message_chain",locals: {message: message,user: user}
+

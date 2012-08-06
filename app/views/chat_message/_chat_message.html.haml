@@ -1,10 +1,9 @@
-%div.row-fluid
-  %div.span10
-    %p
-      = "#{current_user.name}: #{@chat_message.content}"
-  %div.span2
-    = form_tag "/users/#{current_user.id}/profile/increase_reputation",remote: true,class: "form form-inline" do
+%div
+  %div.span9
+    = "#{current_user.name}: #{@chat_message.content}"
+
+  %div.span3
+    = form_tag "/users/#{current_user.id}/profile/increase_reputation",remote: true,class: "form-inline" do
       = hidden_field_tag :reputation_increase,"1"
       = hidden_field_tag :chat_message_id,@chat_message.id
-      %i.icon-thumbs-up
-        = submit_tag "Vote", :class => "btn-vote"
+      = image_submit_tag "https://s3.amazonaws.com/studium_question_images/images/like.jpg",class: "like-button"

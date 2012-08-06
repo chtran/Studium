@@ -4,24 +4,16 @@ class MessagesController < ApplicationController
   before_filter :authenticate_view!,only: [:show]
   
   def index
-    @top_users = User.order("exp DESC").limit(5)
     gon.user_id = current_user.id
-    
     gon.hash_data = User.return_hash_data
     
     # Create a new message
-    @message = Message.new
+    @message=Message.new
     gon.user_id = current_user.id
 
     # Organize messages into groups by users
     @messages=current_user.all_messages.sort_by!(&:created_at)
-    @messages_by_users={}
-    @messages.each do |message|
-      user=message.sender==current_user ? message.receiver : message.sender
-      messages=@messages_by_users[user] || []
-      messages << message
-      @messages_by_users[user]=messages 
-    end
+    messages_by_users_for_messages(@messages)
   end
 
   def create
@@ -36,8 +28,12 @@ class MessagesController < ApplicationController
 
       if @message.save
 
-        message_item=render_to_string partial: "message_item",locals: {message: @message}
+        # recent message list (message drop down content)
+        get_recent_message_list_for_user(@message.receiver)
+        message_list=render_to_string partial: "message_list"
         message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.sender}
+
+        message_item=render_to_string partial: "message_item",locals: {message: @message}
 
         # Receiver's message-receive event
         @new_message = current_user.sent_messages.first
@@ -45,13 +41,12 @@ class MessagesController < ApplicationController
           message_new_chain: message_new_chain,
           new_message: render_to_string(partial: "message_left",locals: {message: @new_message,user: current_user}),
           sender_id: @message.sender.id,
-          message_item: message_item 
+          message_list: message_list
         })
 
         publish_async("user_#{current_user.id}","message",{
           receiver_id: @message.receiver.id,
-          message_new_chain: message_new_chain,
-          message_item: message_item 
+          message_new_chain: message_new_chain
         })
 
         # Receiver's message-notification event
@@ -93,4 +88,5 @@ private
       redirect_to messages_path,alert: "The message you were looking for could not be found."
     end
   end
+
 end
