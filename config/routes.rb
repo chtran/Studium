@@ -102,7 +102,9 @@ Studium::Application.routes.draw do
   resources :wallposts
 
   # Friendship routes
-  post "friendships/request", to: "friendships#request"
+  post "friendships/add", to: "friendships#add"
+  get "friendships/pending_requests", to: "friendships#pending_requests", as: "friend_requests"
+
 
   # Root page
   root to: "homepage#index",as: :index

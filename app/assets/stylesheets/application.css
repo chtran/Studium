@@ -16,8 +16,8 @@
 .navbar i{
   font-size: 25px;
 }
-.navbar-inner .span4 {
-  padding: 5px;
+.navbar-inner .nav-collapse {
+  padding-top: 10px;
 }
 .mydropdown-nav{
   width: 350px;
@@ -33,6 +33,20 @@
   font-size: 12px;
 }
 
+.navbar .mybrand {
+  float: left;
+  display: block;
+  padding: 8px 20px 12px;
+  margin-left: -20px;
+  font-size: 25px;
+  font-weight: 200;
+  line-height: 1;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.navbar a.mybrand:hover {
+  text-decoration: none;
+}
 .my-text-area {
-  width: 200px;
+  width: 800px;
 }

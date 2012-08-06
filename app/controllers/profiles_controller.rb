@@ -16,6 +16,7 @@ class ProfilesController < StatsController
     # Wallposts data
     gon.user_id = current_user.id
     gon.viewed_user_id = params[:user_id]
+    @relationship = current_user.relationship(@user)
     @can_edit = (current_user.id==params[:user_id].to_i)
     @accordion = {
       parent: @can_edit ? "#accordion-status" : "",
