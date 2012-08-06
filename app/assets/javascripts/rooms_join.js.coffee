@@ -108,7 +108,7 @@ $(->
         url: "/rooms/show_explanation",
         success: (data) ->
           $("#choices").html(data)
-          setup_timer(60, ready)
+          setup_timer(10, ready)
 
           $("#history .hide").removeClass("hide").effect("highlight",2000)
           # Reload MathJax
@@ -118,6 +118,7 @@ $(->
       $("#ready").show()
 
     confirm_answer = (choice_id) ->
+      $("#confirm").hide()
       $("#timer").countdown("destroy")
       # Send a POST request to "/rooms/choose" (rooms#choose)
       $.ajax({
@@ -211,7 +212,6 @@ $(->
       # Get the choice_id by finding the "btn-primary" class
       choice_id = $(".question_active .each_choice.btn-primary").attr("id")
       # Remove the confirm button
-      $("#confirm").hide()
       confirm_answer(choice_id)
       true
     )

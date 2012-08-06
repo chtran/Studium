@@ -43,7 +43,7 @@ class ProfilesController < StatsController
 
   def increase_reputation
     chat_message=ChatMessage.find params[:chat_message_id]
-    reputation_increase=params[:reputation_increase]
+    reputation_increase=1
 
     if current_user!=@profile.user and !chat_message.users.include?(current_user)
       @profile.reputation+=reputation_increase.to_i
