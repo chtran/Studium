@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     gon.user_id = current_user.id
 
     # Organize messages into groups by users
-    @messages=current_user.all_messages
+    @messages=current_user.all_messages.sort_by!(&:created_at)
     @messages_by_users={}
     @messages.each do |message|
       user=message.sender==current_user ? message.receiver : message.sender
@@ -36,14 +36,12 @@ class MessagesController < ApplicationController
       @message.receiver_id=r_id
       if @message.save
 
-        message_row=render_to_string(@message)
         message_item=render_to_string(partial: "message_item",locals: {message: @message})
         message_item_list=render_to_string(partial: "message_item_list",locals: {message: @message})
 
         # Receiver's message-receive event
         @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
-          message_row: message_row,
           message_item: message_item 
         })
 

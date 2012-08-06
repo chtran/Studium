@@ -10,7 +10,7 @@ $(->
   user_channel = client.subscribe("user_" + gon.user_id)
   
   user_channel.bind("message", (data) ->
-    $("#messages_body").prepend(data.message_row) if in_messages_index
+    # $("#messages_body").prepend(data.message_row) if in_messages_index
     $("#dropdown-message").prepend(data.message_item)
   )
   

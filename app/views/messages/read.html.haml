@@ -7,4 +7,3 @@
     %div.messages.pre-scrollable
       - @messages.each do |message|
         = render partial: partial_view_for_message(message),locals: {message: message} 
-
