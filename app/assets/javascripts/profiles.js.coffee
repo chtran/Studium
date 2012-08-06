@@ -25,8 +25,7 @@ $(->
             status: $('.status-content textarea').val()
           }
           success: (data) ->
-            new_status = $('.status-content textarea').val()
-            $('p#status').text(new_status)
+            $('p#status').text(data.status)
             $('.status-content textarea').val('')
         })
 
