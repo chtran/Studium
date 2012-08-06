@@ -332,6 +332,7 @@ class RoomsController < ApplicationController
       else
         question_id = 0
       end
+
       #Publish next_question
       #If there're questions left, publish question_id
       #Else, publish question_id = 0, it will redirect user out of the room
