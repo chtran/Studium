@@ -1,4 +1,4 @@
-= link_to message do
+%a{class: "message-link",href: "messages/read/#{message.id}"}
   %div.row-fluid{bgcolor: message.read? ? "#fff" : "#eee"}
     %div.span3
       = image_tag message.sender.profile.image

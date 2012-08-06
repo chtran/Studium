@@ -6,12 +6,16 @@ $(->
   current_controller=gon.current_controller
   current_action=gon.current_action
   in_messages_index=current_controller=="messages" and current_action=="index"
+  in_messages_read=current_controller=="messages" and current_action=="read"
 
   user_channel = client.subscribe("user_" + gon.user_id)
   
   user_channel.bind("message", (data) ->
-    # $("#messages_body").prepend(data.message_row) if in_messages_index
-    $("#dropdown-message").prepend(data.message_item)
+    if in_messages_index
+      $(".message-"+data.sender_id).html(data.message_new_chain)
+      $(".message-"+data.receiver_id).html(data.message_new_chain)
+    if in_messages_read
+      $(".conversation_messages").append(data.new_message)
   )
   
   if in_messages_index
@@ -20,4 +24,20 @@ $(->
       {
         theme: "facebook"
       })
+
+  if in_messages_read
+    $(".reply-message").click ->
+      $.ajax({
+        type: "POST",
+        url: "/messages",
+        data: {
+          receiver_id: $("#receiver_id").val(),
+          "message[body]": $(".reply-body").val()
+        },
+        success: (data) ->
+          $(".conversation_messages").append(data)
+          $(".reply-body").val("")
+      })
+      
+      false
 )

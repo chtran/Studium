@@ -33,14 +33,24 @@ class MessagesController < ApplicationController
       @message = Message.new params[:message]
       @message.sender_id=current_user.id
       @message.receiver_id=r_id
+
       if @message.save
 
-        message_item=render_to_string(partial: "message_item",locals: {message: @message})
-        message_item_list=render_to_string(partial: "message_item_list",locals: {message: @message})
+        message_item=render_to_string partial: "message_item",locals: {message: @message}
+        message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.sender}
 
         # Receiver's message-receive event
         @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
+          message_new_chain: message_new_chain,
+          new_message: render_to_string(partial: "message_left",locals: {message: @new_message,user: current_user}),
+          sender_id: @message.sender.id,
+          message_item: message_item 
+        })
+
+        publish_async("user_#{current_user.id}","message",{
+          receiver_id: @message.receiver.id,
+          message_new_chain: message_new_chain,
           message_item: message_item 
         })
 
@@ -52,18 +62,14 @@ class MessagesController < ApplicationController
           message: message_item,
           type: type
         })
-      else
-        alert = "Message could not be sent to " + User.find(r_id).name
-        redirect_to messages_path, alert: alert
       end
 
+      render partial: "message_left",locals: {message: @new_message,user: current_user}
     end
-
-    redirect_to messages_path, notice: "Message(s) sent"
   end
 
   def read
-    # Get the last messag
+    # Get the last message
     @message = Message.find(params[:message_id])
     @message.update_attributes!(read: true)
 
@@ -71,6 +77,10 @@ class MessagesController < ApplicationController
     sender_messages=@message.sender.all_messages
     receiver_messages=@message.receiver.all_messages
     @messages=(sender_messages & receiver_messages).sort_by!(&:created_at)
+
+    # Reply
+    @reply=Message.new
+    @receiver_id=@message.sender==current_user ? @message.receiver.id : @message.sender.id
   end
 
 private

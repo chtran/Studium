@@ -93,8 +93,6 @@ Studium::Application.routes.draw do
 
 #  end
 
-  resources :messages
-
   # Wallposts routes
   controller :wallposts, path: '/wallposts' do
     root action: 'index', as: 'wallposts'
@@ -102,7 +100,6 @@ Studium::Application.routes.draw do
   end
 
   resources :wallposts
-
 
   # Friendship routes
   post "friendships/request", to: "friendships#request"
