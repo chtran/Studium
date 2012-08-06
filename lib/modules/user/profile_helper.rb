@@ -17,7 +17,7 @@ class User
     end
 
     def rank
-      User.joins(:profile).where("profiles.gp > (?)", self.exp).count + 1
+      User.joins(:profile).where("profiles.gp > (?)", self.gp).count + 1
     end
 
     def gp
