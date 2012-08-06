@@ -10,7 +10,7 @@
         %div.accordion-toggle.wallpost-content{'data-toggle' => 'collapse', 'data-parent'=>'#accordion-wall', 'href'=>'#collapseWall' }
           %h4= current_user.name
           %hr
-          %textarea{:rows => 3}
+          %textarea{:rows => 3, :placeholder => 'Compose a wall post'}
         %div.accordion-body.collapse#collapseWall
           %div.accordion-inner
             %div.btn.btn-success.btn-small#post-btn

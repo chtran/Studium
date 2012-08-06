@@ -14,9 +14,7 @@
       %td.about-text
         %p= @viewed_user.name 
       %td
-        - if current_user == @user
-          %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
-            %i.icon-edit 
+
     %tr
       %td.about-subtitle 
         %strong Email 
@@ -30,7 +28,6 @@
           %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
             %i.icon-edit 
     %tr
-    %tr
       %td.about-subtitle 
         %strong Birthday
       - message = 'Update Your Birthday'
@@ -42,16 +39,4 @@
         - if current_user == @user
           %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
             %i.icon-edit      
-    %tr
-    %tr
-      %td.about-subtitle
-        %strong School
-      - message = 'Update Your School'
-      - if @viewed_user.profile.school 
-        - message = @viewed_user.profile.school 
-      %td.about-text
-        %p= message
-      %td
-        - if current_user == @user
-          %a{:rel => 'tooltip', 'data-original-title'=>'Edit'} 
-            %i.icon-edit        
+

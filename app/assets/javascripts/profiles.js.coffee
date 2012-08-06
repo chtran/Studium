@@ -35,4 +35,11 @@ $(->
         event.stopPropagation()
       $(document).click  ->
         $('.status-content textarea').attr('rows', 2)
+
+      update_info = "
+        <input type= 'text' class = 'input-large update-info'>
+        <div class = 'btn btn-primary'>Save</div> 
+      "
+
+      
 )
