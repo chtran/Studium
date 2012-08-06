@@ -16,6 +16,11 @@ class ProfilesController < StatsController
     # Wallposts data
     gon.user_id = current_user.id
     gon.viewed_user_id = params[:user_id]
+    @can_edit = (current_user.id==params[:user_id].to_i)
+    @accordion = {
+      parent: @can_edit ? "#accordion-status" : "",
+      href: @can_edit ? "#collapseStatus" : ""
+    }
     @viewed_user = User.find(params[:user_id])
     @wallposts   = @viewed_user.wallposts.find(:all, :order=>'created_at DESC')
     # end of wallposts data
@@ -63,11 +68,10 @@ class ProfilesController < StatsController
 
   def update_status
     profile_status = params[:status]
-    status_partial = render_to_string partial: 'status'
     current_user.profile.update_attribute(:status, profile_status)
 
     render json: {
-      status_partial: status_partial
+      status: profile_status
     }
   end
 
