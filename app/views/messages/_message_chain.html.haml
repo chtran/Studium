@@ -1,2 +1,2 @@
 %a{class: "message-link message-#{user.id}",href: "messages/read/#{message.id}"}
-  = render partial: "message_chain_content",locals: {user: user,message: message}
+  = render partial: "messages/message_chain_content",locals: {user: user,message: message}

@@ -11,6 +11,10 @@ $(->
   user_channel = client.subscribe("user_" + gon.user_id)
   
   user_channel.bind("message", (data) ->
+    $(".dropdown-menu-messages").empty()
+    $(".dropdown-menu-messages").prepend(data.message_list)
+    $(".icon-comment").css({"color": "#fff"})
+
     if in_messages_index
       $(".message-"+data.sender_id).html(data.message_new_chain)
       $(".message-"+data.receiver_id).html(data.message_new_chain)
@@ -24,6 +28,22 @@ $(->
       {
         theme: "facebook"
       })
+
+    $(".new-message").click ->
+      $.ajax({
+        type: "POST",
+        url: "/messages",
+        data: {
+          receiver_id: $(".new-message-receivers").val(),
+          "message[body]": $(".new-message-body").val()
+        },
+        success: (data) ->
+          $(".token-input-token-facebook").remove()
+          $(".new-message-body").val("")
+          $("#new_message").modal("hide")
+      })
+      
+      false
 
   if in_messages_read
     $(".reply-message").click ->

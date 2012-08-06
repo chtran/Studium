@@ -61,10 +61,9 @@
                       %i.icon-comment.icon-white
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message
-                      -current_user.received_messages.limit(4).each do |msg|
-                        = render partial: "messages/message_item_list",locals: {message: msg}
-                      %li
-                        =link_to "View all messages", messages_path
+                      %div.dropdown-menu-messages
+                        = render "messages/message_list"
+                      = link_to "View all messages", messages_path
 
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
