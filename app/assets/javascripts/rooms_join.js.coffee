@@ -42,12 +42,8 @@ $(->
     )
 
     # Listen to the "show_explanation" event which keeps track of whether to show explanation or not
-    channel.bind("show_explanation", (data) ->
-      # Get the choice_id by finding the "btn-primary" class
-      choice_id = $(".each_choice.btn-primary").attr("id")
-      show_explanation(data.question_id, choice_id)
-      true
-    )
+    channel.bind("show_explanation", ->
+      show_explanation())
 
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
@@ -97,7 +93,7 @@ $(->
             else
               $("#paragraph").remove()
             $("#current_question").addClass("question_active")
-            setup_timer(600,confirm_answer)
+            setup_timer(10,confirm_answer)
 
             # Reload MathJax
             MathJax.Hub.Queue(["Typeset",MathJax.Hub])
@@ -106,13 +102,10 @@ $(->
 
     # Input: question_id and choice_id
     # Effect: render the explanation for the given question
-    show_explanation = (question_id,choice_id) ->
+    show_explanation = ->
       $.ajax({
         type: "POST",
         url: "/rooms/show_explanation",
-        data: {
-          choice_id: choice_id
-        },
         success: (data) ->
           $("#choices").html(data)
           setup_timer(60, ready)
@@ -285,8 +278,6 @@ $(->
         type: "GET",
         url: "/rooms/leave_room",
         async: false,
-        success: ->
-          alert "Bye!"
       })
 
     $(window).unload(unload_page)
