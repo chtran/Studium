@@ -1,6 +1,7 @@
 %div
   %div.span9
-    = "#{current_user.name}: #{@chat_message.content}"
+    %a{href: "#",rel: "tooltip","data-original-title" => current_user.email}= "#{current_user.name}"
+    = ": #{@chat_message.content}"
 
   %div.span3
     = form_tag "/users/#{current_user.id}/profile/increase_reputation",remote: true,class: "form-inline" do

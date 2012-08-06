@@ -93,7 +93,7 @@ $(->
             else
               $("#paragraph").remove()
             $("#current_question").addClass("question_active")
-            setup_timer(10,confirm_answer)
+            setup_timer(120,confirm_answer)
 
             # Reload MathJax
             MathJax.Hub.Queue(["Typeset",MathJax.Hub])
