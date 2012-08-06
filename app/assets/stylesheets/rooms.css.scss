@@ -1,14 +1,27 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 #profile strong {
-  font-size:18px;
   float: right;
+  font-size: 13px;
 }
 #profile small {
   color: #999;
+  font-size:13px;
 }
 #room_list small {
   color: #999;
+}
+#room_list p {
+  padding: 15px;
+  color: #999;
+}
+
+.user-stats p{
+  color: #666;
+  font-size: 11px;
+}
+.user-stats {
+  margin-top: 5px;
 }
 .accordion-group {
   margin-bottom: 2px;
@@ -86,11 +99,6 @@
   margin-bottom:15px;
 }
 
-.user-stats p{
-  color: #666;
-  font-size: 11px;
-}
-
 #question_container{
   padding-right: 10px
 }
@@ -105,4 +113,16 @@
 .selected_users img {
   width: 20px;
   margin: 5px;
+}
+
+.bordered-container {
+  margin-bottom: 18px;
+  border: 1px solid #E5E5E5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#recent_activities .pre-scrollable {
+  height: 78px;
 }
