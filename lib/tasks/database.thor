@@ -223,8 +223,8 @@ class Database < Thor
     puts "Created Replay room mode" if verbose
     RoomMode.create! title: "Shuffled", namespace: "shuffled"
     puts "Created Shuffled room mode" if verbose
-    RoomMode.create! title: "Smart", namespace: "smart"
-    puts "Created Smart room mode" if verbose
+    #RoomMode.create! title: "Smart", namespace: "smart"
+    #puts "Created Smart room mode" if verbose
     RoomMode.create! title: "Math", namespace: "math"
     puts "Created Math room mode" if verbose
     RoomMode.create! title: "Writing (Multiple Choice)", namespace: "writing"

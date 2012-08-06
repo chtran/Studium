@@ -20,6 +20,9 @@ class Room < ActiveRecord::Base
     return User.find(owner_array[0]) if owner_array
   end
 
+  def active_users
+    self.users.where("status > (0)")
+  end
   def deactivate
     self.update_attribute(:active, false)
   end

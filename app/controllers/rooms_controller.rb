@@ -131,7 +131,7 @@ class RoomsController < ApplicationController
     if @room.show_next_question?
       if @next_question = choose_question!(@room)
         @room.users.each do |user|
-          current_user.update_attribute(:status, 1)
+          user.update_attribute(:status, 1)
         end
         question_id = @next_question.id
       else
@@ -220,9 +220,10 @@ class RoomsController < ApplicationController
     @room = current_user.room
     @question = @room.question
     return if !@room.show_explanation?
-    last_choice = current_user.histories.last.choice
-    current_user_choice = last_choice.question_id==@question.id ? last_choice : nil
+    last_choice = current_user.histories.last.choice if !current_user.histories.empty?
+    current_user_choice = (last_choice and last_choice.question_id==@question.id) ? last_choice : nil
 
+    puts "User #{current_user.id} chose #{current_user_choice.id if current_user_choice}"
     @choices = @question.choices.collect do |choice| {
       data: choice,
       result: if choice.correct
@@ -230,7 +231,7 @@ class RoomsController < ApplicationController
               elsif current_user_choice and choice.id==current_user_choice.id
                 "selected"
               end,
-      selected: @room.users.all.select {|u| u.histories.last.choice_id == choice.id}
+      selected: @room.active_users.all.select {|u| u.histories.last.choice_id == choice.id if !u.histories.empty?}
     }
     end
     messages = {
@@ -246,7 +247,7 @@ class RoomsController < ApplicationController
     # If there's a choice_id (user chose a choice) and that choice is correct
     if current_user.status != 0
       #If user didn't select answer
-      if !current_user_choice
+      if current_user_choice==nil
         @change= current_user.lose_to!(@question)
         @message = messages[:blank]
         @style = styles[:blank]
@@ -318,9 +319,27 @@ class RoomsController < ApplicationController
   end
 
   def leave_room
+    old_room = current_user.room
     current_user.leave_room
-    # Update room list for other people
-    publish_async("presence-rooms", "rooms_change", {})
+    if old_room.show_explanation?
+      publish("presence-room_#{old_room.id}", "show_explanation",{})
+    elsif old_room.show_next_question?
+      if next_question = choose_question!(old_room)
+        old_room.users.each do |user|
+          user.update_attribute(:status, 1)
+        end
+        question_id = next_question.id
+      else
+        question_id = 0
+      end
+      #Publish next_question
+      #If there're questions left, publish question_id
+      #Else, publish question_id = 0, it will redirect user out of the room
+      publish("presence-room_#{old_room.id}","next_question", {
+        question_id: question_id
+      })
+
+    end
     render text: "OK", status: "200"
   end
 
