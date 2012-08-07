@@ -46,7 +46,7 @@ class RoomsController < ApplicationController
         room_id: @room.id,
         status: 0
       })
-      gon.observing = (@room.users.count==1).to_s
+      gon.observing = (@room.users.count!=1)
       choose_question!(@room) if !@room.question
       publish_async("presence-room_#{@room.id}","users_change", {})
       publish_async("presence-rooms", "update_recent_activities", {
@@ -322,26 +322,28 @@ class RoomsController < ApplicationController
 
   def leave_room
     old_room = current_user.room
-    current_user.leave_room
-    if old_room.show_explanation?
-      publish("presence-room_#{old_room.id}", "show_explanation",{})
-    elsif old_room.show_next_question?
-      if next_question = choose_question!(old_room)
-        old_room.users.each do |user|
-          user.update_attribute(:status, 1)
+    if old_room
+      current_user.leave_room
+      if old_room.show_explanation?
+        publish("presence-room_#{old_room.id}", "show_explanation",{})
+      elsif old_room.show_next_question?
+        if next_question = choose_question!(old_room)
+          old_room.users.each do |user|
+            user.update_attribute(:status, 1)
+          end
+          question_id = next_question.id
+        else
+          question_id = 0
         end
-        question_id = next_question.id
-      else
-        question_id = 0
+
+        #Publish next_question
+        #If there're questions left, publish question_id
+        #Else, publish question_id = 0, it will redirect user out of the room
+        publish("presence-room_#{old_room.id}","next_question", {
+          question_id: question_id
+        })
+
       end
-
-      #Publish next_question
-      #If there're questions left, publish question_id
-      #Else, publish question_id = 0, it will redirect user out of the room
-      publish("presence-room_#{old_room.id}","next_question", {
-        question_id: question_id
-      })
-
     end
     render text: "OK", status: "200"
   end
