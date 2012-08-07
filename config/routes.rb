@@ -30,6 +30,7 @@ Studium::Application.routes.draw do
   end
 
   # Rooms_controller routes
+  get "/search",to: "rooms#search_friend_all_results",as: "search_friends"
   resources :rooms,only: [:index,:create] do
     get :search_friend,on: :collection
   end

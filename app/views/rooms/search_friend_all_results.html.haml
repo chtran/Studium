@@ -1,0 +1,5 @@
+%h2 All Results
+%div.row-fluid
+  %div.span6
+    - @users.each do |user|
+      = render partial: "users/user_item",locals: {user: user}

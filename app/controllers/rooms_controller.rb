@@ -347,9 +347,20 @@ class RoomsController < ApplicationController
   end
 
   def search_friend
+    @term=params[:term]
+    @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{@term.downcase}%","%#{@term.downcase}%")
+
+    @results=@users.map {|user| {label: render_to_string(partial: "users/user_item",locals: {user: user}),value: user.name}}
+
+    if @results.count>8
+      @results=@results.take(8)
+      @results << {label: render_to_string(partial: "search_more_results_link"),value: "More Results"}
+    end
+    render json: @results 
+  end
+
+  def search_friend_all_results
     term=params[:term]
     @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{term.downcase}%","%#{term.downcase}%")
-
-    render json: @users.map {|user| {label: render_to_string(partial: "users/user_item",locals: {user: user}),value: user.name}}
   end
 end
