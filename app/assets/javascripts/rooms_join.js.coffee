@@ -108,7 +108,7 @@ $(->
         url: "/rooms/show_explanation",
         success: (data) ->
           $("#choices").html(data)
-          setup_timer(10, ready)
+          setup_timer(120, ready)
 
           $("#history .hide").removeClass("hide").effect("highlight",2000)
           # Reload MathJax
