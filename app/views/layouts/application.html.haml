@@ -55,6 +55,7 @@
             %div.nav-collapse.span10
               %form.navbar-search.pull-left
                 = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
+                %i.icon-search.icon-white{style: "height: 10px;"}
               %ul.nav.pull-right
                 - if user_signed_in?
                   %li.dropdown
