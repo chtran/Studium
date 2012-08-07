@@ -64,7 +64,7 @@
                     %ul.dropdown-menu.mydropdown-nav#dropdown-requests
                       = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
                   %li.dropdown
-                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                    %a.dropdown-toggle.message-dropdown{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-comment.icon-white
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message

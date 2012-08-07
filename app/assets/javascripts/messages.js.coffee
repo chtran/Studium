@@ -9,6 +9,10 @@ $(->
   in_messages_index=current_controller=="messages" and current_action=="index"
   in_messages_read=current_controller=="messages" and current_action=="read"
 
+  # Change all messages to read state when user clicks on the message icon
+  $(".message-dropdown").click ->
+    $(".icon-comment").removeClass("message-white")
+
   if in_messages
     user_channel = client.subscribe("user_" + gon.user_id)
  
@@ -19,7 +23,7 @@ $(->
       $(".dropdown-menu-messages").prepend(data.message_list)
 
       # Highlight emssage icon for receiver only
-      $(".icon-comment").css({"color": "#fff"}) if data.sender_id
+      $(".icon-comment").addClass("message-white") if data.sender_id
 
       # Update messages in index page for both sender and receiver
       if in_messages_index
