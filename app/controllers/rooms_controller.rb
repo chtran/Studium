@@ -361,6 +361,8 @@ class RoomsController < ApplicationController
 
   def search_friend_all_results
     term=params[:term]
-    @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{term.downcase}%","%#{term.downcase}%")
+
+    @users=[]
+    @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{term.downcase}%","%#{term.downcase}%") if term
   end
 end
