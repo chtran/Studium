@@ -44,7 +44,7 @@
       %div.navbar-inner.navbar-big
         %div.row-fluid
           %div.container
-            %div.span3
+            %div.span2
               %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target"=> ".nav-collapse"}
                 %span.icon-bar
                 %span.icon-bar
@@ -52,8 +52,9 @@
               %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
                 Studium
                 %i.icon-home.icon-white
-            %div.span4
-            %div.nav-collapse.span5
+            %div.nav-collapse.span10
+              %form.navbar-search.pull-left
+                = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
               %ul.nav.pull-right
                 - if user_signed_in?
                   %li.dropdown

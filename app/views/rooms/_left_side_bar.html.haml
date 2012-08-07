@@ -34,9 +34,6 @@
         %div.span6
           %div.span8
             %h3 Friends
-          %div.span4
-            = form_for @new_room do |f|
-              = f.autocomplete_field :user_email,autocomplete_user_email_rooms_path
     %div.mousescroll
       %ul.nav.nav-tabs.nav-stacked
         - current_user.friends.each do |f|

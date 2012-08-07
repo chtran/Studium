@@ -1,25 +1,6 @@
-
 %table.table.table-condensed
   %tbody
     - @user_list.each do |user|
       %tr
         %td.row-fluid.user_component.well
-          %a.hover-data{href: "#",rel: "popover",  "data-original-title" => "Quality", "data-content" => "test"}
-            %div.span3
-              %div.thumbnail
-                = image_tag(user.profile.image)
-          %div.span9
-            %h4= user.name
-            %div.row-fluid
-              %div.span8
-              %div.span4
-                %label.label.label-info= user.status_message
-            %div.row-fluid.user-stats
-              %div.span1
-                %i.icon-star-empty
-              %div.span3  
-                %p= "GP #{user.gp}"
-              %div.span1
-                %i.icon-ok
-              %div.span4
-                %p= "LEVEL #{user.level}"
+          = render user

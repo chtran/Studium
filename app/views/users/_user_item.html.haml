@@ -1,0 +1,16 @@
+%div.row-fluid
+  = link_to user_profile_path(user) do
+    %div.span4
+      %div.thumbnail
+        = image_tag(user.profile.image)
+    %div.span8
+      %h4= user.name
+      %div.row-fluid.user-stats
+        %div.span1
+          %i.icon-star-empty
+        %div.span3  
+          %p= "GP #{user.gp}"
+        %div.span1
+          %i.icon-ok
+        %div.span4
+          %p= "LEVEL #{user.level}"

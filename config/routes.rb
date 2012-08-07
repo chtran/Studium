@@ -31,7 +31,7 @@ Studium::Application.routes.draw do
 
   # Rooms_controller routes
   resources :rooms,only: [:index,:create] do
-    get :autocomplete_user_email, on: :collection
+    get :search_friend,on: :collection
   end
   controller :rooms,path: "/rooms",as: "room" do
     #get "/join/:room_title", action: "join", as: "join"
