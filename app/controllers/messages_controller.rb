@@ -28,25 +28,24 @@ class MessagesController < ApplicationController
 
       if @message.save
 
-        # recent message list (message drop down content)
+        # Need to update the following:
+        # Update messages in message dropdown (nav bar) for both sender and receiver (and highlighted for receiver) => message_list
+        # Update messages in #read for both receiver and sender (left-style for sender and right-style for receiver) => new_message
+        # Update messages in #index for both receiver and sender => message_new_chain
+
+        # Updates for receiver
         get_recent_message_list_for_user(@message.receiver)
         message_list=render_to_string partial: "message_list"
         message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.sender}
-
         message_item=render_to_string partial: "message_item",locals: {message: @message}
+        new_message=render_to_string partial: "message_right",locals: {message: @message,user: current_user}
 
-        # Receiver's message-receive event
         @new_message = current_user.sent_messages.first
         publish_async("user_#{r_id}", "message", {
           message_new_chain: message_new_chain,
-          new_message: render_to_string(partial: "message_left",locals: {message: @new_message,user: current_user}),
+          new_message: new_message,
           sender_id: @message.sender.id,
           message_list: message_list
-        })
-
-        publish_async("user_#{current_user.id}","message",{
-          receiver_id: @message.receiver.id,
-          message_new_chain: message_new_chain
         })
 
         # Receiver's message-notification event
@@ -57,8 +56,20 @@ class MessagesController < ApplicationController
           message: message_item,
           type: type
         })
+
+        # Updates for sender (which is the current user)
+        get_recent_message_list_for_user(@message.sender)
+        message_list=render_to_string partial: "message_list"
+        message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.sender}
+        publish_async("user_#{current_user.id}","message",{
+          message_new_chain: message_new_chain,
+          receiver_id: @message.receiver.id,
+          message_list: message_list
+        })
+
       end
 
+      # Render the new message for sender (for appending in #read) => Left-styled
       render partial: "message_left",locals: {message: @new_message,user: current_user}
     end
   end

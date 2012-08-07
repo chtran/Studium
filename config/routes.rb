@@ -26,7 +26,7 @@ Studium::Application.routes.draw do
 
   # Message routes
   resources :messages,only: [:index,:create] do
-    get "/read/:message_id",action: :read,on: :collection
+    get "/read/:message_id",action: :read,on: :collection,as: :read
   end
 
   # Rooms_controller routes
