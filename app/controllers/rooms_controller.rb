@@ -2,6 +2,8 @@ class RoomsController < ApplicationController
   before_filter :authenticate_user!
   protect_from_forgery
 
+  autocomplete :user,:email,full: true
+
   def index
     @name = current_user.name
     @friends = current_user.friends
@@ -342,11 +344,5 @@ class RoomsController < ApplicationController
 
     end
     render text: "OK", status: "200"
-  end
-
-  def friend_suggestion
-    @users=User.joins(:profile).where("first_name like ? OR last_name like ?","%#{params[:term]}%","#{params[:term]}%")
-
-    render json: @users.map(&:name)
   end
 end

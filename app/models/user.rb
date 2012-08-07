@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
     }
     end
   end
+
+  def user_item
+    "#{self.name}"
+  end
 end
