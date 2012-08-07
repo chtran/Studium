@@ -34,8 +34,6 @@
         %div.span6
           %div.span8
             %h3 Friends
-          %div.span4
-            = text_field_tag :username,"", {class: "search-friend",data: {friend_suggestion: room_friend_suggestion_path}}
     %div.mousescroll
       %ul.nav.nav-tabs.nav-stacked
         - current_user.friends.each do |f|

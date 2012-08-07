@@ -36,17 +36,8 @@ $(->
     # Update the room list initially (when page first loads)
     update_room_list()
 
-    formatItem=(row,position,length) ->
-      alert row
-      return "Kien Hoang"
-
     # Autocompletion for friend-search
-    $(".search-friend").autocomplete(
-      $(".search-friend").data("friend-suggestion"), 
-      {
-        formatItem: formatItem
-      })
-
+    
   # Only run the above code if user is in room's index page
   current_controller=gon.current_controller
   current_action=gon.current_action
