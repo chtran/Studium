@@ -27,7 +27,7 @@ $(->
         $(".message-"+data.receiver_id).html(data.message_new_chain)
 
       # Update new message in read for receiver (sender will be updated when he/she clicks reply)
-      if in_messages_read 
+      if in_messages_read
         # Append the new message to the conversation
         new_message=data.new_message
         $(".conversation_messages").append($(new_message).hide().fadeIn(1500))

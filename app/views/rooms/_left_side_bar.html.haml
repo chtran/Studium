@@ -7,7 +7,7 @@
             %td{:colspan => '3'}
               %div.span4
                 - if current_user.profile.image
-                  =image_tag(current_user.profile.image, :class => "profile-pic")
+                  = image_tag(current_user.profile.image, class: "profile-pic")
               %div.span8
                 %h3= current_user.name
                 %small= link_to "View my profile","/users/#{current_user.id}/profile"
@@ -32,7 +32,10 @@
     %div.myhead
       %div.row-fluid
         %div.span6
-          %h3 Friends
+          %div.span8
+            %h3 Friends
+          %div.span4
+            = text_field_tag :username,"", {class: "search-friend",data: {friend_suggestion: room_friend_suggestion_path}}
     %div.mousescroll
       %ul.nav.nav-tabs.nav-stacked
         - current_user.friends.each do |f|
