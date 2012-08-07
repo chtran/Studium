@@ -48,6 +48,7 @@ $(->
     # Listen to the "next_question" event which keeps track of whether to show next question
     channel.bind("next_question", (data) ->
       $("#observing").modal("hide")
+      gon.observing=false if gon.observing
       change_question(data.question_id)
       true
     )
@@ -67,6 +68,7 @@ $(->
     # Input: question_id
     # Effect: changes HTML content of #current_question to show the new question
     change_question = (question_id) ->
+      return false if gon.observing
       $.ajax({
         type: "POST",
         url: "/rooms/show_question",
@@ -103,6 +105,7 @@ $(->
     # Input: question_id and choice_id
     # Effect: render the explanation for the given question
     show_explanation = ->
+      return false if gon.observing
       $.ajax({
         type: "POST",
         url: "/rooms/show_explanation",
@@ -118,6 +121,7 @@ $(->
       $("#ready").show()
 
     confirm_answer = (choice_id) ->
+      return false if gon.observing
       $("#confirm").hide()
       $("#timer").countdown("destroy")
       # Send a POST request to "/rooms/choose" (rooms#choose)
@@ -136,6 +140,7 @@ $(->
     # Input: none
     # Effect: send a POST request to ready
     ready = ->
+      return false if gon.observing
       $("#timer").countdown("destroy")
       $("#ready").hide()
       $.ajax({
@@ -146,6 +151,7 @@ $(->
 
     # Update the latest history
     update_histories=(history_id)->
+      return false if gon.observing
       $.ajax({
         type: "POST",
         url: "/histories/show_history",
@@ -173,7 +179,7 @@ $(->
       })
       # Set question the first time
     
-    if gon.observing=="true"
+    if !gon.observing
       current_question_id = $("#question_container").attr("question_id")
       change_question(current_question_id)
     else

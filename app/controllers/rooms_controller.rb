@@ -44,7 +44,7 @@ class RoomsController < ApplicationController
         room_id: @room.id,
         status: 0
       })
-      gon.observing = (@room.users.count==1).to_s
+      gon.observing = (@room.users.count!=1)
       choose_question!(@room) if !@room.question
       publish_async("presence-room_#{@room.id}","users_change", {})
       publish_async("presence-rooms", "update_recent_activities", {
