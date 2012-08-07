@@ -36,13 +36,6 @@ $(->
     # Update the room list initially (when page first loads)
     update_room_list()
 
-    # Autocompletion for friend-search
-    $(".search-friend").autocomplete
-      source: $(".search-friend").data("autocomplete-source"),
-      html: true,
-      select: (event,ui) ->
-         window.location=$(ui.item.label).find("a:first").attr("href")
-    
   # Only run the above code if user is in room's index page
   current_controller=gon.current_controller
   current_action=gon.current_action
