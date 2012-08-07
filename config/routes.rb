@@ -26,7 +26,7 @@ Studium::Application.routes.draw do
 
   # Message routes
   resources :messages,only: [:index,:create] do
-    get "/read/:message_id",action: :read,on: :collection
+    get "/read/:message_id",action: :read,on: :collection,as: :read
   end
 
   # Rooms_controller routes
@@ -46,6 +46,7 @@ Studium::Application.routes.draw do
     post :invite
     post :chat_message
     post :show_current_user
+    get :friend_suggestion
     
     get "/review/:room_id", to: "rooms#review", as: "review"
 

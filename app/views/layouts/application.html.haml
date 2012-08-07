@@ -15,6 +15,7 @@
     :javascript
       WEB_SOCKET_SUPPRESS_CROSS_DOMAIN_SWF_ERROR = true;
     = javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
+    = javascript_include_tag "autocomplete-rails.js"
     :javascript
       var client = new Pusher("#{Studium::Application.config.pusher_key}")
       var _gaq = _gaq || [];
@@ -63,7 +64,7 @@
                     %ul.dropdown-menu.mydropdown-nav#dropdown-requests
                       = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
                   %li.dropdown
-                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                    %a.dropdown-toggle.message-dropdown{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-comment.icon-white
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message

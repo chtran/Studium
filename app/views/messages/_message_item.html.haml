@@ -1,4 +1,4 @@
-%a{class: "message-link",href: "messages/read/#{message.id}"}
+= link_to read_messages_path(message),class: "message-link" do
   %div.row-fluid
     %div.span3
       = image_tag message.sender.profile.image

@@ -39,13 +39,13 @@ private
     gon.user_id = current_user.id if signed_in?
   end
 
-  def messages_by_users_for_messages(messages)
+  def messages_by_users_for_messages(messages,receiver)
     @messages_by_users={}
     messages.each do |message|
-      user=message.sender==current_user ? message.receiver : message.sender
-      messages=@messages_by_users[user] || []
+      sender=message.sender==receiver ? message.receiver : message.sender
+      messages=@messages_by_users[sender] || []
       messages << message
-      @messages_by_users[user]=messages 
+      @messages_by_users[sender]=messages 
     end
   end
 
@@ -55,6 +55,6 @@ private
 
   def get_recent_message_list_for_user(user)
     @messages=user.all_messages.sort_by! &:created_at
-    messages_by_users_for_messages(@messages)
+    messages_by_users_for_messages(@messages,user)
   end
 end

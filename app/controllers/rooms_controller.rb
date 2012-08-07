@@ -346,4 +346,9 @@ class RoomsController < ApplicationController
     render text: "OK", status: "200"
   end
 
+  def friend_suggestion
+    @users=User.joins(:profile).where("first_name like ? OR last_name like ?","%#{params[:term]}%","#{params[:term]}%")
+
+    render json: @users.map(&:name)
+  end
 end
