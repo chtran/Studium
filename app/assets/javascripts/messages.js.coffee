@@ -27,8 +27,13 @@ $(->
         $(".message-"+data.receiver_id).html(data.message_new_chain)
 
       # Update new message in read for receiver (sender will be updated when he/she clicks reply)
-      if in_messages_read
-        $(".conversation_messages").append(data.new_message)
+      if in_messages_read 
+        # Append the new message to the conversation
+        new_message=data.new_message
+        $(".conversation_messages").append($(new_message).hide().fadeIn(1500))
+
+        # Scroll the conversation box to show the latest message
+        $(".conversation_messages").scrollTo($(".conversation_messages > div:last"))
     )
     
     if in_messages_index
