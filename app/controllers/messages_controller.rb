@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
     # Organize messages into groups by users
     @messages=current_user.all_messages.sort_by!(&:created_at)
-    messages_by_users_for_messages(@messages)
+    messages_by_users_for_messages(@messages,current_user)
   end
 
   def create
@@ -60,7 +60,7 @@ class MessagesController < ApplicationController
         # Updates for sender (which is the current user)
         get_recent_message_list_for_user(@message.sender)
         message_list=render_to_string partial: "message_list"
-        message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.sender}
+        message_new_chain=render_to_string partial: "message_chain_content",locals: {message: @message,user: @message.receiver}
         publish_async("user_#{current_user.id}","message",{
           message_new_chain: message_new_chain,
           receiver_id: @message.receiver.id,
