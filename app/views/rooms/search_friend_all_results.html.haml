@@ -1,5 +1,8 @@
-%h2 All Results
-%div.row-fluid
+%div.row-fluid#rooms_search
+  = render "left_side_bar"
+  %h2 All Results
   %div.span6
     - @users.each do |user|
       = render partial: "users/user_item",locals: {user: user}
+
+  = render "right_side_bar",top_users: @top_users

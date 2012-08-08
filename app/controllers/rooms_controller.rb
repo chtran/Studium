@@ -363,6 +363,7 @@ class RoomsController < ApplicationController
     term=params[:term]
 
     @users=[]
+    @top_users = User.joins(:profile).order("gp DESC").limit(5)
     @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{term.downcase}%","%#{term.downcase}%") if term
   end
 end
