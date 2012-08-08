@@ -89,6 +89,16 @@ class MessagesController < ApplicationController
     @receiver_id=@message.sender==current_user ? @message.receiver.id : @message.sender.id
   end
 
+  def read_all
+    @user=User.find params[:user_id]
+    @user.all_messages.each do |message|
+      message.read=true
+      message.save!
+    end
+
+    render json: {}
+  end
+
 private
   def authenticate_view!
     @message = Message.find(params[:id])

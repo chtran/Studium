@@ -41,7 +41,11 @@ private
 
   def messages_by_users_for_messages(messages,receiver)
     @messages_by_users={}
+    @unread_message=false
+
     messages.each do |message|
+      @unread_message=true unless message.read?
+      gon.read_all_mes_url=read_all_messages_url
       sender=message.sender==receiver ? message.receiver : message.sender
       messages=@messages_by_users[sender] || []
       messages << message
