@@ -350,11 +350,11 @@ class RoomsController < ApplicationController
     @term=params[:term]
     @users=User.joins(:profile).where("lower(first_name) like ? OR lower(last_name) like ?","%#{@term.downcase}%","%#{@term.downcase}%")
 
-    @results=@users.map {|user| {label: render_to_string(partial: "users/user_item",locals: {user: user}),value: user.name}}
+    @results=@users.map {|user| {label: render_to_string(partial: "users/user_item",locals: {user: user}),value: @term}}
 
     if @results.count>8
       @results=@results.take(8)
-      @results << {label: render_to_string(partial: "search_more_results_link"),value: "More Results"}
+      @results << {label: render_to_string(partial: "search_more_results_link"),value: @term}
     end
     render json: @results 
   end
