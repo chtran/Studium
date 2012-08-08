@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_filter :authenticate_user!
-  protect_from_forgery
+  protect_from_forgery except: [:index, :room_list]
 
   def index
     @name = current_user.name

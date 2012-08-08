@@ -1,0 +1,17 @@
+class @Application
+  @client = new Pusher(gon.pusher_key)
+
+  constructor: () ->
+    this.mixin_controller()
+    this.render() if this.correct_view()
+
+  correct_view: ->
+    gon.current_controller==this.controller() and gon.current_action==this.view()
+
+  capitalize  = (string) ->
+    string.charAt(0).toUpperCase()+string.slice(1)
+
+  mixin_controller: ->
+    console.log(window[capitalize(this.controller())+"Controller"])
+    for name,method of window[capitalize(this.controller())+"Controller"][this.view()]
+      window[capitalize(this.controller())+"Index"].prototype[name]=method

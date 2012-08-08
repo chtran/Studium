@@ -1,0 +1,6 @@
+class @Room extends Application
+  controller: -> "rooms"
+
+  channels: ->
+    room_list: Application.client.subscribe("presence-rooms")
+    user: Application.client.subscribe("user_"+gon.user_id)

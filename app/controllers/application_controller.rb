@@ -31,11 +31,8 @@ private
   end
 
   def initialize_gon
-    @current_controller=controller_name
-    @current_action=action_name
-
-    gon.current_controller=@current_controller
-    gon.current_action=@current_action
+    gon.current_controller=controller_name
+    gon.current_action=action_name
     gon.user_id = current_user.id if signed_in?
   end
 
