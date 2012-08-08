@@ -34,6 +34,7 @@ private
     gon.current_controller=controller_name
     gon.current_action=action_name
     gon.user_id = current_user.id if signed_in?
+    gon.pusher_key = Pusher.key
   end
 
   def messages_by_users_for_messages(messages,receiver)
