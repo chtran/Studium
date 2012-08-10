@@ -46,6 +46,7 @@ class RoomsController < ApplicationController
       })
       gon.observing = (@room.users.count!=1)
       choose_question!(@room) if !@room.question
+      gon.question_id = @room.question_id
       publish_async("presence-room_#{@room.id}","users_change", {})
       publish_async("presence-rooms", "update_recent_activities", {
         message: "#{current_user.name} has joined room #{@room.title}"

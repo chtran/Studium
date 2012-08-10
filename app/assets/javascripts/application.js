@@ -8,4 +8,8 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree .
+//= require trunk
+//= require studium
+//= require_tree ./controllers
+//= require_tree ./views
+//= require_tree ./

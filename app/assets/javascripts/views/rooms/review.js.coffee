@@ -1,5 +1,7 @@
-$(->
-  init = ->
+class Studium.Views.RoomsReview extends Trunk.Views
+  controller: "rooms"
+  view: "review"
+  render: ->
     $(".selected").addClass("btn-danger")
                   .append("<div class='span2'>Your choice</div>")
     $(".correct").addClass("btn-success")
@@ -12,6 +14,4 @@ $(->
       $(this).siblings(".paragraph-content").hide()
       $(this).removeClass("hide_paragraph").addClass("show_paragraph").text("Show paragraph")
     )
-  if $("#rooms_review").length
-    init()
-)
+
