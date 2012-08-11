@@ -1,6 +1,6 @@
 class Studium.Views.RoomsJoin extends Trunk.Views
   controller: "rooms"
-  view: "join"
+  action: "join"
   channels:
     room_list: Studium.Client.subscribe("presence-rooms")
     user: Studium.Client.subscribe("user_#{gon.user_id}")
