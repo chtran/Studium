@@ -1,4 +1,4 @@
-Studium.Controllers.messages.read =
+Studium.Controllers.MessagesRead =
   reply_message: ->
     $.ajax({
       type: "POST",

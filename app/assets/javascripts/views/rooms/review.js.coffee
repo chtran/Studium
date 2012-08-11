@@ -1,6 +1,6 @@
 class Studium.Views.RoomsReview extends Trunk.Views
   controller: "rooms"
-  view: "review"
+  action: "review"
   render: ->
     $(".selected").addClass("btn-danger")
                   .append("<div class='span2'>Your choice</div>")

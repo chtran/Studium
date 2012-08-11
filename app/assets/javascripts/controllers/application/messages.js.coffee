@@ -1,4 +1,4 @@
-Studium.Controllers.application.messages=
+Studium.Controllers.ApplicationMessages=
   check_message_read: ->
     # Send a post request to indicate that all messages have been read
     $.ajax({

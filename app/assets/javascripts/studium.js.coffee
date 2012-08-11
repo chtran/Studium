@@ -1,13 +1,6 @@
 window.Studium =
   Views: {}
-  Controllers: {
-    application: {}
-    rooms: {}
-    messages: {}
-    wallposts: {}
-    profiles: {}
-    homepage: {}
-  }
+  Controllers: {}
   Client: new Pusher(gon.pusher_key)
   init: ->
     ###

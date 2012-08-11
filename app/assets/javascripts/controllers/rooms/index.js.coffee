@@ -1,4 +1,4 @@
-Studium.Controllers.rooms.index =
+Studium.Controllers.RoomsIndex =
   update_room_list: ->
     $.ajax({
       type: "POST",
