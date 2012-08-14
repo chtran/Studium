@@ -4,8 +4,6 @@ Trunk.f = {}
 Trunk.f.capitalize = (string) ->
   string.charAt(0).toUpperCase()+string.slice(1)
 
-class Trunk.Controllers
-
 class Trunk.Views
   controller: ""
   view: ""

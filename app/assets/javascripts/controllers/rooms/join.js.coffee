@@ -41,7 +41,7 @@ Studium.Controllers.RoomsJoin =
           else
             $("#paragraph").remove()
           $("#current_question").addClass("question_active")
-          Studium.Controllers.rooms.join.setup_timer(120,Studium.Controllers.rooms.join.confirm_answer)
+          Studium.Controllers.RoomsJoin.setup_timer(120,Studium.Controllers.RoomsJoin.confirm_answer)
 
           # Reload MathJax
           MathJax.Hub.Queue(["Typeset",MathJax.Hub])
@@ -57,7 +57,7 @@ Studium.Controllers.RoomsJoin =
       url: "/rooms/show_explanation",
       success: (data) ->
         $("#choices").html(data)
-        Studium.Controllers.rooms.join.setup_timer(120, Studium.Controllers.rooms.join.ready)
+        Studium.Controllers.RoomsJoin.setup_timer(120, Studium.Controllers.RoomsJoin.ready)
 
         $("#history .hide").removeClass("hide").effect("highlight",2000)
         # Reload MathJax

@@ -187,7 +187,7 @@ class RoomsController < ApplicationController
   end
 
   # Input: question_id
-  # Return: HTML of that question
+  # Return: JSON of that question
   def show_question
     require "parser"
     current_user.update_attribute(:status, 1)
