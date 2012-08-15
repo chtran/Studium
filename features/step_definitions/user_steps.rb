@@ -20,3 +20,7 @@ Given /^I am signed in as "(.+)" with password "(.+)"$/ do |email,password|
   step %Q[I press "Sign in"]
   step %Q[I should see "#{email}"]
 end
+
+Given /^When I am in "(.*)" browser$/ do |name|
+  Capybara.session_name = name
+end
