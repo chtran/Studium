@@ -1,0 +1,22 @@
+%div.get-started-container.row-fluid
+  %div.span1
+    %div.tabbable.tabs-left
+      %ul.nav.nav-tabs
+        %li
+          %a{"href" => "#test1", "data-toggle" => "tab"}
+            %button.btn.btn-large.btn-primary
+              %i.icon-tasks
+            About 
+        %li.active
+          %a{"href" => "#test2", "data-toggle" => "tab"} Recent Activities 
+        %li
+          %a{"href" => "#test3", "data-toggle" => "tab"} Statistics
+        %li
+          %a{"href" => "#test4", "data-toggle" => "tab"} Badges
+  %div.span11#feature-content
+    %div.tab-content
+      %div.tab-pane#test1
+        this is a test
+      %div.tab-pane.active#test2
+      %div.tab-pane#test3
+      %div.tab-pane#test4
