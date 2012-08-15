@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_filter :authenticate_user!
-  protect_from_forgery
+  protect_from_forgery except: [:index, :room_list]
 
   def index
     @name = current_user.name
@@ -46,6 +46,7 @@ class RoomsController < ApplicationController
       })
       gon.observing = (@room.users.count!=1)
       choose_question!(@room) if !@room.question
+      gon.question_id = @room.question_id
       publish_async("presence-room_#{@room.id}","users_change", {})
       publish_async("presence-rooms", "update_recent_activities", {
         message: "#{current_user.name} has joined room #{@room.title}"
@@ -186,7 +187,7 @@ class RoomsController < ApplicationController
   end
 
   # Input: question_id
-  # Return: HTML of that question
+  # Return: JSON of that question
   def show_question
     require "parser"
     current_user.update_attribute(:status, 1)

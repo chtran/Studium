@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120805143744) do
+ActiveRecord::Schema.define(:version => 20120815161741) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
