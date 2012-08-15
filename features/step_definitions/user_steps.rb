@@ -12,7 +12,7 @@ Given /^user "(.+)" has the following profile info:$/ do |email,table|
   end
 end
 
-Given /^I am signed in as "(.+)" with password "(.+)"$/ do |email,password|
+Given /^I am (signed|logged) in as "(.+)" with password "(.+)"$/ do |email,password|
   step %Q[I am on the home page]
   step %Q[I follow "Sign in"]
   step %Q[I fill in "Email" with "#{email}"]

@@ -1,6 +1,8 @@
 %div.row-fluid
-  %div.span1
-    = image_tag user.profile.image
-  %div.span11.message-body
-    %h3.sender-name #{user.name}
-    %small.content= truncate message.body,length: 36
+  %div.span3
+    %div.thumbnail
+      = image_tag(user.profile.image, :class => "profile-pic")
+  %div.span9
+    %div
+      %b=user.name
+    %small= truncate message.body,length: 36

@@ -69,9 +69,8 @@
                       %i.icon-comment.icon-white{class: @unread_message ? "message-white" : "" }
                       %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message
-                      %div.dropdown-menu-messages
-                        = render "messages/message_list"
-                      = link_to "View all messages", messages_path
+                      = render "messages/message_list"
+                      %li= link_to "View all messages", messages_path
 
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
@@ -82,7 +81,8 @@
                         %a{href: "/users/#{current_user.id}/profile"}
                           %div.row-fluid
                             %div.span3
-                              = image_tag(current_user.profile.image, :class => "profile-pic")
+                              %div.thumbnail
+                                = image_tag(current_user.profile.image, :class => "profile-pic")
                             %div.span9
                               %div
                                 %b=current_user.name
