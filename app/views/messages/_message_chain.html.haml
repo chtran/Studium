@@ -1,2 +1,4 @@
-= link_to read_messages_path(message),class: "message-link message-#{user.id}" do
-  = render partial: "messages/message_chain_content",locals: {user: user,message: message}
+%li
+  = link_to read_messages_path(message),class: "message-link message-#{user.id}" do
+    = render partial: "messages/message_chain_content",locals: {user: user,message: message}
+  %hr
