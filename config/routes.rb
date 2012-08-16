@@ -55,6 +55,9 @@ Studium::Application.routes.draw do
 
   end
 
+  #get_started page routes
+  get "/getStarted", to: "get_started#index"
+
   # Admin-related routes
   get "admin", to: "homepage#admin",as: "admin_index"
   namespace "admin" do
