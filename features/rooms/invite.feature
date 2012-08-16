@@ -1,5 +1,4 @@
 @rooms_invite
-@javascript
 Feature: Invite people to room
   As a user
   I want to be able to invite users to my room
@@ -23,6 +22,7 @@ Feature: Invite people to room
     And I am signed in as "anhhoang@studium.vn" with password "password"
     When I am in "Chau" browser
     And I am signed in as "chautran@studiun.vn" with password "password"
+  @javascript  
   Scenario: Inviting a user
     Given I am in "Chau" browser
     And I wait 3 seconds

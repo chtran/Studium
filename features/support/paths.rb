@@ -20,6 +20,9 @@ module NavigationHelpers
     when /^the profile page for user "(.+)"$/
       "/users/#{User.find_by_email!($1).id}/profile"
 
+    when /^rooms index$/
+      '/rooms'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
