@@ -4,6 +4,7 @@ Feature: Invite people to room
   I want to be able to invite users to my room
 
   Background:
+    Given I have run the seed task
     Given the following users exist:
       | email                | password |
       | anhhoang@studium.vn  | password |
@@ -21,13 +22,15 @@ Feature: Invite people to room
     When I am in "HTA" browser
     And I am signed in as "anhhoang@studium.vn" with password "password"
     When I am in "Chau" browser
-    And I am signed in as "chautran@studiun.vn" with password "password"
+    And I am signed in as "chautran@studium.vn" with password "password"
   Scenario: Inviting a user
     Given I am in "Chau" browser
-    And I wait 3 seconds
+    And I wait 1 seconds
     Given I press "New room"
-    And I wait 3 seconds
+    And I wait 1 seconds
     And I fill in "Room title" with "Derp's room"
     And I select "Shuffled" from "Room mode"
     And I press "Create Room"
+    And I wait 1 seconds
     Then "Chau Tran" should be in the user list
+

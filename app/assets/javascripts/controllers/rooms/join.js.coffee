@@ -6,7 +6,7 @@ Studium.Controllers.RoomsJoin =
       type: "POST",
       url: "/rooms/user_list",
       success: (data) ->
-        $("#top_nav").html(data)
+        $("#user_list").html(data)
         true
     })
     true
