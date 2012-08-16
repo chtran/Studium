@@ -14,6 +14,8 @@ Studium.Controllers.RoomsIndex =
       </li>')
 
   show_invite: (data) ->
-    $("#invitation .modal-footer #accept").attr("href","/rooms/join/"+data.room_id)
+    $("#invitation .modal-footer #accept").click(->
+      window.location.replace("/rooms/join/"+data.room_id)
+    )
     $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!")
     $("#invitation").modal("show")

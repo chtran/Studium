@@ -8,6 +8,7 @@ class User
       self.profile.first_name + " " + self.profile.last_name
     end
 
+
     def exp
       self.profile.exp
     end

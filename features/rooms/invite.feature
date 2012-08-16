@@ -6,32 +6,27 @@ Feature: Invite people to room
 
   Background:
     Given I have run the seed task
-    Given the following users exist:
-      | email                | password |
-      | anhhoang@studium.vn  | password |
-      | chautran@studium.vn  | password |
-      | kienhoang@studium.vn | password |
-    And user "anhhoang@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Anh        | Hoang     |
-    And user "chautran@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Chau       | Tran      |
-    And user "kienhoang@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Kien       | Hoang     |
-    When I am in "HTA" browser
-    And I am signed in as "anhhoang@studium.vn" with password "password"
-    When I am in "Chau" browser
-    And I am signed in as "chautran@studium.vn" with password "password"
+    Given the default users exist
+    And I am signed in as "anhhoang@studium.vn" with password "password" in "HTA" browser
+    And I am signed in as "chautran@studium.vn" with password "password" in "Chau" browser
   Scenario: Inviting a user
-    Given I am in "Chau" browser
-    And I wait 1 seconds
-    Given I press "New room"
+    Given I wait 1 seconds in "Chau" browser
+    And I press "New room"
     And I wait 1 seconds
     And I fill in "Room title" with "Chau's room"
     And I select "Critical Reading" from "Room mode"
     And I press "Create Room"
     And I wait 1 seconds
     Then "Chau Tran" should be in the user list
+    Given I wait 1 seconds in "HTA" browser
+    And I wait 4 seconds in "Chau" browser
+    And I press "Invite"
+    And I wait 1 seconds
+    Then I should see "Chau Tran"
+    Given I follow "Chau Tran"
+    And I wait 1 seconds in "HTA" browser
+    Then I should see "You're invited!"
+    Then I press "Accept"
+    And I wait 1 seconds
+    Then I should see "Please wait for the next round to begin"
 

@@ -24,7 +24,7 @@ q1.choices.new choice_letter: "D", content: "fourth", correct: false
 q1.choices.new choice_letter: "E", content: "last", correct: false
 q1.save!
 
-q1 = QuestionType.first.questions.new title: "Test 2", prompt: "This is the <bl /> question"
+q1 = QuestionType.first.questions.new title: "Test 2", prompt: "And this is the <bl /> question"
 q1.choices.new choice_letter: "A", content: "first", correct: false
 q1.choices.new choice_letter: "B", content: "second", correct: true
 q1.choices.new choice_letter: "C", content: "third", correct: false
