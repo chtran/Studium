@@ -18,3 +18,7 @@ Given /^I am signed in as "(.+)" with password "(.+)"$/ do |email,password|
   step %Q[I fill in "Password" with "#{password}"]
   step %Q[I press "Sign in"]
 end
+
+When /^I follow sign_in url$/ do
+  visit(new_user_session_path)
+end

@@ -1,3 +1,4 @@
+@rooms_invite
 @javascript
 Feature: Invite people to room
   As a user
@@ -7,17 +8,17 @@ Feature: Invite people to room
     Given the following users exist:
       | email                | password |
       | anhhoang@studium.vn  | password |
-      | chautran@studium.vn | password |
+      | chautran@studium.vn  | password |
       | kienhoang@studium.vn | password |
     And user "anhhoang@studium.vn" has the following profile info:
       | first_name | last_name |
-      | Anh | Hoang|
+      | Anh        | Hoang     |
     And user "chautran@studium.vn" has the following profile info:
       | first_name | last_name |
-      | Chau | Tran|
+      | Chau       | Tran      |
     And user "kienhoang@studium.vn" has the following profile info:
       | first_name | last_name |
-      | Kien | Hoang|
+      | Kien       | Hoang     |
     When I am in "HTA" browser
     And I am signed in as "anhhoang@studium.vn" with password "password"
     When I am in "Chau" browser
