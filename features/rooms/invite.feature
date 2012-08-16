@@ -28,8 +28,8 @@ Feature: Invite people to room
     And I wait 1 seconds
     Given I press "New room"
     And I wait 1 seconds
-    And I fill in "Room title" with "Derp's room"
-    And I select "Shuffled" from "Room mode"
+    And I fill in "Room title" with "Chau's room"
+    And I select "Critical Reading" from "Room mode"
     And I press "Create Room"
     And I wait 1 seconds
     Then "Chau Tran" should be in the user list
