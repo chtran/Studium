@@ -9,24 +9,22 @@ Feature: Invite people to room
     Given the default users exist
     And I am signed in as "anhhoang@studium.vn" with password "password" in "HTA" browser
     And I am signed in as "chautran@studium.vn" with password "password" in "Chau" browser
-  Scenario: Inviting a user
+
+  Scenario: User accepting invitation
     Given I wait 1 seconds in "Chau" browser
-    And I press "New room"
-    And I wait 1 seconds
-    And I fill in "Room title" with "Chau's room"
-    And I select "Critical Reading" from "Room mode"
-    And I press "Create Room"
-    And I wait 1 seconds
-    Then "Chau Tran" should be in the user list
+    And I create a room with title "Chau's room" and room mode "Critical Reading"
+    Then "Chau Tran" should be in the user list with status "Answering"
     Given I wait 1 seconds in "HTA" browser
     And I wait 4 seconds in "Chau" browser
     And I press "Invite"
     And I wait 1 seconds
-    Then I should see "Chau Tran"
-    Given I follow "Chau Tran"
+    Then I should see "Anh Hoang"
+    Given I follow "Anh Hoang"
     And I wait 1 seconds in "HTA" browser
     Then I should see "You're invited!"
-    Then I press "Accept"
+    Given I press "Accept"
     And I wait 1 seconds
     Then I should see "Please wait for the next round to begin"
+    Given I wait 1 seconds in "Chau" browser
+    Then "Anh Hoang" should be in the user list with status "Observing"
 

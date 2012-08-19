@@ -1,16 +1,16 @@
-%div.accordion-group
+%div.accordion-group{id: "room_#{room.id}"}
   %div.accordion-heading
-    %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#room_#{room.id}", "data-parent" => "#room_list"}
+    %div.accordion-toggle{"data-toggle" => "collapse", "data-target" => "#body-room_#{room.id}", "data-parent" => "#room_list"}
       %div.row-fluid
         %div.span2.profile_image
           - if room.owner and room.owner.profile.image
             =image_tag(room.owner.profile.image)
         %div.span8
-          %h3=room.title
-          %span.label.label-success= room.room_mode.title
+          %h3.room-title=room.title
+          %span.label.label-success.room-mode= room.room_mode.title
         %div.span2
           %small= time_ago_in_words(room.created_at) + " ago"
-  %div.accordion-body.collapse{id: "room_#{room.id}"}
+  %div.accordion-body.collapse{id: "body-room_#{room.id}"}
     %div.accordion-inner
       %div.span8
         %dl.dl-horizontal
