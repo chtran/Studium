@@ -38,12 +38,12 @@ class RoomsController < ApplicationController
   def join
     @room = Room.find params[:room_id]
     if @room.active?
-      gon.user_id = current_user.id
-      gon.room_id = @room.id
       current_user.update_attributes({
         room_id: @room.id,
         status: 0
       })
+      gon.user_id = current_user.id
+      gon.room_id = @room.id
       gon.observing = (@room.users.count!=1)
       choose_question!(@room) if !@room.question
       gon.question_id = @room.question_id

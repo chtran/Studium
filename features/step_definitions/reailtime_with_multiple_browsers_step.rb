@@ -2,9 +2,10 @@ When /^I am in "(.*)" browser$/ do |name|
   Capybara.session_name = name
 end
 
-When /^(?!I am in)(.*(?= in)) in "(.*)" browser$/ do |extra_step, name|
-  step %Q[I am in "#{name}" browser] 
-  step %Q[#{extra_step}]
+
+When /^(?!I am in)(.*(?= in)) in (.*) browser$/ do |job, name|
+  step "I am in #{name} browser"
+  step "#{job}"
 end
 
 

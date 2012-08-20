@@ -4,31 +4,27 @@ Feature: Invite people to room
   I want to be able to invite users to my room
 
   Background:
-    Given the following users exist:
-      | email                | password |
-      | anhhoang@studium.vn  | password |
-      | chautran@studium.vn  | password |
-      | kienhoang@studium.vn | password |
-    And user "anhhoang@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Anh        | Hoang     |
-    And user "chautran@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Chau       | Tran      |
-    And user "kienhoang@studium.vn" has the following profile info:
-      | first_name | last_name |
-      | Kien       | Hoang     |
-    When I am in "HTA" browser
-    And I am signed in as "anhhoang@studium.vn" with password "password"
-    When I am in "Chau" browser
-    And I am signed in as "chautran@studiun.vn" with password "password"
-  @javascript  
-  Scenario: Inviting a user
-    Given I am in "Chau" browser
-    And I wait 3 seconds
-    Given I press "New room"
-    And I wait 3 seconds
-    And I fill in "Room title" with "Derp's room"
-    And I select "Shuffled" from "Room mode"
-    And I press "Create Room"
-    Then "Chau Tran" should be in the user list
+
+    Given I have run the seed task
+    Given the default users exist
+    And I am signed in as "anhhoang@studium.vn" with password "password" in "HTA" browser
+    And I am signed in as "chautran@studium.vn" with password "password" in "Chau" browser
+
+  Scenario: User accepting invitation
+    Given I wait 1 seconds in "Chau" browser
+    And I create a room with title "Chau's room" and room mode "Critical Reading"
+    Then "Chau Tran" should be in the user list with status "Answering"
+    Given I wait 1 seconds in "HTA" browser
+    And I wait 4 seconds in "Chau" browser
+    And I press "Invite"
+    And I wait 1 seconds
+    Then I should see "Anh Hoang"
+    Given I follow "Anh Hoang"
+    And I wait 1 seconds in "HTA" browser
+    Then I should see "You're invited!"
+    Given I press "Accept"
+    And I wait 1 seconds
+    Then I should see "Please wait for the next round to begin"
+    Given I wait 1 seconds in "Chau" browser
+    Then "Anh Hoang" should be in the user list with status "Observing"
+

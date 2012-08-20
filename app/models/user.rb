@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :profile
 
+  def self.find_by_name(name)
+    User.all.select {|u| u.name==name}.first
+  end
+
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end

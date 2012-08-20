@@ -10,8 +10,11 @@ class Trunk.Views
   constructor: ->
     this.functions = window[APP_NAME]["Controllers"][Trunk.f.capitalize(this.controller)+Trunk.f.capitalize(this.action)]
     if this.correct_view()
-      this.listen()
-      this.render()
+      this_class = this
+      $(->
+        this_class.listen()
+        this_class.render()
+      )
 
   correct_view: ->
     correct_controller = this.controller==gon.current_controller

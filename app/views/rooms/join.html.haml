@@ -8,11 +8,11 @@
   %div.span3
     %div.row-fluid
       %div.span9
-        %a.btn.btn-danger#quit
+        %button.btn.btn-danger#quit
           Quit
       %div.span3.pull-right
         %div
-          %a.btn.btn-primary#invite_button Invite
+          %button.btn.btn-primary#invite_button Invite
 
 %div.row-fluid#rooms_join
   %div.span9
@@ -33,10 +33,11 @@
           %div.span8
             %div#choices
             %div.pull-right.control
-              %a.btn.btn-primary#confirm{style: "display:none"} Confirm
-              %a.btn.btn-primary#ready{style: "display:none"} Ready
+              %button.btn.btn-primary#confirm{style: "display:none"} Confirm
+              %button.btn.btn-primary#ready{style: "display:none"} Ready
   %div.span3
     %div#top_nav
+      %div#user_list
     %div#bottom_nav
       %ul.nav.nav-tabs
         %li.active

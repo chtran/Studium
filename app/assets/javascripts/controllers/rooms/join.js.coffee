@@ -6,7 +6,7 @@ Studium.Controllers.RoomsJoin =
       type: "POST",
       url: "/rooms/user_list",
       success: (data) ->
-        $("#top_nav").html(data)
+        $("#user_list").html(data)
         true
     })
     true
@@ -151,6 +151,7 @@ Studium.Controllers.RoomsJoin =
   show_invite_modal: ->
     user_list = $("#invite .modal-body p")
     user_list.text("")
+    rooms_channel = Studium.Client.subscribe("presence-rooms")
     current_user=rooms_channel.members.me
     data="Active Users: <br />"
     rooms_channel.members.each((member) ->
