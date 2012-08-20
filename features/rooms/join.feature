@@ -7,17 +7,56 @@ Feature: Playing in a room
 
   Background:
     Given I have run the seed task
-    Given the default users exist
-    And I am signed in as "anhhoang@studium.vn" with password "password"
-  Scenario: Create a room
-    Given I wait 1 seconds
+    And the default users exist
+    And I am signed in as "anhhoang@studium.vn" with password "password" in "HTA" browser
+    And I wait 1 seconds
+
+  Scenario: Single player
     And I create a room with title "HTA's room" and room mode "Critical Reading"
     Then "Anh Hoang" should be in the user list
     And the status of "Anh Hoang" should be "Answering"
     Given "Anh Hoang" chooses the choice "A"
     And I press "Confirm"
-    And I wait 10 seconds
+    And I wait 7 seconds
     Then "Anh Hoang" should see the correct explanation
     Given I press "Ready"
     And I wait 5 seconds
+    Then the status of "Anh Hoang" should be "Answering"
+
+  @rooms_multi
+  Scenario: Multi player
+    Given I am signed in as "chautran@studium.vn" with password "password" in "Chau" browser
+    And I wait 1 seconds
+    And I create a room with title "HTA's room" and room mode "Critical Reading" in "HTA" browser
+    Then "Anh Hoang" should be in the user list
+    And the status of "Anh Hoang" should be "Answering"
+    Given "Anh Hoang" chooses the choice "A"
+    And I press "Confirm"
+    And I wait 7 seconds
+    Then "Anh Hoang" should see the correct explanation
+    Given I expand room "HTA's room" in "Chau" browser
+    And I follow "Join"
+    And I wait 1 seconds
+    Then I should see "Please wait for the next round to begin"
+    Given I press "Ready" in "HTA" browser
+    And I wait 5 seconds
+    Then the status of "Anh Hoang" should be "Answering"
+    Then "Chau Tran" should be in the user list
+    And the status of "Chau Tran" should be "Answering"
+    Given "Anh Hoang" chooses the choice "A"
+    And I press "Confirm"
+    And I wait 7 seconds
+    And "Chau Tran" chooses the choice "B" in "Chau" browser
+    And I press "Confirm"
+    And I wait 7 seconds
+    Then "Chau Tran" should see the correct explanation
+    And "Anh Hoang" should see the correct explanation in "HTA" browser
+    And the status of "Anh Hoang" should be "Confirmed"
+    And the status of "Chau Tran" should be "Confirmed"
+    Given I press "Ready"
+    And I wait 3 seconds
+    Then the status of "Anh Hoang" should be "Ready"
+    Given I press "Ready" in "Chau" browser
+    And I wait 3 seconds
+    Then the status of "Chau Tran" should be "Answering"
     Then the status of "Anh Hoang" should be "Answering"
