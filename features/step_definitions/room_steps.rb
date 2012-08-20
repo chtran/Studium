@@ -38,10 +38,15 @@ end
 Given /^I create a room with title "(.*?)" and room mode "(.*?)"$/ do |title,room_mode|
   step %Q[I press "New room"]
   step %Q[I wait 1 seconds]
-  step %Q[I fill in "Room title" with "Chau's room"]
-  step %Q[I select "Critical Reading" from "Room mode"]
+  step %Q[I fill in "Room title" with "#{title}"]
+  step %Q[I select "#{room_mode}" from "Room mode"]
   step %Q[I press "Create Room"]
   step %Q[I wait 1 seconds]
+end
+
+Given /^I expand room "(.*?)"$/ do |title|
+  room = Room.find_by_title(title)
+  step %Q[I click on "#room_#{room.id}"]
 end
 
 And /^"(.*?)" should be in the user list with status "(.*?)"$/ do |name,status|
