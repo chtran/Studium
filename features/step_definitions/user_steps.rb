@@ -24,10 +24,10 @@ When /^I follow sign_in url$/ do
 end
 
 Given /^the default users exist$/ do
-  User.create! email: "anhhoang@studium.vn", password: "password", admin: true
-  User.create! email: "chautran@studium.vn", password: "password", admin: true
-  User.create! email: "kienhoang@studium.vn", password: "password", admin: true
-  Profile.create! user_id: User.find_by_email("anhhoang@studium.vn").id, first_name: "Anh", last_name: "Hoang"
-  Profile.create! user_id: User.find_by_email("chautran@studium.vn").id, first_name: "Chau", last_name: "Tran"
-  Profile.create! user_id: User.find_by_email("kienhoang@studium.vn").id, first_name: "Kien", last_name: "Hoang"
+  ah = User.create! email: "anhhoang@studium.vn", password: "password", admin: true
+  ct = User.create! email: "chautran@studium.vn", password: "password", admin: true
+  kh = User.create! email: "kienhoang@studium.vn", password: "password", admin: true
+  Profile.create! user_id: ah.id, first_name: "Anh", last_name: "Hoang"
+  Profile.create! user_id: ct.id, first_name: "Chau", last_name: "Tran"
+  Profile.create! user_id: kh.id, first_name: "Kien", last_name: "Hoang"
 end

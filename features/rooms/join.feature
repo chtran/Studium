@@ -11,13 +11,14 @@ Feature: Playing in a room
     And I am signed in as "anhhoang@studium.vn" with password "password" in "HTA" browser
     And I wait 1 seconds
 
+  @rooms_single
   Scenario: Single player
     And I create a room with title "HTA's room" and room mode "Critical Reading"
     Then "Anh Hoang" should be in the user list
     And the status of "Anh Hoang" should be "Answering"
     Given "Anh Hoang" chooses the choice "A"
     And I press "Confirm"
-    And I wait 7 seconds
+    And I wait 14 seconds
     Then "Anh Hoang" should see the correct explanation
     Given I press "Ready"
     And I wait 5 seconds

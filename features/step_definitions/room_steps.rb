@@ -11,18 +11,18 @@ end
 Then /^"(.*?)" chooses the choice "([A-Z])"$/ do |name,choice_letter|
   user = User.find_by_name(name)
   choice = user.room.question.choices.where(choice_letter: choice_letter).first
-  click_button(choice.id.to_s)
+  click_button("choice-#{choice.id.to_s}")
 end
 
 Then /^"(.*?)" should see the correct explanation$/ do |name|
   user = User.find_by_name(name)
   question = user.room.question
   if user.histories.last.question_id!=question.id
-    page.has_content?("You didn't select an answer. See explanation below.")
+    assert page.has_content?("You didn't select an answer. See explanation below.")
   elsif user.histories.last.choice.correct
-    page.has_content?("Congratulations! You got the right answer.")
+    assert page.has_content?("Congratulations! You got the right answer.")
   else
-    page.has_content?("Sorry you got the wrong answer. See explanation below.")
+    assert page.has_content?("Sorry you got the wrong answer. See explanation below.")
   end
 end
 
@@ -36,6 +36,7 @@ And /^the room mode of "(.*?)" should be "(.*?)"$/ do |title,room_mode|
 end
 
 Given /^I create a room with title "(.*?)" and room mode "(.*?)"$/ do |title,room_mode|
+  step %Q[I wait 1 seconds]
   step %Q[I press "New room"]
   step %Q[I wait 1 seconds]
   step %Q[I fill in "Room title" with "#{title}"]
@@ -54,11 +55,3 @@ And /^"(.*?)" should be in the user list with status "(.*?)"$/ do |name,status|
   step %Q[the status of "#{name}" should be "#{status}"]
 end
 
-And /^I create a room with title "(.*)" and room mode "(.*)"$/ do |title, mode|
-  step %Q[I wait 4 seconds]
-  step %Q[I press "New room"]
-  step %Q[I wait 3 seconds]
-  step %Q[I fill in "Room title" with "#{title}"]
-  step %Q[I select "#{mode}" from "Room mode"]
-  step %Q[I press "Create Room"]
-end
