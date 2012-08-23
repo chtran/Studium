@@ -12,6 +12,7 @@
 }
 .mycontainer {
   margin-top: 20px;
+  min-height: 600px;
 }
 .navbar i{
   font-size: 25px;

@@ -22,12 +22,12 @@ class Studium.Views.RoomsJoin extends Trunk.Views
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
-    $(".question_active .each_choice").live("click", f.choose_answer) 
+    $(".question_active .each_choice").live("click", f.choose_answer)
 
     # User confirming the answer
     $("#confirm").live("click", ->
       # Get the choice_id by finding the "btn-primary" class
-      choice_id = $(".question_active .each_choice.btn-primary").attr("id")
+      choice_id = $(".question_active .each_choice.btn-primary").data("choiceId")
       # Remove the confirm button
       f.confirm_answer(choice_id)
       true

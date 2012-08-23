@@ -156,7 +156,7 @@ Studium.Controllers.RoomsJoin =
     data="Active Users: <br />"
     rooms_channel.members.each((member) ->
       if member.id-current_user.id!=0
-        data = "<div><a href='#' class='invite_link' user_id="+member.id+">"+member.info.name+"</a></div>"
+        data = "<div><a href='#' class='invite_link' data-user-id="+member.id+">"+member.info.name+"</a></div>"
 
       user_list.append(data)
     )
@@ -167,7 +167,7 @@ Studium.Controllers.RoomsJoin =
       type: "POST",
       url: "/rooms/invite",
       data: {
-        user_id: $(this).attr("user_id")
+        user_id: $(this).data("userId")
       }
       success: ->
         alert("Invited "+$(this).text())
