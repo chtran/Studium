@@ -75,5 +75,14 @@ img.profile-pic {
   font-size: 15px;
 }
 
+.navbar-fixed-top .nav-collapse{
+  display: table;
+}
+
+.navbar-fixed-top .nav-collapse .navbar-search{
+  display: table-cell
+  vertical-align: middle;
+}
+
 
 
