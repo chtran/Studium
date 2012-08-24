@@ -1,0 +1,13 @@
+#user-info-modal{
+  position: fixed;
+  right: 2%;
+  width: 560px;
+  overflow: auto;
+  z-index: 1050;
+  background-color: white;
+  -webkit-border-radius: 6px;
+  -webkit-box-shadow: 0 3px 7px;
+  box-shadow: 0 3px 7px;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
