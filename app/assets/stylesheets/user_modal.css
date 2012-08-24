@@ -1,9 +1,9 @@
 #user-info-modal{
   position: fixed;
-  right: 2%;
-  width: 560px;
+  right: 20px;
+  width: 460px;
   overflow: auto;
-  z-index: 1050;
+  z-index: 999;
   background-color: white;
   -webkit-border-radius: 6px;
   -webkit-box-shadow: 0 3px 7px;

@@ -4,4 +4,4 @@ class Studium.Views.ApplicationUserModal extends Trunk.Views
 
   render: ->
     f = this.functions
-    $(".trigger").click(f.show_modal)
+    $(".modal-trigger").click(f.show_modal)

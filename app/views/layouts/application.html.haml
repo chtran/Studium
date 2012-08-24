@@ -59,15 +59,17 @@
               %ul.nav.pull-right
                 - if user_signed_in?
                   %li.dropdown
+                    %a.dropdown-toggle{"href" => "#", "data-toggle" =>"dropdwon"}
+                      %i.icon-wrench.icon-white.modal-trigger
+
+                  %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-globe.icon-white
-                      %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-requests
                       = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
                   %li.dropdown
                     %a.dropdown-toggle.message-dropdown{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-comment.icon-white{class: @unread_message ? "message-white" : "" }
-                      %b.caret
                     %ul.dropdown-menu.mydropdown-nav#dropdown-message
                       = render "messages/message_list"
                       %li= link_to "View all messages", messages_path
@@ -75,7 +77,6 @@
                   %li.dropdown
                     %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
                       %i.icon-user.icon-white
-                      %b.caret
                     %ul.dropdown-menu.mydropdown-nav
                       %li
                         %a{href: "/users/#{current_user.id}/profile"}
@@ -103,12 +104,15 @@
           %div.alert.alert-error
             %button.close{:"data-dismiss"=>"alert"} x
             %p= alert
-      %button.trigger trigger
       %div.hide.fade.in#user-info-modal
-        %div.modal-header 
-          This is a test
         %div.modal-body 
-          This is another test
+          %ul.nav.nav-tabs
+            %li
+              %a{"href"=>"#", "data-toggle"=>"tab"} Badges
+            %li
+              %a{"href"=>"#", "data-toggle"=>"tab"} Stats
+            %li
+              %a{"href"=>"#", "data-toggle"=>"tab"} Notebook
 
       %div.row-fluid
         %div.mycontainer
