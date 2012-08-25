@@ -15,7 +15,7 @@
   min-height: 600px;
 }
 .navbar i{
-  font-size: 25px;
+  font-size: 23px;
 }
 .navbar-inner .nav-collapse {
 }
@@ -36,7 +36,7 @@
 .navbar .mybrand {
   float: left;
   display: block;
-  padding: 8px 20px 12px;
+  padding: 8px 20px 7px;
   margin-left: -20px;
   font-size: 25px;
   font-weight: 200;
