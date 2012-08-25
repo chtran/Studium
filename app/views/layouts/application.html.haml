@@ -40,7 +40,7 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
   %body{class: controller.controller_name}
-    %div.navbar.navbar-fixed-top
+    %div.navbar.navbar-fixed-top.navbar-inverse
       %div.navbar-inner.navbar-big
         %div.row-fluid
           %div.container
@@ -51,7 +51,6 @@
                 %span.icon-bar
               %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
                 Studium
-                %i.icon-home.icon-white
             %div.nav-collapse.span10
               %form.navbar-search.pull-left
                 = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
