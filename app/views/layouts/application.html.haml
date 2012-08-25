@@ -108,12 +108,33 @@
         %div.modal-body 
           %ul.nav.nav-tabs
             %li
-              %a{"href"=>"#", "data-toggle"=>"tab"} Badges
+              %a{"href"=>"#badges", "data-toggle"=>"tab"} Badges
             %li
-              %a{"href"=>"#", "data-toggle"=>"tab"} Stats
+              %a{"href"=>"#stats", "data-toggle"=>"tab"} Stats
             %li
-              %a{"href"=>"#", "data-toggle"=>"tab"} Notebook
-
+              %a{"href"=>"#notebook", "data-toggle"=>"tab"} Notebook
+          %div.tab-content
+            %div.tab-pane.fade#badges
+              %h4 Badges progress
+              %hr
+              %div.badges-progress.row-fluid
+                %div.first-half.span6
+                  - count = Badge.all.count
+                  - Badge.all[0..count/2].each do |b|
+                    %div.row-fluid.badge-line
+                      =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %div.progress.badge-progress-bar.span10
+                        %div.bar
+                %div.second-half.span6.row-fluid
+                  - Badge.all[count/2..count].each do |b|
+                    %div.row-fluid
+                      =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %div.progress.badge-progress-bar.span10
+                        %div.bar
+            %div.tab-pane.fade#stats
+              This is another test
+            %div.tab-pane.fade#notebook
+              This is notebook
       %div.row-fluid
         %div.mycontainer
           = yield

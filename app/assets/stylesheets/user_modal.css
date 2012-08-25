@@ -11,3 +11,14 @@
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
+
+.badge-modal{
+  width: 10px;
+  height: 10px;
+}
+
+.badges-progress{
+}
+
+.badge-line{
+}
