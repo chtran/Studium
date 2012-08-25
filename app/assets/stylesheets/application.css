@@ -17,6 +17,7 @@
 .navbar i{
   font-size: 23px;
 }
+
 .navbar-inner .nav-collapse {
 }
 .mydropdown-nav{
@@ -32,6 +33,7 @@
 .mydropdown-nav small{
   font-size: 12px;
 }
+
 
 .navbar .mybrand {
   float: left;
@@ -134,4 +136,9 @@ img.profile-pic {
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+.navbar-fixed-top hr{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
