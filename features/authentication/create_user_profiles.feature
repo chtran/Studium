@@ -5,6 +5,7 @@ Feature: Create User Profiles
 
 	Background:
 		Given I am on the home page
+		And I follow "Sign in"
 		And I follow "Sign up"
 
 	Scenario: Create User Profiles with Valid Attributes
