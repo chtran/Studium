@@ -3,6 +3,9 @@ Given /^the following users exist:$/ do |table|
     @user=User.create! user
     @user.admin=user[:admin] || false
     @user.save
+
+    # Populate profile info
+    @profile=Profile.create! first_name: "Kien",last_name: "Hoang",school: "Lafayette",user_id: @user.id
   end
 end
 

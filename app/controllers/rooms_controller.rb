@@ -28,9 +28,8 @@ class RoomsController < ApplicationController
       redirect_to room_join_path(@room.id)
     else
       alert=""
-      @room.errors.full_messages.each do |msg|
-        alert+=msg+"\n"
-      end
+      @room.errors.full_messages.each { |msg| alert+=msg+"\n" }
+        
       redirect_to rooms_path, alert: alert
     end
   end
