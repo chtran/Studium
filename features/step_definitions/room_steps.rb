@@ -1,3 +1,18 @@
+
+# "(.*?)" should be in the user list
+# the status of "(.*?)" should be "(.*?)"
+# "(.*?)" chooses the choice "([A-Z])"
+# "(.*?)" chooses the choice "([A-Z])"
+# "(.*?)" should see the correct explanation
+# room "(.*?)" should be in the room list
+# the room mode of "(.*?)" should be "(.*?)"
+# I create a room with title "(.*?)" and room mode "(.*?)"
+# I expand room "(.*?)"
+# "(.*?)" should be in the user list with status "(.*?)"
+#
+#
+
+
 Given /^"(.*?)" should be in the user list$/ do |name|
   user_list = page.find("#user_list")
   assert user_list.has_content?(name)
@@ -55,3 +70,6 @@ And /^"(.*?)" should be in the user list with status "(.*?)"$/ do |name,status|
   step %Q[the status of "#{name}" should be "#{status}"]
 end
 
+And /^what$/ do
+  puts page.body
+end

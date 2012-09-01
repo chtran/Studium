@@ -40,57 +40,52 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
   %body{class: controller.controller_name}
-    %div.navbar.navbar-fixed-top
+    %div.navbar.navbar-fixed-top.navbar-inverse
       %div.navbar-inner.navbar-big
-        %div.row-fluid
-          %div.container
-            %div.span2
-              %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target"=> ".nav-collapse"}
-                %span.icon-bar
-                %span.icon-bar
-                %span.icon-bar
-              %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
-                Studium
-            %div.nav-collapse.span10
-              %form.navbar-search.pull-left
+        %div.container.row-fluid
+          %div.span2
+            %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
+              =image_tag("images/logo.png")
+          %div.span10
+            %ul.nav.pull-right
+              - if user_signed_in?
+                %li
+                  %a{"href" => "#" }
+                    %i.icon-wrench.icon-white.modal-trigger
+
+                %li.dropdown
+                  %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                    %i.icon-globe.icon-white
+                  %ul.dropdown-menu.mydropdown-nav#dropdown-requests
+                    = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
+                %li.dropdown
+                  %a.dropdown-toggle.message-dropdown{"href" => "#", "data-toggle"=> "dropdown"}
+                    %i.icon-comment.icon-white{class: @unread_message ? "message-white" : "" }
+                  %ul.dropdown-menu.mydropdown-nav#dropdown-message
+                    = render "messages/message_list"
+                    %li= link_to "View all messages", messages_path
+
+                %li.dropdown
+                  %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
+                    %i.icon-user.icon-white
+                  %ul.dropdown-menu.mydropdown-nav
+                    %li
+                      %a{id: "userboard", href: "/users/#{current_user.id}/profile"}
+                        %div.row-fluid
+                          %div.span3
+                            %div.thumbnail
+                              = image_tag(current_user.profile.image, :class => "profile-pic")
+                          %div.span9
+                            %div
+                              %b=current_user.name
+                            %small View my profile
+                    %hr
+                    %li= link_to "Sign out",destroy_user_session_path, method: :delete
+              %form.navbar-search.form-search.pull-right
                 = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
-                %i.icon-search.icon-white{style: "height: 10px;"}
-              %ul.nav.pull-right
-                - if user_signed_in?
-                  %li.dropdown
-                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
-                      %i.icon-globe.icon-white
-                      %b.caret
-                    %ul.dropdown-menu.mydropdown-nav#dropdown-requests
-                      = render partial: "friendships/pending_requests",locals: {requesters: current_user.requesters}
-                  %li.dropdown
-                    %a.dropdown-toggle.message-dropdown{"href" => "#", "data-toggle"=> "dropdown"}
-                      %i.icon-comment.icon-white{class: @unread_message ? "message-white" : "" }
-                      %b.caret
-                    %ul.dropdown-menu.mydropdown-nav#dropdown-message
-                      = render "messages/message_list"
-                      %li= link_to "View all messages", messages_path
+                - if current_user and current_user.admin?
+                  %li= link_to "Admin Page",admin_index_path
 
-                  %li.dropdown
-                    %a.dropdown-toggle{"href" => "#", "data-toggle"=> "dropdown"}
-                      %i.icon-user.icon-white
-                      %b.caret
-                    %ul.dropdown-menu.mydropdown-nav
-                      %li
-                        %a{href: "/users/#{current_user.id}/profile"}
-                          %div.row-fluid
-                            %div.span3
-                              %div.thumbnail
-                                = image_tag(current_user.profile.image, :class => "profile-pic")
-                            %div.span9
-                              %div
-                                %b=current_user.name
-                              %small View my profile
-                  - if current_user.admin?
-                    %li= link_to "Admin Page",admin_index_path
-                  %li.divider-vertical
-
-                  %li= link_to "Sign out",destroy_user_session_path, method: :delete
     %div.container-fluid
       %div.row-fluid.notice-alert
         -# Notifications
@@ -102,8 +97,39 @@
           %div.alert.alert-error
             %button.close{:"data-dismiss"=>"alert"} x
             %p= alert
-
-
+      %div.hide.fade.in#user-info-modal
+        %div.modal-body 
+          %ul.nav.nav-tabs
+            %li
+              %a{"href"=>"#badges", "data-toggle"=>"tab"} Badges
+            %li
+              %a{"href"=>"#stats", "data-toggle"=>"tab"} Stats
+            %li
+              %a{"href"=>"#notebook", "data-toggle"=>"tab"} Notebook
+          %div.tab-content
+            %div.tab-pane.fade#badges
+              %h4 Badges progress
+              %hr
+              %div.badges-progress.row-fluid
+                %div.first-half.span6
+                  - count = Badge.all.count
+                  - Badge.all[0..count/2-1].each do |b|
+                    %div.row-fluid.badge-line
+                      %a{"rel"=>"tooltip", "data-original-title"=>"#{b.description}"}
+                        =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %div.progress.badge-progress-bar.span10
+                        %div.bar
+                %div.second-half.span6.row-fluid
+                  - Badge.all[count/2..count].each do |b|
+                    %div.row-fluid
+                      %a{"rel"=>"tooltip", "data-original-title"=>"#{b.description}"}
+                        =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %div.progress.badge-progress-bar.span10
+                        %div.bar
+            %div.tab-pane.fade#stats
+              This is another test
+            %div.tab-pane.fade#notebook
+              This is notebook
       %div.row-fluid
         %div.mycontainer
           = yield

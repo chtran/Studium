@@ -25,7 +25,7 @@ Feature: Signing in
 		And I fill in "Email" with "info@studium.vn"
 		And I fill in "Password" with "password"
 		And I press "Sign in"
-		Then I should be on the rooms page
+		Then I should be on the dashboard
 		And I should see "Sign out"
 
   @signing_in_admin

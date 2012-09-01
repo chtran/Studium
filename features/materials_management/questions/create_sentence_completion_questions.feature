@@ -4,12 +4,11 @@ Feature: Create Sentence Completion Questions
 	I want to be able to create new sc questions in my material ms page
 
 	Background:
-		Given the following users exist:
+		Given I have run the seed task
+		And the following users exist:
 			| email							 | password | admin |
 			| admin@ticketee.com | password | true  |
 		And I am signed in as "admin@ticketee.com" with password "password"
-		And I have run the seed task
-		And I am on the home page
 		When I follow "Admin Page"
 		And I follow "Materials"
 		And I follow "Questions"

@@ -15,8 +15,8 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
-    when /^the dashboard page$/
-      '/dashboard'
+    when /^the dashboard$/
+      rooms_path
     when /^the profile page for user "(.+)"$/
       "/users/#{User.find_by_email!($1).id}/profile"
 

@@ -28,8 +28,9 @@ class RoomsController < ApplicationController
       redirect_to room_join_path(@room.id)
     else
       alert=""
-      @room.errors.full_messages.each { |msg| alert+=msg+"\n" }
-        
+      @room.errors.full_messages.each do |msg|
+        alert+=msg+"\n"
+      end
       redirect_to rooms_path, alert: alert
     end
   end
@@ -350,7 +351,7 @@ class RoomsController < ApplicationController
 
   def search_friend
     @term=params[:term].strip
-    @users=User.joins(:profile).where("lower(concat(first_name,' ',last_name)) like ?","%#{@term.downcase}%")
+    @users=User.joins(:profile).where("concat(first_name,'',last_name) like ?","%#{@term.downcase}%")
 
     @results=@users.map {|user| {label: render_to_string(partial: "users/user_item",locals: {user: user}),value: @term}}
 
@@ -366,6 +367,6 @@ class RoomsController < ApplicationController
 
     @users=[]
     @top_users = User.joins(:profile).order("gp DESC").limit(5)
-    @users=User.joins(:profile).where("lower(concat(first_name,' ',last_name)) like ?","%#{term.downcase}%") if term
+    @users=User.joins(:profile).where("lower(concat(first_name,'',last_name)) like ?","%#{term.downcase}%") if term
   end
 end
