@@ -1,9 +1,9 @@
 %div.row-fluid
   = link_to user_profile_path(user) do
-    %div.span4
+    %div.span3
       %div.thumbnail
-        = image_tag(user.profile.image)
-    %div.span8
+        = image_tag(user.profile.image, class: "profile-pic")
+    %div.span9
       %h4= user.name
       %div.row-fluid.user-stats
         %div.span1

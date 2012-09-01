@@ -45,7 +45,7 @@
         %div.container.row-fluid
           %div.span2
             %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
-              Studium
+              =image_tag("images/logo.png")
           %div.span10
             %ul.nav.pull-right
               - if user_signed_in?
@@ -83,7 +83,7 @@
                     %li= link_to "Sign out",destroy_user_session_path, method: :delete
               %form.navbar-search.form-search.pull-right
                 = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
-                - if current_user.admin?
+                - if current_user and current_user.admin?
                   %li= link_to "Admin Page",admin_index_path
 
     %div.container-fluid
