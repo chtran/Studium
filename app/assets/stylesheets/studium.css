@@ -1,0 +1,20 @@
+.spacing{
+  letter-spacing: 1px;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grey9 {
+  color: #999;
+}
+
+.pad15 {
+  padding: 15px;
+}
+
+.separator{
+  height: 30px;
+}
