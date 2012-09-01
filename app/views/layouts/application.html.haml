@@ -113,15 +113,17 @@
               %div.badges-progress.row-fluid
                 %div.first-half.span6
                   - count = Badge.all.count
-                  - Badge.all[0..count/2].each do |b|
+                  - Badge.all[0..count/2-1].each do |b|
                     %div.row-fluid.badge-line
-                      =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %a{"rel"=>"tooltip", "data-original-title"=>"#{b.description}"}
+                        =image_tag b.image.url, "class"=>"badge-modal span2"
                       %div.progress.badge-progress-bar.span10
                         %div.bar
                 %div.second-half.span6.row-fluid
                   - Badge.all[count/2..count].each do |b|
                     %div.row-fluid
-                      =image_tag b.image.url, "class"=>"badge-modal span2"
+                      %a{"rel"=>"tooltip", "data-original-title"=>"#{b.description}"}
+                        =image_tag b.image.url, "class"=>"badge-modal span2"
                       %div.progress.badge-progress-bar.span10
                         %div.bar
             %div.tab-pane.fade#stats
