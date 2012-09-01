@@ -5,6 +5,7 @@ Feature: Create User Profiles
 
 	Background:
 		Given I am on the home page
+		And I follow "Sign in"
 		And I follow "Sign up"
 
 	Scenario: Create User Profiles with Valid Attributes
@@ -15,8 +16,8 @@ Feature: Create User Profiles
 		And I fill in "Last name" with "Hoang"
 		And I fill in "School" with "Lafayette College"
 		And I press "Sign up"
-		Then I should be on the dashboard page
-		When I follow "user@ticketee.com"
+		Then I should be on the dashboard
+		When I follow "userboard"
 		Then I should be on the profile page for user "user@ticketee.com"
 		And I should see "Kien Hoang"
 		And I should see "Lafayette College"
@@ -26,6 +27,5 @@ Feature: Create User Profiles
 		And I fill in "Password" with "password"
 		And I fill in "Password confirmation" with "password"
 		And I press "Sign up"
-		Then I should see "First name can't be blank"
-		And I should see "Last name can't be blank"
-		And I should see "School can't be blank"
+		Then I should see "Profile first name can't be blank"
+		And I should see "Profile last name can't be blank"

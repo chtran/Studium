@@ -70,3 +70,6 @@ And /^"(.*?)" should be in the user list with status "(.*?)"$/ do |name,status|
   step %Q[the status of "#{name}" should be "#{status}"]
 end
 
+And /^what$/ do
+  puts page.body
+end
