@@ -12,7 +12,7 @@
 }
 
 .accordion#room_list .room-list-body{
-  min-height: 300px;
+  min-height: 277px;
   border-bottom: 1px solid #DDD;
 }
 
@@ -54,6 +54,21 @@
 .myhead .btn {
   float:right;
   margin-right: 7px;
+}
+
+.online-users-head {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.friends-head {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
 }
 
 .accordion-body.collapse .dl-horizontal{
@@ -101,6 +116,11 @@
 
 .lead{
   font-size: 17px;
+}
+
+.thumbnail-profile-pic{
+  width: 50px;
+
 }
 
 .room_settings{

@@ -5,8 +5,17 @@
 
     %div.bordered-container
       %div.online-users-head
-        %h3 Online Users
+        %h4 Online Users
       %div.online-users-body
+        %div
+          %div.thumbnail.thumbnail-profile-pic
+            = image_tag current_user.profile.image, :class => "profile-pic"
+      %div.friends-head
+        %h4 Friends
+      %div.online-users-body
+        %div
+          %div.thumbnail.thumbnail-profile-pic
+            = image_tag current_user.profile.image, :class => "profile-pic"         
 
     %br
     %div.modal.hide#new_room
