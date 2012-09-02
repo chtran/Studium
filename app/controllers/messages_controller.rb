@@ -6,7 +6,8 @@ class MessagesController < ApplicationController
   def index
     gon.user_id = current_user.id
     gon.hash_data = User.return_hash_data
-    
+    @top_users = User.joins(:profile).order("gp DESC").limit(5)
+
     # Create a new message
     @message=Message.new
     gon.user_id = current_user.id
@@ -75,6 +76,7 @@ class MessagesController < ApplicationController
   end
 
   def read
+    @top_users = User.joins(:profile).order("gp DESC").limit(5)
     # Get the last message
     @message = Message.find(params[:message_id])
     @message.update_attributes!(read: true)

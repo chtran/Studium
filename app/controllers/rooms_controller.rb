@@ -48,7 +48,9 @@ class RoomsController < ApplicationController
       gon.question_id = @room.question_id
       publish_async("presence-room_#{@room.id}","users_change", {})
       publish_async("presence-rooms", "update_recent_activities", {
-        message: "#{current_user.name} has joined room #{@room.title}"
+        message: "#{current_user.name} has joined room #{@room.title}",
+        user_name: current_user.name,
+        user_image: current_user.profile.image
       })
     else
       redirect_to rooms_path,alert: "The room you were looking for has been deactivated"

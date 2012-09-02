@@ -152,7 +152,8 @@
 }
 
 #recent_activities .pre-scrollable {
-  height: 78px;
+  height: 477px;
+  max-height: 477px;
 }
 
 .like-button {
@@ -164,3 +165,18 @@
 .chat-content {
   max-height: 200px;
 }
+
+#recent_activities #activities_list .activity{
+  border-bottom: 1px solid #E5E5E5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#recent_activities #activities_list .profile-pic{
+  margin-left: 5px;
+}
+
+#recent_activities #activities_list .activity-messages{
+  color: #666;
+}
+
