@@ -1,31 +1,8 @@
-%div.span3
+%div.span4
   %div.bordered-container#recent_activities
     %div.myhead
       %h3 Recent Activities
     %div.pre-scrollable
       %ul.nav.nav-tabs.nav-stacked#activities_list
   
-  %div.separator
-  %div.bordered-container#ranking
-    %div.myhead
-      %h3 Ranking
-    %div
-      %table.table
-        %thead
-        %tbody
-          - top_users.each do |user|
-            %tr
-              %td.row-fluid.user_component
-                %div.span5.row-fluid
-                  %div.span4
-                    %h2= "##{user.rank}"
-                  %div.span8
-                    = image_tag(user.profile.image,:class => "profile-pic")
-                %div.span7
-                  %a{href:"/users/#{user.id}/profile"}
-                    %h4= user.name
-                  %div.user-stats.row-fluid
-                    %div.span2
-                      %i.icon-star-empty
-                    %div.span8
-                      %p= "GP #{user.gp}"
+

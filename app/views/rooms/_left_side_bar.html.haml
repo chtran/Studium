@@ -28,24 +28,26 @@
   
   %div.separator
 
-  %div.bordered-container#friend_list
+  %div.bordered-container#ranking
     %div.myhead
-      %div.row-fluid
-        %div.span6
-          %div.span8
-            %h3 Friends
-    %div.mousescroll
-      %ul.nav.nav-tabs.nav-stacked
-        - current_user.friends.each do |f|
-          %li
-            %a{href: user_profile_path(f)}
-              =image_tag(f.profile.image, :class => "profile-pic")
-              = f.name
-              - if f.room_id
-                is in room #{f.room_id}
-    :javascript
-      $(".mousescroll").slimscroll({
-        color: '#666',
-        size: '10px',
-        height: '438px'
-      });
+      %h3 Ranking
+    %div
+      %table.table
+        %thead
+        %tbody
+          - top_users.each do |user|
+            %tr
+              %td.row-fluid.user_component
+                %div.span5.row-fluid
+                  %div.span4
+                    %h2= "##{user.rank}"
+                  %div.span8
+                    = image_tag(user.profile.image,:class => "profile-pic")
+                %div.span7
+                  %a{href:"/users/#{user.id}/profile"}
+                    %h4= user.name
+                  %div.user-stats.row-fluid
+                    %div.span2
+                      %i.icon-star-empty
+                    %div.span8
+                      %p= "GP #{user.gp}"

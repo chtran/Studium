@@ -8,6 +8,14 @@
   color: #999;
   font-size:13px;
 }
+.accordion#room_list{
+}
+
+.accordion#room_list .room-list-body{
+  min-height: 300px;
+  border-bottom: 1px solid #DDD;
+}
+
 #room_list small {
   color: #999;
 }
