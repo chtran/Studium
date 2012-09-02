@@ -1,7 +1,22 @@
 %div.row-fluid#rooms_index
-  = render "left_side_bar"
-  %div.span6
+  = render "left_side_bar", top_users: @top_users
+  %div.span5
     %div.accordion#room_list
+
+    %div.bordered-container
+      %div.online-users-head
+        %h4 Online Users
+      %div.online-users-body
+        %div
+          %div.thumbnail.thumbnail-profile-pic
+            = image_tag current_user.profile.image, :class => "profile-pic"
+      %div.friends-head
+        %h4 Friends
+      %div.online-users-body
+        %div
+          %div.thumbnail.thumbnail-profile-pic
+            = image_tag current_user.profile.image, :class => "profile-pic"         
+
     %br
     %div.modal.hide#new_room
       %div.modal-header
@@ -19,5 +34,5 @@
         %button.btn{"data-dismiss"=>"modal"}Decline
         %button.btn.btn-primary#accept Accept
 
-  = render "right_side_bar", top_users: @top_users
+  = render "right_side_bar"
 

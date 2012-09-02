@@ -43,12 +43,15 @@
     %div.navbar.navbar-fixed-top.navbar-inverse
       %div.navbar-inner.navbar-big
         %div.container.row-fluid
-          %div.span2
+          %div.span3
             %a.mybrand{href: user_signed_in? ? "/dashboard":"/"}
               =image_tag("images/logo.png")
-          %div.span10
+          %div.span9.navbar-icons
+            %form.navbar-search.form-search
+              = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
             %ul.nav.pull-right
               - if user_signed_in?
+
                 %li
                   %a{"href" => "#" }
                     %i.icon-wrench.icon-white.modal-trigger
@@ -81,8 +84,6 @@
                             %small View my profile
                     %hr
                     %li= link_to "Sign out",destroy_user_session_path, method: :delete
-              %form.navbar-search.form-search.pull-right
-                = text_field_tag :user_name,"",{class: "search-friend search-query",placeholder: "Search",data: {autocomplete_source: search_friend_rooms_path}}
                 - if current_user and current_user.admin?
                   %li= link_to "Admin Page",admin_index_path
 

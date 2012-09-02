@@ -1,5 +1,5 @@
 %div.row-fluid#messages_index
-  = render "rooms/left_side_bar"
+  = render "rooms/left_side_bar", top_users: @top_users
   
   %div.span8
     %h2= @message.receiver.name

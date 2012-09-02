@@ -11,20 +11,13 @@
         %div.span2
           %small= time_ago_in_words(room.created_at) + " ago"
   %div.accordion-body.collapse{id: "body-room_#{room.id}"}
-    %div.accordion-inner
-      %div.span8
-        %dl.dl-horizontal
-          %dt Created at
-          %dd= room.created_at.localtime
-          %dt Players
-          %dd
-            %table.table.table-condensed
-              - order = 1
-              - room.users.each do |user|
-                %tr
-                  %td= order
-                  %td= user.profile.first_name+" "+user.profile.last_name
-                  - order+= 1
+    %div.accordion-inner.row-fluid
+      %div.span2
+        %strong Players
+      %div.span6
+        - room.users.each do |user|
+          %a{:href => "#", :rel => "tooltip", "data-original-title"=>"#{user.name}"}
+            =image_tag user.profile.image, :class => "profile-pic-small"
       %div.span2
       %div.span2
         = link_to "Join", room_join_path(room.id), {class: "btn btn-primary"}

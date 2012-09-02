@@ -8,6 +8,14 @@
   color: #999;
   font-size:13px;
 }
+.accordion#room_list{
+}
+
+.accordion#room_list .room-list-body{
+  min-height: 277px;
+  border-bottom: 1px solid #DDD;
+}
+
 #room_list small {
   color: #999;
 }
@@ -46,6 +54,25 @@
 .myhead .btn {
   float:right;
   margin-right: 7px;
+}
+
+.online-users-head {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.friends-head {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.profile-pic-small{
+  width:30px;
 }
 
 .accordion-body.collapse .dl-horizontal{
@@ -95,6 +122,11 @@
   font-size: 17px;
 }
 
+.thumbnail-profile-pic{
+  width: 50px;
+
+}
+
 .room_settings{
   margin-bottom:15px;
 }
@@ -120,7 +152,8 @@
 }
 
 #recent_activities .pre-scrollable {
-  height: 78px;
+  height: 477px;
+  max-height: 477px;
 }
 
 .like-button {
@@ -132,3 +165,18 @@
 .chat-content {
   max-height: 200px;
 }
+
+#recent_activities #activities_list .activity{
+  border-bottom: 1px solid #E5E5E5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#recent_activities #activities_list .profile-pic{
+  margin-left: 5px;
+}
+
+#recent_activities #activities_list .activity-messages{
+  color: #666;
+}
+

@@ -4,9 +4,10 @@
       %h3 Room list
     %div.span6
       %button.btn.btn-primary{"data-toggle"=>"modal", "href"=>"#new_room"}New room
-- if @rooms.empty?
-  %div.accordion-group.text-center
-    %div
-      %p No one's around. Create your own room!
-- @rooms.each do |room|
-  = render "room_item", room: room
+%div.room-list-body.pre-scrollable
+  - if @rooms.empty?
+    %div.accordion-group.text-center
+      %div
+        %p No one's around. Create your own room!
+  - @rooms.each do |room|
+    = render "room_item", room: room
