@@ -63,6 +63,15 @@
   border-bottom: 1px solid #E5E5E5;
 }
 
+.online-users-body{
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.online-users-container{
+  width: 150%;
+}
+
 .friends-head {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -174,6 +183,7 @@
 
 #recent_activities #activities_list .profile-pic{
   margin-left: 5px;
+  display: inline; 
 }
 
 #recent_activities #activities_list .activity-messages{

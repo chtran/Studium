@@ -30,3 +30,11 @@ Studium.Controllers.RoomsIndex =
     )
     $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!")
     $("#invitation").modal("show")
+  show_online_users: ->
+    rooms_channel = Studium.Client.subscribe("presence-rooms")
+    users = rooms_channel.members.me
+    for user in users
+      $('.online-users-container').append('
+        <img alt="Picture?type=square" class="profile-pic" src='+user.profile.image+'>
+      ')
+    

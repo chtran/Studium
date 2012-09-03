@@ -9,6 +9,7 @@ class Studium.Views.RoomsIndex extends Trunk.Views
     f = this.functions
     # Update room list for the first time
     f.update_room_list()
+    f.show_online_users()
 
   listen: ->
     f = this.functions

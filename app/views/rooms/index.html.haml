@@ -7,12 +7,10 @@
       %div.online-users-head
         %h4 Online Users
       %div.online-users-body
-        %div
-          %div.thumbnail.thumbnail-profile-pic
-            = image_tag current_user.profile.image, :class => "profile-pic"
+        %div.online-users-container
       %div.friends-head
         %h4 Friends
-      %div.online-users-body
+      %div.friends-body
         %div
           %div.thumbnail.thumbnail-profile-pic
             = image_tag current_user.profile.image, :class => "profile-pic"         
