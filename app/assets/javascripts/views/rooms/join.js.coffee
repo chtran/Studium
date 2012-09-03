@@ -60,6 +60,13 @@ class Studium.Views.RoomsJoin extends Trunk.Views
 
     # Send the message if it's not nil
     $("#chat .chat_send").live("click", f.send_chat)
+    $("#chat .chat_message").keypress((e) ->
+      if (e.which==13 and !e.shiftKey)
+        e.preventDefault()
+        f.send_chat()
+    )
+
+
 
     # stats about users popover when users' div are hovered in users_list
 #    $("a[rel=popover]").popover()
