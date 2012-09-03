@@ -19,6 +19,23 @@ class Studium.Views.RoomsJoin extends Trunk.Views
 
     # Update the user list the first time
     f.update_users()
+    disable_choice = (choice_id) ->
+      console.log("disable #{choice_id}")
+      $("#close-#{choice_id}").fadeTo("fast",0.2)
+      $("#choice-#{choice_id}").removeClass("each_choice").addClass("disabled").removeClass("btn-primary")
+
+    enable_choice = (choice_id) ->
+      console.log("enable #{choice_id}")
+      $("#close-#{choice_id}").fadeTo("fast",0.4)
+      $("#choice-#{choice_id}").addClass("each_choice").removeClass("disabled")
+
+    $(".disable").live("click", ->
+      choice_id = $(this).data("choiceId")
+      if $("#choice-#{choice_id}").hasClass("each_choice")
+        disable_choice(choice_id)
+      else
+        enable_choice(choice_id)
+    )
 
     # User clicking on a choice
     # Add class "btn-primary" to the chosen choice
