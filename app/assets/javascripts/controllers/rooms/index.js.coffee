@@ -33,11 +33,23 @@ Studium.Controllers.RoomsIndex =
 
 
   show_online_users: ->
+    
     rooms_channel = Studium.Client.subscribe("presence-rooms")
-    online_users = $(".online-users-body .online-users-container")
-    rooms_channel.members.each((member)->
-      alert("hello world")
-      data = '<img alt="Picture?type=square" class="profile-pic" src='+member.profile.image+'>'
-      alert(data)
+    rooms_channel.bind('pusher:subscription_succeeded', ->
+      online_users = $(".online-users-body .online-users-container")
+      rooms_channel.members.each((member)->
+        $.ajax({
+            type: "POST",
+            url: "/users/get_info"
+            data:{
+              email: member.info.email
+            },
+            success: (user_info) ->
+              data = '<img alt="Picture?type=square" class="profile-pic" src='+user_info.image+'>'
+              online_users.append(data)
+          })
+      )
+    
     )
+
     
