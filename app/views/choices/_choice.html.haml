@@ -1,3 +1,7 @@
-%button.row-fluid.btn.each_choice{"data-choice-id" => choice.id.to_s,"id" => "choice-#{choice.id.to_s}","class" => defined?(choice_class) ? choice_class : ""}
-  %div.span2.choice_letter= choice.choice_letter
-  %div.span8.choice_content= choice.content.parse_latex.html_safe
+%div.row
+  %div.span10
+    %div.row-fluid.btn.each_choice{"data-choice-id" => choice.id.to_s,"id" => "choice-#{choice.id.to_s}","class" => defined?(choice_class) ? choice_class : ""}
+      %div.span2.choice_letter= choice.choice_letter
+      %div.span10.choice_content= choice.content.parse_latex.html_safe
+  %div.span2
+    %a.disable.close{id: "close-#{choice.id.to_s}", href:"#", "data-choice-id" => choice.id.to_s} &times;

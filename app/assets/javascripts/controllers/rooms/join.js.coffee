@@ -67,7 +67,7 @@ Studium.Controllers.RoomsJoin =
     $("#ready").show()
 
   choose_answer: ->
-    $(this).siblings().removeClass("btn-primary")
+    $(".each_choice").removeClass("btn-primary")
     $(this).addClass("btn-primary")
 
     # For vocab reading questions
