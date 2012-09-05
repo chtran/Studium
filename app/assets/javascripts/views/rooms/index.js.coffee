@@ -20,3 +20,7 @@ class Studium.Views.RoomsIndex extends Trunk.Views
     this.channels.room_list.bind("update_recent_activities", f.update_recent_activities)
 
     this.channels.user.bind("invite", f.show_invite)
+
+    this.channels.room_list.bind("update_online_users", f.update_online_users)
+
+    this.channels.room_list.bind("pusher:member_removed",f.remove_offline_users)
