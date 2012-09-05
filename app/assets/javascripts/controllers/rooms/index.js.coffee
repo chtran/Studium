@@ -45,7 +45,7 @@ Studium.Controllers.RoomsIndex =
               email: member.info.email
             },
             success: (user_info) ->
-              data = '<img alt="Picture?type=square" class="profile-pic" src='+user_info.image+'>'
+              data = '<img alt="Picture?type=square" class="profile-pic" src='+user_info.image+'>'  
               online_users.append(data)
           })
       )
