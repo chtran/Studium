@@ -191,3 +191,5 @@ Studium.Controllers.RoomsJoin =
       url: "/rooms/leave_room",
       async: false,
     })
+
+

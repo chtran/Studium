@@ -8,4 +8,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_user_data
+    email = params[:email]
+    @user = User.where("email = '#{email}'").first
+    render json: {
+      email: @user.email,
+      name: @user.name,
+      image: @user.profile.image
+    }
+  end
+
 end

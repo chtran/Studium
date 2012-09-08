@@ -10,6 +10,12 @@ class RoomsController < ApplicationController
     gon.user_id = current_user.id
     @new_room = Room.new
     #current_user.update_attribute(:status,0) unless current_user.status==0
+
+    publish_async("presence-rooms", "update_online_users",{
+      name: current_user.name,
+      email: current_user.email,
+      image: current_user.profile.image
+    })
   end
 
   # Request type: POST

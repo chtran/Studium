@@ -8,6 +8,7 @@ Studium::Application.routes.draw do
   # User authentication
   devise_for :users,controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
   get "users/index"
+  post "users/get_info", to:"users#get_user_data"
 
   # Profile Routes
   controller :profiles,path: "/users/:user_id/profile" do

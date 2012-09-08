@@ -30,3 +30,33 @@ Studium.Controllers.RoomsIndex =
     )
     $("#invitation .modal-body p").text("You are invited by "+data.user_name+" to his room!")
     $("#invitation").modal("show")
+
+  update_online_users: (data)->
+    online_users = $(".online-users-body .online-users-container")
+    data = '<img alt="Picture?type=square" class="profile-pic" src='+data.image+'>'
+    online_users.append(data)
+
+  remove_offline_users: (data)->
+    $(".online-users-body .online-users-container img[data-p-id = #{data.id}]").remove()
+
+  show_online_users: ->
+    
+    rooms_channel = Studium.Client.subscribe("presence-rooms")
+    rooms_channel.bind('pusher:subscription_succeeded', ->
+      online_users = $(".online-users-body .online-users-container")
+      rooms_channel.members.each((member)->
+        $.ajax({
+            type: "POST",
+            url: "/users/get_info"
+            data:{
+              email: member.info.email
+            },
+            success: (user_info) ->
+              data = '<img alt="Picture?type=square" data-p-id = '+member.id+' class="profile-pic" src='+user_info.image+'>'  
+              online_users.append(data)
+          })
+      )
+    
+    )
+
+    
