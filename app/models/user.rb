@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   has_one :profile,dependent: :destroy
   has_many :wallposts, foreign_key: "receiver_id"
   has_and_belongs_to_many :badges
+  has_many :objects, class_name: "RecentActivity", as: "object"
+  has_many :subjects, class_name: "RecentActivity", as: "subject"
 
   accepts_nested_attributes_for :profile
 

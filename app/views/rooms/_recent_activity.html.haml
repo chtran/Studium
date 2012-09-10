@@ -1,0 +1,8 @@
+%div.activity.row-fluid
+  %div.span2
+    =image_tag(a.subject.profile.image, class: "profile-pic")
+  %div.span9
+    %div.row-fluid
+      %strong= a.subject.name
+    %div.row-fluid.spacing.activity-messages
+      %p= a.render

@@ -5,6 +5,9 @@ class Room < ActiveRecord::Base
   has_many :questions, through: :questions_buffers
   has_many :users
   has_many :histories
+  has_many :objects, class_name: "RecentActivity", as: "object"
+  has_many :subjects, class_name: "RecentActivity", as: "subject"
+
   validates :room_mode_id, presence: true
   attr_accessible :title, :room_mode_id
 

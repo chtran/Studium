@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
     @friends = current_user.friends
     @image = current_user.profile.image
     @top_users = User.joins(:profile).order("gp DESC").limit(5)
+    @recent_activities = current_user.objects + current_user.subjects
     gon.user_id = current_user.id
     @new_room = Room.new
     #current_user.update_attribute(:status,0) unless current_user.status==0
@@ -43,6 +44,9 @@ class RoomsController < ApplicationController
   def join
     @room = Room.find params[:room_id]
     if @room.active?
+      new_activity = current_user.subjects.generate("join_room")
+      new_activity.object = @room
+      new_activity.save
       current_user.update_attributes({
         room_id: @room.id,
         status: 0

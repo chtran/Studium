@@ -11,6 +11,7 @@ class User
       output > 0 ? output : 1
     end
 
+    # Update the user's level, returns true if the level changed, false otherwise
     def update_level(win)
       #self.profile.increment!(:gp, win ? WIN_GP : LOSE_GP)
       profile = self.profile
@@ -49,7 +50,10 @@ class User
       profile=self.profile
       profile.increment!(:exp, change)
       question.decrement!(:exp, change)
-      update_level(true)
+      if update_level(true)
+        new_activity = self.subjects.generate("level_up")
+        new_activity.save!
+      end
       profile.save!
       return change
     end

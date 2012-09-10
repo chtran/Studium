@@ -69,7 +69,10 @@ class ProfilesController < StatsController
 
   def update_status
     profile_status = params[:status]
-    current_user.profile.update_attribute(:status, profile_status)
+    if current_user.profile.update_attribute(:status, profile_status)
+      new_activity = current_user.subjects.generate("update_status")
+      new_activity.save
+    end
 
     render json: {
       status: profile_status

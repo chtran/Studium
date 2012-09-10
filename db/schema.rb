@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815161741) do
+ActiveRecord::Schema.define(:version => 20120910034137) do
 
   create_table "badge_managers", :force => true do |t|
     t.integer  "user_id"
@@ -169,6 +169,16 @@ ActiveRecord::Schema.define(:version => 20120815161741) do
     t.integer  "room_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "recent_activities", :force => true do |t|
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "verb"
   end
 
   create_table "room_modes", :force => true do |t|
