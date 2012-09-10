@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     @friends = current_user.friends
     @image = current_user.profile.image
     @top_users = User.joins(:profile).order("gp DESC").limit(5)
-    @recent_activities = current_user.objects + current_user.subjects
+    @recent_activities = RecentActivity.where(subject_type: "User").where(subject_id: current_user.friend_ids.push(current_user.id)).order("created_at DESC")
     gon.user_id = current_user.id
     @new_room = Room.new
     #current_user.update_attribute(:status,0) unless current_user.status==0
